@@ -16,7 +16,7 @@
 
 - 環境によっては ~git rev-parse --short HEAD~ が10文字に満たなくて、短くなる (7文字とか) ことがある (git のバージョンが古いとき?) ようなので、そういう環境でも10文字になるようにしているようです。
 
-## 2019-04-23
+# 2019-04-23
 
 - `RUBY_REVISION` が整数から文字列に変わるのはまずいんじゃないかという話もあったみたいだけど、このままなのかなあ。
 
@@ -104,7 +104,7 @@ sys     0m0.068s
 
 - [ ] *rurema* `time.c: added in: option to Time.now`
 
-## 2019-04-18
+# 2019-04-18
 
 ## [r67603](https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_67601_67605#r67603)
 
