@@ -1,5 +1,5 @@
 - あとでまとめ直してブログに移動する予定なので、こっちにはあまりリンクしないで欲しいです。
-- <https://ruby-trunk-changes.hatenablog.com> typo 指摘などは *hatenablog* をつけることにしました。
+- <https://ruby-trunk-changes.hatenablog.com> へのコメントは *hatenablog* をつけることにしました。
 - [rurema](https://github.com/rurema/doctree) 用のメモには *rurema* をつけることにしました。
 
 # 2019-04-27
