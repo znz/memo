@@ -14,6 +14,53 @@
 - <https://github.com/ruby/ruby/commit/52cfb17086998b9434c9c786bfcf827197216c9a> で戻ってしまった変更を再適用
 - <https://github.com/ruby/ruby/commit/9a83922b666d4e26b84840757b16b0f9df6acef9> は気になった変更だけだったので `git cherry-pick 9a83922b666d4e26b84840757b16b0f9df6acef9` で問題なし
 
+## [569c1ef6f1](https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunnk_changes_20190427#569c1ef6f1)
+
+- [ ] *hatenablog* <!-- irb の upstream からの再度同期。 タイミングで r67678 のぶんは巻き戻ってしまったようです。 --> 直前のコミット (Author: naruse, Committer: k0kubun) と重複しない差分にみえるのですが、 r67678 って巻き戻ってます?
+
+## [48313f129a](https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunnk_changes_20190427#48313f129a)
+
+- コミットログに確認の実行ログだけ書いて説明を書き忘れたのですが、 2.6 でも `nil` が返ってくることがある、と、このメモを書いていて気づいたのですが、コミットログに書いた確認方法だと `Enumerator::ArithmeticSequence#begin` ではなく `Range#begin` になっていました。
+
+ということで 2.6 でも `first` は `nil` が返ってくることがありますが、 `begin` は beginless range が入った 2.7 からのようです。
+
+コミットログに書いた確認方法:
+```
+% ruby -ve 'p (nil..).first'
+ruby 2.6.3p62 (2019-04-16 revision 67580) [x86_64-darwin18]
+nil
+% ruby -ve 'p (nil..).begin'
+ruby 2.6.3p62 (2019-04-16 revision 67580) [x86_64-darwin18]
+nil
+```
+
+正しい確認方法:
+```
+% ruby -ve 'p (nil..2).step(2).begin'
+ruby 2.6.3p62 (2019-04-16 revision 67580) [x86_64-darwin18]
+Traceback (most recent call last):
+-e:1:in `<main>': bad value for range (ArgumentError)
+% ruby -ve 'p (nil..2).step(2).first'
+ruby 2.6.3p62 (2019-04-16 revision 67580) [x86_64-darwin18]
+Traceback (most recent call last):
+-e:1:in `<main>': bad value for range (ArgumentError)
+zsh: exit 1     ruby -ve 'p (nil..2).step(2).first'
+% ruby -ve 'p (1..-1).step(2).first'
+ruby 2.6.3p62 (2019-04-16 revision 67580) [x86_64-darwin18]
+nil
+```
+```
+% ruby -ve 'p (nil..2).step(2).begin'
+ruby 2.7.0dev (2019-04-27 trunk 3067370f61) [x86_64-darwin18]
+nil
+% ruby -ve 'p (nil..2).step(2).first'
+ruby 2.7.0dev (2019-04-27 trunk 3067370f61) [x86_64-darwin18]
+nil
+% ruby -ve 'p (1..-1).step(2).first'
+ruby 2.7.0dev (2019-04-27 trunk 3067370f61) [x86_64-darwin18]
+nil
+```
+
 # 2019-04-26
 
 ## [b55201dd09](https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunnk_changes_20190426#b55201dd09)
