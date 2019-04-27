@@ -160,8 +160,43 @@ sys     0m0.068s
 
 - [ ] *hatenablog* <https://github.com/ruby/csv/blob/master/NEWS.md#308---2019-04-11> が `-` の前までしかリンクになってない?
 
+# 2019-04-14
+
+## [r67533](https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_67530_67549#r67533)
+
+- [ ] *hatenablog* `mjit*.{hc}` はシェル風に書くと、ブレース展開なら `mjit*.{h,c}` でグロブなら `mjit*.[hc]` になりそう。
+
+# 2019-04-11
+
+## [r67517](https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_67513_67518#r67517)
+
+- [ ] *rurema* [DOC] Add `ifnone` example to `find` documentation [ci skip]
+  <https://github.com/ruby/ruby/pull/2110>
+
+# 2019-04-10
+
+## [r67479](https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_67477_67501#r67479)
+
+- [ ] *rurema* `GC.compact`
+- [Feature #15626](https://bugs.ruby-lang.org/issues/15626)
+
+# 2019-04-06
+
+- [ ] *hatenablog* r67455 `tool/downloaderrb` → `tool/downloader.rb` ?
+
 # rurema
 
 - [ ] *rurema* `reline`
-- [ ] *rurema* `GC.compact`
 - [ ] *rurema* パターンマッチ: 文法, `#deconstruct`, `#deconstruct_keys`
+- [ ] *rurema* 令和対応はサンプルコードに反映する? <https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_67471_67476>
+- [ ] *rurema* beginless range 対応で `Enumerator::ArithmeticSequence#{begin,first}` などに `| nil` の追加
+  - と思ったら rdoc の first には or nil が付いていたので確認したところ、 2.6 でも nil がかえってくることがあった。
+    ```
+    % ruby -ve 'p (nil..).first'
+    ruby 2.6.3p62 (2019-04-16 revision 67580) [x86_64-darwin18]
+    nil
+    % ruby -ve 'p (nil..).begin'
+    ruby 2.6.3p62 (2019-04-16 revision 67580) [x86_64-darwin18]
+    nil
+	```
+- [ ] `Logger#level=` が Socket のように Symbol でも指定できるようになると短くかけるようになって嬉しいのかも。
