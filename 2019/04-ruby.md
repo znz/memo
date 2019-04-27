@@ -61,6 +61,8 @@ ruby 2.7.0dev (2019-04-27 trunk 3067370f61) [x86_64-darwin18]
 nil
 ```
 
+- [x] *rurema* <https://github.com/rurema/doctree/pull/1852>
+
 # 2019-04-26
 
 ## [b55201dd09](https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunnk_changes_20190426#b55201dd09)
