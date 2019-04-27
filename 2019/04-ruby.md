@@ -182,21 +182,24 @@ sys     0m0.068s
 
 # 2019-04-06
 
-- [ ] *hatenablog* r67455 `tool/downloaderrb` → `tool/downloader.rb` ?
+## [r67455](https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_67447_67458#r67455)
+
+- [ ] *hatenablog* `tool/downloaderrb` → `tool/downloader.rb` ?
+
+# 2019-04-02
+
+## [r67405](https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_67401_67414#r67405)
+
+- [ ] *hatenablog* `unpoisone_xxx` → `unpoison_xxx` ?
+
+## [r67411](https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_67401_67414#r67411)
+
+- [ ] *hatenablog* `JAPANESE_ERA_INITIALS を JISX0301_ERA_INITIALS を` → `~ を ~ に` ?
 
 # rurema
 
 - [ ] *rurema* `reline`
 - [ ] *rurema* パターンマッチ: 文法, `#deconstruct`, `#deconstruct_keys`
 - [ ] *rurema* 令和対応はサンプルコードに反映する? <https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_67471_67476>
-- [ ] *rurema* beginless range 対応で `Enumerator::ArithmeticSequence#{begin,first}` などに `| nil` の追加
-  - と思ったら rdoc の first には or nil が付いていたので確認したところ、 2.6 でも nil がかえってくることがあった。
-    ```
-    % ruby -ve 'p (nil..).first'
-    ruby 2.6.3p62 (2019-04-16 revision 67580) [x86_64-darwin18]
-    nil
-    % ruby -ve 'p (nil..).begin'
-    ruby 2.6.3p62 (2019-04-16 revision 67580) [x86_64-darwin18]
-    nil
-	```
+- [ ] *rurema* beginless range 対応
 - [ ] `Logger#level=` が Socket のように Symbol でも指定できるようになると短くかけるようになって嬉しいのかも。
