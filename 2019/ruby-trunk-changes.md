@@ -2,6 +2,34 @@
 - <https://ruby-trunk-changes.hatenablog.com> typo 指摘などは *hatenablog* をつけることにしました。
 - [rurema](https://github.com/rurema/doctree) 用のメモには *rurema* をつけることにしました。
 
+# 2019-04-27
+
+## <https://github.com/ruby/ruby/commit/8990779d3693b106fbca014518726ba53224f731>
+
+- <https://github.com/ruby/ruby/commit/52cfb17086998b9434c9c786bfcf827197216c9a> で戻ってしまった変更を再適用
+- <https://github.com/ruby/ruby/commit/c20aae965e2e79fcf4c443b266f7012157d5b23b> は他の変更もあるので、 `git cherry-pick c20aae965e2e79fcf4c443b266f7012157d5b23b` でどうなるかと思ったら、うまく `lib/irb/cmd/fork.rb` だけ再適用されたので、そのまま push
+
+## <https://github.com/ruby/ruby/commit/c8b675adb902a67bf62a1a9945bade7c8becc4e8>
+
+- <https://github.com/ruby/ruby/commit/52cfb17086998b9434c9c786bfcf827197216c9a> で戻ってしまった変更を再適用
+- <https://github.com/ruby/ruby/commit/9a83922b666d4e26b84840757b16b0f9df6acef9> は気になった変更だけだったので `git cherry-pick 9a83922b666d4e26b84840757b16b0f9df6acef9` で問題なし
+
+# 2019-04-26
+
+## [b55201dd09](https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunnk_changes_20190426#b55201dd09)
+
+- [ ] *hatenablog* f6cd383f9dc3ae1204a5fba8f56ee7826cbce って何だろう? 直前のコミットは 94af6cd383f9dc3ae1204a5fba8f56ee7826cbce だし、 `git show f6cd383f9dc3ae1204a5fba8f56ee7826cbce` しても出てこないし。
+
+## [Do not color IRB output on 'dumb' TERM](https://github.com/ruby/ruby/commit/022cbb278f381e5774a5d0277a83127c6f6b4802)
+
+- `TERM=dumb` と `TERM=emacs` を特別扱いするのをみたことがあるけど、どういう時にそう設定されることがあるのかは、ちゃんと調べたことがないなあ。
+
+## [1cef6a0c0c](https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunnk_changes_20190426#1cef6a0c0c)
+
+- <https://github.com/ruby/ruby/commit/1cef6a0c0c996ab87ef41dfeede3203ee3c811dc>
+- `make -j` で `.ext/**/*.rb` よりも timestamp の mtime が未来の時に cp で Permission denied になるようなので、その確認用の stat 追加です。
+- `stat` コマンドは Linux だと秒未満も表示されたのですが、 macOS だと表示されなかったのと `-t` で指定できる `strftime(3)` 形式の timefmt でも `%N` に未対応で難しそうだったので、前後関係が比較できればいいので、 `File::Stat#mtime` から `to_f` したものを表示するようにしました。
+
 # 2019-04-25
 
 ## [c9715eb494](https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunnk_changes_20190425#c9715eb494)
