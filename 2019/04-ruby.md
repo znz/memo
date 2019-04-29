@@ -24,6 +24,18 @@
 - shallow clone をやめたので、毎回全部取ってくるのは重そうということで、 docker image に clone を入れておくことにした。
 - ruby のサイズなら slug の size limit に余裕で収まるかと思っていたが、 [500MB 制限](https://devcenter.heroku.com/articles/slug-compiler#slug-size) に対して `du -shc ruby` が 282M なので、将来的に溢れる可能性もありそうだった。
 
+## [7875c42f64](https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunnk_changes_20190429#7875c42f64)
+
+- [ ] *hatenablog* `tool/vcs.r` → `tool/vcs.rb` ?
+
+## [0d227d1ce6](https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunnk_changes_20190429#0d227d1ce6)
+
+- [ ] *hatenablog* `Etc.getloging` → `Etc.getlogin` ?
+
+## [6bedbf4625](https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunnk_changes_20190429#6bedbf4625), [50cbb21ba5](https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunnk_changes_20190429#50cbb21ba5)
+
+- [ ] *rurema* `Integer#[](range)`
+
 # 2019-04-27
 
 ## <https://github.com/ruby/ruby/commit/8990779d3693b106fbca014518726ba53224f731>
