@@ -2,6 +2,18 @@
 - <https://ruby-trunk-changes.hatenablog.com> へのコメントは *hatenablog* をつけることにしました。
 - [rurema](https://github.com/rurema/doctree) 用のメモには *rurema* をつけることにしました。
 
+# 2019-04-29
+
+## [ruby/snapshot](https://github.com/ruby/snapshot)
+
+- Heroku のログを確認すると `Errno::ENOENT: No such file or directory - git` だったので、 Dockerfile で git がインストールされていなかったので、 svn がもう使われていないのを `git grep svn` で確認して subversion を git に変更
+- `docker build -t ruby-snapshot .` と `docker run -it ruby-snapshot bundle exec rake snapshot` で手元でも動作確認 (production 環境かどうかで動作をわけることはしていないので、手元だと AWS へのアクセスのところでエラーになって止まるのが正常)
+- Heroku の Web から manual deploy してみたら buildpack のビルドが走ってしまった。
+- [Building Docker Images with heroku.yml Is Generally Available \| Heroku](https://blog.heroku.com/build-docker-images-heroku-yml) を参考にして build だけの heroku.yml を作成して deploy してみたが、変わらず。
+- Heroku の Web の Overview で Dyno formation が空になっていて、元々の指定がわからなかったので hsbt さんの deploy に rollback して確認
+- `web` `/bin/bash` になっていたので heroku.yml に追加して、もう一度 Heroku の Web から manual deploy
+- Heroku Scheduler での実行待ち
+
 # 2019-04-27
 
 ## <https://github.com/ruby/ruby/commit/8990779d3693b106fbca014518726ba53224f731>
