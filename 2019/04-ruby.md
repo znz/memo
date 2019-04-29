@@ -14,6 +14,16 @@
 - `web` `/bin/bash` になっていたので heroku.yml に追加して、もう一度 Heroku の Web から manual deploy
 - Heroku Scheduler での実行待ち
 
+## [ruby/snapshot](https://github.com/ruby/snapshot) 続き
+
+- stable-snapshot が作成されていなかったので再調査
+- `ruby ruby_2_6/tool/make-snapshot -archname=stable-snapshot -srcdir=ruby_2_6 pkg stable` と `stable` を指定すると良さそうだった
+- 処理を追いかけていて `ChangeLog` が作成されていて shallow clone だと空になってしまことが判明して、さらに継続調査
+- `git clone --single-branch https://github.com/ruby/ruby` を検討したが `stable` の方と処理が分かれるのが嫌だと思って不採用
+- `stable` を指定した時に `git for-each-ref --format='%(refname:short)' 'refs/heads/ruby_[0-9]*'` 相当の処理でローカルブランチしか見えないようで、 `git checkout ruby_2_6` するなどしておく必要があった
+- shallow clone をやめたので、毎回全部取ってくるのは重そうということで、 docker image に clone を入れておくことにした。
+- ruby のサイズなら slug の size limit に余裕で収まるかと思っていたが、 [500MB 制限](https://devcenter.heroku.com/articles/slug-compiler#slug-size) に対して `du -shc ruby` が 282M なので、将来的に溢れる可能性もありそうだった。
+
 # 2019-04-27
 
 ## <https://github.com/ruby/ruby/commit/8990779d3693b106fbca014518726ba53224f731>
