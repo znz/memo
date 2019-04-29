@@ -17,12 +17,15 @@
 ## [ruby/snapshot](https://github.com/ruby/snapshot) 続き
 
 - stable-snapshot が作成されていなかったので再調査
+- `docker run -it -v /tmp/pkg:/root/pkg ruby-snapshot /bin/bash` で調査
 - `ruby ruby_2_6/tool/make-snapshot -archname=stable-snapshot -srcdir=ruby_2_6 pkg stable` と `stable` を指定すると良さそうだった
 - 処理を追いかけていて `ChangeLog` が作成されていて shallow clone だと空になってしまことが判明して、さらに継続調査
 - `git clone --single-branch https://github.com/ruby/ruby` を検討したが `stable` の方と処理が分かれるのが嫌だと思って不採用
 - `stable` を指定した時に `git for-each-ref --format='%(refname:short)' 'refs/heads/ruby_[0-9]*'` 相当の処理でローカルブランチしか見えないようで、 `git checkout ruby_2_6` するなどしておく必要があった
 - shallow clone をやめたので、毎回全部取ってくるのは重そうということで、 docker image に clone を入れておくことにした。
 - ruby のサイズなら slug の size limit に余裕で収まるかと思っていたが、 [500MB 制限](https://devcenter.heroku.com/articles/slug-compiler#slug-size) に対して `du -shc ruby` が 282M なので、将来的に溢れる可能性もありそうだった。
+
+- 調査用に作業イメージを残していたが、最後には不要なので `docker system prune` で掃除をしておく。
 
 ## [7875c42f64](https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunnk_changes_20190429#7875c42f64)
 
