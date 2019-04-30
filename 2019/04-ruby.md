@@ -2,6 +2,17 @@
 - <https://ruby-trunk-changes.hatenablog.com> へのコメントは *hatenablog* をつけることにしました。
 - [rurema](https://github.com/rurema/doctree) 用のメモには *rurema* をつけることにしました。
 
+# 2019-04-30
+
+## [040b37f8b4b8d0a4931ee9b7c15b57f9f918639a](https://github.com/ruby/ruby/commit/040b37f8b4b8d0a4931ee9b7c15b57f9f918639a)
+
+- [ruby/snapshot](https://github.com/ruby/snapshot) で作成される snapshot/revision.h が 7 文字になっていたので 10 文字に変更
+- ちょっと変更して毎回 tarball 作成して展開して snapshot/revision.h を確認していたのでかなり時間がかかりました。
+
+## [7a34d8902ad93c0e487623cd99e6c23296a7a768](https://github.com/ruby/ruby/commit/7a34d8902ad93c0e487623cd99e6c23296a7a768)
+
+- [ruby/snapshot](https://github.com/ruby/snapshot) の git pull の動作確認用のコミット
+
 # 2019-04-29
 
 ## [ruby/snapshot](https://github.com/ruby/snapshot)
