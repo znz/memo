@@ -13,6 +13,10 @@
 
 - [ruby/snapshot](https://github.com/ruby/snapshot) の git pull の動作確認用のコミット
 
+## [c222f4d31fc5f0566fa969d8fbb948f8841daf94](https://github.com/ruby/ruby/commit/c222f4d31fc5f0566fa969d8fbb948f8841daf94)
+
+- `git clone --depth=1` で clone したものから `tool/make-snapshot` で tarball を作成すると空の ChangeLog ができていたのですが、その時の調査で `from ||= branch_beginning(url)` が `""` になって、その下で `^..commit-hash` という range になって `fatal: bad revision` になっていたのに、そういうものかと思ってスルーしていたのですが、そもそもここのチェックで例外にすべきだと思い直したので、チェック部分を変更しました。
+
 # 2019-04-29
 
 ## [ruby/snapshot](https://github.com/ruby/snapshot)
