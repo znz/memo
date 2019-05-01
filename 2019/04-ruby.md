@@ -13,6 +13,10 @@
 
 - [ruby/snapshot](https://github.com/ruby/snapshot) の git pull の動作確認用のコミット
 
+## [3be5907e734f9c88af577bb0b0e8ec2d66b7b2f7](https://github.com/ruby/ruby/commit/3be5907e734f9c88af577bb0b0e8ec2d66b7b2f7)
+
+- ext/win32/lib/Win32API.rb の警告なしの代用品として lib/reline/windows.rb が使われるようになったら嫌だなあと思ったので、lib/reline/windows.rb の Win32API はトップレベルではなく Reline::Win32API とかにした方が良いのでは、と伝えると変えてもらえました。
+
 ## [c222f4d31fc5f0566fa969d8fbb948f8841daf94](https://github.com/ruby/ruby/commit/c222f4d31fc5f0566fa969d8fbb948f8841daf94)
 
 - `git clone --depth=1` で clone したものから `tool/make-snapshot` で tarball を作成すると空の ChangeLog ができていたのですが、その時の調査で `from ||= branch_beginning(url)` が `""` になって、その下で `^..commit-hash` という range になって `fatal: bad revision` になっていたのに、そういうものかと思ってスルーしていたのですが、そもそもここのチェックで例外にすべきだと思い直したので、チェック部分を変更しました。
