@@ -4,6 +4,10 @@
 
 # 2019-04-30
 
+## [a116f04cca](https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunnk_changes_20190430#a116f04cca)
+
+- [ ] *hatenablog* `.travis.yaml` → `.travis.yml` ?
+
 ## [040b37f8b4b8d0a4931ee9b7c15b57f9f918639a](https://github.com/ruby/ruby/commit/040b37f8b4b8d0a4931ee9b7c15b57f9f918639a)
 
 - [ruby/snapshot](https://github.com/ruby/snapshot) で作成される snapshot/revision.h が 7 文字になっていたので 10 文字に変更
@@ -12,6 +16,10 @@
 ## [7a34d8902ad93c0e487623cd99e6c23296a7a768](https://github.com/ruby/ruby/commit/7a34d8902ad93c0e487623cd99e6c23296a7a768)
 
 - [ruby/snapshot](https://github.com/ruby/snapshot) の git pull の動作確認用のコミット
+
+## [319eee0f4a](https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunnk_changes_20190430#319eee0f4a)
+
+- 英語版 Windows のデフォルトが IBM437 らしく、 AppVeyor 内の `Encoding.default_external` は `Encoding::IBM437` になっているらしい。
 
 ## [3be5907e734f9c88af577bb0b0e8ec2d66b7b2f7](https://github.com/ruby/ruby/commit/3be5907e734f9c88af577bb0b0e8ec2d66b7b2f7)
 
