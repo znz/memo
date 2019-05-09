@@ -2,6 +2,22 @@
 - <https://ruby-trunk-changes.hatenablog.com> へのコメントは *hatenablog* をつけることにしました。
 - [rurema](https://github.com/rurema/doctree) 用のメモには *rurema* をつけることにしました。
 
+# 2019-05-09
+
+## [eb84b33c86280a72aaeedae1e582045528c534b2](https://github.com/ruby/ruby/commit/eb84b33c86280a72aaeedae1e582045528c534b2), [025206d0dd29266771f166eb4f59609af602213a](https://github.com/ruby/ruby/commit/025206d0dd29266771f166eb4f59609af602213a)
+
+- [rubyfarm](https://github.com/mame/rubyfarmer) のように特定のコミットを checkout していると detached HEAD になっていて、最初に git 対応したときは大丈夫だったのに [7790b610b8c11ae987e0f9a936418a7a34a8af0b](https://github.com/ruby/ruby/commit/7790b610b8c11ae987e0f9a936418a7a34a8af0b) から、その状態だとブランチ名が空欄になっていたのを対応
+
+## [`Enumerator#with_object` with multiple objects](https://bugs.ruby-lang.org/issues/11797#change-77964)
+
+このチケットの例だけなら
+
+```
+["a", "b", "c", "c", "a", "c"].tally.select{@2>1}.map{@1} #=> ["a", "c"]
+```
+
+でいけそう。
+
 # 2019-05-08
 
 ## [d56b0cb554](https://github.com/ruby/ruby/commit/d56b0cb554dd75190b1d308e20f3f49f5f12571b)
