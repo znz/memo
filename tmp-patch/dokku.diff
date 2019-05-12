@@ -1,0 +1,269 @@
+diff --git a/docs/advanced-usage/plugin-management.md b/docs/advanced-usage/plugin-management.md
+index 0ae0f559..3c6808a1 100644
+--- a/docs/advanced-usage/plugin-management.md
++++ b/docs/advanced-usage/plugin-management.md
+@@ -33,8 +33,10 @@ dokku plugin
+ plugn: dev
+   00_dokku-standard    0.16.0 enabled    dokku core standard plugin
+   20_events            0.16.0 enabled    dokku core events logging plugin
++  app-json             0.16.0 enabled    dokku core app-json plugin
+   apps                 0.16.0 enabled    dokku core apps plugin
+   build-env            0.16.0 enabled    dokku core build-env plugin
++  buildpacks           0.16.0 enabled    dokku core buildpacks plugin
+   certs                0.16.0 enabled    dokku core certificate management plugin
+   checks               0.16.0 enabled    dokku core checks plugin
+   common               0.16.0 enabled    dokku core common plugin
+@@ -44,13 +46,14 @@ plugn: dev
+   enter                0.16.0 enabled    dokku core enter plugin
+   git                  0.16.0 enabled    dokku core git plugin
+   logs                 0.16.0 enabled    dokku core logs plugin
+-  named-containers     0.16.0 enabled    dokku core named containers plugin
+   network              0.16.0 enabled    dokku core network plugin
+   nginx-vhosts         0.16.0 enabled    dokku core nginx-vhosts plugin
+   plugin               0.16.0 enabled    dokku core plugin plugin
+   proxy                0.16.0 enabled    dokku core proxy plugin
+   ps                   0.16.0 enabled    dokku core ps plugin
+   repo                 0.16.0 enabled    dokku core repo plugin
++  resource             0.16.0 enabled    dokku core resource plugin
++  scheduler-docker-local 0.16.0 enabled    dokku core scheduler-docker-local plugin
+   shell                0.16.0 enabled    dokku core shell plugin
+   ssh-keys             0.16.0 enabled    dokku core ssh-keys plugin
+   storage              0.16.0 enabled    dokku core storage plugin
+diff --git a/docs/advanced-usage/resource-management.md b/docs/advanced-usage/resource-management.md
+index 02227dd8..3431c14a 100644
+--- a/docs/advanced-usage/resource-management.md
++++ b/docs/advanced-usage/resource-management.md
+@@ -70,7 +70,7 @@ dokku resource:limit --cpu 100 --memory 100 --process-type worker node-js-app
+ 
+ #### Displaying Resource Limits
+ 
+-Running the `resource:limits` command without any flags will display the currently configured app reservation.
++Running the `resource:limits` command without any flags will display the currently configured app limits.
+ 
+ ```shell
+ dokku resource:limits node-js-app
+@@ -99,7 +99,7 @@ dokku resource:limit --global --memory 200
+ This may also be combined with the `--process-type` flag to set global limits on a process-type level:
+ 
+ ```shell
+-dokku resource:limit --global --memory 150 --process-type web node-js-app
++dokku resource:limit --global --memory 150 --process-type web
+ ```
+ 
+ ```
+@@ -178,7 +178,7 @@ dokku resource:reserve --memory 100 node-js-app
+        memory: 100
+ ```
+ 
+-Multiple resources can be limited in a single call:
++Multiple resources can be reserved in a single call:
+ 
+ ```shell
+ dokku resource:reserve --cpu 100 --memory 100 node-js-app
+@@ -190,7 +190,7 @@ dokku resource:reserve --cpu 100 --memory 100 node-js-app
+        memory: 100
+ ```
+ 
+-Resources can also be limited on a per-process type basis. If specified, this will override any generic limits set for the app.
++Resources can also be reserved on a per-process type basis. If specified, this will override any generic reservations set for the app.
+ 
+ ```shell
+ dokku resource:reserve --cpu 100 --memory 100 --process-type worker node-js-app
+@@ -233,7 +233,7 @@ dokku resource:reserve --global --memory 200
+ This may also be combined with the `--process-type` flag to set global reservations on a process-type level:
+ 
+ ```shell
+-dokku resource:reserve --global --memory 150 --process-type web node-js-app
++dokku resource:reserve --global --memory 150 --process-type web
+ ```
+ 
+ ```
+diff --git a/docs/assets/favicons/manifest.json b/docs/assets/favicons/manifest.json
+index 76d1ee7e..6d7bb046 100644
+--- a/docs/assets/favicons/manifest.json
++++ b/docs/assets/favicons/manifest.json
+@@ -2,37 +2,37 @@
+     "name": "Dokku",
+     "icons": [
+         {
+-            "src": "https:\/\/cdn.rawgit.com\/progrium\/dokku\/v0.16.0\/docs\/assets\/favicons\/android-chrome-36x36.png",
++            "src": "https:\/\/cdn.jsdelivr.net\/dokku\/dokku@v0.16.0\/docs\/assets\/favicons\/android-chrome-36x36.png",
+             "sizes": "36x36",
+             "type": "image\/png",
+             "density": "0.75"
+         },
+         {
+-            "src": "https:\/\/cdn.rawgit.com\/progrium\/dokku\/v0.16.0\/docs\/assets\/favicons\/android-chrome-48x48.png",
++            "src": "https:\/\/cdn.jsdelivr.net\/dokku\/dokku@v0.16.0\/docs\/assets\/favicons\/android-chrome-48x48.png",
+             "sizes": "48x48",
+             "type": "image\/png",
+             "density": "1.0"
+         },
+         {
+-            "src": "https:\/\/cdn.rawgit.com\/progrium\/dokku\/v0.16.0\/docs\/assets\/favicons\/android-chrome-72x72.png",
++            "src": "https:\/\/cdn.jsdelivr.net\/dokku\/dokku@v0.16.0\/docs\/assets\/favicons\/android-chrome-72x72.png",
+             "sizes": "72x72",
+             "type": "image\/png",
+             "density": "1.5"
+         },
+         {
+-            "src": "https:\/\/cdn.rawgit.com\/progrium\/dokku\/v0.16.0\/docs\/assets\/favicons\/android-chrome-96x96.png",
++            "src": "https:\/\/cdn.jsdelivr.net\/dokku\/dokku@v0.16.0\/docs\/assets\/favicons\/android-chrome-96x96.png",
+             "sizes": "96x96",
+             "type": "image\/png",
+             "density": "2.0"
+         },
+         {
+-            "src": "https:\/\/cdn.rawgit.com\/progrium\/dokku\/v0.16.0\/docs\/assets\/favicons\/android-chrome-144x144.png",
++            "src": "https:\/\/cdn.jsdelivr.net\/dokku\/dokku@v0.16.0\/docs\/assets\/favicons\/android-chrome-144x144.png",
+             "sizes": "144x144",
+             "type": "image\/png",
+             "density": "3.0"
+         },
+         {
+-            "src": "https:\/\/cdn.rawgit.com\/progrium\/dokku\/v0.16.0\/docs\/assets\/favicons\/android-chrome-192x192.png",
++            "src": "https:\/\/cdn.jsdelivr.net\/dokku\/dokku@v0.16.0\/docs\/assets\/favicons\/android-chrome-192x192.png",
+             "sizes": "192x192",
+             "type": "image\/png",
+             "density": "4.0"
+diff --git a/docs/community/tutorials/deploying-with-gitlab-ci.md b/docs/community/tutorials/deploying-with-gitlab-ci.md
+index e3511975..255555d5 100644
+--- a/docs/community/tutorials/deploying-with-gitlab-ci.md
++++ b/docs/community/tutorials/deploying-with-gitlab-ci.md
+@@ -6,7 +6,7 @@ Gitlab-CI can be used to automatically deploy a Dokku application using the [ily
+ 
+ Make sure you have a Gitlab account and a Dokku project hosted on Gitlab. This method works whether if you are using buildpacks or Dockerfile.
+ 
+-Make sure you have set up an app on the remote machine following [these instructions](http://dokku.viewdocs.io/dokku/deployment/application-deployment/) and can successfully deploy to it from the local machine.
++Make sure you have set up an app on the remote machine following [these instructions](/docs/deployment/application-deployment.md) and can successfully deploy to it from the local machine.
+ 
+ ## Deploy automatically to production
+ 
+diff --git a/docs/deployment/application-deployment.md b/docs/deployment/application-deployment.md
+index 0ccc37ce..8e13df67 100644
+--- a/docs/deployment/application-deployment.md
++++ b/docs/deployment/application-deployment.md
+@@ -53,7 +53,7 @@ Dokku supports linking a single service to multiple applications as well as link
+ 
+ ### Deploy the app
+ 
+-> Warning: Your app should respect the `PORT` environment variable, otherwise it may not respond to web requests. You can find more information in the [port management documentation](/docs/networking/port-management.md).**
++> Warning: Your app should respect the `PORT` environment variable, otherwise it may not respond to web requests. You can find more information in the [port management documentation](/docs/networking/port-management.md).
+ 
+ Now you can deploy the `ruby-getting-started` app to your Dokku server. All you have to do is add a remote to name the app. Applications are created on-the-fly on the Dokku server.
+ 
+diff --git a/docs/development/plugin-creation.md b/docs/development/plugin-creation.md
+index 05468f13..223aac78 100644
+--- a/docs/development/plugin-creation.md
++++ b/docs/development/plugin-creation.md
+@@ -8,7 +8,7 @@ If you create your own plugin:
+ 2. Check out the [list of triggers](/docs/development/plugin-triggers.md) your plugin can implement
+ 3. Upload your plugin to GitHub with a repository name following the `dokku-<name>` convention (e.g. `dokku-mariadb`)
+ 4. Edit [this page](/docs/community/plugins.md) and add a link to your plugin
+-5. Subscribe to the [dokku development blog](http://progrium.com) to be notified about API changes and releases
++5. Subscribe to the [dokku development blog](https://dokku.github.io/) to be notified about API changes and releases
+ 
+ 
+ ## Compilable plugins (Golang, Java(?), C, etc.)
+@@ -177,7 +177,7 @@ version = "0.1.0"
+ - As of 0.4.0, Dokku allows image tagging and deployment of tagged images
+   - This means hard-coding the `$IMAGE` as `dokku/$APP` is no longer sufficient
+   - You should now use `get_running_image_tag()` and `get_app_image_name()` as sourced from `common/functions` (see the [plugin triggers](/docs/development/plugin-triggers.md) doc for examples). **Note:** This is only for plugins that are not `pre/post-build-*` plugins
+-- As of 0.5.0, we use container labels to help cleanup intermediate containers with `dokku cleanup
++- As of 0.5.0, we use container labels to help cleanup intermediate containers with `dokku cleanup`
+   - This means that if you manually call `docker run`, you should include `$DOKKU_GLOBAL_RUN_ARGS` to ensure your intermediate containers are labeled correctly
+-- As of 0.6.0, you should not **not** call the `dokku` binary directly from within plugins because clients using the `--app` argument are potentially broken when doing so (as well as other issues)
++- As of 0.6.0, you should **not** call the `dokku` binary directly from within plugins because clients using the `--app` argument are potentially broken when doing so (as well as other issues)
+   - You should instead source the `functions` file for a given plugin when attempting to call Dokku internal functions
+diff --git a/docs/development/plugin-triggers.md b/docs/development/plugin-triggers.md
+index 253e2921..aa3e11cc 100644
+--- a/docs/development/plugin-triggers.md
++++ b/docs/development/plugin-triggers.md
+@@ -1326,7 +1326,7 @@ DOKKU_SCHEDULER="$1"; APP="$2";
+ > between minor releases until the 1.0 release.
+ 
+ - Description: Allows you to run scheduler commands when retrieving container logs
+-- Invoked by: `dokku logs:failed`
++- Invoked by: `dokku logs`
+ - Arguments: `$DOKKU_SCHEDULER $APP $PROCESS_TYPE $TAIL $PRETTY_PRINT $NUM`
+ - Example:
+ 
+@@ -1364,7 +1364,7 @@ DOKKU_SCHEDULER="$1"; APP="$2";
+ > between minor releases until the 1.0 release.
+ 
+ - Description: Allows you to run scheduler commands when containers should be force retired from the system
+-- Invoked by: `dokku run`
++- Invoked by: `dokku ps:retire`
+ - Arguments: `$DOKKU_SCHEDULER`
+ - Example:
+ 
+diff --git a/plugins/common/common.go b/plugins/common/common.go
+index 99dd24d6..8d0c88df 100644
+--- a/plugins/common/common.go
++++ b/plugins/common/common.go
+@@ -320,8 +320,8 @@ func UcFirst(str string) string {
+ 	return ""
+ }
+ 
+-// VerifyAppName verifies app name format and app existence"
+-func VerifyAppName(appName string) (err error) {
++// VerifyAppName verifies app name format and app existence
++func VerifyAppName(appName string) error {
+ 	if appName == "" {
+ 		return fmt.Errorf("App name must not be null")
+ 	}
+@@ -334,7 +334,7 @@ func VerifyAppName(appName string) (err error) {
+ 	if !r.MatchString(appName) {
+ 		return fmt.Errorf("app name (%s) must begin with lowercase alphanumeric character", appName)
+ 	}
+-	return err
++	return nil
+ }
+ 
+ // VerifyImage returns true if docker image exists in local repo
+diff --git a/plugins/common/properties.go b/plugins/common/properties.go
+index d780003f..ebc38c96 100644
+--- a/plugins/common/properties.go
++++ b/plugins/common/properties.go
+@@ -79,13 +79,13 @@ func PropertyGet(pluginName string, appName string, property string) string {
+ 
+ // PropertyGetAll returns a map of all properties for a given app
+ func PropertyGetAll(pluginName string, appName string) (map[string]string, error) {
+-	properties := make(map[string]string)
+ 	pluginAppConfigRoot := getPluginAppPropertyPath(pluginName, appName)
+ 	files, err := ioutil.ReadDir(pluginAppConfigRoot)
+ 	if err != nil {
+-		return properties, err
++		return nil, err
+ 	}
+ 
++	properties := make(map[string]string)
+ 	for _, file := range files {
+ 		if file.IsDir() {
+ 			continue
+diff --git a/plugins/resource/resource.go b/plugins/resource/resource.go
+index 526589cc..3e7b1fee 100644
+--- a/plugins/resource/resource.go
++++ b/plugins/resource/resource.go
+@@ -67,7 +67,7 @@ func ReportSingleApp(appName, infoFlag string) {
+ 	common.LogFail(fmt.Sprintf("Invalid flag passed, valid flags: %s", strings.Join(strkeys, ", ")))
+ }
+ 
+-// GetResourceValue fetches a single value for a given app/process/request/key combination
++// GetResourceValue fetches a single value for a given app/process/resource/key combination
+ func GetResourceValue(appName string, processType string, resourceType string, key string) (string, error) {
+ 	resources, err := common.PropertyGetAll("resource", appName)
+ 	if err != nil {
+diff --git a/plugins/resource/src/triggers/resource-get-property/resource-get-property.go b/plugins/resource/src/triggers/resource-get-property/resource-get-property.go
+index 53d22eff..061d02fa 100644
+--- a/plugins/resource/src/triggers/resource-get-property/resource-get-property.go
++++ b/plugins/resource/src/triggers/resource-get-property/resource-get-property.go
+@@ -9,7 +9,7 @@ import (
+ 	"github.com/dokku/dokku/plugins/resource"
+ )
+ 
+-// writes the resource key to stdout for a given app container
++// writes the resource value to stdout for a given app container
+ func main() {
+ 	flag.Parse()
+ 	appName := flag.Arg(0)
