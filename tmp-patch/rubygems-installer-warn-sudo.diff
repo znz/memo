@@ -1,0 +1,23 @@
+diff --git a/lib/rubygems/installer.rb b/lib/rubygems/installer.rb
+index 76c3bcf1d7..72b4367c28 100644
+--- a/lib/rubygems/installer.rb
++++ b/lib/rubygems/installer.rb
+@@ -730,6 +730,18 @@ def check_that_user_bin_dir_is_in_path # :nodoc:
+   def verify_gem_home # :nodoc:
+     FileUtils.mkdir_p gem_home, :mode => options[:dir_mode] && 0755
+     raise Gem::FilePermissionError, gem_home unless File.writable?(gem_home)
++    unless File.owned?(gem_home)
++      return true if @force
++      msg = ['']
++      user_name = Etc.getpwuid(Process.euid).name
++      owner_name = Etc.getpwuid(File.stat('.').uid).name
++      msg << "Owner of #{gem_home} is not #{user_name}, but #{owner_name}."
++      msg << 'This installation may cause permission problem.'
++      msg << 'Continue?'
++      unless ask_yes_no(msg.join("\n"), false)
++        raise Gem::InstallError, 'cancelled'
++      end
++    end
+   end
+ 
+   def verify_spec
