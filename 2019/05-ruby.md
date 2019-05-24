@@ -2,6 +2,40 @@
 - <https://ruby-trunk-changes.hatenablog.com> へのコメントは *hatenablog* をつけることにしました。
 - [rurema](https://github.com/rurema/doctree) 用のメモには *rurema* をつけることにしました。
 
+# 2019-05-24
+
+## ruby/reline の clone が大きかったのを解決した
+
+- `.git` が 100M 以上あって、 `git clone` などが重いという話から。
+- `checkout` されているファイルに大きなファイルはないし `git log --stat` をみても大きそうなファイルはない。
+- `git gc --aggressive` はあまり効果なし (CPU やメモリを大量に使って頑張って 63M ぐらいまでは減った)
+- `git_find_big.sh` というのを探してきて実行してみると、なぜか ChangeLog などが含まれていた。
+- タグが `v0.0.0`, `v1_8_7`, `v2_0_0_rc1`, `v2_1_0_rc1`, `v2_2_0_rc1` とあって、タグの方から ChangeLog につながっていた。
+- `git tag -d v0.0.0; git tag -d v1_8_7; git tag -d v2_0_0_rc1; ...` でバシバシ消して `git gc` したらなぜか反応がなくなった (CPU も使っていない) ので ctrl+c で止めて `git gc --prune=now` したら 360K まで縮んだ。
+- `git pull` したら `v0.0.0` が復活したが、一瞬だったので ChangeLog などのダウンロードはなかったように見えた。
+- `git pull --tags` したら `v1_8_7` などが復活して 30 秒以上かかっていたので、これが原因で間違いなさそうだった。
+- `git push --delete origin v1_8_7 v2_0_0_rc1 v2_1_0_rc1 v2_2_0_rc1` で削除して `git clone https://github.com/ruby/reline /tmp/reline` で縮んでいるのを確認。
+
+```
+%  git push --delete origin v1_8_7 v2_0_0_rc1 v2_1_0_rc1 v2_2_0_rc1
+To github.com:ruby/reline
+ - [deleted]             v1_8_7
+ - [deleted]             v2_0_0_rc1
+ - [deleted]             v2_1_0_rc1
+ - [deleted]             v2_2_0_rc1
+%  git clone https://github.com/ruby/reline /tmp/reline
+Cloning into '/tmp/reline'...
+remote: Enumerating objects: 180, done.
+remote: Counting objects: 100% (180/180), done.
+remote: Compressing objects: 100% (91/91), done.
+remote: Total 2129 (delta 98), reused 162 (delta 89), pack-reused 1949
+Receiving objects: 100% (2129/2129), 301.83 KiB | 632.00 KiB/s, done.
+Resolving deltas: 100% (1317/1317), done.
+%  du -shc /tmp/reline
+752K	/tmp/reline
+752K	total
+```
+
 # 2019-05-09
 
 ## [eb84b33c86280a72aaeedae1e582045528c534b2](https://github.com/ruby/ruby/commit/eb84b33c86280a72aaeedae1e582045528c534b2), [025206d0dd29266771f166eb4f59609af602213a](https://github.com/ruby/ruby/commit/025206d0dd29266771f166eb4f59609af602213a)
