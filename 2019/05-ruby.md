@@ -2,6 +2,16 @@
 - <https://ruby-trunk-changes.hatenablog.com> へのコメントは *hatenablog* をつけることにしました。
 - [rurema](https://github.com/rurema/doctree) 用のメモには *rurema* をつけることにしました。
 
+# 2019-05-26
+
+- [4668a3a9da](https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunnk_changes_20190526#4668a3a9da)
+
+- [ ] *hatenablog* Envutil → EnvUtil ?
+
+- [208ed56e57](https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunnk_changes_20190526#208ed56e57)
+
+- [ ] *hatenablog* rb → irb ?
+
 # 2019-05-24
 
 ## [6ae9d5c85f](https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunnk_changes_20190524#6ae9d5c85f)
