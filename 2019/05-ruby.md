@@ -4,6 +4,18 @@
 
 # 2019-05-24
 
+## [6ae9d5c85f](https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunnk_changes_20190524#6ae9d5c85f)
+
+- テストが失敗していて、コミッター slack でささださんから (自分ですぐには対処できない状況なので) 誰か revert しておいて、というリクエストがあったので revert しました。
+
+## [35caedc828](https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunnk_changes_20190524#35caedc828)
+
+- git pull のオプションとしてはもうちょっと後のバージョンからだったらしい。
+
+## [7f2f56b2f5](https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunnk_changes_20190524#7f2f56b2f5)
+
+- [ ] *hatenablog* のがるのか ?
+
 ## ruby/reline の clone が大きかったのを解決した
 
 - `.git` が 100M 以上あって、 `git clone` などが重いという話から。
