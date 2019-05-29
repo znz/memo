@@ -2,13 +2,29 @@
 - <https://ruby-trunk-changes.hatenablog.com> へのコメントは *hatenablog* をつけることにしました。
 - [rurema](https://github.com/rurema/doctree) 用のメモには *rurema* をつけることにしました。
 
+# 2019-05-29
+
+## [7c0639f3f8](https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunnk_changes_20190529#7c0639f3f8)
+
+- [ ] *hatenablog* `FIX2IN()` → `FIX2INT()` ?
+
+## [8552e9d696](https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunnk_changes_20190529#8552e9d696)
+
+- [ ] *hatenablog* 配列帳 → 配列長 ?
+
+## [aee36bf149](https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunnk_changes_20190529#aee36bf149)
+
+- `void *ptr = asan_poisoned_object_p(v);` で呼ばれている `asan_poisoned_object_p()` が `return` している `__asan_region_is_poisoned` の定義が、
+  `#if !__has_feature(address_sanitizer)` のときに `# define __asan_region_is_poisoned(x, y) 0` で常に 0 で、
+  その常に 0 になる `ptr` を使って `if (ptr) { asan_poison_object(v); }` と分岐していたので、誤検出ではなさそうでした。
+
 # 2019-05-26
 
-- [4668a3a9da](https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunnk_changes_20190526#4668a3a9da)
+## [4668a3a9da](https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunnk_changes_20190526#4668a3a9da)
 
 - [ ] *hatenablog* Envutil → EnvUtil ?
 
-- [208ed56e57](https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunnk_changes_20190526#208ed56e57)
+## [208ed56e57](https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunnk_changes_20190526#208ed56e57)
 
 - [ ] *hatenablog* rb → irb ?
 
