@@ -2,6 +2,12 @@
 - <https://ruby-trunk-changes.hatenablog.com> へのコメントは *hatenablog* をつけることにしました。
 - [rurema](https://github.com/rurema/doctree) 用のメモには *rurema* をつけることにしました。
 
+# 2019-06-13
+
+## developer meeting
+
+- このチケットで時間がかかるのか、というのもいくつかあって、リストに上がっていたチケットは途中までで終わったけど、 pipeline operator `|>` が実験的に入ったり、 numbered parameter が `|e|` 相当のものがいいのか `|e,|` 相当のものがいいのか再度議論していたりした。
+
 # 2019-06-04
 
 ## expand tabs が動いていないことがあったのを修正
