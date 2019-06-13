@@ -4,6 +4,10 @@
 
 # 2019-06-13
 
+## [1808029061](https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20190613#1808029061)
+
+- [ ] *hatenablog* `make ync-default-gems` → `make sync-default-gems` ?
+
 ## developer meeting
 
 - このチケットで時間がかかるのか、というのもいくつかあって、リストに上がっていたチケットは途中までで終わったけど、 pipeline operator `|>` が実験的に入ったり、 numbered parameter が `|e|` 相当のものがいいのか `|e,|` 相当のものがいいのか再度議論していたりした。
