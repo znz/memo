@@ -2,6 +2,13 @@
 - <https://ruby-trunk-changes.hatenablog.com> へのコメントは *hatenablog* をつけることにしました。
 - [rurema](https://github.com/rurema/doctree) 用のメモには *rurema* をつけることにしました。
 
+# 2019-06-14
+
+## [d780c36624](https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20190614#d780c36624)
+
+- コミッター Slack で2回つついてみたけど追加されなかったので、自分で追加しました。
+- pipeline operator の時に experimental とつけ忘れたとどこかで言っていたはずなので、追加すること自体は問題ないはず。
+
 # 2019-06-13
 
 ## [1808029061](https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20190613#1808029061)
