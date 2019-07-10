@@ -2,6 +2,12 @@
 - <https://ruby-trunk-changes.hatenablog.com> へのコメントは *hatenablog* をつけることにしました。
 - [rurema](https://github.com/rurema/doctree) 用のメモには *rurema* をつけることにしました。
 
+# 2019-07-09
+
+- [Enumerable#select(pattern) #2271](https://github.com/ruby/ruby/pull/2271)
+- [Enumerable#select(pattern) #73](https://github.com/ko1/rubyhackchallenge/issues/73)
+- [Feature #14197 `Enumerable#{select,reject}` accept a pattern argument](https://bugs.ruby-lang.org/issues/14197)
+
 # 2019-07-03
 
 ## [e44c9b1147](https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20190703#e44c9b1147)
