@@ -1,0 +1,1 @@
+- minio は X-Amz-Meta-Mtime での mtime 設定は対応していないがメタ情報として保存はしてくれていたので、 rclone 経由なら mtime として見えた。
