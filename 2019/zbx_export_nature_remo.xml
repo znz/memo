@@ -1,47 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
-    <version>4.0</version>
-    <date>2019-08-02T08:29:49Z</date>
+    <version>4.2</version>
+    <date>2019-08-04T14:21:32Z</date>
     <groups>
         <group>
-            <name>Nature Remo</name>
+            <name>Templates/Network devices</name>
         </group>
     </groups>
-    <hosts>
-        <host>
-            <host>api.nature.global</host>
-            <name>api.nature.global</name>
+    <templates>
+        <template>
+            <template>Template Nature Remo</template>
+            <name>Template Nature Remo</name>
             <description/>
-            <proxy/>
-            <status>0</status>
-            <ipmi_authtype>-1</ipmi_authtype>
-            <ipmi_privilege>2</ipmi_privilege>
-            <ipmi_username/>
-            <ipmi_password/>
-            <tls_connect>1</tls_connect>
-            <tls_accept>1</tls_accept>
-            <tls_issuer/>
-            <tls_subject/>
-            <tls_psk_identity/>
-            <tls_psk/>
-            <templates/>
             <groups>
                 <group>
-                    <name>Nature Remo</name>
+                    <name>Templates/Network devices</name>
                 </group>
             </groups>
-            <interfaces>
-                <interface>
-                    <default>1</default>
-                    <type>1</type>
-                    <useip>0</useip>
-                    <ip/>
-                    <dns>api.nature.global</dns>
-                    <port>10050</port>
-                    <bulk>1</bulk>
-                    <interface_ref>if1</interface_ref>
-                </interface>
-            </interfaces>
             <applications>
                 <application>
                     <name>Nature Remo</name>
@@ -55,7 +30,7 @@
                     <snmp_oid/>
                     <key>nature.devices</key>
                     <delay>10m</delay>
-                    <history>3650d</history>
+                    <history>1d</history>
                     <trends>0</trends>
                     <status>0</status>
                     <value_type>4</value_type>
@@ -102,20 +77,19 @@
                         </header>
                         <header>
                             <name>Authorization</name>
-                            <value>Bearer {$NATURE_API_TOKEN}</value>
+                            <value>Bearer {$NATURE_REMO_API_TOKEN}</value>
                         </header>
                     </headers>
                     <retrieve_mode>0</retrieve_mode>
                     <request_method>0</request_method>
-                    <output_format>1</output_format>
+                    <output_format>0</output_format>
                     <allow_traps>0</allow_traps>
                     <ssl_cert_file/>
                     <ssl_key_file/>
                     <ssl_key_password/>
-                    <verify_peer>0</verify_peer>
+                    <verify_peer>1</verify_peer>
                     <verify_host>1</verify_host>
                     <master_item/>
-                    <interface_ref>if1</interface_ref>
                 </item>
                 <item>
                     <name>humidity</name>
@@ -157,7 +131,9 @@
                     <preprocessing>
                         <step>
                             <type>12</type>
-                            <params>$.body[0].newest_events.hu.val</params>
+                            <params>$[0].newest_events.hu.val</params>
+                            <error_handler>0</error_handler>
+                            <error_handler_params/>
                         </step>
                     </preprocessing>
                     <jmx_endpoint/>
@@ -223,7 +199,9 @@
                     <preprocessing>
                         <step>
                             <type>12</type>
-                            <params>$.body[0].newest_events.il.val</params>
+                            <params>$[0].newest_events.il.val</params>
+                            <error_handler>0</error_handler>
+                            <error_handler_params/>
                         </step>
                     </preprocessing>
                     <jmx_endpoint/>
@@ -289,7 +267,9 @@
                     <preprocessing>
                         <step>
                             <type>12</type>
-                            <params>$.body[0].newest_events.mo.val</params>
+                            <params>$[0].newest_events.mo.val</params>
+                            <error_handler>0</error_handler>
+                            <error_handler_params/>
                         </step>
                     </preprocessing>
                     <jmx_endpoint/>
@@ -355,7 +335,9 @@
                     <preprocessing>
                         <step>
                             <type>12</type>
-                            <params>$.body[0].newest_events.te.val</params>
+                            <params>$[0].newest_events.te.val</params>
+                            <error_handler>0</error_handler>
+                            <error_handler_params/>
                         </step>
                     </preprocessing>
                     <jmx_endpoint/>
@@ -384,15 +366,10 @@
             </items>
             <discovery_rules/>
             <httptests/>
-            <macros>
-                <macro>
-                    <macro>{$NATURE_API_TOKEN}</macro>
-                    <value></value>
-                </macro>
-            </macros>
-            <inventory>
-                <inventory_mode>-1</inventory_mode>
-            </inventory>
-        </host>
-    </hosts>
+            <macros/>
+            <templates/>
+            <screens/>
+            <tags/>
+        </template>
+    </templates>
 </zabbix_export>
