@@ -1,0 +1,24 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Run curl and grep (expect match)
+      run: |
+        if curl -s https://rubyci.s3.amazonaws.com/doxygen-latest-html/index.html | grep -q 4209066f0e2be775357d09cb513c89a2f064a335; then
+          echo match
+        else
+          echo not match
+        fi
+    - name: Run curl and grep (expect not match)
+      run: |
+        if curl -s https://rubyci.s3.amazonaws.com/doxygen-latest-html/index.html | grep -q d8060782373c181bc689ce9bc73f6cb8b74de44d; then
+          echo match
+        else
+          echo not match
+        fi
