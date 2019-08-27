@@ -8,17 +8,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Run curl and grep (expect match)
+    - name: Run curl and grep
       run: |
         if curl -s https://rubyci.s3.amazonaws.com/doxygen-latest-html/index.html | grep -q 4209066f0e2be775357d09cb513c89a2f064a335; then
-          echo match
-        else
-          echo not match
+          touch '[doxygen skip]'
         fi
-    - name: Run curl and grep (expect not match)
+    - name: Skip if match
       run: |
-        if curl -s https://rubyci.s3.amazonaws.com/doxygen-latest-html/index.html | grep -q d8060782373c181bc689ce9bc73f6cb8b74de44d; then
-          echo match
-        else
-          echo not match
-        fi
+        [ -f '[doxygen skip]' ] && exit
+        echo match
+    - name: Skip if not match
+      run: |
+        [ -f '[doxygen skip]' ] || exit
+        echo not match
