@@ -1,0 +1,22 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Download current index.html
+      run: |
+        curl -o /tmp/index.html https://rubyci.s3.amazonaws.com/doxygen-latest-html/index.html || touch /tmp/index.html
+        if grep -q "${GITHUB_SHA}" /tmp/index.html; then
+          echo "##[set-env name=SKIP]doxygen"
+        fi
+    - name: ls /tmp
+      run: |
+        ls -al /tmp
+    - name: env
+      run: |
+        env | sort
