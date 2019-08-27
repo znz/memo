@@ -4,6 +4,8 @@ jobs:
   one:
     runs-on: ubuntu-16.04
     steps:
+      - name: Show env
+        run: env
       - name: Dump GitHub context
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
