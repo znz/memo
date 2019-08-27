@@ -14,6 +14,9 @@ jobs:
         if grep -q "${GITHUB_SHA}" /tmp/index.html; then
           echo "##[set-env name=SKIP]doxygen"
         fi
+        echo "##[set-env name=SOME_VAR]some text"
+      env:
+        GITHUB_SHA: 932a471d3811d6d44764ce42b1b140a04961a763
     - name: ls /tmp
       run: |
         ls -al /tmp
