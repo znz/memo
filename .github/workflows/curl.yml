@@ -15,12 +15,12 @@ jobs:
     - name: Skip if match
       run: |
         if grep -q "${GITHUB_SHA}" tmp/index.html; then exit; fi
-        echo match
+        echo not match
       env:
         GITHUB_SHA: ${{ github.sha }}
     - name: Skip if not match
       run: |
         if ! grep -q "${GITHUB_SHA}" tmp/index.html; then exit; fi
-        echo not match
+        echo match
       env:
         GITHUB_SHA: ${{ github.sha }}
