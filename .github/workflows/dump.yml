@@ -1,4 +1,5 @@
-on: push
+#on: push
+on: check_run
 
 jobs:
   one:

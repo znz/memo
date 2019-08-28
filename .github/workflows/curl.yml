@@ -1,6 +1,7 @@
 name: CI
 
-on: [push]
+#on: [push]
+on: check_run
 
 jobs:
   build:
@@ -17,8 +18,6 @@ jobs:
           echo "##[set-env name=SKIP]doxygen"
         fi
         echo "##[set-env name=SOME_VAR]some text"
-      env:
-        GITHUB_SHA: 932a471d3811d6d44764ce42b1b140a04961a763
     - name: ls /tmp
       run: |
         ls -al /tmp
