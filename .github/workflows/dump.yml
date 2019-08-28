@@ -7,8 +7,19 @@ jobs:
       - name: Set env
         run: |
           echo '##[set-env name=JOBS]'-j$((1 + $(nproc --all)))
+          echo '##[set-env name=SKIP_DOXYGEN]'true
       - name: Show env
-        run: env
+        run: env | sort
+      - name: skip test 'true'
+        run: echo test
+        if: job.env.SKIP_DOXYGEN == 'true'
+      - name: skip test true
+        run: echo test
+        if: job.env.SKIP_DOXYGEN == true
+      - name: test not set
+        run: echo not set
+        if: job.env.FOO_BAR == 'not set'
+
       - name: Dump GitHub context
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
