@@ -16,9 +16,18 @@ jobs:
       - name: skip test true
         run: echo test
         if: job.env.SKIP_DOXYGEN == true
-      - name: test not set
-        run: echo not set
-        if: job.env.FOO_BAR == 'not set'
+      - name: test FOO_BAR
+        run: echo test
+        if: job.env.FOO_BAR && job.env.FOO_BAR == 'not set'
+      - name: test FOO_BAR === true
+        run: echo test
+        if: job.env.FOO_BAR === 'true'
+      - name: test FOO_BAR != false
+        run: echo test
+        if: job.env.FOO_BAR != 'false'
+      - name: test FOO_BAR !== false
+        run: echo test
+        if: job.env.FOO_BAR !== 'false'
 
       - name: Dump GitHub context
         env:
