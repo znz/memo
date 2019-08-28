@@ -11,7 +11,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install --no-install-recommends -y build-essential git bison autoconf ruby p7zip-full curl
       - name: Checkout ruby/ruby
-        run: git clone --single-branch --shallow-since=$(date --date='1 year ago' '+%Y-12-01') https://github.com/ruby/ruby ruby
+        run: git clone --single-branch --shallow-since='25 Dec 00:00:00' https://github.com/ruby/ruby ruby
       - name: Fetch notes
         run: cd ruby && git fetch origin +refs/notes/commits:refs/notes/commits
       - name: Make snapshot
@@ -33,7 +33,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install --no-install-recommends -y build-essential git bison autoconf ruby p7zip-full curl
       - name: Checkout ruby/ruby
-        run: git clone --single-branch --shallow-since=$(date --date='2 year ago' '+%Y-12-01') --branch=ruby_2_6 https://github.com/ruby/ruby ruby
+        run: git clone --single-branch --shallow-since='25 Dec 1 year ago 00:00:00' --branch=ruby_2_6 https://github.com/ruby/ruby ruby
       - name: Make stable-snapshot
         run: ruby ruby/tool/make-snapshot -archname=stable-snapshot -srcdir=ruby pkg stable
       - name: Check pkg
