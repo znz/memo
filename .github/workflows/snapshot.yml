@@ -1,0 +1,43 @@
+name: make-snapshot
+on: push
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install libraries
+        run: |
+          set -x
+          sudo apt-get update
+          sudo apt-get install build-essential git bison autoconf ruby bundler p7zip-full curl
+      - name: Checkout ruby/ruby
+        run: git clone --depth=10 https://github.com/ruby/ruby ruby
+      - name: Make snapshot
+        run: ruby ruby/tool/make-snapshot -archname=snapshot -srcdir=ruby pkg
+      - name: Check pkg
+        run: |
+          set -x
+          ls -al pkg
+          7z x pkg/snapshot.zip snapshot/revision.h
+          cat snapshot/revision.h
+          7z l pkg/snapshot.zip snapshot/ChangeLog
+
+  stable-snapshot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install libraries
+        run: |
+          set -x
+          sudo apt-get update
+          sudo apt-get install build-essential git bison autoconf ruby bundler p7zip-full curl
+      - name: Checkout ruby/ruby
+        run: git clone --depth=10 --branch=ruby_2_6 https://github.com/ruby/ruby ruby
+      - name: Make stable-snapshot
+        run: ruby ruby/tool/make-snapshot -archname=stable-snapshot -srcdir=ruby pkg stable
+      - name: Check pkg
+        run: |
+          set -x
+          ls -al pkg
+          7z x pkg/stable-snapshot.zip stable-snapshot/revision.h
+          cat stable-snapshot/revision.h
+          7z l pkg/stable-snapshot.zip stable-snapshot/ChangeLog
