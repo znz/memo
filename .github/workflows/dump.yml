@@ -4,6 +4,9 @@ jobs:
   one:
     runs-on: ubuntu-16.04
     steps:
+      - name: Set env
+        run: |
+          echo '##[set-env name=JOBS]'-j$((1 + $(nproc --all)))
       - name: Show env
         run: env
       - name: Dump GitHub context
