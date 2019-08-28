@@ -9,7 +9,7 @@ jobs:
         run: |
           set -x
           sudo apt-get update
-          sudo apt-get install build-essential git bison autoconf ruby bundler p7zip-full curl
+          sudo apt-get install --no-install-recommends -y build-essential git bison autoconf ruby p7zip-full curl
       - name: Checkout ruby/ruby
         run: git clone --single-branch --shallow-since=$(date --date='1 year ago' '+%Y-12-01') https://github.com/ruby/ruby ruby
       - name: Fetch notes
@@ -31,7 +31,7 @@ jobs:
         run: |
           set -x
           sudo apt-get update
-          sudo apt-get install build-essential git bison autoconf ruby bundler p7zip-full curl
+          sudo apt-get install --no-install-recommends -y build-essential git bison autoconf ruby p7zip-full curl
       - name: Checkout ruby/ruby
         run: git clone --single-branch --shallow-since=$(date --date='2 year ago' '+%Y-12-01') --branch=ruby_2_6 https://github.com/ruby/ruby ruby
       - name: Make stable-snapshot
