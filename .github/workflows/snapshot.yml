@@ -3,6 +3,7 @@ on: push
 
 jobs:
   check-ci-skip:
+    runs-on: ubuntu-latest
     steps:
       - name: Check [ci skip]
         run: echo ok
