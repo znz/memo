@@ -21,3 +21,7 @@ jobs:
         run: echo "$JOB_CONTEXT"
         env:
           JOB_CONTEXT: ${{ toJson(job) }}
+      - name: Debug steps context
+        run: echo "$STEPS_CONTEXT"
+        env:
+          STEPS_CONTEXT: ${{ toJson(steps) }}
