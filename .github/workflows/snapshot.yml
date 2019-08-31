@@ -5,6 +5,19 @@ jobs:
   check-snapshot:
     runs-on: ubuntu-latest
     steps:
+      - name: Debug GitHub context
+        run: echo "$GITHUB_CONTEXT"
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+      - name: Check [ci skip]
+        run: |
+          echo '##[set-env name=SKIP_CI]'true
+        if: contains(github.event.head_commit.message, '[ci skip]')
+      - run: env
+      - name: Skip CI
+        run: echo run
+        if: job.env.SKIP_CI != 'true'
+
       - name: Install libraries
         run: |
           set -x
