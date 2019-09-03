@@ -5,6 +5,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - &echo-example
+        run: echo example
       - run: env | sort
       - name: Dump GitHub context
         env:
@@ -30,3 +32,4 @@ jobs:
         env:
           MATRIX_CONTEXT: ${{ toJson(matrix) }}
         run: echo "$MATRIX_CONTEXT"
+      - *echo-example
