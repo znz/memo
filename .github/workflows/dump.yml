@@ -45,7 +45,7 @@ jobs:
             {
               "attachments": [{
                 "text": "${{ job.status }}: <https://github.com/${{ github.repository }}/commit/${{ github.sha }}/checks|${{ github.workflow }}> ",
-                "color": "${{ success() ? 'good' : 'danger' }}"
+                "color": "danger"
               }]
             }
         env:
