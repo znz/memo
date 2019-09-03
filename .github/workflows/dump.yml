@@ -1,7 +1,8 @@
 name: dump
+
 on:
   schedule:
-    - cron: '0 0 * * *'
+    - cron: '5 0 * * *'
   push:
     branches:
       - '*'
