@@ -13,6 +13,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - run: |
+          TARGET_VERSION=$(echo $GITHUB_REF | sed -e "s#refs/tags/testing/v##" -e "s/_\([a-z]\)/-\1/" -e "y/_/./")
+          echo $TARGET_VERSION
+          TARGET_VERSION=${{ github.ref.substring('refs/tags/testing/v'.length).replace(/_(?!\d)/, '-').replace(/_/, '.') }}
+          echo $TARGET_VERSION
       - run: env | sort
       - name: Dump GitHub context
         env:
@@ -44,6 +49,8 @@ jobs:
           payload: |
             {
               "attachments": [{
+                title: "${{ 'ruby-'+github.ref.substring('refs/tags/testing/v'.length).replace(/_(?!\d)/, '-').replace(/_/, '.') }}",
+                title_link: "https://cache.ruby-lang.org/pub/tmp/",
                 "text": "${{ job.status }}: <https://github.com/${{ github.repository }}/commit/${{ github.sha }}/checks|${{ github.workflow }}> ",
                 "color": "danger"
               }]
