@@ -1,0 +1,26 @@
+name: notify-slack
+runs:
+  using: docker
+  image: 'docker://ruby:2.6-slim'
+
+  args:
+    - /usr/local/bin/ruby
+    - -e
+    - |-
+      require 'json'
+      require 'net/http'
+      require 'uri'
+      github_repo = ENV.fetch('GITHUB_REPOSITORY')
+      github_sha  = ENV.fetch('GITHUB_SHA')
+      github_ref  = ENV.fetch('GITHUB_REF')
+      commit_url = "https://github.com/#{github_repo}/commit/#{github_sha}"
+      attachment = {
+        text: "<#{commit_url}/checks|#{workflow} failed>"
+        color: 'danger',
+      }
+      resp = Net::HTTP.post(
+        URI(ENV.fetch('SLACK_WEBHOOK_URL')),
+        { attachments: [attachment] }.to_json,
+        { 'Content-Type' => 'application/json' },
+      )
+      puts "#{resp.code} (#{resp.body}) -- #{payload.to_json}"
