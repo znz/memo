@@ -1,0 +1,39 @@
+name: make-snapshot
+
+on:
+  push:
+    branches:
+      - '*'
+
+jobs:
+  check-snapshot-ruby_2_4:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install libraries
+        run: |
+          set -x
+          sudo apt-get update -q
+          sudo apt-get install --no-install-recommends -q -y build-essential libssl-dev libyaml-dev libreadline6-dev zlib1g-dev libncurses5-dev libffi-dev libgdbm5 libgdbm-dev bison- autoconf- ruby- git-
+      - name: Download snapshot-ruby_2_4.tar.xz
+        run: wget https://cache.ruby-lang.org/pub/ruby/snapshot/snapshot-ruby_2_4.tar.xz
+      - name: Extract
+        run: tar xf snapshot-ruby_2_4.tar.xz
+      - name: Fixed world writable dirs
+        run: |
+          chmod go-w $HOME
+          sudo chmod -R go-w /usr/share
+      - name: Set ENV
+        run: |
+          echo '##[set-env name=JOBS]'-j$((1 + $(nproc --all)))
+      - name: configure
+        run: cd snapshot-ruby_2_4 && ./configure
+      - name: make
+        run: cd snapshot-ruby_2_4 && make $JOBS
+      - name: make test
+        run: cd snapshot-ruby_2_4 && make $JOBS test TESTOPTS="-q --tty=no"
+      - name: make test-all
+        run: cd snapshot-ruby_2_4 && make $JOBS test-all TESTOPTS="--tty=no --name='!/^test_do_not_allow_invalid_client_cert_auth_connection\z/' --name='!/^test_ioflush2\z/' --name='!/^test_session_reuse\z/' --name='!/^test_session_reuse_but_expire\z/'
+      - name: make install
+        run: cd snapshot-ruby_2_4 && sudo make $JOBS install
+      - name: ruby -v
+        run: ruby -v
