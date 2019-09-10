@@ -1,0 +1,466 @@
+name: make-snapshot
+
+on:
+  push:
+    branches:
+      - '*'
+
+jobs:
+  dump-context:
+    runs-on: ubuntu-latest
+    steps:
+      - run: env | sort
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+      - name: Dump job context
+        env:
+          JOB_CONTEXT: ${{ toJson(job) }}
+        run: echo "$JOB_CONTEXT"
+      - name: Dump steps context
+        env:
+          STEPS_CONTEXT: ${{ toJson(steps) }}
+        run: echo "$STEPS_CONTEXT"
+      - name: Dump runner context
+        env:
+          RUNNER_CONTEXT: ${{ toJson(runner) }}
+        run: echo "$RUNNER_CONTEXT"
+      - name: Dump strategy context
+        env:
+          STRATEGY_CONTEXT: ${{ toJson(strategy) }}
+        run: echo "$STRATEGY_CONTEXT"
+      - name: Dump matrix context
+        env:
+          MATRIX_CONTEXT: ${{ toJson(matrix) }}
+        run: echo "$MATRIX_CONTEXT"
+  snapshot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install libraries
+        run: |
+          set -x
+          sudo apt-get update -q
+          sudo apt-get install --no-install-recommends -q -y build-essential git bison autoconf ruby p7zip-full curl
+      - name: Checkout ruby/ruby
+        run: git clone --single-branch --shallow-since='2018-12-25 00:00:00' https://github.com/ruby/ruby ruby
+      - name: Fetch notes
+        run: cd ruby && git fetch origin +refs/notes/commits:refs/notes/commits
+      - name: Make snapshot
+        run: ruby ruby/tool/make-snapshot -archname=snapshot -srcdir=ruby pkg
+      - name: Check pkg
+        run: |
+          set -x
+          ls -al pkg
+          7z x pkg/snapshot.zip snapshot/revision.h
+          cat snapshot/revision.h
+          7z l pkg/snapshot.zip snapshot/ChangeLog
+      - name: Upload s3
+        run: |
+          set -x
+          for ext in .tar.gz .tar.bz2 .tar.xz .zip; do
+            aws s3 cp "pkg/snapshot$ext" "s3://ftp.r-l.o/pub/ruby/snapshot$ext" --no-progress
+            curl -sS -X PURGE -H "Fastly-Soft-Purge:1" "https://cache.ruby-lang.org/pub/ruby/snapshot$ext"
+          done
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.FTP_R_L_O_AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.FTP_R_L_O_AWS_SECRET_ACCESS_KEY }}
+      - uses: k0kubun/action-slack@v2.0.0
+        with:
+          payload: |
+            {
+              "attachments": [{
+                "text": "${{ job.status }}: <https://github.com/${{ github.repository }}/commit/${{ github.sha }}/checks|${{ github.workflow }} snapshot>",
+                "color": "danger"
+              }]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SNAPSHOT_SLACK_WEBHOOK_URL }}
+        if: failure()
+  stable-snapshot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install libraries
+        run: |
+          set -x
+          sudo apt-get update -q
+          sudo apt-get install --no-install-recommends -q -y build-essential git bison autoconf ruby p7zip-full curl
+      - name: Checkout ruby/ruby for tool/make-snapshot
+        run: git clone --depth=1 https://github.com/ruby/ruby ruby
+      - name: Checkout ruby_2_6
+        run: git clone --single-branch --shallow-since='2017-12-25 00:00:00' --branch=ruby_2_6 https://github.com/ruby/ruby ruby_2_6
+      - name: Fetch notes
+        run: cd ruby_2_6 && git fetch origin +refs/notes/commits:refs/notes/commits
+      - name: Make stable-snapshot
+        run: ruby ruby/tool/make-snapshot -archname=stable-snapshot -srcdir=ruby_2_6 pkg stable
+      - name: Check pkg
+        run: |
+          set -x
+          ls -al pkg
+          7z x pkg/stable-snapshot.zip stable-snapshot/revision.h
+          cat stable-snapshot/revision.h
+          7z l pkg/stable-snapshot.zip stable-snapshot/ChangeLog
+      - name: Upload s3
+        run: |
+          set -x
+          for ext in .tar.gz .tar.bz2 .tar.xz .zip; do
+            aws s3 cp "pkg/stable-snapshot$ext" "s3://ftp.r-l.o/pub/ruby/stable-snapshot$ext" --no-progress
+            curl -sS -X PURGE -H "Fastly-Soft-Purge:1" "https://cache.ruby-lang.org/pub/ruby/stable-snapshot$ext"
+          done
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.FTP_R_L_O_AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.FTP_R_L_O_AWS_SECRET_ACCESS_KEY }}
+      - uses: k0kubun/action-slack@v2.0.0
+        with:
+          payload: |
+            {
+              "attachments": [{
+                "text": "${{ job.status }}: <https://github.com/${{ github.repository }}/commit/${{ github.sha }}/checks|${{ github.workflow }} stable-snapshot>",
+                "color": "danger"
+              }]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SNAPSHOT_SLACK_WEBHOOK_URL }}
+        if: failure()
+
+  snapshot-master:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install libraries
+        run: |
+          set -x
+          sudo apt-get update -q
+          sudo apt-get install --no-install-recommends -q -y build-essential git bison autoconf ruby p7zip-full curl
+      - name: Checkout ruby/ruby
+        run: git clone --single-branch --shallow-since='2018-12-25 00:00:00' https://github.com/ruby/ruby ruby
+      - name: Fetch notes
+        run: cd ruby && git fetch origin +refs/notes/commits:refs/notes/commits
+      - name: Make snapshot
+        run: ruby ruby/tool/make-snapshot -archname=snapshot-master -srcdir=ruby pkg
+      - name: Check pkg
+        run: |
+          set -x
+          ls -al pkg
+          7z x pkg/snapshot-master.zip snapshot-master/revision.h
+          cat snapshot-master/revision.h
+          7z l pkg/snapshot-master.zip snapshot-master/ChangeLog
+      - name: Upload s3
+        run: |
+          set -x
+          for ext in .tar.gz .tar.bz2 .tar.xz .zip; do
+            aws s3 cp "pkg/snapshot-master$ext" "s3://ftp.r-l.o/pub/ruby/snapshot/snapshot-master$ext" --no-progress
+            curl -sS -X PURGE -H "Fastly-Soft-Purge:1" "https://cache.ruby-lang.org/pub/ruby/snapshot/snapshot-master$ext"
+          done
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.FTP_R_L_O_AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.FTP_R_L_O_AWS_SECRET_ACCESS_KEY }}
+      - uses: k0kubun/action-slack@v2.0.0
+        with:
+          payload: |
+            {
+              "attachments": [{
+                "text": "${{ job.status }}: <https://github.com/${{ github.repository }}/commit/${{ github.sha }}/checks|${{ github.workflow }} snapshot-master>",
+                "color": "danger"
+              }]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SNAPSHOT_SLACK_WEBHOOK_URL }}
+        if: failure()
+
+  snapshot-ruby_2_6:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install libraries
+        run: |
+          set -x
+          sudo apt-get update -q
+          sudo apt-get install --no-install-recommends -q -y build-essential git bison autoconf ruby p7zip-full curl
+      - name: Checkout ruby/ruby for tool/make-snapshot
+        run: git clone --depth=1 https://github.com/ruby/ruby ruby
+      - name: Make snapshot-ruby_2_6
+        run: ruby ruby/tool/make-snapshot -archname=snapshot-ruby_2_6 -svn pkg 2.6
+      - name: Check pkg
+        run: |
+          set -x
+          ls -al pkg
+          7z x pkg/snapshot-ruby_2_6.zip snapshot-ruby_2_6/revision.h
+          cat snapshot-ruby_2_6/revision.h
+          7z l pkg/snapshot-ruby_2_6.zip snapshot-ruby_2_6/ChangeLog
+      - name: Upload s3
+        run: |
+          set -x
+          for ext in .tar.gz .tar.bz2 .tar.xz .zip; do
+            aws s3 cp "pkg/snapshot-ruby_2_6$ext" "s3://ftp.r-l.o/pub/ruby/snapshot/snapshot-ruby_2_6$ext" --no-progress
+            curl -sS -X PURGE -H "Fastly-Soft-Purge:1" "https://cache.ruby-lang.org/pub/ruby/snapshot/snapshot-ruby_2_6$ext"
+          done
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.FTP_R_L_O_AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.FTP_R_L_O_AWS_SECRET_ACCESS_KEY }}
+      - uses: k0kubun/action-slack@v2.0.0
+        with:
+          payload: |
+            {
+              "attachments": [{
+                "text": "${{ job.status }}: <https://github.com/${{ github.repository }}/commit/${{ github.sha }}/checks|${{ github.workflow }} snapshot-ruby_2_6>",
+                "color": "danger"
+              }]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SNAPSHOT_SLACK_WEBHOOK_URL }}
+        if: failure()
+
+  snapshot-ruby_2_5:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install libraries
+        run: |
+          set -x
+          sudo apt-get update -q
+          sudo apt-get install --no-install-recommends -q -y build-essential git bison autoconf ruby p7zip-full curl
+      - name: Checkout ruby/ruby for tool/make-snapshot
+        run: git clone --depth=1 https://github.com/ruby/ruby ruby
+      - name: Make snapshot-ruby_2_5
+        run: ruby ruby/tool/make-snapshot -archname=snapshot-ruby_2_5 -svn pkg 2.5
+      - name: Check pkg
+        run: |
+          set -x
+          ls -al pkg
+          7z x pkg/snapshot-ruby_2_5.zip snapshot-ruby_2_5/revision.h
+          cat snapshot-ruby_2_5/revision.h
+          7z l pkg/snapshot-ruby_2_5.zip snapshot-ruby_2_5/ChangeLog
+      - name: Upload s3
+        run: |
+          set -x
+          for ext in .tar.gz .tar.bz2 .tar.xz .zip; do
+            aws s3 cp "pkg/snapshot-ruby_2_5$ext" "s3://ftp.r-l.o/pub/ruby/snapshot/snapshot-ruby_2_5$ext" --no-progress
+            curl -sS -X PURGE -H "Fastly-Soft-Purge:1" "https://cache.ruby-lang.org/pub/ruby/snapshot/snapshot-ruby_2_5$ext"
+          done
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.FTP_R_L_O_AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.FTP_R_L_O_AWS_SECRET_ACCESS_KEY }}
+      - uses: k0kubun/action-slack@v2.0.0
+        with:
+          payload: |
+            {
+              "attachments": [{
+                "text": "${{ job.status }}: <https://github.com/${{ github.repository }}/commit/${{ github.sha }}/checks|${{ github.workflow }} snapshot-ruby_2_5>",
+                "color": "danger"
+              }]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SNAPSHOT_SLACK_WEBHOOK_URL }}
+        if: failure()
+
+  snapshot-ruby_2_4:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install libraries
+        run: |
+          set -x
+          sudo apt-get update -q
+          sudo apt-get install --no-install-recommends -q -y build-essential git bison autoconf ruby p7zip-full curl
+      - name: Checkout ruby/ruby for tool/make-snapshot
+        run: git clone --depth=1 https://github.com/ruby/ruby ruby
+      - name: Make snapshot-ruby_2_4
+        run: ruby ruby/tool/make-snapshot -archname=snapshot-ruby_2_4 -svn pkg 2.4
+      - name: Check pkg
+        run: |
+          set -x
+          ls -al pkg
+          7z x pkg/snapshot-ruby_2_4.zip snapshot-ruby_2_4/revision.h
+          cat snapshot-ruby_2_4/revision.h
+          7z l pkg/snapshot-ruby_2_4.zip snapshot-ruby_2_4/ChangeLog
+      - name: Upload s3
+        run: |
+          set -x
+          for ext in .tar.gz .tar.bz2 .tar.xz .zip; do
+            aws s3 cp "pkg/snapshot-ruby_2_4$ext" "s3://ftp.r-l.o/pub/ruby/snapshot/snapshot-ruby_2_4$ext" --no-progress
+            curl -sS -X PURGE -H "Fastly-Soft-Purge:1" "https://cache.ruby-lang.org/pub/ruby/snapshot/snapshot-ruby_2_4$ext"
+          done
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.FTP_R_L_O_AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.FTP_R_L_O_AWS_SECRET_ACCESS_KEY }}
+      - uses: k0kubun/action-slack@v2.0.0
+        with:
+          payload: |
+            {
+              "attachments": [{
+                "text": "${{ job.status }}: <https://github.com/${{ github.repository }}/commit/${{ github.sha }}/checks|${{ github.workflow }} snapshot-ruby_2_4>",
+                "color": "danger"
+              }]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SNAPSHOT_SLACK_WEBHOOK_URL }}
+        if: failure()
+
+  check-snapshot-master:
+    needs: snapshot-master
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install libraries
+        run: |
+          set -x
+          sudo apt-get update -q
+          sudo apt-get install --no-install-recommends -q -y build-essential libssl-dev libyaml-dev libreadline6-dev zlib1g-dev libncurses5-dev libffi-dev libgdbm5 libgdbm-dev bison- autoconf- ruby- git-
+      - name: Download snapshot-master.tar.xz
+        run: wget https://cache.ruby-lang.org/pub/ruby/snapshot/snapshot-master.tar.xz
+      - name: Extract
+        run: tar xf snapshot-master.tar.xz
+      - name: Fixed world writable dirs
+        run: |
+          chmod go-w $HOME
+          sudo chmod -R go-w /usr/share
+      - name: Set ENV
+        run: |
+          echo '##[set-env name=JOBS]'-j$((1 + $(nproc --all)))
+      - name: configure
+        run: cd snapshot-master && ./configure
+      - name: make
+        run: cd snapshot-master && make $JOBS
+      - name: make check
+        run: cd snapshot-master && make $JOBS check TESTOPTS="-q --tty=no" MSPECOPT="-ff"
+      - name: make install
+        run: cd snapshot-master && sudo make $JOBS install
+      - name: ruby -v
+        run: ruby -v
+      - uses: k0kubun/action-slack@v2.0.0
+        with:
+          payload: |
+            {
+              "attachments": [{
+                "text": "${{ job.status }}: <https://github.com/${{ github.repository }}/commit/${{ github.sha }}/checks|${{ github.workflow }} check-snapshot-master>",
+                "color": "danger"
+              }]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SNAPSHOT_SLACK_WEBHOOK_URL }}
+        if: failure()
+
+  check-snapshot-ruby_2_6:
+    needs: snapshot-ruby_2_6
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install libraries
+        run: |
+          set -x
+          sudo apt-get update -q
+          sudo apt-get install --no-install-recommends -q -y build-essential libssl-dev libyaml-dev libreadline6-dev zlib1g-dev libncurses5-dev libffi-dev libgdbm5 libgdbm-dev bison- autoconf- ruby- git-
+      - name: Download snapshot-ruby_2_6.tar.xz
+        run: wget https://cache.ruby-lang.org/pub/ruby/snapshot/snapshot-ruby_2_6.tar.xz
+      - name: Extract
+        run: tar xf snapshot-ruby_2_6.tar.xz
+      - name: Fixed world writable dirs
+        run: |
+          chmod go-w $HOME
+          sudo chmod -R go-w /usr/share
+      - name: Set ENV
+        run: |
+          echo '##[set-env name=JOBS]'-j$((1 + $(nproc --all)))
+      - name: configure
+        run: cd snapshot-ruby_2_6 && ./configure
+      - name: make
+        run: cd snapshot-ruby_2_6 && make $JOBS
+      - name: make check
+        run: cd snapshot-ruby_2_6 && make $JOBS check TESTOPTS="-q --tty=no" MSPECOPT="-ff"
+      - name: make install
+        run: cd snapshot-ruby_2_6 && sudo make $JOBS install
+      - name: ruby -v
+        run: ruby -v
+      - uses: k0kubun/action-slack@v2.0.0
+        with:
+          payload: |
+            {
+              "attachments": [{
+                "text": "${{ job.status }}: <https://github.com/${{ github.repository }}/commit/${{ github.sha }}/checks|${{ github.workflow }} check-snapshot-ruby_2_6>",
+                "color": "danger"
+              }]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SNAPSHOT_SLACK_WEBHOOK_URL }}
+        if: failure()
+
+  check-snapshot-ruby_2_5:
+    needs: snapshot-ruby_2_5
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install libraries
+        run: |
+          set -x
+          sudo apt-get update -q
+          sudo apt-get install --no-install-recommends -q -y build-essential libssl-dev libyaml-dev libreadline6-dev zlib1g-dev libncurses5-dev libffi-dev libgdbm5 libgdbm-dev bison- autoconf- ruby- git-
+      - name: Download snapshot-ruby_2_5.tar.xz
+        run: wget https://cache.ruby-lang.org/pub/ruby/snapshot/snapshot-ruby_2_5.tar.xz
+      - name: Extract
+        run: tar xf snapshot-ruby_2_5.tar.xz
+      - name: Fixed world writable dirs
+        run: |
+          chmod go-w $HOME
+          sudo chmod -R go-w /usr/share
+      - name: Set ENV
+        run: |
+          echo '##[set-env name=JOBS]'-j$((1 + $(nproc --all)))
+      - name: configure
+        run: cd snapshot-ruby_2_5 && ./configure
+      - name: make
+        run: cd snapshot-ruby_2_5 && make $JOBS
+      - name: make check
+        run: cd snapshot-ruby_2_5 && make $JOBS check TESTOPTS="-q --tty=no" MSPECOPT="-ff"
+      - name: make install
+        run: cd snapshot-ruby_2_5 && sudo make $JOBS install
+      - name: ruby -v
+        run: ruby -v
+      - uses: k0kubun/action-slack@v2.0.0
+        with:
+          payload: |
+            {
+              "attachments": [{
+                "text": "${{ job.status }}: <https://github.com/${{ github.repository }}/commit/${{ github.sha }}/checks|${{ github.workflow }} check-snapshot-ruby_2_5>",
+                "color": "danger"
+              }]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SNAPSHOT_SLACK_WEBHOOK_URL }}
+        if: failure()
+
+  check-snapshot-ruby_2_4:
+    needs: snapshot-ruby_2_4
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install libraries
+        run: |
+          set -x
+          sudo apt-get update -q
+          sudo apt-get install --no-install-recommends -q -y build-essential libssl-dev libyaml-dev libreadline6-dev zlib1g-dev libncurses5-dev libffi-dev libgdbm5 libgdbm-dev bison- autoconf- ruby- git-
+      - name: Download snapshot-ruby_2_4.tar.xz
+        run: wget https://cache.ruby-lang.org/pub/ruby/snapshot/snapshot-ruby_2_4.tar.xz
+      - name: Extract
+        run: tar xf snapshot-ruby_2_4.tar.xz
+      - name: Fixed world writable dirs
+        run: |
+          chmod go-w $HOME
+          sudo chmod -R go-w /usr/share
+      - name: Set ENV
+        run: |
+          echo '##[set-env name=JOBS]'-j$((1 + $(nproc --all)))
+      - name: configure
+        run: cd snapshot-ruby_2_4 && ./configure
+      - name: make
+        run: cd snapshot-ruby_2_4 && make $JOBS
+      - name: make test
+        run: cd snapshot-ruby_2_4 && make $JOBS test TESTOPTS="-q --tty=no"
+      - name: make install
+        run: cd snapshot-ruby_2_4 && sudo make $JOBS install
+      - name: ruby -v
+        run: ruby -v
+      - uses: k0kubun/action-slack@v2.0.0
+        with:
+          payload: |
+            {
+              "attachments": [{
+                "text": "${{ job.status }}: <https://github.com/${{ github.repository }}/commit/${{ github.sha }}/checks|${{ github.workflow }} check-snapshot-ruby_2_4>",
+                "color": "danger"
+              }]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SNAPSHOT_SLACK_WEBHOOK_URL }}
+        if: failure()
