@@ -54,6 +54,7 @@ jobs:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
   download:
+    needs: upload
     runs-on: ubuntu-latest
     steps:
       - run: env | sort
