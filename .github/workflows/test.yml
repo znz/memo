@@ -36,6 +36,7 @@ jobs:
 
       - run: mkdir -p path/to/artifact
       - run: echo hello > path/to/artifact/world.txt
+      - run: ls -lR .
 
       - uses: actions/upload-artifact@master
         with:
@@ -88,8 +89,8 @@ jobs:
           name: my-artifact
           path: path/to/artifact
 
-      - run: cat path/to/artifact
-      - run: mkdir -p path/to/artifact
+      - run: cat path/to/artifact/world.txt
+      - run: ls -lR .
 
       - uses: k0kubun/action-slack@v2.0.0
         with:
