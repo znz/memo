@@ -1,13 +1,8 @@
-name: dump
+name: repository_dispatch
 
 on:
-  schedule:
-    - cron: '5 0 * * *'
-  push:
-    branches:
-      - '*'
-    tags:
-      - '*'
+  repository_dispatch:
+    types: "v*"
 
 jobs:
   build:
@@ -46,11 +41,7 @@ jobs:
             {
               "attachments": [{
                 "text": "${{ job.status }}: <https://github.com/${{ github.repository }}/commit/${{ github.sha }}/checks|${{ github.workflow }}> ",
-                "color": "danger"
               }]
             }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-#      - uses: ./.github/actions/notify-slack
-#        env:
-#          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
