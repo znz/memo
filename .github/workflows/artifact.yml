@@ -43,7 +43,7 @@ jobs:
       - uses: actions/upload-artifact@master
         with:
           name: text files
-          path: *.txt
+          path: '*.txt'
 
       - uses: actions/upload-artifact@master
         with:
