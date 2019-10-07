@@ -42,8 +42,13 @@ jobs:
 
       - uses: actions/upload-artifact@master
         with:
-          name: text files
-          path: [foo.txt, bar.txt]
+          name: foo
+          path: foo.txt
+
+      - uses: actions/upload-artifact@master
+        with:
+          name: bar
+          path: bar.txt
 
       - uses: actions/upload-artifact@master
         with:
