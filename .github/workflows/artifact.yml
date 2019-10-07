@@ -36,7 +36,14 @@ jobs:
 
       - run: mkdir -p path/to/artifact
       - run: echo hello > path/to/artifact/world.txt
+      - run: echo foo > foo.txt
+      - run: echo bar > bar.txt
       - run: ls -lR .
+
+      - uses: actions/upload-artifact@master
+        with:
+          name: text files
+          path: *.txt
 
       - uses: actions/upload-artifact@master
         with:
