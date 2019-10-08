@@ -2,7 +2,10 @@ name: repository_dispatch
 
 on:
   repository_dispatch:
-    types: "v*"
+    #types: "v*"
+    types:
+      - foo
+      - bar
 
 jobs:
   build:
