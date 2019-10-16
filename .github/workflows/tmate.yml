@@ -1,0 +1,28 @@
+name: tmate
+
+on:
+  repository_dispatch:
+    types:
+      - tmate-*
+
+jobs:
+  ubuntu:
+    runs-on: ubuntu-latest
+    if: contains(github.event.action, 'ubuntu')
+    steps:
+    - name: Setup tmate session
+      uses: mxschmitt/action-tmate@v1
+
+  macos:
+    runs-on: macos-latest
+    if: contains(github.event.action, 'macos')
+    steps:
+    - name: Setup tmate session
+      uses: mxschmitt/action-tmate@v1
+
+  windows:
+    runs-on: windows-latest
+    if: contains(github.event.action, 'windows')
+    steps:
+    - name: Setup tmate session
+      uses: mxschmitt/action-tmate@v1
