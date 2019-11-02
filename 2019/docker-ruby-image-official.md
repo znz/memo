@@ -44,10 +44,18 @@ circleci/ruby                Ruby is a dynamic, reflective, object-orient…   6
 
 # rubylang/ruby
 
+- <https://hub.docker.com/r/rubylang/ruby/>
 - bundler 周りなどの余計な環境変数を設定していない
 - 主に特定 OS バージョンのみ
   - 今だと Ubuntu bionic
   - alpine などに対応する余裕がない
+
+# ruby/ruby-docker-image
+
+- <https://github.com/ruby/ruby-docker-images>
+- 元は iruby や pycall のテストのための make install しただけのピュアな状態の Ruby
+- Ubuntu ベース
+- gem のテストで広く使えるから rubydata/ruby から移籍
 
 # rubylang/all-ruby
 
