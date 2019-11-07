@@ -1,3 +1,24 @@
+# 2019-11-07
+
+## default gem 化
+
+gemspec 経由で version.rb で読み込まれる定数があると `autoload` がきかなくなってハマることがありそう。
+
+```
+% ruby /tmp/a.rb
+Net::SMTP
+[]
+% cat /tmp/a.rb
+module Net
+  class SMTP; end
+end
+module Net
+  autoload :SMTP, 'net/smtp'
+end
+p Net::SMTP
+p $LOADED_FEATURES.grep(/smtp/)
+```
+
 # 2019-11-05
 
 ## octokit gem を試した
