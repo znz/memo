@@ -1,3 +1,9 @@
+# 2019-11-11
+
+`exit 1` するシェルスクリプトを `git` としてパスに入れて `make check` したら `rubygems` も失敗したけど、 CI だと通ってたのは https://github.com/ruby/ruby/blob/9d3213ac856e1f5930bda555d4d65b173c6cdf83/lib/rubygems/test_case.rb#L504 でパスになければ `skip` になっていたからだった。
+
+https://github.com/ruby/ruby/commit/9d3213ac856e1f5930bda555d4d65b173c6cdf83 では実行できるかどうかで判定してしまった。
+
 # 2019-11-07
 
 ## default gem 化
