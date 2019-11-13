@@ -11,6 +11,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v1
+      - run: |
+          COMMIT_TIMESTAMP="$(git log -1 --format=%ct)"
+          echo "::set-env name=COMMIT_TIMESTAMP::$COMMIT_TIMESTAMP"
+          echo "::set-output name=action_fruit::strawberry"
+        id: commit_timestamp
       - run: env | sort
       - name: Dump GitHub context
         env:
