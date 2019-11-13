@@ -13,8 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - run: |
-          COMMIT_TIMESTAMP="$(git log -1 --format=%ct)"
-          echo "::set-env name=COMMIT_TIMESTAMP::$COMMIT_TIMESTAMP"
+          echo "::set-env name=COMMIT_TIMESTAMP::$(git log -1 --format=%ct)"
           echo "::set-output name=action_fruit::strawberry"
         id: commit_timestamp
       - run: env | sort
@@ -49,7 +48,7 @@ jobs:
           payload: |
             {
               "attachments": [{
-                "text": "${{ job.status }}: ${{ env.COMMIT_TIMESTAMP }} ${{ steps.commit_timestamp.action_fruit }} <https://github.com/${{ github.repository }}/commit/${{ github.sha }}/checks|${{ github.workflow }}> "
+                "text": "${{ job.status }}: ${{ env.COMMIT_TIMESTAMP }} <https://github.com/${{ github.repository }}/commit/${{ github.sha }}/checks|${{ github.workflow }}> "
               }]
             }
         env:
