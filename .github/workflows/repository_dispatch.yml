@@ -21,11 +21,13 @@ jobs:
           LOGS=$(TZ=UTC git log --since='0:00' --date=iso-local --format=%cd)
           echo "$LOGS"
           COUNT=$(echo "$LOGS" | wc -l)
+          # strip spaces
+          COUNT=$((0 + COUNT))
           echo "$COUNT"
           echo "::set-env name=COMMIT_NUMBER_OF_DAY::$COUNT"
           echo "::set-env name=COMMIT_DATE::$(TZ=UTC git log --since='0:00' --date=short-local --format=%cd -1)"
         id: commit_timestamp
-        if: "!contains(matrix.os, 'windows')"
+        shell: bash
 
       - run: env | sort
       - name: Dump GitHub context
