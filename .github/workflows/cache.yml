@@ -1,0 +1,31 @@
+name: Some Cache
+
+on:
+  push:
+  repository_dispatch:
+    types:
+      - cache
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: Cache Test
+      id: cache-tests
+      uses: actions/cache@v1
+      with:
+        path: dummy
+        key: ${{ runner.os }}-dummy
+
+    - name: Check dummy
+      run: |
+        ls -alR dummy || :
+
+    - name: Generate Dummy Data
+      run: mkdir -pv dummy && echo data > dummy/data.txt
+
+    - name: Use Dummy Data
+      run: cat dummy/data.txt
