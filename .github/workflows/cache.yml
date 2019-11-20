@@ -11,8 +11,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v1
-
     - name: Cache Test
       id: cache-tests
       uses: actions/cache@v1
