@@ -1,7 +1,7 @@
 name: Some Cache
 
 on:
-  push:
+  #push:
   repository_dispatch:
     types:
       - cache
