@@ -1,0 +1,75 @@
+name: ruby-windows
+on:
+  repository_dispatch:
+    types:
+      - ruby-windows
+
+jobs:
+  make:
+    strategy:
+      matrix:
+        test_task: [test]
+        os: [windows-2016, windows-2019]
+        vs: [2017, 2019]
+        exclude:
+          - os: windows-2016
+            vs: 2019
+          - os: windows-2019
+            vs: 2017
+      fail-fast: false
+    runs-on: ${{ matrix.os }}
+    if: "!contains(github.event.head_commit.message, '[ci skip]')"
+    steps:
+      - name: Install libraries with vcpkg
+        run: |
+          vcpkg --triplet x64-windows install readline zlib
+      - name: Install libraries with chocolatey
+        run: |
+          choco config get cacheLocation
+          choco install --no-progress openssl winflexbison3
+      # Not using official actions/checkout because it's unstable and sometimes doesn't work for a fork.
+      - name: Checkout ruby/ruby
+        run: |
+          git clone --single-branch --shallow-since=yesterday https://github.com/ruby/ruby src
+          git -C src reset --hard ${{ github.sha }}
+        if: github.event_name == 'push'
+      - name: Checkout a pull request
+        run: |
+          git clone --single-branch --shallow-since=yesterday --branch=${{ github.event.pull_request.head.ref }} https://github.com/${{ github.event.pull_request.head.repo.full_name }} src
+          git -C src reset --hard ${{ github.event.pull_request.head.sha }}
+        if: github.event_name == 'pull_request'
+      - run: ./src/tool/actions-commit-info.sh
+        shell: bash
+      - name: Configure
+        run: |
+          md build
+          cd build
+          call "C:\Program Files (x86)\Microsoft Visual Studio\${{ matrix.vs }}\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
+          ../src/win32/configure.bat --disable-install-doc --without-ext=+,dbm,gdbm --enable-bundled-libffi --with-opt-dir=C:/vcpkg/installed/x64-windows
+        shell: cmd
+      - name: nmake
+        run: |
+          call "C:\Program Files (x86)\Microsoft Visual Studio\${{ matrix.vs }}\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
+          set YACC=win_bison
+          cd build
+          nmake up
+          nmake
+        shell: cmd
+      - name: nmake
+        run: |
+          call "C:\Program Files (x86)\Microsoft Visual Studio\${{ matrix.vs }}\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
+          set YACC=win_bison
+          cd build
+          nmake DESTDIR=ruby_%COMMIT_DATE%_%COMMIT_NUMBER_OF_DAY% install
+          nmake
+        shell: cmd
+      - name: nmake test
+        run: |
+          call "C:\Program Files (x86)\Microsoft Visual Studio\${{ matrix.vs }}\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
+          cd build
+          nmake ${{ matrix.test_task }}
+        shell: cmd
+      - uses: actions/upload-artifact@master
+        with:
+          name: ruby_vs${{ matrix.vs }}_${{ env.COMMIT_DATE }}_${{ env.COMMIT_NUMBER_OF_DAY }}
+          path: ruby_${{ env.COMMIT_DATE }}_${{ env.COMMIT_NUMBER_OF_DAY }}
