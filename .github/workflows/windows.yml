@@ -54,13 +54,13 @@ jobs:
           cd build
           nmake DESTDIR=ruby_%COMMIT_DATE%_%COMMIT_NUMBER_OF_DAY% install
         shell: cmd
+      - uses: actions/upload-artifact@master
+        with:
+          name: ruby_vs${{ matrix.vs }}_${{ env.COMMIT_DATE }}_${{ env.COMMIT_NUMBER_OF_DAY }}
+          path: src\build\ruby_${{ env.COMMIT_DATE }}_${{ env.COMMIT_NUMBER_OF_DAY }}
       - name: nmake test
         run: |
           call "C:\Program Files (x86)\Microsoft Visual Studio\${{ matrix.vs }}\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
           cd build
           nmake ${{ matrix.test_task }}
         shell: cmd
-      - uses: actions/upload-artifact@master
-        with:
-          name: ruby_vs${{ matrix.vs }}_${{ env.COMMIT_DATE }}_${{ env.COMMIT_NUMBER_OF_DAY }}
-          path: src\build\ruby_${{ env.COMMIT_DATE }}_${{ env.COMMIT_NUMBER_OF_DAY }}
