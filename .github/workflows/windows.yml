@@ -37,7 +37,8 @@ jobs:
           md build
           cd build
           call "C:\Program Files (x86)\Microsoft Visual Studio\${{ matrix.vs }}\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
-          ../src/win32/configure.bat --disable-install-doc --without-ext=+,dbm,gdbm --enable-bundled-libffi --with-opt-dir=C:/vcpkg/installed/x64-windows "--with-openssl-dir=C:/Program Files/OpenSSL-Win64"
+          set OPENSSL_DIR=C:\Program Files\OpenSSL-Win64
+          ../src/win32/configure.bat --disable-install-doc --without-ext=+,dbm,gdbm --enable-bundled-libffi --with-opt-dir=C:/vcpkg/installed/x64-windows --with-openssl-dir=%OPENSSL_DIR:\=/%
         shell: cmd
       - name: nmake
         run: |
