@@ -32,6 +32,8 @@ jobs:
           git clone --depth=50 https://github.com/ruby/ruby src
       - run: ./src/tool/actions-commit-info.sh
         shell: bash
+     - run: sed -i -e 's/echo off/echo on/' ./src/win32/configure.bat
+       shell: bash
       - name: Configure
         run: |
           md build
