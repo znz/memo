@@ -1,3 +1,13 @@
+# 2019-11-30
+
+- 鹿児島Ruby会議01に参加して発表もした。
+- docs.r-l.o の deploy 権限をもらって更新されていなかった原因を調査して修正。
+- コーヒーブレイクの時間をできるだけ使うようにしていたけど、修正を頑張っていた間は話を集中して聞けず。
+
+- https://docs.ruby-lang.org/ja/latest/method/Kernel/m/abort.html の説明が古い。 exit や exit! も含めて rdoc からの翻訳に差し替えたい。
+
+- 懇親会の時に duolingo の友達をフォローで追加できた。
+
 # 2019-11-11
 
 `exit 1` するシェルスクリプトを `git` としてパスに入れて `make check` したら `rubygems` も失敗したけど、 CI だと通ってたのは https://github.com/ruby/ruby/blob/9d3213ac856e1f5930bda555d4d65b173c6cdf83/lib/rubygems/test_case.rb#L504 でパスになければ `skip` になっていたからだった。
