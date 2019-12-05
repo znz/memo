@@ -1,3 +1,19 @@
+# 2019-12-05
+
+- `test_default_gems.rb` だけ動かしても再現しないので `make test-all TESTS="-v did_you_mean ruby/test_default_gems.rb"` でチェックしていた。
+
+## TEST_RATIO
+
+ripper のテストを参考にして RATIO をつけて require だけで Thread が動いていないかチェックするようにした。
+
+```
+% git grep -n TEST_RATIO ..
+../test/ripper/assert_parse_files.rb:13:      TEST_RATIO = ENV["TEST_RIPPER_RATIO"]&.tap {|s|break s.to_f} || 0.05 # testing all files needs too long time...
+../test/ripper/assert_parse_files.rb:20:      if (1...scripts.size).include?(num = scripts.size * TEST_RATIO)
+../test/ruby/test_require_lib.rb:5:  TEST_RATIO = ENV["TEST_REQUIRE_THREAD_RATIO"]&.tap {|s|break s.to_f} || 0.05 # testing all files needs too long time...
+../test/ruby/test_require_lib.rb:14:    next if TEST_RATIO < rand(0.0..1.0)
+```
+
 # 2019-12-03
 
 ## rurema レビュー会
