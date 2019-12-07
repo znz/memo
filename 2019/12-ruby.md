@@ -1,3 +1,8 @@
+# 2019-12-07
+
+- Ruby関西 勉強会 で directpoll を使ってアンケートと鹿児島Ruby会議01での話の再演をした。
+- zeitwerk 良さそうだった
+
 # 2019-12-05
 
 - `test_default_gems.rb` だけ動かしても再現しないので `make test-all TESTS="-v did_you_mean ruby/test_default_gems.rb"` でチェックしていた。
