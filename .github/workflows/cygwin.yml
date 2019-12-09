@@ -27,5 +27,5 @@ jobs:
           choco install --no-progress cygwin
       - name: Install cygwin additional packages
         run: |
-          C:\tools\cygwin\cygwinsetup.exe -qgnNdO -R C:/tools/cygwin/root -P zlib-devel
+          C:\tools\cygwin\cygwinsetup.exe -qgnNdO -R C:/tools/cygwin -l C:/tools/cygwin/packages -P zlib-devel
         shell: cmd
