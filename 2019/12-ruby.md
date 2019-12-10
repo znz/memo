@@ -19,6 +19,12 @@ ripper のテストを参考にして RATIO をつけて require だけで Threa
 ../test/ruby/test_require_lib.rb:14:    next if TEST_RATIO < rand(0.0..1.0)
 ```
 
+# 2019-12-04
+
+- https://github.com/ruby/dbm/pull/5#issuecomment-561696809
+- https://github.com/oneclick/rubyinstaller2/wiki/For-gem-developers
+- `s.metadata["msys2_mingw_dependencies"] = "gdbm"` のように書いておくと gem のインストール時に依存パッケージを自動インストールできるらしい
+
 # 2019-12-03
 
 ## rurema レビュー会
