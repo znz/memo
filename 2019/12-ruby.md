@@ -1,3 +1,13 @@
+# 2019-12-10
+
+## rurema レビュー会
+
+- https://github.com/rurema のアイコン画像変更
+- Slack 外でも募集しても良さそうだったので https://rurema-review.connpass.com/ を作って来週のイベントをたてた
+- 3人でどんどんマージ
+- マージ可能かどうか API で取れるかどうか調べてみたら https://developer.github.com/v3/git/#checking-mergeability-of-pull-requests に poll が必要と書いてあって不便そうだった
+- https://github.com/rurema/doctree/pull/1502 をマージした時に変になったのか、 CI がこけていて `Range` の `#@end` の対応がずれていたことがわかったので https://github.com/rurema/doctree/pull/2049 で修正
+
 # 2019-12-07
 
 - Ruby関西 勉強会 で directpoll を使ってアンケートと鹿児島Ruby会議01での話の再演をした。
