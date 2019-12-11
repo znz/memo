@@ -18,6 +18,7 @@ jobs:
       - uses: actions/checkout@v1
       - run: |
           echo "::set-env name=COMMIT_TIMESTAMP::$(git log -1 --format=%ct)"
+          echo "::set-output name=COMMIT_TIMESTAMP::$(git log -1 --format=%ct)"
           LOGS=$(TZ=UTC git log --since='0:00' --date=iso-local --format=%cd)
           echo "$LOGS"
           COUNT=$(echo "$LOGS" | wc -l)
@@ -26,6 +27,8 @@ jobs:
           echo "$COUNT"
           echo "::set-env name=COMMIT_NUMBER_OF_DAY::$COUNT"
           echo "::set-env name=COMMIT_DATE::$(TZ=UTC git log --since='0:00' --date=short-local --format=%cd -1)"
+          echo "::set-output name=COMMIT_NUMBER_OF_DAY::$COUNT"
+          echo "::set-output name=COMMIT_DATE::$(TZ=UTC git log --since='0:00' --date=short-local --format=%cd -1)"
         id: commit_timestamp
         shell: bash
 
