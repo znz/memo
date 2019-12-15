@@ -1,3 +1,14 @@
+# 2019-12-15
+
+https://pocke.hatenablog.com/entry/2019/12/15/191326 によると読めなかった QR コードは https://github.com/Kuniwak/vim-qrcode で作成していたということで、[issue を書いた](https://github.com/Kuniwak/vim-qrcode/issues/1)。
+https://github.com/whomwah/rqrcode を使って `to_s` で取り出しているようで、その文字列には quiet zone は含まれていなかったので、
+vim プラグイン側で独自で追加している余白が足りないみたいだった。
+
+他にも使うときのために https://www.denso-si.jp/dictionary/dic_qr/images/GeneralDescriptionoftheQRCode.pdf をみて手入力した部分をここにもコピペしておく。
+
+    3-4. クワイエットゾーン
+    QR コードの読取りに必要とされる余白スペースである。このクワイエットゾーンにより、CCD センサの画像の中からシンボルの検出が容易になる。クワイエットゾーンは 4 セル以上必要である。
+
 # 2019-12-10
 
 ## rurema レビュー会
