@@ -393,6 +393,7 @@ jobs:
           echo "::set-output name=GITHUB_REF_RUBY_RUBY::$GITHUB_REF"
           echo "::set-output name=TARGET_VERSION::$TARGET_VERSION"
         id: info
+        shell: bash
 
         env:
           GITHUB_EVENT_ACTION: ${{ github.event.action }}
