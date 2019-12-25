@@ -91,19 +91,6 @@ jobs:
           7z x pkg/ruby-${TARGET_VERSION}.zip ruby-${TARGET_VERSION}/revision.h
           cat ruby-${TARGET_VERSION}/revision.h
           7z l pkg/ruby-${TARGET_VERSION}.zip ruby-${TARGET_VERSION}/ChangeLog
-      - name: Upload s3
-        run: |
-          set -x
-          TARGET_VERSION=${{ steps.info.outputs.TARGET_VERSION }}
-          for ext in .tar.gz .tar.bz2 .tar.xz .zip; do
-            aws s3 cp "pkg/ruby-${TARGET_VERSION}$ext" "s3://ftp.r-l.o/pub/tmp/ruby-${TARGET_VERSION}-draft$ext" --no-progress
-            curl -sS -X PURGE -H "Fastly-Soft-Purge:1" "https://cache.ruby-lang.org/pub/tmp/ruby-${TARGET_VERSION}-draft$ext"
-          done
-          aws s3 cp "pkg/info/info.yml" "s3://ftp.r-l.o/pub/tmp/ruby-info-${TARGET_VERSION}-draft.yml" --no-progress
-          curl -sS -X PURGE -H "Fastly-Soft-Purge:1" "https://cache.ruby-lang.org/pub/tmp/ruby-info-${TARGET_VERSION}-draft.yml"
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.FTP_R_L_O_AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.FTP_R_L_O_AWS_SECRET_ACCESS_KEY }}
       - uses: k0kubun/action-slack@v2.0.0
         with:
           payload: |
