@@ -1,0 +1,360 @@
+name: Make draft release package
+
+on:
+  push:
+    tags:
+      - 'draft/v*' # e.g. draft/v2_6_4
+  repository_dispatch:
+    types:
+      - "refs/tags/v*" # e.g. refs/tags/v2_6_4
+
+jobs:
+  dump-context:
+    runs-on: ubuntu-latest
+    steps:
+      - run: env | sort
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+      - name: Dump job context
+        env:
+          JOB_CONTEXT: ${{ toJson(job) }}
+        run: echo "$JOB_CONTEXT"
+      - name: Dump steps context
+        env:
+          STEPS_CONTEXT: ${{ toJson(steps) }}
+        run: echo "$STEPS_CONTEXT"
+      - name: Dump runner context
+        env:
+          RUNNER_CONTEXT: ${{ toJson(runner) }}
+        run: echo "$RUNNER_CONTEXT"
+      - name: Dump strategy context
+        env:
+          STRATEGY_CONTEXT: ${{ toJson(strategy) }}
+        run: echo "$STRATEGY_CONTEXT"
+      - name: Dump matrix context
+        env:
+          MATRIX_CONTEXT: ${{ toJson(matrix) }}
+        run: echo "$MATRIX_CONTEXT"
+
+  make-snapshot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install libraries
+        run: |
+          set -x
+          sudo apt-get update -q || :
+          sudo apt-get install --no-install-recommends -q -y build-essential git bison autoconf ruby p7zip-full curl
+      - name: Checkout ruby/ruby for tool/make-snapshot and spec
+        run: git clone --depth=1 https://github.com/ruby/ruby ruby
+      - uses: actions/upload-artifact@master
+        with:
+          name: spec
+          path: ruby/spec
+      - name: Make pkg
+        run: |
+          set -x
+          GITHUB_REF=${GITHUB_EVENT_ACTION:-$(echo $GITHUB_REF | sed -e "s#/draft/#/#")}
+          TARGET_VERSION=$(echo $GITHUB_REF | sed -e "s#refs/tags/v##" -e "s/_\([a-z]\)/-\1/" -e "y/_/./")
+          if ruby -e "major, minor, = '${TARGET_VERSION}'.split('.').map(&:to_i); exit(major<=2 && minor<7)"; then
+            # e.g. GITHUB_REF=refs/tags/draft/v2_6_4 -> TARGET_VERSION=2.6.4
+            ruby ruby/tool/make-snapshot -svn pkg ${TARGET_VERSION}
+          else
+            # e.g. GITHUB_REF=refs/tags/draft/v2_7_0_preview1 -> TARGET_VERSION=2.7.0-preview1
+            pushd ruby
+            git fetch --shallow-since='2018-12-25 00:00:00'
+            git fetch origin "+${GITHUB_REF}:${GITHUB_REF}"
+            git fetch origin +refs/notes/commits:refs/notes/commits
+            popd
+            ruby ruby/tool/make-snapshot -srcdir=ruby pkg ${TARGET_VERSION}
+          fi
+          ruby -e "puts %(${TARGET_VERSION}).include?(?-)" > pkg/pre-release
+        env:
+          GITHUB_EVENT_ACTION: ${{ github.event.action }}
+      - uses: actions/upload-artifact@master
+        with:
+          name: Packages
+          path: pkg
+      - uses: actions/upload-artifact@master
+        with:
+          name: Info
+          path: pkg/info
+      - name: Check pkg
+        run: |
+          set -x
+          GITHUB_REF=${GITHUB_EVENT_ACTION:-$(echo $GITHUB_REF | sed -e "s#/draft/#/#")}
+          TARGET_VERSION=$(echo $GITHUB_REF | sed -e "s#refs/tags/v##" -e "s/_\([a-z]\)/-\1/" -e "y/_/./")
+          ls -al pkg
+          7z x pkg/ruby-${TARGET_VERSION}.zip ruby-${TARGET_VERSION}/revision.h
+          cat ruby-${TARGET_VERSION}/revision.h
+          7z l pkg/ruby-${TARGET_VERSION}.zip ruby-${TARGET_VERSION}/ChangeLog
+        env:
+          GITHUB_EVENT_ACTION: ${{ github.event.action }}
+
+  ubuntu:
+    needs: make-snapshot
+    strategy:
+      matrix:
+        test_task: [check, test-bundler, test-bundled-gems]
+        os: [ubuntu-latest, ubuntu-16.04]
+        exclude:
+          - test_task: test-bundler
+            os: ubuntu-16.04
+          - test_task: test-bundled-gems
+            os: ubuntu-16.04
+      fail-fast: false
+    runs-on: ${{ matrix.os }}
+    steps:
+      - run: env | sort
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+      - name: Dump job context
+        env:
+          JOB_CONTEXT: ${{ toJson(job) }}
+        run: echo "$JOB_CONTEXT"
+      - name: Dump steps context
+        env:
+          STEPS_CONTEXT: ${{ toJson(steps) }}
+        run: echo "$STEPS_CONTEXT"
+      - name: Dump runner context
+        env:
+          RUNNER_CONTEXT: ${{ toJson(runner) }}
+        run: echo "$RUNNER_CONTEXT"
+      - name: Dump strategy context
+        env:
+          STRATEGY_CONTEXT: ${{ toJson(strategy) }}
+        run: echo "$STRATEGY_CONTEXT"
+      - name: Dump matrix context
+        env:
+          MATRIX_CONTEXT: ${{ toJson(matrix) }}
+        run: echo "$MATRIX_CONTEXT"
+
+      - uses: actions/download-artifact@master
+        with:
+          name: Packages
+          path: pkg
+      - name: Extract
+        run: tar xf pkg/ruby-*.tar.xz
+      - uses: actions/download-artifact@master
+        with:
+          name: spec
+          path: spec
+      - name: Update spec
+        run: |
+          set -x
+          cd ruby-*/
+          rm -rf spec/mspec spec/ruby
+          mv ../spec/mspec ../spec/ruby spec
+        if: matrix.test_task == 'check'
+      - name: Install libraries
+        run: |
+          set -x
+          sudo apt-get update -q || :
+          # postfix `-` means `uninstall`
+          APT_INSTALL_RUBY=ruby-
+          APT_INSTALL_GIT=git-
+          case "${{ matrix.test_task }}" in
+            test-bundled-gems)
+              # test-bundled-gems requires executable host ruby
+              APT_INSTALL_RUBY=ruby
+              # test-bundled-gems-fetch requires git
+              unset APT_INSTALL_GIT
+              ;;
+            test-bundler)
+              # avoid Bundler::Source::Git::GitNotInstalledError
+              unset APT_INSTALL_GIT
+              ;;
+            *)
+              ;;
+          esac
+          sudo apt-get install --no-install-recommends -q -y build-essential libssl-dev libyaml-dev libreadline6-dev zlib1g-dev libncurses5-dev libffi-dev libgdbm-dev bison- autoconf- $APT_INSTALL_RUBY $APT_INSTALL_GIT
+      - name: Fixed world writable dirs
+        run: |
+          chmod go-w $HOME
+          sudo chmod -R go-w /usr/share
+      - name: Set ENV
+        run: |
+          echo '::set-env name=JOBS::'-j$((1 + $(nproc --all)))
+      - name: configure
+        run: cd ruby-*/ && ./configure
+      - name: make
+        run: cd ruby-*/ && make $JOBS
+      - name: Tests
+        run: cd ruby-*/ && make $JOBS -s ${{ matrix.test_task }}
+        env:
+          MSPECOPT: "-ff" # not using `-j` because sometimes `mspec -j` silently dies (for ruby < 2.7)
+          RUBY_TESTOPTS: "-q --tty=no"
+      - name: make install without root privilege
+        run: cd ruby-*/ && make $JOBS install DESTDIR="$HOME/dummy"
+        if: matrix.test_task == 'check'
+      - name: make install
+        run: cd ruby-*/ && sudo make $JOBS install
+        if: matrix.test_task == 'check'
+      - name: ruby -v
+        run: ruby -v
+        if: matrix.test_task == 'check'
+
+  macos:
+    needs: make-snapshot
+    strategy:
+      matrix:
+        test_task: [check, test-bundler, test-bundled-gems]
+        os: [macos-latest]
+      fail-fast: false
+    runs-on: ${{ matrix.os }}
+    steps:
+      - run: env | sort
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+      - name: Dump job context
+        env:
+          JOB_CONTEXT: ${{ toJson(job) }}
+        run: echo "$JOB_CONTEXT"
+      - name: Dump steps context
+        env:
+          STEPS_CONTEXT: ${{ toJson(steps) }}
+        run: echo "$STEPS_CONTEXT"
+      - name: Dump runner context
+        env:
+          RUNNER_CONTEXT: ${{ toJson(runner) }}
+        run: echo "$RUNNER_CONTEXT"
+      - name: Dump strategy context
+        env:
+          STRATEGY_CONTEXT: ${{ toJson(strategy) }}
+        run: echo "$STRATEGY_CONTEXT"
+      - name: Dump matrix context
+        env:
+          MATRIX_CONTEXT: ${{ toJson(matrix) }}
+        run: echo "$MATRIX_CONTEXT"
+
+      - name: Disable Firewall
+        run: |
+          sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate off
+          sudo /usr/libexec/ApplicationFirewall/socketfilterfw --getglobalstate
+      - uses: actions/download-artifact@master
+        with:
+          name: Packages
+          path: pkg
+      - name: Extract
+        run: tar xf pkg/ruby-*.tar.xz
+      - name: Update spec
+        run: |
+          if $(cat pkg/pre-release); then
+            echo Use spec in tarball if pre-release
+            exit
+          else
+            echo Use latest ruby/spec
+          fi
+          set -x
+          cd ruby-*/
+          rm -rf spec/mspec spec/ruby
+          git clone --depth=1 https://github.com/ruby/mspec spec/mspec
+          git clone --depth=1 https://github.com/ruby/spec spec/ruby
+        if: matrix.test_task == 'check'
+      - name: Install libraries
+        run: |
+          with_retry () {
+            "$@" || { sleep 5 && "$@"; } || { sleep 60 && "$@"; }
+          }
+          set -x
+          with_retry brew update
+          with_retry brew install gdbm gmp libffi openssl@1.1 zlib autoconf automake libtool readline
+      - name: Set ENV
+        run: |
+          echo '::set-env name=JOBS::'-j$((1 + $(sysctl -n hw.activecpu)))
+      - name: configure
+        run: cd ruby-*/ && ./configure --with-openssl-dir=$(brew --prefix openssl@1.1) --with-readline-dir=$(brew --prefix readline)
+      - name: make
+        run: cd ruby-*/ && make $JOBS
+      - name: Tests
+        run: cd ruby-*/ && make $JOBS -s ${{ matrix.test_task }}
+        env:
+          MSPECOPT: "-ff" # not using `-j` because sometimes `mspec -j` silently dies (for ruby < 2.7)
+          RUBY_TESTOPTS: "-q --tty=no"
+      - name: make install without root privilege
+        run: cd ruby-*/ && make $JOBS install DESTDIR="$HOME/dummy"
+        if: matrix.test_task == 'check'
+      - name: make install
+        run: cd ruby-*/ && sudo make $JOBS install
+        if: matrix.test_task == 'check'
+      - name: ruby -v
+        run: /usr/local/bin/ruby -v
+        if: matrix.test_task == 'check'
+
+  windows:
+    needs: make-snapshot
+    strategy:
+      matrix:
+        os: [windows-2019]
+        vs: [2019]
+        test_task: [test]
+      fail-fast: false
+    runs-on: ${{ matrix.os }}
+    steps:
+      - run: env | sort
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+      - name: Dump job context
+        env:
+          JOB_CONTEXT: ${{ toJson(job) }}
+        run: echo "$JOB_CONTEXT"
+      - name: Dump steps context
+        env:
+          STEPS_CONTEXT: ${{ toJson(steps) }}
+        run: echo "$STEPS_CONTEXT"
+      - name: Dump runner context
+        env:
+          RUNNER_CONTEXT: ${{ toJson(runner) }}
+        run: echo "$RUNNER_CONTEXT"
+      - name: Dump strategy context
+        env:
+          STRATEGY_CONTEXT: ${{ toJson(strategy) }}
+        run: echo "$STRATEGY_CONTEXT"
+      - name: Dump matrix context
+        env:
+          MATRIX_CONTEXT: ${{ toJson(matrix) }}
+        run: echo "$MATRIX_CONTEXT"
+
+      - name: Install libraries with vcpkg
+        run: |
+          vcpkg --triplet x64-windows install readline zlib
+      - name: Install libraries with chocolatey
+        run: |
+          choco install --no-progress openssl winflexbison3
+      - uses: actions/download-artifact@master
+        with:
+          name: Packages
+          path: pkg
+      - name: Extract
+        run: 7z x pkg/ruby-*.zip
+      - name: configure
+        run: |
+          cd ruby-*
+          call "C:\Program Files (x86)\Microsoft Visual Studio\${{ matrix.vs }}\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
+          win32/configure.bat --disable-install-doc --without-ext=+,dbm,gdbm --enable-bundled-libffi --with-opt-dir=C:/vcpkg/installed/x64-windows
+        shell: cmd
+      - name: nmake
+        run: |
+          cd ruby-*
+          call "C:\Program Files (x86)\Microsoft Visual Studio\${{ matrix.vs }}\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
+          set YACC=win_bison
+          nmake up
+          nmake
+        shell: cmd
+      - name: nmake test
+        run: |
+          cd ruby-*
+          call "C:\Program Files (x86)\Microsoft Visual Studio\${{ matrix.vs }}\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
+          nmake ${{ matrix.test_task }}
+        shell: cmd
+      - name: ruby -v
+        run: |
+          cd ruby-*
+          .\ruby -v
