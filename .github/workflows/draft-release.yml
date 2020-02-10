@@ -71,7 +71,7 @@ jobs:
               "attachments": [{
                 title: "Build Draft Release ${{ steps.info.outputs.TARGET_VERSION }}",
                 title_link: "https://cache.ruby-lang.org/pub/tmp/",
-                "text": "${{ job.status }}: make-snapshot <https://github.com/${{ github.repository }}/actions/?query=workflow%3A%22${{ github.workflow }}%22|${{ github.workflow }} at ${{ steps.info.outputs.TARGET_VERSION }}>",
+                "text": "${{ job.status }}: make-snapshot <https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}|${{ github.workflow }} at ${{ steps.info.outputs.TARGET_VERSION }}>",
                 "color": "danger"
               }]
             }
@@ -85,7 +85,7 @@ jobs:
               "attachments": [{
                 title: "Build Draft Release ${{ steps.info.outputs.TARGET_VERSION }}",
                 title_link: "https://cache.ruby-lang.org/pub/tmp/",
-                "text": "${{ job.status }}: make-snapshot <https://github.com/${{ github.repository }}/actions/?query=workflow%3A%22${{ github.workflow }}%22|${{ github.workflow }} at ${{ steps.info.outputs.TARGET_VERSION }}>",
+                "text": "${{ job.status }}: make-snapshot <https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}|${{ github.workflow }} at ${{ steps.info.outputs.TARGET_VERSION }}>",
                 "color": "good"
               }]
             }
@@ -211,7 +211,7 @@ jobs:
           payload: |
             {
               "attachments": [{
-                "text": "${{ job.status }}: ${{ matrix.os }} / ${{ matrix.test_task }} <https://github.com/${{ github.repository }}/actions/?query=workflow%3A%22${{ github.workflow }}%22|${{ github.workflow }} at ${{ steps.info.outputs.TARGET_VERSION }}>",
+                "text": "${{ job.status }}: ${{ matrix.os }} / ${{ matrix.test_task }} <https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}|${{ github.workflow }} at ${{ steps.info.outputs.TARGET_VERSION }}>",
                 "color": "danger"
               }]
             }
@@ -223,7 +223,7 @@ jobs:
           payload: |
             {
               "attachments": [{
-                "text": "${{ job.status }}: ${{ matrix.os }} / ${{ matrix.test_task }} <https://github.com/${{ github.repository }}/actions/?query=workflow%3A%22${{ github.workflow }}%22|${{ github.workflow }} at ${{ steps.info.outputs.TARGET_VERSION }}>",
+                "text": "${{ job.status }}: ${{ matrix.os }} / ${{ matrix.test_task }} <https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}|${{ github.workflow }} at ${{ steps.info.outputs.TARGET_VERSION }}>",
                 "color": "good"
               }]
             }
@@ -330,7 +330,7 @@ jobs:
           payload: |
             {
               "attachments": [{
-                "text": "${{ job.status }}: ${{ matrix.os }} / ${{ matrix.test_task }} <https://github.com/${{ github.repository }}/actions/?query=workflow%3A%22${{ github.workflow }}%22|${{ github.workflow }} at ${{ steps.info.outputs.TARGET_VERSION }}>",
+                "text": "${{ job.status }}: ${{ matrix.os }} / ${{ matrix.test_task }} <https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}|${{ github.workflow }} at ${{ steps.info.outputs.TARGET_VERSION }}>",
                 "color": "danger"
               }]
             }
@@ -342,7 +342,7 @@ jobs:
           payload: |
             {
               "attachments": [{
-                "text": "${{ job.status }}: ${{ matrix.os }} / ${{ matrix.test_task }} <https://github.com/${{ github.repository }}/actions/?query=workflow%3A%22${{ github.workflow }}%22|${{ github.workflow }} at ${{ steps.info.outputs.TARGET_VERSION }}>",
+                "text": "${{ job.status }}: ${{ matrix.os }} / ${{ matrix.test_task }} <https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}|${{ github.workflow }} at ${{ steps.info.outputs.TARGET_VERSION }}>",
                 "color": "good"
               }]
             }
@@ -439,7 +439,7 @@ jobs:
           payload: |
             {
               "attachments": [{
-                "text": "${{ job.status }}: ${{ matrix.os }} (vs${{ matrix.vs }}) / ${{ matrix.test_task }} <https://github.com/${{ github.repository }}/actions/?query=workflow%3A%22${{ github.workflow }}%22|${{ github.workflow }} at ${{ steps.info.outputs.TARGET_VERSION }}>",
+                "text": "${{ job.status }}: ${{ matrix.os }} (vs${{ matrix.vs }}) / ${{ matrix.test_task }} <https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}|${{ github.workflow }} at ${{ steps.info.outputs.TARGET_VERSION }}>",
                 "color": "danger"
               }]
             }
@@ -451,7 +451,7 @@ jobs:
           payload: |
             {
               "attachments": [{
-                "text": "${{ job.status }}: ${{ matrix.os }} (vs${{ matrix.vs }}) / ${{ matrix.test_task }} <https://github.com/${{ github.repository }}/actions/?query=workflow%3A%22${{ github.workflow }}%22|${{ github.workflow }} at ${{ steps.info.outputs.TARGET_VERSION }}>",
+                "text": "${{ job.status }}: ${{ matrix.os }} (vs${{ matrix.vs }}) / ${{ matrix.test_task }} <https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}|${{ github.workflow }} at ${{ steps.info.outputs.TARGET_VERSION }}>",
                 "color": "good"
               }]
             }

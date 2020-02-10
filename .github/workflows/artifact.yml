@@ -60,7 +60,7 @@ jobs:
           payload: |
             {
               "attachments": [{
-                "text": "${{ github.event.action }} ${{ job.status }}: <https://github.com/${{ github.repository }}/commit/${{ github.sha }}/checks|${{ github.workflow }}> "
+                "text": "${{ github.event.action }} ${{ job.status }}: <https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}|${{ github.workflow }}> "
               }]
             }
         env:
@@ -109,7 +109,7 @@ jobs:
           payload: |
             {
               "attachments": [{
-                "text": "${{ github.event.action }} ${{ job.status }}: <https://github.com/${{ github.repository }}/commit/${{ github.sha }}/checks|${{ github.workflow }}> "
+                "text": "${{ github.event.action }} ${{ job.status }}: <https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}|${{ github.workflow }}> "
               }]
             }
         env:
