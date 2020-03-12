@@ -14,3 +14,6 @@ COPY --chown=runner snapshot-master.tar.xz /home/runner
 USER runner
 RUN tar xf snapshot-master.tar.xz
 RUN cd snapshot-* && ./configure && make -j$(nproc)
+COPY --chown=runner snapshot-ruby_2_5.tar.xz /home/runner
+RUN tar xf snapshot-ruby_2_5.tar.xz
+RUN cd snapshot-ruby_2_5 && ./configure && make -j$(nproc)
