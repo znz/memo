@@ -54,10 +54,6 @@ jobs:
         run: echo "$MATRIX_CONTEXT"
       - run: ls -lR $GITHUB_WORKSPACE
         if: false
-      - run: |
-          echo "::warning file=app.js,line=1,col=5::Missing semicolon"
-          echo "::error file=app.js,line=10,col=15::Something went wrong"
-          false
       - uses: k0kubun/action-slack@v2.0.0
         with:
           payload: |
