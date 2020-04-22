@@ -171,20 +171,19 @@ jobs:
               ;;
           esac
           sudo apt-get install --no-install-recommends -q -y build-essential libssl-dev libyaml-dev libreadline6-dev zlib1g-dev libncurses5-dev libffi-dev libgdbm-dev bison- autoconf- $APT_INSTALL_RUBY $APT_INSTALL_GIT
+      - run: 'ls -alR $HOME/.config || :'
       - name: Fixed world writable dirs
         run: |
           chmod go-w $HOME
           sudo chmod -R go-w /usr/share
-      - run: 'ls -al $HOME/.config || :'
+      - run: 'ls -alR $HOME/.config || :'
       - name: Set ENV
         run: |
           echo '::set-env name=JOBS::'-j$((1 + $(nproc --all)))
       - name: configure
         run: cd snapshot-*/ && ./configure
-      - run: 'ls -al $HOME/.config || :'
       - name: make
         run: cd snapshot-*/ && make $JOBS
-      - run: 'ls -al $HOME/.config || :'
       - name: make check
         run: cd snapshot-*/ && make $JOBS check TESTOPTS="-q --tty=no" MSPECOPT="-ff"
         if: matrix.test_task == 'check'
