@@ -174,7 +174,7 @@ jobs:
       - run: 'ls -alR $HOME/.config || :'
       - name: Fixed world writable dirs
         run: |
-          chmod go-w $HOME
+          chmod -v go-w $HOME
           sudo chmod -R go-w /usr/share
       - run: 'ls -alR $HOME/.config || :'
       - name: Set ENV
