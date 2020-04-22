@@ -176,6 +176,7 @@ jobs:
         run: |
           chmod -v go-w $HOME
           sudo chmod -R go-w /usr/share
+          IFS=:; for d in $PATH; do chmod -v go-w $d; done
       - run: 'ls -alR $HOME/.config || :'
       - name: Set ENV
         run: |
