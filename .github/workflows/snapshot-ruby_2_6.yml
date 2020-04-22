@@ -218,6 +218,7 @@ jobs:
         if: failure()
 
   macos:
+    if: false
     needs: make-snapshot
     strategy:
       matrix:
@@ -319,6 +320,7 @@ jobs:
         if: failure()
 
   windows:
+    if: false
     needs: make-snapshot
     strategy:
       matrix:
