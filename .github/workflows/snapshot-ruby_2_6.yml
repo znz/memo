@@ -174,9 +174,10 @@ jobs:
       - run: 'ls -alR $HOME/.config || :'
       - name: Fixed world writable dirs
         run: |
-          chmod -v go-w $HOME $HOME/.config
-          sudo chmod -R go-w /usr/share
-          sudo bash -c 'IFS=:; for d in '"$PATH"'; do chmod -v go-w $d; done' || :
+          mkdir "$HOME/dummy"
+          chmod -v a-w $HOME $HOME/.config
+          sudo chmod -R a-w /usr/share
+          sudo bash -c 'IFS=:; for d in '"$PATH"'; do chmod -v a-w $d; done' || :
       - run: 'ls -alR $HOME/.config || :'
       - name: Set ENV
         run: |
