@@ -52,7 +52,7 @@ jobs:
         env:
           MATRIX_CONTEXT: ${{ toJson(matrix) }}
         run: echo "$MATRIX_CONTEXT"
-      - uses: actions/upload-artifact@v2
+      - uses: actions/checkout@v2
       - run: ls -lR $GITHUB_WORKSPACE
         if: false
       - uses: k0kubun/action-slack@v2.0.0
