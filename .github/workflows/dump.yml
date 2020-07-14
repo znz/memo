@@ -55,7 +55,10 @@ jobs:
       - uses: actions/checkout@v2
       - run: ls -lR $GITHUB_WORKSPACE
         if: false
-      - run: ls -al /github /home
+      - run: |
+          if [ -d /github/home -a ! -e /home/runner ]; then
+            ln -s /github/home /home/runner
+          fi
       - uses: k0kubun/action-slack@v2.0.0
         with:
           payload: |
