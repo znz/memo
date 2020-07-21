@@ -1,0 +1,521 @@
+2020-07-21T13:59:53.2998077Z ##[section]Starting: Request a runner to run this job
+2020-07-21T13:59:53.5480556Z Can't find any online and idle self-hosted runner in current repository that matches the required labels: 'ubuntu-18.04'
+2020-07-21T13:59:53.5480662Z Can't find any online and idle self-hosted runner in current repository's account/organization that matches the required labels: 'ubuntu-18.04'
+2020-07-21T13:59:53.5480714Z Found online and idle hosted runner in current repository's account/organization that matches the required labels: 'ubuntu-18.04'
+2020-07-21T13:59:53.7506635Z ##[section]Finishing: Request a runner to run this job
+2020-07-21T13:59:59.7984511Z Current runner version: '2.267.1'
+2020-07-21T13:59:59.8010260Z ##[group]Operating System
+2020-07-21T13:59:59.8010865Z Ubuntu
+2020-07-21T13:59:59.8011114Z 18.04.4
+2020-07-21T13:59:59.8011280Z LTS
+2020-07-21T13:59:59.8011497Z ##[endgroup]
+2020-07-21T13:59:59.8011719Z ##[group]Virtual Environment
+2020-07-21T13:59:59.8011958Z Environment: ubuntu-18.04
+2020-07-21T13:59:59.8012192Z Version: 20200709.0
+2020-07-21T13:59:59.8012504Z Included Software: https://github.com/actions/virtual-environments/blob/ubuntu18/20200709.0/images/linux/Ubuntu1804-README.md
+2020-07-21T13:59:59.8012778Z ##[endgroup]
+2020-07-21T13:59:59.8013714Z Prepare workflow directory
+2020-07-21T13:59:59.8208383Z Prepare all required actions
+2020-07-21T13:59:59.8219736Z Download action repository 'actions/checkout@v2'
+2020-07-21T14:00:01.8320005Z Download action repository 'ruby/setup-ruby@master'
+2020-07-21T14:00:02.0400403Z ##[group]Run if [ -d /github/home -a ! -e /home/runner ]; then
+2020-07-21T14:00:02.0400675Z [36;1mif [ -d /github/home -a ! -e /home/runner ]; then[0m
+2020-07-21T14:00:02.0400901Z [36;1m  ln -s /github/home /home/runner[0m
+2020-07-21T14:00:02.0401089Z [36;1mfi[0m
+2020-07-21T14:00:02.0441402Z shell: /bin/bash -e {0}
+2020-07-21T14:00:02.0441694Z ##[endgroup]
+2020-07-21T14:00:02.0719238Z ##[group]Run actions/checkout@v2
+2020-07-21T14:00:02.0719466Z with:
+2020-07-21T14:00:02.0719657Z   repository: znz/memo
+2020-07-21T14:00:02.0720046Z   token: ***
+2020-07-21T14:00:02.0720241Z   ssh-strict: true
+2020-07-21T14:00:02.0720414Z   persist-credentials: true
+2020-07-21T14:00:02.0720607Z   clean: true
+2020-07-21T14:00:02.0720797Z   fetch-depth: 1
+2020-07-21T14:00:02.0720982Z   lfs: false
+2020-07-21T14:00:02.0721172Z   submodules: false
+2020-07-21T14:00:02.0721361Z ##[endgroup]
+2020-07-21T14:00:02.8112004Z Syncing repository: znz/memo
+2020-07-21T14:00:02.8123265Z ##[group]Getting Git version info
+2020-07-21T14:00:02.8124261Z Working directory is '/home/runner/work/memo/memo'
+2020-07-21T14:00:02.8124884Z [command]/usr/bin/git version
+2020-07-21T14:00:02.8125128Z git version 2.27.0
+2020-07-21T14:00:02.8125880Z ##[endgroup]
+2020-07-21T14:00:02.8126640Z Deleting the contents of '/home/runner/work/memo/memo'
+2020-07-21T14:00:02.8129493Z ##[group]Initializing the repository
+2020-07-21T14:00:02.8129818Z [command]/usr/bin/git init /home/runner/work/memo/memo
+2020-07-21T14:00:02.8130047Z Initialized empty Git repository in /home/runner/work/memo/memo/.git/
+2020-07-21T14:00:02.8130314Z [command]/usr/bin/git remote add origin https://github.com/znz/memo
+2020-07-21T14:00:02.8130556Z ##[endgroup]
+2020-07-21T14:00:02.8130777Z ##[group]Disabling automatic garbage collection
+2020-07-21T14:00:02.8131483Z [command]/usr/bin/git config --local gc.auto 0
+2020-07-21T14:00:02.8131712Z ##[endgroup]
+2020-07-21T14:00:02.8132852Z ##[group]Setting up auth
+2020-07-21T14:00:02.8133304Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2020-07-21T14:00:02.8133925Z [command]/usr/bin/git submodule foreach --recursive git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :
+2020-07-21T14:00:02.8134438Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2020-07-21T14:00:02.8135080Z [command]/usr/bin/git submodule foreach --recursive git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :
+2020-07-21T14:00:02.8135592Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2020-07-21T14:00:02.8135850Z ##[endgroup]
+2020-07-21T14:00:02.8136065Z ##[group]Fetching the repository
+2020-07-21T14:00:02.8136619Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --progress --no-recurse-submodules --depth=1 origin +d309ab6b8a288f39000bac0f9e64cacf834493cd:refs/remotes/origin/master
+2020-07-21T14:00:03.5984213Z remote: Enumerating objects: 53, done.        
+2020-07-21T14:00:03.5986684Z remote: Counting objects:   1% (1/53)        
+2020-07-21T14:00:03.5986999Z remote: Counting objects:   3% (2/53)        
+2020-07-21T14:00:03.5987260Z remote: Counting objects:   5% (3/53)        
+2020-07-21T14:00:03.5987538Z remote: Counting objects:   7% (4/53)        
+2020-07-21T14:00:03.5987791Z remote: Counting objects:   9% (5/53)        
+2020-07-21T14:00:03.5988032Z remote: Counting objects:  11% (6/53)        
+2020-07-21T14:00:03.5988277Z remote: Counting objects:  13% (7/53)        
+2020-07-21T14:00:03.5988503Z remote: Counting objects:  15% (8/53)        
+2020-07-21T14:00:03.5988749Z remote: Counting objects:  16% (9/53)        
+2020-07-21T14:00:03.5988998Z remote: Counting objects:  18% (10/53)        
+2020-07-21T14:00:03.5989240Z remote: Counting objects:  20% (11/53)        
+2020-07-21T14:00:03.5989487Z remote: Counting objects:  22% (12/53)        
+2020-07-21T14:00:03.5989726Z remote: Counting objects:  24% (13/53)        
+2020-07-21T14:00:03.5989962Z remote: Counting objects:  26% (14/53)        
+2020-07-21T14:00:03.5990212Z remote: Counting objects:  28% (15/53)        
+2020-07-21T14:00:03.5990431Z remote: Counting objects:  30% (16/53)        
+2020-07-21T14:00:03.5990675Z remote: Counting objects:  32% (17/53)        
+2020-07-21T14:00:03.5991079Z remote: Counting objects:  33% (18/53)        
+2020-07-21T14:00:03.5991339Z remote: Counting objects:  35% (19/53)        
+2020-07-21T14:00:03.5991579Z remote: Counting objects:  37% (20/53)        
+2020-07-21T14:00:03.5991828Z remote: Counting objects:  39% (21/53)        
+2020-07-21T14:00:03.5992069Z remote: Counting objects:  41% (22/53)        
+2020-07-21T14:00:03.5992306Z remote: Counting objects:  43% (23/53)        
+2020-07-21T14:00:03.5992530Z remote: Counting objects:  45% (24/53)        
+2020-07-21T14:00:03.5992772Z remote: Counting objects:  47% (25/53)        
+2020-07-21T14:00:03.5993017Z remote: Counting objects:  49% (26/53)        
+2020-07-21T14:00:03.5993258Z remote: Counting objects:  50% (27/53)        
+2020-07-21T14:00:03.5993494Z remote: Counting objects:  52% (28/53)        
+2020-07-21T14:00:03.5993746Z remote: Counting objects:  54% (29/53)        
+2020-07-21T14:00:03.5993995Z remote: Counting objects:  56% (30/53)        
+2020-07-21T14:00:03.5994254Z remote: Counting objects:  58% (31/53)        
+2020-07-21T14:00:03.5994498Z remote: Counting objects:  60% (32/53)        
+2020-07-21T14:00:03.5994894Z remote: Counting objects:  62% (33/53)        
+2020-07-21T14:00:03.5995117Z remote: Counting objects:  64% (34/53)        
+2020-07-21T14:00:03.5995356Z remote: Counting objects:  66% (35/53)        
+2020-07-21T14:00:03.5995597Z remote: Counting objects:  67% (36/53)        
+2020-07-21T14:00:03.5995834Z remote: Counting objects:  69% (37/53)        
+2020-07-21T14:00:03.5996075Z remote: Counting objects:  71% (38/53)        
+2020-07-21T14:00:03.5996321Z remote: Counting objects:  73% (39/53)        
+2020-07-21T14:00:03.5996565Z remote: Counting objects:  75% (40/53)        
+2020-07-21T14:00:03.5996802Z remote: Counting objects:  77% (41/53)        
+2020-07-21T14:00:03.5997041Z remote: Counting objects:  79% (42/53)        
+2020-07-21T14:00:03.5997284Z remote: Counting objects:  81% (43/53)        
+2020-07-21T14:00:03.5997523Z remote: Counting objects:  83% (44/53)        
+2020-07-21T14:00:03.5997777Z remote: Counting objects:  84% (45/53)        
+2020-07-21T14:00:03.5998019Z remote: Counting objects:  86% (46/53)        
+2020-07-21T14:00:03.5998256Z remote: Counting objects:  88% (47/53)        
+2020-07-21T14:00:03.5998496Z remote: Counting objects:  90% (48/53)        
+2020-07-21T14:00:03.5998741Z remote: Counting objects:  92% (49/53)        
+2020-07-21T14:00:03.5998959Z remote: Counting objects:  94% (50/53)        
+2020-07-21T14:00:03.5999204Z remote: Counting objects:  96% (51/53)        
+2020-07-21T14:00:03.5999445Z remote: Counting objects:  98% (52/53)        
+2020-07-21T14:00:03.5999681Z remote: Counting objects: 100% (53/53)        
+2020-07-21T14:00:03.5999928Z remote: Counting objects: 100% (53/53), done.        
+2020-07-21T14:00:03.6000364Z remote: Compressing objects:   2% (1/50)        
+2020-07-21T14:00:03.6000612Z remote: Compressing objects:   4% (2/50)        
+2020-07-21T14:00:03.6000857Z remote: Compressing objects:   6% (3/50)        
+2020-07-21T14:00:03.6001094Z remote: Compressing objects:   8% (4/50)        
+2020-07-21T14:00:03.6001340Z remote: Compressing objects:  10% (5/50)        
+2020-07-21T14:00:03.6001589Z remote: Compressing objects:  12% (6/50)        
+2020-07-21T14:00:03.6001839Z remote: Compressing objects:  14% (7/50)        
+2020-07-21T14:00:03.6002076Z remote: Compressing objects:  16% (8/50)        
+2020-07-21T14:00:03.6002319Z remote: Compressing objects:  18% (9/50)        
+2020-07-21T14:00:03.6035309Z remote: Compressing objects:  20% (10/50)        
+2020-07-21T14:00:03.6035511Z remote: Compressing objects:  22% (11/50)        
+2020-07-21T14:00:03.6035660Z remote: Compressing objects:  24% (12/50)        
+2020-07-21T14:00:03.6035804Z remote: Compressing objects:  26% (13/50)        
+2020-07-21T14:00:03.6035958Z remote: Compressing objects:  28% (14/50)        
+2020-07-21T14:00:03.6036100Z remote: Compressing objects:  30% (15/50)        
+2020-07-21T14:00:03.6036239Z remote: Compressing objects:  32% (16/50)        
+2020-07-21T14:00:03.6036540Z remote: Compressing objects:  34% (17/50)        
+2020-07-21T14:00:03.6036686Z remote: Compressing objects:  36% (18/50)        
+2020-07-21T14:00:03.6036826Z remote: Compressing objects:  38% (19/50)        
+2020-07-21T14:00:03.6036965Z remote: Compressing objects:  40% (20/50)        
+2020-07-21T14:00:03.6037105Z remote: Compressing objects:  42% (21/50)        
+2020-07-21T14:00:03.6037227Z remote: Compressing objects:  44% (22/50)        
+2020-07-21T14:00:03.6037369Z remote: Compressing objects:  46% (23/50)        
+2020-07-21T14:00:03.6037511Z remote: Compressing objects:  48% (24/50)        
+2020-07-21T14:00:03.6037654Z remote: Compressing objects:  50% (25/50)        
+2020-07-21T14:00:03.6037792Z remote: Compressing objects:  52% (26/50)        
+2020-07-21T14:00:03.6037939Z remote: Compressing objects:  54% (27/50)        
+2020-07-21T14:00:03.6038080Z remote: Compressing objects:  56% (28/50)        
+2020-07-21T14:00:03.6038219Z remote: Compressing objects:  58% (29/50)        
+2020-07-21T14:00:03.6038353Z remote: Compressing objects:  60% (30/50)        
+2020-07-21T14:00:03.6038493Z remote: Compressing objects:  62% (31/50)        
+2020-07-21T14:00:03.6038635Z remote: Compressing objects:  64% (32/50)        
+2020-07-21T14:00:03.6038776Z remote: Compressing objects:  66% (33/50)        
+2020-07-21T14:00:03.6038915Z remote: Compressing objects:  68% (34/50)        
+2020-07-21T14:00:03.6039055Z remote: Compressing objects:  70% (35/50)        
+2020-07-21T14:00:03.6039194Z remote: Compressing objects:  72% (36/50)        
+2020-07-21T14:00:03.6039333Z remote: Compressing objects:  74% (37/50)        
+2020-07-21T14:00:03.6039457Z remote: Compressing objects:  76% (38/50)        
+2020-07-21T14:00:03.6039597Z remote: Compressing objects:  78% (39/50)        
+2020-07-21T14:00:03.6039747Z remote: Compressing objects:  80% (40/50)        
+2020-07-21T14:00:03.6039888Z remote: Compressing objects:  82% (41/50)        
+2020-07-21T14:00:03.6040030Z remote: Compressing objects:  84% (42/50)        
+2020-07-21T14:00:03.6040190Z remote: Compressing objects:  86% (43/50)        
+2020-07-21T14:00:03.6040330Z remote: Compressing objects:  88% (44/50)        
+2020-07-21T14:00:03.6040468Z remote: Compressing objects:  90% (45/50)        
+2020-07-21T14:00:03.6040606Z remote: Compressing objects:  92% (46/50)        
+2020-07-21T14:00:03.6040748Z remote: Compressing objects:  94% (47/50)        
+2020-07-21T14:00:03.6040891Z remote: Compressing objects:  96% (48/50)        
+2020-07-21T14:00:03.6041018Z remote: Compressing objects:  98% (49/50)        
+2020-07-21T14:00:03.6041160Z remote: Compressing objects: 100% (50/50)        
+2020-07-21T14:00:03.6041306Z remote: Compressing objects: 100% (50/50), done.        
+2020-07-21T14:00:03.6097850Z remote: Total 53 (delta 5), reused 33 (delta 1), pack-reused 0        
+2020-07-21T14:00:03.6649003Z From https://github.com/znz/memo
+2020-07-21T14:00:03.6650860Z  * [new ref]         d309ab6b8a288f39000bac0f9e64cacf834493cd -> origin/master
+2020-07-21T14:00:03.6686007Z ##[endgroup]
+2020-07-21T14:00:03.6687425Z ##[group]Determining the checkout info
+2020-07-21T14:00:03.6690129Z ##[endgroup]
+2020-07-21T14:00:03.6690700Z ##[group]Checking out the ref
+2020-07-21T14:00:03.6698159Z [command]/usr/bin/git checkout --progress --force -B master refs/remotes/origin/master
+2020-07-21T14:00:03.6796313Z Reset branch 'master'
+2020-07-21T14:00:03.6797029Z Branch 'master' set up to track remote branch 'master' from 'origin'.
+2020-07-21T14:00:03.6802778Z ##[endgroup]
+2020-07-21T14:00:03.6807584Z [command]/usr/bin/git log -1
+2020-07-21T14:00:03.6845701Z commit d309ab6b8a288f39000bac0f9e64cacf834493cd
+2020-07-21T14:00:03.6846104Z Author: Kazuhiro NISHIYAMA <znz@users.noreply.github.com>
+2020-07-21T14:00:03.6847425Z Date:   Tue Jul 21 22:59:23 2020 +0900
+2020-07-21T14:00:03.6847655Z 
+2020-07-21T14:00:03.6848304Z     Merge pull request #2 from znz/test-pr-info
+2020-07-21T14:00:03.6848595Z     
+2020-07-21T14:00:03.6848848Z     Test pr info
+2020-07-21T14:00:03.6940552Z ##[group]Run ruby/setup-ruby@master
+2020-07-21T14:00:03.6940712Z with:
+2020-07-21T14:00:03.6940827Z   ruby-version: 2.3
+2020-07-21T14:00:03.6940954Z   bundler: default
+2020-07-21T14:00:03.6941078Z   bundler-cache: false
+2020-07-21T14:00:03.6941207Z   working-directory: .
+2020-07-21T14:00:03.6941335Z ##[endgroup]
+2020-07-21T14:00:03.7492496Z ##[group]Downloading Ruby
+2020-07-21T14:00:03.7501601Z https://github.com/ruby/ruby-builder/releases/download/enable-shared/ruby-2.3.8-ubuntu-18.04.tar.gz
+2020-07-21T14:00:04.3664578Z Took   0.62 seconds
+2020-07-21T14:00:04.3665827Z ##[endgroup]
+2020-07-21T14:00:04.3666983Z ##[group]Extracting Ruby
+2020-07-21T14:00:04.3704487Z [command]/bin/tar -xz -C /home/runner/.rubies -f /home/runner/work/_temp/4d96f9b0-fce2-45e3-94ef-179058e8726e
+2020-07-21T14:00:05.4656098Z Took   1.10 seconds
+2020-07-21T14:00:05.4687617Z ##[endgroup]
+2020-07-21T14:00:05.4693922Z ##[group]Installing Bundler
+2020-07-21T14:00:05.4695004Z Ruby 2.3 has a bug with Bundler 2 (https://github.com/rubygems/rubygems/issues/3570), using Bundler 1 instead on Ruby 2.3
+2020-07-21T14:00:05.4696184Z [command]/home/runner/.rubies/ruby-2.3.8/bin/gem install bundler -v ~> 1 --no-document
+2020-07-21T14:00:06.0352965Z Successfully installed bundler-1.17.3
+2020-07-21T14:00:06.0354312Z 1 gem installed
+2020-07-21T14:00:06.0390953Z Took   0.57 seconds
+2020-07-21T14:00:06.0416109Z ##[endgroup]
+2020-07-21T14:00:06.0486608Z ##[group]Run gem install mysql2
+2020-07-21T14:00:06.0486831Z [36;1mgem install mysql2[0m
+2020-07-21T14:00:06.0526489Z shell: /bin/bash -e {0}
+2020-07-21T14:00:06.0526642Z env:
+2020-07-21T14:00:06.0526830Z   PATH: /home/runner/.rubies/ruby-2.3.8/bin:/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:/usr/share/rust/.cargo/bin:/home/runner/.config/composer/vendor/bin:/home/runner/.dotnet/tools:/snap/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games
+2020-07-21T14:00:06.0527099Z ##[endgroup]
+2020-07-21T14:00:06.4063578Z Building native extensions.  This could take a while...
+2020-07-21T14:00:12.8735864Z Successfully installed mysql2-0.5.3
+2020-07-21T14:00:12.8737200Z 1 gem installed
+2020-07-21T14:00:12.8819520Z ##[group]Run ruby -r openssl -r mysql2 -e 0
+2020-07-21T14:00:12.8819754Z [36;1mruby -r openssl -r mysql2 -e 0[0m
+2020-07-21T14:00:12.8864586Z shell: /bin/bash -e {0}
+2020-07-21T14:00:12.8864720Z env:
+2020-07-21T14:00:12.8864909Z   PATH: /home/runner/.rubies/ruby-2.3.8/bin:/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:/usr/share/rust/.cargo/bin:/home/runner/.config/composer/vendor/bin:/home/runner/.dotnet/tools:/snap/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games
+2020-07-21T14:00:12.8865091Z ##[endgroup]
+2020-07-21T14:00:13.0570051Z /home/runner/.rubies/ruby-2.3.8/lib/ruby/gems/2.3.0/gems/mysql2-0.5.3/lib/mysql2/mysql2.so: [BUG] Segmentation fault at 0x0000000000000000
+2020-07-21T14:00:13.0570760Z ruby 2.3.8p459 (2018-10-18 revision 65136) [x86_64-linux]
+2020-07-21T14:00:13.0570861Z 
+2020-07-21T14:00:13.0571177Z -- Control frame information -----------------------------------------------
+2020-07-21T14:00:13.0571522Z c:0008 p:-11864959130408 s:0040 e:000039 TOP    [FINISH]
+2020-07-21T14:00:13.0571829Z c:0007 p:---- s:0038 e:000037 CFUNC  :require
+2020-07-21T14:00:13.0572208Z c:0006 p:0124 s:0034 e:000033 METHOD /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/rubygems/core_ext/kernel_require.rb:55
+2020-07-21T14:00:13.0572624Z c:0005 p:0306 s:0024 e:000023 TOP    /home/runner/.rubies/ruby-2.3.8/lib/ruby/gems/2.3.0/gems/mysql2-0.5.3/lib/mysql2.rb:36 [FINISH]
+2020-07-21T14:00:13.0572935Z c:0004 p:---- s:0019 e:000018 CFUNC  :require
+2020-07-21T14:00:13.0573313Z c:0003 p:0091 s:0015 e:000014 RESCUE /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/rubygems/core_ext/kernel_require.rb:127
+2020-07-21T14:00:13.0573726Z c:0002 p:0421 s:0012 e:000011 METHOD /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/rubygems/core_ext/kernel_require.rb:39 [FINISH]
+2020-07-21T14:00:13.0573878Z c:0001 p:0000 s:0002 E:0022c0 (none) [FINISH]
+2020-07-21T14:00:13.0573960Z 
+2020-07-21T14:00:13.0574278Z -- Ruby level backtrace information ----------------------------------------
+2020-07-21T14:00:13.0574644Z /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/rubygems/core_ext/kernel_require.rb:39:in `require'
+2020-07-21T14:00:13.0575074Z /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/rubygems/core_ext/kernel_require.rb:127:in `rescue in require'
+2020-07-21T14:00:13.0575441Z /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/rubygems/core_ext/kernel_require.rb:127:in `require'
+2020-07-21T14:00:13.0575841Z /home/runner/.rubies/ruby-2.3.8/lib/ruby/gems/2.3.0/gems/mysql2-0.5.3/lib/mysql2.rb:36:in `<top (required)>'
+2020-07-21T14:00:13.0576202Z /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/rubygems/core_ext/kernel_require.rb:55:in `require'
+2020-07-21T14:00:13.0576562Z /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/rubygems/core_ext/kernel_require.rb:55:in `require'
+2020-07-21T14:00:13.0576668Z 
+2020-07-21T14:00:13.0576975Z -- Machine register context ------------------------------------------------
+2020-07-21T14:00:13.0577140Z  RIP: 0x00007f5708e16efa RBP: 0x0000565435a41960 RSP: 0x00007ffc2a43ade8
+2020-07-21T14:00:13.0577279Z  RAX: 0x0000000000000000 RBX: 0x000056543589f830 RCX: 0x0000000000000100
+2020-07-21T14:00:13.0577423Z  RDX: 0x0000000000000000 RDI: 0x0000000000000000 RSI: 0x0000000000000000
+2020-07-21T14:00:13.0577561Z   R8: 0x0000000000001800  R9: 0x0000000000000020 R10: 0x0000000000000015
+2020-07-21T14:00:13.0577706Z  R11: 0x00007f570751aaa0 R12: 0x0000000000000002 R13: 0x00005654358c9b98
+2020-07-21T14:00:13.0577846Z  R14: 0x0000565435a40c90 R15: 0x00007f5707122240 EFL: 0x0000000000010283
+2020-07-21T14:00:13.0577915Z 
+2020-07-21T14:00:13.0578222Z -- C level backtrace information -------------------------------------------
+2020-07-21T14:00:13.0735299Z /home/runner/.rubies/ruby-2.3.8/lib/libruby.so.2.3(rb_vm_bugreport+0x974) [0x7f57093544c4] vm_dump.c:724
+2020-07-21T14:00:13.0736196Z /home/runner/.rubies/ruby-2.3.8/lib/libruby.so.2.3(rb_bug_context+0xd4) [0x7f57091dba74] error.c:435
+2020-07-21T14:00:13.0739540Z /home/runner/.rubies/ruby-2.3.8/lib/libruby.so.2.3(sigsegv+0x3e) [0x7f57092bf50e] signal.c:890
+2020-07-21T14:00:13.0739902Z /lib/x86_64-linux-gnu/libc.so.6 [0x7f5708dabfd0]
+2020-07-21T14:00:13.0753217Z /lib/x86_64-linux-gnu/libc.so.6 [0x7f5708e16efa]
+2020-07-21T14:00:13.0753578Z /home/runner/.rubies/ruby-2.3.8/openssl/lib/libcrypto.so.1.0.0(lh_insert+0x10d) [0x7f57071dc6cd]
+2020-07-21T14:00:13.0753951Z /home/runner/.rubies/ruby-2.3.8/openssl/lib/libcrypto.so.1.0.0(OBJ_NAME_add+0x6b) [0x7f570712268b]
+2020-07-21T14:00:13.0754273Z /usr/lib/x86_64-linux-gnu/libssl.so.1.1 [0x7f5705c2013e]
+2020-07-21T14:00:13.0754616Z /lib/x86_64-linux-gnu/libpthread.so.0(__pthread_once_slow+0xb7) [0x7f5708b5d827]
+2020-07-21T14:00:13.0755705Z /usr/lib/x86_64-linux-gnu/libcrypto.so.1.1(CRYPTO_THREAD_run_once+0x9) [0x7f57058fc039]
+2020-07-21T14:00:13.0756206Z /usr/lib/x86_64-linux-gnu/libssl.so.1.1(OPENSSL_init_ssl+0x67) [0x7f5705c20337]
+2020-07-21T14:00:13.0756536Z /usr/lib/x86_64-linux-gnu/libmysqlclient.so.20 [0x7f5705ed5754]
+2020-07-21T14:00:13.0756893Z /usr/lib/x86_64-linux-gnu/libmysqlclient.so.20(mysql_server_init+0x67) [0x7f5705e9ac27]
+2020-07-21T14:00:13.0757322Z /home/runner/.rubies/ruby-2.3.8/lib/ruby/gems/2.3.0/gems/mysql2-0.5.3/lib/mysql2/mysql2.so(init_mysql2_client+0xc) [0x7f570643aabc] client.c:1406
+2020-07-21T14:00:13.0757750Z /home/runner/.rubies/ruby-2.3.8/lib/ruby/gems/2.3.0/gems/mysql2-0.5.3/lib/mysql2/mysql2.so(Init_mysql2+0x76) [0x7f570643bf26] mysql2_ext.c:11
+2020-07-21T14:00:13.0758126Z /home/runner/.rubies/ruby-2.3.8/lib/libruby.so.2.3(dln_load+0xfb) [0x7f570918d17b] dln.c:1355
+2020-07-21T14:00:13.0758497Z /home/runner/.rubies/ruby-2.3.8/lib/libruby.so.2.3(rb_vm_call_cfunc+0xb2) [0x7f5709342282] vm.c:2005
+2020-07-21T14:00:13.0758880Z /home/runner/.rubies/ruby-2.3.8/lib/libruby.so.2.3(rb_require_internal+0x58d) [0x7f57091e9abd] load.c:1004
+2020-07-21T14:00:13.0759265Z /home/runner/.rubies/ruby-2.3.8/lib/libruby.so.2.3(rb_require_safe+0x9) [0x7f57091e9e99] load.c:1045
+2020-07-21T14:00:13.0760408Z /home/runner/.rubies/ruby-2.3.8/lib/libruby.so.2.3(vm_call_cfunc+0xe4) [0x7f570933c724] vm_insnhelper.c:1642
+2020-07-21T14:00:13.0760830Z /home/runner/.rubies/ruby-2.3.8/lib/libruby.so.2.3(vm_exec_core+0x477) [0x7f5709344267] insns.def:994
+2020-07-21T14:00:13.0771677Z /home/runner/.rubies/ruby-2.3.8/lib/libruby.so.2.3(vm_exec+0x7c) [0x7f570934a3ac] vm.c:1693
+2020-07-21T14:00:13.0772060Z /home/runner/.rubies/ruby-2.3.8/lib/libruby.so.2.3(rb_load_internal0+0xb9) [0x7f57091e7989] load.c:619
+2020-07-21T14:00:13.0772428Z /home/runner/.rubies/ruby-2.3.8/lib/libruby.so.2.3(rb_require_internal+0x868) [0x7f57091e9d98] load.c:1000
+2020-07-21T14:00:13.0772799Z /home/runner/.rubies/ruby-2.3.8/lib/libruby.so.2.3(rb_require_safe+0x9) [0x7f57091e9e99] load.c:1045
+2020-07-21T14:00:13.0773180Z /home/runner/.rubies/ruby-2.3.8/lib/libruby.so.2.3(vm_call_cfunc+0xe4) [0x7f570933c724] vm_insnhelper.c:1642
+2020-07-21T14:00:13.0773586Z /home/runner/.rubies/ruby-2.3.8/lib/libruby.so.2.3(vm_call_method+0xd3) [0x7f570934c7e3] vm_insnhelper.c:2177
+2020-07-21T14:00:13.0773967Z /home/runner/.rubies/ruby-2.3.8/lib/libruby.so.2.3(vm_exec_core+0x477) [0x7f5709344267] insns.def:994
+2020-07-21T14:00:13.0774333Z /home/runner/.rubies/ruby-2.3.8/lib/libruby.so.2.3(vm_exec+0x7c) [0x7f570934a3ac] vm.c:1693
+2020-07-21T14:00:13.0774726Z /home/runner/.rubies/ruby-2.3.8/lib/libruby.so.2.3(vm_call0_body.constprop.128+0x1f5) [0x7f570934e3c5] vm_eval.c:182
+2020-07-21T14:00:13.0775094Z /home/runner/.rubies/ruby-2.3.8/lib/libruby.so.2.3(rb_call0+0xc2) [0x7f570934e992] vm_eval.c:61
+2020-07-21T14:00:13.0775465Z /home/runner/.rubies/ruby-2.3.8/lib/libruby.so.2.3(require_libraries+0xc1) [0x7f57092ba311] ruby.c:587
+2020-07-21T14:00:13.0782581Z /home/runner/.rubies/ruby-2.3.8/lib/libruby.so.2.3(process_options+0xbf2) [0x7f57092bea22] ruby.c:1561
+2020-07-21T14:00:13.0783059Z /home/runner/.rubies/ruby-2.3.8/lib/libruby.so.2.3(ruby_process_options+0xd8) [0x7f57092bee28] ruby.c:2110
+2020-07-21T14:00:13.0783440Z /home/runner/.rubies/ruby-2.3.8/lib/libruby.so.2.3(ruby_options+0xb4) [0x7f57091e6214] eval.c:103
+2020-07-21T14:00:13.0783953Z /home/runner/.rubies/ruby-2.3.8/bin/ruby(main+0x43) [0x565434aee8e3] main.c:36
+2020-07-21T14:00:13.0784066Z 
+2020-07-21T14:00:13.0784396Z -- Other runtime information -----------------------------------------------
+2020-07-21T14:00:13.0784479Z 
+2020-07-21T14:00:13.0784726Z * Loaded script: -e
+2020-07-21T14:00:13.0784870Z 
+2020-07-21T14:00:13.0784990Z * Loaded features:
+2020-07-21T14:00:13.0785053Z 
+2020-07-21T14:00:13.0785164Z     0 enumerator.so
+2020-07-21T14:00:13.0785293Z     1 thread.rb
+2020-07-21T14:00:13.0785413Z     2 rational.so
+2020-07-21T14:00:13.0785515Z     3 complex.so
+2020-07-21T14:00:13.0785847Z     4 /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/x86_64-linux/enc/encdb.so
+2020-07-21T14:00:13.0786299Z     5 /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/x86_64-linux/enc/trans/transdb.so
+2020-07-21T14:00:13.0786631Z     6 /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/unicode_normalize.rb
+2020-07-21T14:00:13.0787595Z     7 /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/x86_64-linux/rbconfig.rb
+2020-07-21T14:00:13.0788233Z     8 /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/rubygems/compatibility.rb
+2020-07-21T14:00:13.0788875Z     9 /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/rubygems/defaults.rb
+2020-07-21T14:00:13.0789541Z    10 /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/rubygems/deprecate.rb
+2020-07-21T14:00:13.0790203Z    11 /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/rubygems/errors.rb
+2020-07-21T14:00:13.0790864Z    12 /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/rubygems/version.rb
+2020-07-21T14:00:13.0791581Z    13 /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/rubygems/requirement.rb
+2020-07-21T14:00:13.0792236Z    14 /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/rubygems/platform.rb
+2020-07-21T14:00:13.0792921Z    15 /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/rubygems/basic_specification.rb
+2020-07-21T14:00:13.0793574Z    16 /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/rubygems/stub_specification.rb
+2020-07-21T14:00:13.0794219Z    17 /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/rubygems/util/list.rb
+2020-07-21T14:00:13.0794876Z    18 /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/x86_64-linux/stringio.so
+2020-07-21T14:00:13.0795534Z    19 /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/uri/rfc2396_parser.rb
+2020-07-21T14:00:13.0796036Z    20 /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/uri/rfc3986_parser.rb
+2020-07-21T14:00:13.0796365Z    21 /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/uri/common.rb
+2020-07-21T14:00:13.0796711Z    22 /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/uri/generic.rb
+2020-07-21T14:00:13.0797031Z    23 /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/uri/ftp.rb
+2020-07-21T14:00:13.0797364Z    24 /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/uri/http.rb
+2020-07-21T14:00:13.0797702Z    25 /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/uri/https.rb
+2020-07-21T14:00:13.0798021Z    26 /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/uri/ldap.rb
+2020-07-21T14:00:13.0798353Z    27 /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/uri/ldaps.rb
+2020-07-21T14:00:13.0798716Z    28 /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/uri/mailto.rb
+2020-07-21T14:00:13.0799016Z    29 /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/uri.rb
+2020-07-21T14:00:13.0799352Z    30 /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/rubygems/specification.rb
+2020-07-21T14:00:13.0799690Z    31 /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/rubygems/exceptions.rb
+2020-07-21T14:00:13.0800022Z    32 /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/rubygems/dependency.rb
+2020-07-21T14:00:13.0800359Z    33 /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/rubygems/core_ext/kernel_gem.rb
+2020-07-21T14:00:13.0800686Z    34 /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/monitor.rb
+2020-07-21T14:00:13.0801039Z    35 /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/rubygems/core_ext/kernel_require.rb
+2020-07-21T14:00:13.0801361Z    36 /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/rubygems.rb
+2020-07-21T14:00:13.0801686Z    37 /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/rubygems/path_support.rb
+2020-07-21T14:00:13.0802161Z    38 /home/runner/.rubies/ruby-2.3.8/lib/ruby/gems/2.3.0/gems/did_you_mean-1.0.0/lib/did_you_mean/version.rb
+2020-07-21T14:00:13.0802563Z    39 /home/runner/.rubies/ruby-2.3.8/lib/ruby/gems/2.3.0/gems/did_you_mean-1.0.0/lib/did_you_mean/core_ext/name_error.rb
+2020-07-21T14:00:13.0802961Z    40 /home/runner/.rubies/ruby-2.3.8/lib/ruby/gems/2.3.0/gems/did_you_mean-1.0.0/lib/did_you_mean/levenshtein.rb
+2020-07-21T14:00:13.0803348Z    41 /home/runner/.rubies/ruby-2.3.8/lib/ruby/gems/2.3.0/gems/did_you_mean-1.0.0/lib/did_you_mean/jaro_winkler.rb
+2020-07-21T14:00:13.0803736Z    42 /home/runner/.rubies/ruby-2.3.8/lib/ruby/gems/2.3.0/gems/did_you_mean-1.0.0/lib/did_you_mean/spell_checkable.rb
+2020-07-21T14:00:13.0804153Z    43 /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/delegate.rb
+2020-07-21T14:00:13.0804580Z    44 /home/runner/.rubies/ruby-2.3.8/lib/ruby/gems/2.3.0/gems/did_you_mean-1.0.0/lib/did_you_mean/spell_checkers/name_error_checkers/class_name_checker.rb
+2020-07-21T14:00:13.0805028Z    45 /home/runner/.rubies/ruby-2.3.8/lib/ruby/gems/2.3.0/gems/did_you_mean-1.0.0/lib/did_you_mean/spell_checkers/name_error_checkers/variable_name_checker.rb
+2020-07-21T14:00:13.0805442Z    46 /home/runner/.rubies/ruby-2.3.8/lib/ruby/gems/2.3.0/gems/did_you_mean-1.0.0/lib/did_you_mean/spell_checkers/name_error_checkers.rb
+2020-07-21T14:00:13.0805848Z    47 /home/runner/.rubies/ruby-2.3.8/lib/ruby/gems/2.3.0/gems/did_you_mean-1.0.0/lib/did_you_mean/spell_checkers/method_name_checker.rb
+2020-07-21T14:00:13.0806242Z    48 /home/runner/.rubies/ruby-2.3.8/lib/ruby/gems/2.3.0/gems/did_you_mean-1.0.0/lib/did_you_mean/spell_checkers/null_checker.rb
+2020-07-21T14:00:13.0806844Z    49 /home/runner/.rubies/ruby-2.3.8/lib/ruby/gems/2.3.0/gems/did_you_mean-1.0.0/lib/did_you_mean/formatter.rb
+2020-07-21T14:00:13.0807223Z    50 /home/runner/.rubies/ruby-2.3.8/lib/ruby/gems/2.3.0/gems/did_you_mean-1.0.0/lib/did_you_mean.rb
+2020-07-21T14:00:13.0807560Z    51 /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/x86_64-linux/digest.so
+2020-07-21T14:00:13.0807872Z    52 /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/digest.rb
+2020-07-21T14:00:13.0808207Z    53 /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/x86_64-linux/openssl.so
+2020-07-21T14:00:13.0808532Z    54 /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/openssl/bn.rb
+2020-07-21T14:00:13.0808849Z    55 /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/openssl/pkey.rb
+2020-07-21T14:00:13.0809219Z    56 /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/openssl/cipher.rb
+2020-07-21T14:00:13.0809896Z    57 /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/openssl/config.rb
+2020-07-21T14:00:13.0810221Z    58 /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/openssl/digest.rb
+2020-07-21T14:00:13.0810544Z    59 /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/openssl/x509.rb
+2020-07-21T14:00:13.0811017Z    60 /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/openssl/buffering.rb
+2020-07-21T14:00:13.0811361Z    61 /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/x86_64-linux/io/nonblock.so
+2020-07-21T14:00:13.0811694Z    62 /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/openssl/ssl.rb
+2020-07-21T14:00:13.0812020Z    63 /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/openssl.rb
+2020-07-21T14:00:13.0812354Z    64 /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/x86_64-linux/date_core.so
+2020-07-21T14:00:13.0812666Z    65 /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/date.rb
+2020-07-21T14:00:13.0812995Z    66 /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/x86_64-linux/bigdecimal.so
+2020-07-21T14:00:13.0813357Z    67 /home/runner/.rubies/ruby-2.3.8/lib/ruby/gems/2.3.0/gems/mysql2-0.5.3/lib/mysql2/version.rb
+2020-07-21T14:00:13.0813718Z    68 /home/runner/.rubies/ruby-2.3.8/lib/ruby/gems/2.3.0/gems/mysql2-0.5.3/lib/mysql2/error.rb
+2020-07-21T14:00:13.0813814Z 
+2020-07-21T14:00:13.0813933Z * Process memory map:
+2020-07-21T14:00:13.0814009Z 
+2020-07-21T14:00:13.0814376Z 565434aee000-565434aef000 r-xp 00000000 08:11 525199                     /home/runner/.rubies/ruby-2.3.8/bin/ruby
+2020-07-21T14:00:13.0814860Z 565434cee000-565434cef000 r--p 00000000 08:11 525199                     /home/runner/.rubies/ruby-2.3.8/bin/ruby
+2020-07-21T14:00:13.0815261Z 565434cef000-565434cf0000 rw-p 00001000 08:11 525199                     /home/runner/.rubies/ruby-2.3.8/bin/ruby
+2020-07-21T14:00:13.0815606Z 5654352d9000-565435a47000 rw-p 00000000 00:00 0                          [heap]
+2020-07-21T14:00:13.0816005Z 7f570373c000-7f5703aef000 r--s 00000000 08:11 98499                      /usr/lib/x86_64-linux-gnu/libmysqlclient.so.20.3.17
+2020-07-21T14:00:13.0816404Z 7f5703aef000-7f5703dba000 r--s 00000000 08:11 101150                     /usr/lib/x86_64-linux-gnu/libcrypto.so.1.1
+2020-07-21T14:00:13.0816797Z 7f5703dba000-7f5703dde000 r--s 00000000 08:11 85834                      /lib/x86_64-linux-gnu/libpthread-2.27.so
+2020-07-21T14:00:13.0817271Z 7f5703dde000-7f5703e6c000 r--s 00000000 08:11 101155                     /usr/lib/x86_64-linux-gnu/libssl.so.1.1
+2020-07-21T14:00:13.0817689Z 7f5703e6c000-7f5704113000 r--s 00000000 08:11 527031                     /home/runner/.rubies/ruby-2.3.8/openssl/lib/libcrypto.so.1.0.0
+2020-07-21T14:00:13.0818077Z 7f5704113000-7f5704303000 r--s 00000000 08:11 85819                      /lib/x86_64-linux-gnu/libc-2.27.so
+2020-07-21T14:00:13.0818476Z 7f5704303000-7f570510c000 r--s 00000000 08:11 528448                     /home/runner/.rubies/ruby-2.3.8/lib/libruby.so.2.3.0
+2020-07-21T14:00:13.0818864Z 7f570510c000-7f5705132000 r--s 00000000 08:11 525199                     /home/runner/.rubies/ruby-2.3.8/bin/ruby
+2020-07-21T14:00:13.0819240Z 7f5705132000-7f5705149000 r-xp 00000000 08:11 89140                      /lib/x86_64-linux-gnu/libgcc_s.so.1
+2020-07-21T14:00:13.0819608Z 7f5705149000-7f5705348000 ---p 00017000 08:11 89140                      /lib/x86_64-linux-gnu/libgcc_s.so.1
+2020-07-21T14:00:13.0820001Z 7f5705348000-7f5705349000 r--p 00016000 08:11 89140                      /lib/x86_64-linux-gnu/libgcc_s.so.1
+2020-07-21T14:00:13.0820384Z 7f5705349000-7f570534a000 rw-p 00017000 08:11 89140                      /lib/x86_64-linux-gnu/libgcc_s.so.1
+2020-07-21T14:00:13.0820785Z 7f570534a000-7f570550d000 r-xp 00000000 08:11 89153                      /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28
+2020-07-21T14:00:13.0821181Z 7f570550d000-7f570570d000 ---p 001c3000 08:11 89153                      /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28
+2020-07-21T14:00:13.0821575Z 7f570570d000-7f5705718000 r--p 001c3000 08:11 89153                      /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28
+2020-07-21T14:00:13.0821968Z 7f5705718000-7f570571b000 rw-p 001ce000 08:11 89153                      /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28
+2020-07-21T14:00:13.0822277Z 7f570571b000-7f570571e000 rw-p 00000000 00:00 0 
+2020-07-21T14:00:13.0822664Z 7f570571e000-7f57059bb000 r-xp 00000000 08:11 101150                     /usr/lib/x86_64-linux-gnu/libcrypto.so.1.1
+2020-07-21T14:00:13.0823055Z 7f57059bb000-7f5705bba000 ---p 0029d000 08:11 101150                     /usr/lib/x86_64-linux-gnu/libcrypto.so.1.1
+2020-07-21T14:00:13.0823454Z 7f5705bba000-7f5705be6000 r--p 0029c000 08:11 101150                     /usr/lib/x86_64-linux-gnu/libcrypto.so.1.1
+2020-07-21T14:00:13.0823851Z 7f5705be6000-7f5705be8000 rw-p 002c8000 08:11 101150                     /usr/lib/x86_64-linux-gnu/libcrypto.so.1.1
+2020-07-21T14:00:13.0824156Z 7f5705be8000-7f5705bec000 rw-p 00000000 00:00 0 
+2020-07-21T14:00:13.0824535Z 7f5705bec000-7f5705c6d000 r-xp 00000000 08:11 101155                     /usr/lib/x86_64-linux-gnu/libssl.so.1.1
+2020-07-21T14:00:13.0824923Z 7f5705c6d000-7f5705e6d000 ---p 00081000 08:11 101155                     /usr/lib/x86_64-linux-gnu/libssl.so.1.1
+2020-07-21T14:00:13.0825310Z 7f5705e6d000-7f5705e76000 r--p 00081000 08:11 101155                     /usr/lib/x86_64-linux-gnu/libssl.so.1.1
+2020-07-21T14:00:13.0825704Z 7f5705e76000-7f5705e7a000 rw-p 0008a000 08:11 101155                     /usr/lib/x86_64-linux-gnu/libssl.so.1.1
+2020-07-21T14:00:13.0826157Z 7f5705e7a000-7f57061b7000 r-xp 00000000 08:11 98499                      /usr/lib/x86_64-linux-gnu/libmysqlclient.so.20.3.17
+2020-07-21T14:00:13.0826571Z 7f57061b7000-7f57063b6000 ---p 0033d000 08:11 98499                      /usr/lib/x86_64-linux-gnu/libmysqlclient.so.20.3.17
+2020-07-21T14:00:13.0826974Z 7f57063b6000-7f57063ba000 r--p 0033c000 08:11 98499                      /usr/lib/x86_64-linux-gnu/libmysqlclient.so.20.3.17
+2020-07-21T14:00:13.0827374Z 7f57063ba000-7f570642c000 rw-p 00340000 08:11 98499                      /usr/lib/x86_64-linux-gnu/libmysqlclient.so.20.3.17
+2020-07-21T14:00:13.0827688Z 7f570642c000-7f5706432000 rw-p 00000000 00:00 0 
+2020-07-21T14:00:13.0828275Z 7f5706432000-7f5706443000 r-xp 00000000 08:11 528868                     /home/runner/.rubies/ruby-2.3.8/lib/ruby/gems/2.3.0/gems/mysql2-0.5.3/lib/mysql2/mysql2.so
+2020-07-21T14:00:13.0828803Z 7f5706443000-7f5706642000 ---p 00011000 08:11 528868                     /home/runner/.rubies/ruby-2.3.8/lib/ruby/gems/2.3.0/gems/mysql2-0.5.3/lib/mysql2/mysql2.so
+2020-07-21T14:00:13.0829257Z 7f5706642000-7f5706644000 r--p 00010000 08:11 528868                     /home/runner/.rubies/ruby-2.3.8/lib/ruby/gems/2.3.0/gems/mysql2-0.5.3/lib/mysql2/mysql2.so
+2020-07-21T14:00:13.0829707Z 7f5706644000-7f5706645000 rw-p 00012000 08:11 528868                     /home/runner/.rubies/ruby-2.3.8/lib/ruby/gems/2.3.0/gems/mysql2-0.5.3/lib/mysql2/mysql2.so
+2020-07-21T14:00:13.0830122Z 7f5706645000-7f570665a000 r-xp 00000000 08:11 527830                     /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/x86_64-linux/bigdecimal.so
+2020-07-21T14:00:13.0830544Z 7f570665a000-7f5706859000 ---p 00015000 08:11 527830                     /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/x86_64-linux/bigdecimal.so
+2020-07-21T14:00:13.0830968Z 7f5706859000-7f570685a000 r--p 00014000 08:11 527830                     /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/x86_64-linux/bigdecimal.so
+2020-07-21T14:00:13.0831409Z 7f570685a000-7f570685b000 rw-p 00015000 08:11 527830                     /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/x86_64-linux/bigdecimal.so
+2020-07-21T14:00:13.0831831Z 7f570685b000-7f570688e000 r-xp 00000000 08:11 527847                     /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/x86_64-linux/date_core.so
+2020-07-21T14:00:13.0832256Z 7f570688e000-7f5706a8e000 ---p 00033000 08:11 527847                     /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/x86_64-linux/date_core.so
+2020-07-21T14:00:13.0832680Z 7f5706a8e000-7f5706a8f000 r--p 00033000 08:11 527847                     /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/x86_64-linux/date_core.so
+2020-07-21T14:00:13.0833098Z 7f5706a8f000-7f5706a90000 rw-p 00034000 08:11 527847                     /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/x86_64-linux/date_core.so
+2020-07-21T14:00:13.0833420Z 7f5706a90000-7f5706a91000 rw-p 00000000 00:00 0 
+2020-07-21T14:00:13.0833829Z 7f5706a91000-7f5706a92000 r-xp 00000000 08:11 527826                     /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/x86_64-linux/io/nonblock.so
+2020-07-21T14:00:13.0834260Z 7f5706a92000-7f5706c91000 ---p 00001000 08:11 527826                     /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/x86_64-linux/io/nonblock.so
+2020-07-21T14:00:13.0834687Z 7f5706c91000-7f5706c92000 r--p 00000000 08:11 527826                     /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/x86_64-linux/io/nonblock.so
+2020-07-21T14:00:13.0835105Z 7f5706c92000-7f5706c93000 rw-p 00001000 08:11 527826                     /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/x86_64-linux/io/nonblock.so
+2020-07-21T14:00:13.0835525Z 7f5706c93000-7f5706c97000 r-xp 00000000 08:11 527832                     /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/x86_64-linux/digest.so
+2020-07-21T14:00:13.0835943Z 7f5706c97000-7f5706e96000 ---p 00004000 08:11 527832                     /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/x86_64-linux/digest.so
+2020-07-21T14:00:13.0836372Z 7f5706e96000-7f5706e97000 r--p 00003000 08:11 527832                     /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/x86_64-linux/digest.so
+2020-07-21T14:00:13.0836838Z 7f5706e97000-7f5706e98000 rw-p 00004000 08:11 527832                     /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/x86_64-linux/digest.so
+2020-07-21T14:00:13.0837224Z 7f5706e98000-7f5706eb4000 r-xp 00000000 08:11 2173                       /lib/x86_64-linux-gnu/libz.so.1.2.11
+2020-07-21T14:00:13.0837606Z 7f5706eb4000-7f57070b3000 ---p 0001c000 08:11 2173                       /lib/x86_64-linux-gnu/libz.so.1.2.11
+2020-07-21T14:00:13.0837988Z 7f57070b3000-7f57070b4000 r--p 0001b000 08:11 2173                       /lib/x86_64-linux-gnu/libz.so.1.2.11
+2020-07-21T14:00:13.0838368Z 7f57070b4000-7f57070b5000 rw-p 0001c000 08:11 2173                       /lib/x86_64-linux-gnu/libz.so.1.2.11
+2020-07-21T14:00:13.0838852Z 7f57070b5000-7f57072f1000 r-xp 00000000 08:11 527031                     /home/runner/.rubies/ruby-2.3.8/openssl/lib/libcrypto.so.1.0.0
+2020-07-21T14:00:13.0839282Z 7f57072f1000-7f57074f1000 ---p 0023c000 08:11 527031                     /home/runner/.rubies/ruby-2.3.8/openssl/lib/libcrypto.so.1.0.0
+2020-07-21T14:00:13.0839703Z 7f57074f1000-7f570750c000 r--p 0023c000 08:11 527031                     /home/runner/.rubies/ruby-2.3.8/openssl/lib/libcrypto.so.1.0.0
+2020-07-21T14:00:13.0840107Z 7f570750c000-7f5707518000 rw-p 00257000 08:11 527031                     /home/runner/.rubies/ruby-2.3.8/openssl/lib/libcrypto.so.1.0.0
+2020-07-21T14:00:13.0840414Z 7f5707518000-7f570751b000 rw-p 00000000 00:00 0 
+2020-07-21T14:00:13.0840809Z 7f570751b000-7f5707582000 r-xp 00000000 08:11 527035                     /home/runner/.rubies/ruby-2.3.8/openssl/lib/libssl.so.1.0.0
+2020-07-21T14:00:13.0841214Z 7f5707582000-7f5707781000 ---p 00067000 08:11 527035                     /home/runner/.rubies/ruby-2.3.8/openssl/lib/libssl.so.1.0.0
+2020-07-21T14:00:13.0841632Z 7f5707781000-7f5707785000 r--p 00066000 08:11 527035                     /home/runner/.rubies/ruby-2.3.8/openssl/lib/libssl.so.1.0.0
+2020-07-21T14:00:13.0842043Z 7f5707785000-7f570778c000 rw-p 0006a000 08:11 527035                     /home/runner/.rubies/ruby-2.3.8/openssl/lib/libssl.so.1.0.0
+2020-07-21T14:00:13.0842452Z 7f570778c000-7f57077de000 r-xp 00000000 08:11 527831                     /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/x86_64-linux/openssl.so
+2020-07-21T14:00:13.0842884Z 7f57077de000-7f57079dd000 ---p 00052000 08:11 527831                     /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/x86_64-linux/openssl.so
+2020-07-21T14:00:13.0843315Z 7f57079dd000-7f57079df000 r--p 00051000 08:11 527831                     /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/x86_64-linux/openssl.so
+2020-07-21T14:00:13.0843738Z 7f57079df000-7f57079e1000 rw-p 00053000 08:11 527831                     /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/x86_64-linux/openssl.so
+2020-07-21T14:00:13.0844071Z 7f57079e1000-7f57079e2000 rw-p 00000000 00:00 0 
+2020-07-21T14:00:13.0844480Z 7f57079e2000-7f57079ea000 r-xp 00000000 08:11 527867                     /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/x86_64-linux/stringio.so
+2020-07-21T14:00:13.0844913Z 7f57079ea000-7f5707be9000 ---p 00008000 08:11 527867                     /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/x86_64-linux/stringio.so
+2020-07-21T14:00:13.0845343Z 7f5707be9000-7f5707bea000 r--p 00007000 08:11 527867                     /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/x86_64-linux/stringio.so
+2020-07-21T14:00:13.0846586Z 7f5707bea000-7f5707beb000 rw-p 00008000 08:11 527867                     /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/x86_64-linux/stringio.so
+2020-07-21T14:00:13.0847068Z 7f5707beb000-7f5707bed000 r-xp 00000000 08:11 527796                     /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/x86_64-linux/enc/trans/transdb.so
+2020-07-21T14:00:13.0847513Z 7f5707bed000-7f5707ded000 ---p 00002000 08:11 527796                     /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/x86_64-linux/enc/trans/transdb.so
+2020-07-21T14:00:13.0847969Z 7f5707ded000-7f5707dee000 r--p 00002000 08:11 527796                     /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/x86_64-linux/enc/trans/transdb.so
+2020-07-21T14:00:13.0848537Z 7f5707dee000-7f5707def000 rw-p 00003000 08:11 527796                     /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/x86_64-linux/enc/trans/transdb.so
+2020-07-21T14:00:13.0848997Z 7f5707def000-7f5707df1000 r-xp 00000000 08:11 527777                     /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/x86_64-linux/enc/encdb.so
+2020-07-21T14:00:13.0849425Z 7f5707df1000-7f5707ff0000 ---p 00002000 08:11 527777                     /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/x86_64-linux/enc/encdb.so
+2020-07-21T14:00:13.0849845Z 7f5707ff0000-7f5707ff1000 r--p 00001000 08:11 527777                     /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/x86_64-linux/enc/encdb.so
+2020-07-21T14:00:13.0850349Z 7f5707ff1000-7f5707ff2000 rw-p 00002000 08:11 527777                     /home/runner/.rubies/ruby-2.3.8/lib/ruby/2.3.0/x86_64-linux/enc/encdb.so
+2020-07-21T14:00:13.0850647Z 7f5707ff2000-7f57080f3000 rw-p 00000000 00:00 0 
+2020-07-21T14:00:13.0851030Z 7f57080f3000-7f5708290000 r-xp 00000000 08:11 85823                      /lib/x86_64-linux-gnu/libm-2.27.so
+2020-07-21T14:00:13.0851419Z 7f5708290000-7f570848f000 ---p 0019d000 08:11 85823                      /lib/x86_64-linux-gnu/libm-2.27.so
+2020-07-21T14:00:13.0851804Z 7f570848f000-7f5708490000 r--p 0019c000 08:11 85823                      /lib/x86_64-linux-gnu/libm-2.27.so
+2020-07-21T14:00:13.0852187Z 7f5708490000-7f5708491000 rw-p 0019d000 08:11 85823                      /lib/x86_64-linux-gnu/libm-2.27.so
+2020-07-21T14:00:13.0852576Z 7f5708491000-7f570849a000 r-xp 00000000 08:11 85821                      /lib/x86_64-linux-gnu/libcrypt-2.27.so
+2020-07-21T14:00:13.0852954Z 7f570849a000-7f5708699000 ---p 00009000 08:11 85821                      /lib/x86_64-linux-gnu/libcrypt-2.27.so
+2020-07-21T14:00:13.0853345Z 7f5708699000-7f570869a000 r--p 00008000 08:11 85821                      /lib/x86_64-linux-gnu/libcrypt-2.27.so
+2020-07-21T14:00:13.0854428Z 7f570869a000-7f570869b000 rw-p 00009000 08:11 85821                      /lib/x86_64-linux-gnu/libcrypt-2.27.so
+2020-07-21T14:00:13.0854746Z 7f570869b000-7f57086c9000 rw-p 00000000 00:00 0 
+2020-07-21T14:00:13.0855119Z 7f57086c9000-7f57086cc000 r-xp 00000000 08:11 85822                      /lib/x86_64-linux-gnu/libdl-2.27.so
+2020-07-21T14:00:13.0855502Z 7f57086cc000-7f57088cb000 ---p 00003000 08:11 85822                      /lib/x86_64-linux-gnu/libdl-2.27.so
+2020-07-21T14:00:13.0855871Z 7f57088cb000-7f57088cc000 r--p 00002000 08:11 85822                      /lib/x86_64-linux-gnu/libdl-2.27.so
+2020-07-21T14:00:13.0856260Z 7f57088cc000-7f57088cd000 rw-p 00003000 08:11 85822                      /lib/x86_64-linux-gnu/libdl-2.27.so
+2020-07-21T14:00:13.0856654Z 7f57088cd000-7f570894c000 r-xp 00000000 08:11 6225                       /usr/lib/x86_64-linux-gnu/libgmp.so.10.3.2
+2020-07-21T14:00:13.0857062Z 7f570894c000-7f5708b4c000 ---p 0007f000 08:11 6225                       /usr/lib/x86_64-linux-gnu/libgmp.so.10.3.2
+2020-07-21T14:00:13.0857463Z 7f5708b4c000-7f5708b4d000 r--p 0007f000 08:11 6225                       /usr/lib/x86_64-linux-gnu/libgmp.so.10.3.2
+2020-07-21T14:00:13.0857860Z 7f5708b4d000-7f5708b4e000 rw-p 00080000 08:11 6225                       /usr/lib/x86_64-linux-gnu/libgmp.so.10.3.2
+2020-07-21T14:00:13.0858252Z 7f5708b4e000-7f5708b68000 r-xp 00000000 08:11 85834                      /lib/x86_64-linux-gnu/libpthread-2.27.so
+2020-07-21T14:00:13.0858636Z 7f5708b68000-7f5708d67000 ---p 0001a000 08:11 85834                      /lib/x86_64-linux-gnu/libpthread-2.27.so
+2020-07-21T14:00:13.0859021Z 7f5708d67000-7f5708d68000 r--p 00019000 08:11 85834                      /lib/x86_64-linux-gnu/libpthread-2.27.so
+2020-07-21T14:00:13.0859404Z 7f5708d68000-7f5708d69000 rw-p 0001a000 08:11 85834                      /lib/x86_64-linux-gnu/libpthread-2.27.so
+2020-07-21T14:00:13.0859727Z 7f5708d69000-7f5708d6d000 rw-p 00000000 00:00 0 
+2020-07-21T14:00:13.0860103Z 7f5708d6d000-7f5708f54000 r-xp 00000000 08:11 85819                      /lib/x86_64-linux-gnu/libc-2.27.so
+2020-07-21T14:00:13.0860558Z 7f5708f54000-7f5709154000 ---p 001e7000 08:11 85819                      /lib/x86_64-linux-gnu/libc-2.27.so
+2020-07-21T14:00:13.0860956Z 7f5709154000-7f5709158000 r--p 001e7000 08:11 85819                      /lib/x86_64-linux-gnu/libc-2.27.so
+2020-07-21T14:00:13.0861336Z 7f5709158000-7f570915a000 rw-p 001eb000 08:11 85819                      /lib/x86_64-linux-gnu/libc-2.27.so
+2020-07-21T14:00:13.0861648Z 7f570915a000-7f570915e000 rw-p 00000000 00:00 0 
+2020-07-21T14:00:13.0862034Z 7f570915e000-7f5709439000 r-xp 00000000 08:11 528448                     /home/runner/.rubies/ruby-2.3.8/lib/libruby.so.2.3.0
+2020-07-21T14:00:13.0862433Z 7f5709439000-7f5709638000 ---p 002db000 08:11 528448                     /home/runner/.rubies/ruby-2.3.8/lib/libruby.so.2.3.0
+2020-07-21T14:00:13.0862906Z 7f5709638000-7f570963e000 r--p 002da000 08:11 528448                     /home/runner/.rubies/ruby-2.3.8/lib/libruby.so.2.3.0
+2020-07-21T14:00:13.0863318Z 7f570963e000-7f5709641000 rw-p 002e0000 08:11 528448                     /home/runner/.rubies/ruby-2.3.8/lib/libruby.so.2.3.0
+2020-07-21T14:00:13.0863636Z 7f5709641000-7f5709652000 rw-p 00000000 00:00 0 
+2020-07-21T14:00:13.0864004Z 7f5709652000-7f5709679000 r-xp 00000000 08:11 85815                      /lib/x86_64-linux-gnu/ld-2.27.so
+2020-07-21T14:00:13.0864377Z 7f5709694000-7f57096c5000 r--p 00000000 08:11 25859                      /usr/lib/locale/C.UTF-8/LC_CTYPE
+2020-07-21T14:00:13.0864732Z 7f57096c5000-7f5709860000 r--p 00000000 08:11 34332                      /usr/lib/locale/locale-archive
+2020-07-21T14:00:13.0865039Z 7f5709860000-7f5709865000 rw-p 00000000 00:00 0 
+2020-07-21T14:00:13.0865336Z 7f570986b000-7f570986c000 ---p 00000000 00:00 0 
+2020-07-21T14:00:13.0865640Z 7f570986c000-7f5709870000 rw-p 00000000 00:00 0 
+2020-07-21T14:00:13.0866027Z 7f5709870000-7f5709877000 r--s 00000000 08:11 86088                      /usr/lib/x86_64-linux-gnu/gconv/gconv-modules.cache
+2020-07-21T14:00:13.0866335Z 7f5709877000-7f5709879000 rw-p 00000000 00:00 0 
+2020-07-21T14:00:13.0866711Z 7f5709879000-7f570987a000 r--p 00027000 08:11 85815                      /lib/x86_64-linux-gnu/ld-2.27.so
+2020-07-21T14:00:13.0867091Z 7f570987a000-7f570987b000 rw-p 00028000 08:11 85815                      /lib/x86_64-linux-gnu/ld-2.27.so
+2020-07-21T14:00:13.0867405Z 7f570987b000-7f570987c000 rw-p 00000000 00:00 0 
+2020-07-21T14:00:13.0867731Z 7ffc29c40000-7ffc2a43f000 rw-p 00000000 00:00 0                          [stack]
+2020-07-21T14:00:13.0868089Z 7ffc2a46e000-7ffc2a471000 r--p 00000000 00:00 0                          [vvar]
+2020-07-21T14:00:13.0868437Z 7ffc2a471000-7ffc2a472000 r-xp 00000000 00:00 0                          [vdso]
+2020-07-21T14:00:13.0868791Z ffffffffff600000-ffffffffff601000 r-xp 00000000 00:00 0                  [vsyscall]
+2020-07-21T14:00:13.0868900Z 
+2020-07-21T14:00:13.0868961Z 
+2020-07-21T14:00:13.0869078Z [NOTE]
+2020-07-21T14:00:13.0869209Z You may have encountered a bug in the Ruby interpreter or extension libraries.
+2020-07-21T14:00:13.0869347Z Bug reports are welcome.
+2020-07-21T14:00:13.0869694Z For details: http://www.ruby-lang.org/bugreport.html
+2020-07-21T14:00:13.0869792Z 
+2020-07-21T14:00:13.3238872Z /home/runner/work/_temp/75788d2d-0ff7-45b3-bf68-9c83d3bc9ad7.sh: line 1:  2917 Aborted                 (core dumped) ruby -r openssl -r mysql2 -e 0
+2020-07-21T14:00:13.3292341Z ##[error]Process completed with exit code 134.
+2020-07-21T14:00:13.3357557Z Post job cleanup.
+2020-07-21T14:00:13.4418506Z [command]/usr/bin/git version
+2020-07-21T14:00:13.4488360Z git version 2.27.0
+2020-07-21T14:00:13.4524577Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2020-07-21T14:00:13.4573897Z [command]/usr/bin/git submodule foreach --recursive git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :
+2020-07-21T14:00:13.4883587Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2020-07-21T14:00:13.4929715Z http.https://github.com/.extraheader
+2020-07-21T14:00:13.4938571Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2020-07-21T14:00:13.4985918Z [command]/usr/bin/git submodule foreach --recursive git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :
+2020-07-21T14:00:13.5312278Z Cleaning up orphan processes
