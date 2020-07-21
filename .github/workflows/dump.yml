@@ -52,8 +52,13 @@ jobs:
         env:
           MATRIX_CONTEXT: ${{ toJson(matrix) }}
         run: echo "$MATRIX_CONTEXT"
+      - uses: actions/checkout@v2
       - run: ls -lR $GITHUB_WORKSPACE
         if: false
+      - run: |
+          if [ -d /github/home -a ! -e /home/runner ]; then
+            ln -s /github/home /home/runner
+          fi
       - uses: k0kubun/action-slack@v2.0.0
         with:
           payload: |
