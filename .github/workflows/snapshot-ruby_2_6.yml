@@ -1,8 +1,6 @@
 name: snapshot-ruby_2_6
 
 on:
-  schedule:
-    - cron: '30 12 * * *' # Daily at 12:30 UTC
   repository_dispatch:
     types:
       - "make-snapshot"
