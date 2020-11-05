@@ -14,6 +14,13 @@
 
 https://github.com/ruby/ruby/commit/9d3213ac856e1f5930bda555d4d65b173c6cdf83 では実行できるかどうかで判定してしまった。
 
+# ruby-trunk-changes 2019-11-08
+
+https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20191108#eaa011ffdb
+> .travis.yml の BASERUBY に古い ruby を使うテストで BASERUBy のバージョンを 1.9.3 から 2.2 に変更しています。 tool/mk_builtin_loader.rb などが BASERUBY で実行されるので要求バージョンが上がったようです。
+
+BASERUBy?
+
 # 2019-11-07
 
 ## default gem 化
