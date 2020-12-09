@@ -16,7 +16,7 @@ on:
 
 jobs:
   make-snapshot:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - name: Set TARGET_VERSION
         run: |
