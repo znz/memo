@@ -1,0 +1,69 @@
+name: Make draft release package
+
+on:
+  workflow_dispatch:
+    inputs:
+      TARGET_VERSION:
+        description: Packaging target version
+        required: true
+        default: 3.0.0-preview1
+
+jobs:
+  make-snapshot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set TARGET_VERSION
+        run: |
+          TARGET_VERSION="${{ github.event.inputs.TARGET_VERSION }}"
+          echo TARGET_VERSION="$TARGET_VERSION" >> $GITHUB_ENV
+          echo "::set-output name=TARGET_VERSION::$TARGET_VERSION"
+        shell: bash
+        id: info
+
+      - name: Install libraries
+        run: |
+          set -x
+          sudo apt-get update -q || :
+          sudo apt-get install --no-install-recommends -q -y build-essential git bison autoconf ruby p7zip-full curl
+      - name: Checkout ruby/ruby for tool/make-snapshot
+        run: git clone --depth=1 https://github.com/ruby/ruby ruby
+      - name: Make pkg
+        run: |
+          set -x
+          GITHUB_REF_RUBY_RUBY=refs/tags/v$(echo $TARGET_VERSION | sed 'y/.-/__/')
+          if ruby -e "major, minor, = '${TARGET_VERSION}'.split('.').map(&:to_i); exit(major<=2 && minor<7)"; then
+            # e.g. GITHUB_REF=refs/tags/draft/v2_6_4 -> TARGET_VERSION=2.6.4
+            ruby ruby/tool/make-snapshot -svn pkg ${TARGET_VERSION}
+            echo PACKAGE_EXTS=".tar.gz .tar.bz2 .tar.xz .zip" >> $GITHUB_ENV
+          else
+            # e.g. GITHUB_REF=refs/tags/draft/v2_7_0_preview1 -> TARGET_VERSION=2.7.0-preview1
+            pushd ruby
+            git fetch --shallow-since='2018-12-25 00:00:00'
+            git fetch origin "+${GITHUB_REF_RUBY_RUBY}:${GITHUB_REF_RUBY_RUBY}"
+            git fetch origin +refs/notes/commits:refs/notes/commits
+            git fetch origin +refs/notes/log-fix:refs/notes/log-fix
+            popd
+            if ruby -e "major, minor, = '${TARGET_VERSION}'.split('.').map(&:to_i); exit(major<3)"; then
+              ruby ruby/tool/make-snapshot -srcdir=ruby pkg ${TARGET_VERSION}
+              echo PACKAGE_EXTS=".tar.gz .tar.bz2 .tar.xz .zip" >> $GITHUB_ENV
+            else
+              # exclude bzip from -packages
+              ruby ruby/tool/make-snapshot -srcdir=ruby -packages=gzip,xz,zip pkg ${TARGET_VERSION}
+              echo PACKAGE_EXTS=".tar.gz .tar.xz .zip" >> $GITHUB_ENV
+            fi
+          fi
+      - uses: actions/upload-artifact@master
+        with:
+          name: Packages
+          path: pkg
+      - uses: actions/upload-artifact@master
+        with:
+          name: Info
+          path: pkg/info
+      - name: Check pkg
+        run: |
+          set -x
+          ls -al pkg
+          7z x pkg/ruby-${TARGET_VERSION}.zip ruby-${TARGET_VERSION}/revision.h
+          cat ruby-${TARGET_VERSION}/revision.h
+          7z l pkg/ruby-${TARGET_VERSION}.zip ruby-${TARGET_VERSION}/ChangeLog
