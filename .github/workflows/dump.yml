@@ -27,6 +27,11 @@ jobs:
           echo dummy
           echo "::pause-logging::"
       - run: env | sort
+      - run: |
+          ulimit -a
+          ulimit -c unlimited
+          ulimit -a
+      - run: ulimit -a
       - name: Dump GitHub context
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
