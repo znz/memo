@@ -64,6 +64,9 @@ jobs:
             ln -s /github/home /home/runner
           fi
       - run: |
+          set -x
+          ls -al "$HOME/.config"
+          chmod -v a-w $HOME $HOME/.config
           ls -al "$HOME/.config"
       - uses: k0kubun/action-slack@v2.0.0
         with:
