@@ -20,7 +20,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/make-snapshot
         with:
-          ruby-patch-url: ${{ inputs.RUBY_PATCH_URL }}
+          ruby-patch-url: "${{ github.event.inputs.RUBY_PATCH_URL }}"
       - uses: actions/upload-artifact@master
         with:
           name: Packages
