@@ -37,9 +37,8 @@ jobs:
       - name: Apply patch
         run: |
           set -x
-          cd snapshot-*
           curl -sSL "${RUBY_PATCH_URL}" -o ruby.patch
-          cd ruby
+          cd snapshot-*
           git apply ../ruby.patch
         env:
           RUBY_PATCH_URL: "${{ github.event.inputs.RUBY_PATCH_URL }}"
