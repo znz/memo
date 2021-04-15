@@ -34,8 +34,6 @@ jobs:
           7z x pkg/*.zip $archname/revision.h
           cat $archname/revision.h
           7z l pkg/*.zip $archname/ChangeLog
-      - name: Extract
-        run: 7z x pkg/*.zip
       - name: Apply patch
         run: |
           set -x
