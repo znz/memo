@@ -44,7 +44,7 @@ runs:
         git apply ../ruby.patch
       env:
         RUBY_PATCH_URL: "${{ inputs.ruby-patch-url }}"
-      if: "${{ inputs.ruby-patch-url }}"
+      if: "${{ inputs.ruby-patch-url != '' }}"
       shell: bash
     - name: Make snapshot
       run: ruby ruby/tool/make-snapshot -archname=$archname -srcdir=ruby pkg ${{ inputs.version }}
