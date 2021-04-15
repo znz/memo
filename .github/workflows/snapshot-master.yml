@@ -45,4 +45,4 @@ jobs:
           git apply ../ruby.patch
         env:
           RUBY_PATCH_URL: "${{ inputs.ruby-patch-url }}"
-        if: "${{ github.event.inputs.RUBY_PATCH_URL != '' }"
+        if: "${{ github.event.inputs.RUBY_PATCH_URL != '' }}"
