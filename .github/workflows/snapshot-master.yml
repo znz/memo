@@ -19,8 +19,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/make-snapshot
-        with:
-          ruby-patch-url: "${{ github.event.inputs.RUBY_PATCH_URL }}"
       - uses: actions/upload-artifact@master
         with:
           name: Packages
@@ -36,3 +34,15 @@ jobs:
           7z x pkg/*.zip $archname/revision.h
           cat $archname/revision.h
           7z l pkg/*.zip $archname/ChangeLog
+      - name: Extract
+        run: 7z x pkg/*.zip
+      - name: Apply patch
+        run: |
+          set -x
+          cd snapshot-*
+          curl -sSL "${RUBY_PATCH_URL}" -o ruby.patch
+          cd ruby
+          git apply ../ruby.patch
+        env:
+          RUBY_PATCH_URL: "${{ inputs.ruby-patch-url }}"
+        if: "${{ github.event.inputs.RUBY_PATCH_URL != '' }"
