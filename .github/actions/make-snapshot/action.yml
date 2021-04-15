@@ -38,12 +38,20 @@ runs:
       shell: bash
     - name: Apply patch
       run: |
-        set -x
-        if [ -n "${RUBY_PATCH_URL}" ]; then
-          curl -sSL "${RUBY_PATCH_URL}" -o ruby.patch
-          cd ruby
-          git apply ../ruby.patch
-        fi
+        case "${RUBY_PATCH_URL}" in
+          *.patch)
+            set -x
+            curl -sSL "${RUBY_PATCH_URL}" -o ruby.patch
+            cd ruby
+            git am ../ruby.patch
+            ;;
+          *)
+            set -x
+            curl -sSL "${RUBY_PATCH_URL}" -o ruby.diff
+            cd ruby
+            git apply ../ruby.diff
+            ;;
+        esac
       env:
         RUBY_PATCH_URL: "${{ inputs.ruby-patch-url }}"
       shell: bash
