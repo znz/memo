@@ -39,12 +39,13 @@ runs:
     - name: Apply patch
       run: |
         set -x
-        curl -sSL "${RUBY_PATCH_URL}" -o ruby.patch
-        cd ruby
-        git apply ../ruby.patch
+        if [ -n "${RUBY_PATCH_URL}" ]; then
+          curl -sSL "${RUBY_PATCH_URL}" -o ruby.patch
+          cd ruby
+          git apply ../ruby.patch
+        fi
       env:
         RUBY_PATCH_URL: "${{ inputs.ruby-patch-url }}"
-      if: "${{ inputs.ruby-patch-url != '' }}"
       shell: bash
     - name: Make snapshot
       run: ruby ruby/tool/make-snapshot -archname=$archname -srcdir=ruby pkg ${{ inputs.version }}
