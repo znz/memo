@@ -34,12 +34,89 @@ jobs:
           7z x pkg/*.zip $archname/revision.h
           cat $archname/revision.h
           7z l pkg/*.zip $archname/ChangeLog
+
+  macos:
+    needs: make-snapshot
+    strategy:
+      matrix:
+        test_task: [check, test-bundler-parallel, test-bundled-gems]
+        os: [macos-latest]
+      fail-fast: false
+    runs-on: ${{ matrix.os }}
+    steps:
+      - run: env | sort
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+      - name: Dump job context
+        env:
+          JOB_CONTEXT: ${{ toJson(job) }}
+        run: echo "$JOB_CONTEXT"
+      - name: Dump steps context
+        env:
+          STEPS_CONTEXT: ${{ toJson(steps) }}
+        run: echo "$STEPS_CONTEXT"
+      - name: Dump runner context
+        env:
+          RUNNER_CONTEXT: ${{ toJson(runner) }}
+        run: echo "$RUNNER_CONTEXT"
+      - name: Dump strategy context
+        env:
+          STRATEGY_CONTEXT: ${{ toJson(strategy) }}
+        run: echo "$STRATEGY_CONTEXT"
+      - name: Dump matrix context
+        env:
+          MATRIX_CONTEXT: ${{ toJson(matrix) }}
+        run: echo "$MATRIX_CONTEXT"
+
+      - uses: actions/download-artifact@master
+        with:
+          name: Packages
+          path: pkg
+      - name: Extract
+        run: tar xf pkg/*.tar.xz
       - name: Apply patch
         run: |
           set -x
           curl -sSL "${RUBY_PATCH_URL}" -o ruby.patch
-          cd snapshot-*
+          cd snapshot-*/
           git apply ../ruby.patch
+        shell: bash
         env:
           RUBY_PATCH_URL: "${{ github.event.inputs.RUBY_PATCH_URL }}"
         if: "${{ github.event.inputs.RUBY_PATCH_URL != '' }}"
+      - name: Install libraries
+        run: |
+          with_retry () {
+            "$@" || { sleep 5 && "$@"; } || { sleep 60 && "$@"; }
+          }
+          set -x
+          with_retry brew update
+          with_retry brew upgrade
+          with_retry brew install gdbm gmp libffi openssl@1.1 zlib autoconf automake libtool readline
+      - name: Set ENV
+        run: |
+          echo "JOBS=-j$((1 + $(sysctl -n hw.activecpu)))" >> $GITHUB_ENV
+      - name: configure
+        run: cd snapshot-*/ && ./configure --with-openssl-dir=$(brew --prefix openssl@1.1) --with-readline-dir=$(brew --prefix readline)
+      - name: make
+        run: cd snapshot-*/ && make $JOBS
+      - name: Tests
+        run: cd snapshot-*/ && make $JOBS -s ${{ matrix.test_task }}
+        env:
+          RUBY_TESTOPTS: "-q --tty=no"
+          TEST_BUNDLED_GEMS_ALLOW_FAILURES: "xmlrpc,rss,rexml"
+      # leaked-globals since 2.7
+      - name: Leaked Globals
+        run: cd snapshot-*/ && make -s leaked-globals
+        if: matrix.test_task == 'check'
+      - name: make install without root privilege
+        run: cd snapshot-*/ && make $JOBS install DESTDIR="/tmp/destdir"
+        if: matrix.test_task == 'check'
+      - name: make install
+        run: cd snapshot-*/ && sudo make $JOBS install
+        if: matrix.test_task == 'check'
+      - name: ruby -v
+        run: /usr/local/bin/ruby -v
+        if: matrix.test_task == 'check'
