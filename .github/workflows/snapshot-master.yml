@@ -39,7 +39,8 @@ jobs:
     needs: make-snapshot
     strategy:
       matrix:
-        test_task: [check, test-bundler-parallel, test-bundled-gems]
+        #test_task: [check, test-bundler-parallel, test-bundled-gems]
+        test_task: [test-bundled-gems]
         os: [macos-latest]
       fail-fast: false
     runs-on: ${{ matrix.os }}
@@ -102,6 +103,8 @@ jobs:
         run: cd snapshot-*/ && ./configure --with-openssl-dir=$(brew --prefix openssl@1.1) --with-readline-dir=$(brew --prefix readline)
       - name: make
         run: cd snapshot-*/ && make $JOBS
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
       - name: Tests
         run: cd snapshot-*/ && make $JOBS -s ${{ matrix.test_task }}
         env:
