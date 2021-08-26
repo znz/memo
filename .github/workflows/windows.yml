@@ -25,5 +25,9 @@ jobs:
             patch
       - run: |
           dir /b /s *patch*
-        working-directory: C:\msys64
+        working-directory: C:\
+        shell: cmd
+      - run: |
+          dir /b /s *patch*
+        working-directory: D:\
         shell: cmd
