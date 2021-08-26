@@ -24,4 +24,5 @@ jobs:
           install: >-
             patch
       - run: |
-          dir C:\msys64\mingw64\bin
+          dir /b C:\msys64 | findstr patch
+        shell: cmd
