@@ -9,55 +9,19 @@ jobs:
     strategy:
       matrix:
         test_task: [test]
-        os: [windows-2019]
-        vs: [2019]
+        os: [windows-2022]
       fail-fast: false
     runs-on: ${{ matrix.os }}
-    if: "!contains(github.event.head_commit.message, '[ci skip]')"
+    env:
+      GITPULLOPTIONS: --no-tags origin ${{github.ref}}
+      PATCH: C:\msys64\usr\bin\patch.exe
     steps:
-      - name: Install libraries with vcpkg
-        run: |
-          vcpkg --triplet x64-windows install readline zlib
-      - name: Install libraries with chocolatey
-        run: |
-          choco config get cacheLocation
-          choco install --no-progress openssl winflexbison3
-      - name: Checkout ruby/ruby
-        run: |
-          git clone --depth=50 https://github.com/ruby/ruby src
-      - run: ./src/tool/actions-commit-info.sh
-        shell: bash
-      - run: sed -i -e 's/echo off/echo on/' ./src/win32/configure.bat
-        shell: bash
-      - name: Configure
-        run: |
-          md build
-          cd build
-          call "C:\Program Files (x86)\Microsoft Visual Studio\${{ matrix.vs }}\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
-          ../src/win32/configure.bat --disable-install-doc --without-ext=+,dbm,gdbm --enable-bundled-libffi --with-opt-dir=C:/vcpkg/installed/x64-windows --with-openssl-dir="C:/Program Files/OpenSSL-Win64"
-        shell: cmd
-      - name: nmake
-        run: |
-          call "C:\Program Files (x86)\Microsoft Visual Studio\${{ matrix.vs }}\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
-          set YACC=win_bison
-          cd build
-          nmake up
-          nmake
-        shell: cmd
-      - name: nmake install
-        run: |
-          call "C:\Program Files (x86)\Microsoft Visual Studio\${{ matrix.vs }}\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
-          set YACC=win_bison
-          cd build
-          nmake DESTDIR=ruby_%COMMIT_DATE%_%COMMIT_NUMBER_OF_DAY% install
-        shell: cmd
-      - uses: actions/upload-artifact@master
+      - run: md build
+        working-directory:
+      - uses: msys2/setup-msys2@v2
         with:
-          name: ruby_vs${{ matrix.vs }}_${{ env.COMMIT_DATE }}_${{ env.COMMIT_NUMBER_OF_DAY }}
-          path: src\build\ruby_${{ env.COMMIT_DATE }}_${{ env.COMMIT_NUMBER_OF_DAY }}
-      - name: nmake test
-        run: |
-          call "C:\Program Files (x86)\Microsoft Visual Studio\${{ matrix.vs }}\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
-          cd build
-          nmake ${{ matrix.test_task }}
-        shell: cmd
+          update: true
+          install: >-
+            patch
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
