@@ -20,7 +20,6 @@ jobs:
         working-directory:
       - uses: msys2/setup-msys2@v2
         with:
-          msystem: MSYS
           update: true
           install: >-
             patch
@@ -28,3 +27,4 @@ jobs:
           dir C:\
           dir C:\msys64
           dir C:\msys64\usr\bin
+          dir C:\msys64\mingw64\usr\bin
