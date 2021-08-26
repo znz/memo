@@ -9,7 +9,7 @@ jobs:
     strategy:
       matrix:
         test_task: [test]
-        os: [windows-2022]
+        os: [windows-2019, windows-2022]
       fail-fast: false
     runs-on: ${{ matrix.os }}
     env:
@@ -24,7 +24,4 @@ jobs:
           install: >-
             patch
       - run: |
-          dir C:\
-          dir C:\msys64
-          dir C:\msys64\usr\bin
-          dir C:\msys64\mingw64
+          dir C:\msys64\mingw64\bin
