@@ -24,6 +24,6 @@ jobs:
           install: >-
             patch
       - run: |
-          dir /b /s patch.exe
+          dir /b /s *patch.exe
         working-directory: C:\msys64
         shell: cmd
