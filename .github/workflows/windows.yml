@@ -24,10 +24,10 @@ jobs:
           install: >-
             patch
       - run: |
-          dir /b /s *patch*
+          dir /b /s *patch.exe
         working-directory: C:\
         shell: cmd
       - run: |
-          dir /b /s *patch*
+          dir /b /s *patch.exe
         working-directory: D:\
         shell: cmd
