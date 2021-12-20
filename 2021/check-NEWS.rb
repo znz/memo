@@ -34,11 +34,9 @@ end
 vers = news.scan(/^ *\* (\S+) (\d+\.[\w.]+)$/).to_h
 gem_list_vers = `gem list`.scan(/^(\S+) \((?:default: )?(\d+\.[\w.]+)\)$/).to_h
 
+gem_list_vers['RubyGems'] = `gem -v`.chomp
+
 map_name = {
-  'StringScanner' => 'strscan',
-  'Readline(C-ext)' => 'readline-ext',
-  'OptionParser' => 'optparse',
-  'OpenUri' => 'open-uri',
 }
 
 vers.map do |name, ver|
