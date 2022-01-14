@@ -2,3 +2,12 @@
 
 - <https://github.com/rurema/doctree/pull/2637>
 - <https://github.com/rurema/bitclust/pull/172>
+- <https://github.com/rurema/doctree/pull/2643>
+- <https://github.com/rurema/doctree/pull/2650>
+- <https://github.com/rurema/doctree/pull/2651>
+- <https://github.com/rurema/doctree/pull/2652>
+- <https://github.com/rurema/doctree/pull/2654>
+- <https://github.com/rurema/doctree/pull/2655>
+- <https://github.com/rurema/doctree/pull/2656>
+- <https://github.com/rurema/doctree/pull/2657>
+- <https://github.com/ruby/net-http/pull/38>
