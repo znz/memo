@@ -1,0 +1,61 @@
+* ruby-trunk-changes
+https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20210729
+[52e602edda] est → set ?
+https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20210812
+[e5f6cd7045] TImeout → Timeout ?
+https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20210814
+[ee362302c0] TracePint → TracePoint ?
+https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20210825
+[384c0f57aa] 動機処理 → 同期処理 ?
+https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20210831
+いくつか ruygems になっているところがある
+https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20210901
+[f9bdb17c02] relien → reline ?
+https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20210906
+[a68a1b0b7d] being → begin ?
+https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20210911
+[ad979a5e00] 移動し → 移動した ?
+https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20210911
+[c5c0f5c652] #39 が https://github.com/ruby/ruby/pull/39 へのリンクになっている
+
+
+https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20211024
+[8fde54a3b5] 追加していいます → 追加しています ?
+
+https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20211117
+[c910de3575] 存在しないファイルの依存関係があると作成しようとして失敗する?
+
+https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20211125
+[aace9cb162] docter → doctor ?
+
+https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20211126
+[f3320f164f] bundler 自身につては → bundler 自身については ?
+
+https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20211206
+[26063d3954] SIGKILL → SIGILL ?
+
+https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20211208
+[af6e088357] 0 だったら → 1 以下だったら ?
+
+https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20211209
+[12a0a89e22] 機能部分司る → 機能部分を司る ?
+
+https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20211214
+[1a63468831] YJIT::MJIT → RubyVM::MJIT ?
+
+https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20211215
+[637c3cfc5d] このの呼び出し → この呼び出し ?
+
+https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20211219
+[7159af3491] スリップボード → クリップボード ?
+
+https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20211221
+[8ebf597885] OpenSSL 30 → OpenSSL 3.0 ?
+[79a6f4349d] OpenSSL::HMA → OpenSSL::HMAC ?
+
+https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20211224
+[44acab76af] ど 用コメント ?
+
+https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20211228
+[dd022c1f76] ダウンドード ?
+[bf97415c02] deprecatd ? FileTest.exists? も?
