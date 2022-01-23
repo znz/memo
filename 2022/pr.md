@@ -11,3 +11,10 @@
 - <https://github.com/rurema/doctree/pull/2656>
 - <https://github.com/rurema/doctree/pull/2657>
 - <https://github.com/ruby/net-http/pull/38>
+- <https://github.com/ruby/net-http/pull/40>
+- <https://github.com/ruby/net-http/pull/41>
+- <https://github.com/ruby/typeprof/pull/107>
+- <https://github.com/rurema/doctree/pull/2660>
+- <https://github.com/rurema/doctree/pull/2661>
+- <https://github.com/rurema/doctree/pull/2662>
+- <https://github.com/rurema/doctree/pull/2663>
