@@ -18,3 +18,4 @@
 - <https://github.com/rurema/doctree/pull/2661>
 - <https://github.com/rurema/doctree/pull/2662>
 - <https://github.com/rurema/doctree/pull/2663>
+- <https://github.com/Homebrew/homebrew-cask/pull/118009>

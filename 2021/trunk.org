@@ -18,7 +18,6 @@ https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20210911
 https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20210911
 [c5c0f5c652] #39 が https://github.com/ruby/ruby/pull/39 へのリンクになっている
 
-
 https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20211024
 [8fde54a3b5] 追加していいます → 追加しています ?
 
@@ -55,6 +54,9 @@ https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20211221
 
 https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20211224
 [44acab76af] ど 用コメント ?
+
+https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20211225
+[0867b638af] 変換できけど → 変換できるけど ?
 
 https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20211228
 [dd022c1f76] ダウンドード ?
