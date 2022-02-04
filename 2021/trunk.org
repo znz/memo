@@ -61,3 +61,6 @@ https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20211225
 https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20211228
 [dd022c1f76] ダウンドード ?
 [bf97415c02] deprecatd ? FileTest.exists? も?
+
+https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20211231
+[db547a3bc4] といクラス → というクラス ?

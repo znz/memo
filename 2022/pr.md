@@ -19,3 +19,9 @@
 - <https://github.com/rurema/doctree/pull/2662>
 - <https://github.com/rurema/doctree/pull/2663>
 - <https://github.com/Homebrew/homebrew-cask/pull/118009>
+- <https://github.com/rurema/doctree/pull/2669>
+
+# 2022-02
+
+- <https://github.com/rurema/doctree/pull/2673>
+- <https://github.com/rurema/doctree/pull/2675>
