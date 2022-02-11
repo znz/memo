@@ -25,3 +25,9 @@
 
 - <https://github.com/rurema/doctree/pull/2673>
 - <https://github.com/rurema/doctree/pull/2675>
+- <https://github.com/rurema/doctree/pull/2677>
+- <https://github.com/rurema/doctree/pull/2678>
+- <https://github.com/rurema/doctree/pull/2679>
+- <https://github.com/rurema/doctree/pull/2680>
+- <https://github.com/rurema/doctree/pull/2681>
+- <https://github.com/rurema/doctree/pull/2682>
