@@ -2,3 +2,6 @@
 
 https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20220104
 [0bfb406b75] 一時ディレトリ → 一時ディレクトリ ?
+
+https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20220119
+[9033ac3e2c] EACCESS → EACCES ?
