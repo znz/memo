@@ -1,0 +1,40 @@
+# This example requires Lima v0.7.0 or later.
+images:
+# Hint: run `limactl prune` to invalidate the "current" cache
+- location: "https://cloud-images.ubuntu.com/impish/current/impish-server-cloudimg-amd64.img"
+  arch: "x86_64"
+- location: "https://cloud-images.ubuntu.com/impish/current/impish-server-cloudimg-arm64.img"
+  arch: "aarch64"
+mounts:
+- location: "~"
+- location: "/tmp/lima"
+  writable: true
+containerd:
+  system: false
+  user: false
+provision:
+- mode: system
+  script: |
+    #!/bin/bash
+    set -eux -o pipefail
+    command -v systemd-nspawn >/dev/null 2>&1 && exit 0
+    export DEBIAN_FRONTEND=noninteractive
+    apt-get update
+    apt-get install -y etckeeper
+    apt-get install -y systemd-container
+
+    # sudo EDITOR=vi systemctl edit systemd-nspawn@.service
+    mkdir -p /etc/systemd/system/systemd-nspawn@.service.d
+    printf "[Service]\nEnvironment=SYSTEMD_NSPAWN_TMPFS_TMP=0\n" > /etc/systemd/system/systemd-nspawn@.service.d/override.conf
+
+    # btrfs
+    apt-get install -y btrfs-progs
+    fallocate -l 50G /50G.img
+    mkfs.btrfs /50G.img
+    echo /50G.img /var/lib/machines btrfs defaults,lazytime,compress=zstd:5 0 0 >> /etc/fstab
+    mount /var/lib/machines
+
+    apt-get install -y debootstrap
+    apt-get install -y mmdebstrap
+    apt-get install -y debian-archive-keyring debian-ports-archive-keyring ubuntu-keyring
+    apt-get install -y binfmt-support qemu-user-static
