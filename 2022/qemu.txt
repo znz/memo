@@ -1,0 +1,1 @@
+systemd-run --user -p CPUQuota=40% -t qemu-system-i386 -cdrom FD13LIVE.iso -nographic
