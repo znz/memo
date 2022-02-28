@@ -36,40 +36,40 @@ args=(
 # network
 case "$arch" in
     arm64)
-	# systemd-networkd で自動設定
-	args=(
-	    "${args[@]}"
-	    --customize-hook='chroot "$1" mv /etc/network/interfaces /etc/network/interfaces.save'
-	    --customize-hook='chroot "$1" systemctl enable systemd-networkd systemd-resolved'
-	)
-	;;
+        # systemd-networkd で自動設定
+        args=(
+            "${args[@]}"
+            --customize-hook='chroot "$1" mv /etc/network/interfaces /etc/network/interfaces.save'
+            --customize-hook='chroot "$1" systemctl enable systemd-networkd systemd-resolved'
+        )
+        ;;
     *)
-	# /etc/network/interfaces で設定
-	args=(
-	    "${args[@]}"
-	    --customize-hook='printf "auto host0\niface host0 inet dhcp\n" > "$1"/etc/network/interfaces.d/host0'
-	)
-	;;
+        # /etc/network/interfaces で設定
+        args=(
+            "${args[@]}"
+            --customize-hook='printf "auto host0\niface host0 inet dhcp\n" > "$1"/etc/network/interfaces.d/host0'
+        )
+        ;;
 esac
 
 # apt-line
 case "$arch" in
     alpha|hppa|ia64|m68k|powerpc|ppc64|riscv64|sh4|sparc64|x32)
-	# https://deb.debian.org/debian-ports/ にあるもの
-	args=(
-	    "${args[@]}"
-	    --keyring=/usr/share/keyrings
-	    --include debian-ports-archive-keyring
-	)
-	mirror=https://deb.debian.org/debian-ports
-	;;
+        # https://deb.debian.org/debian-ports/ にあるもの
+        args=(
+            "${args[@]}"
+            --keyring=/usr/share/keyrings
+            --include debian-ports-archive-keyring
+        )
+        mirror=https://deb.debian.org/debian-ports
+        ;;
     *)
-	args=(
-	    "${args[@]}"
-	    #--components="main contrib non-free"
-	)
-	#mirror=https://deb.debian.org/debian
-	;;
+        args=(
+            "${args[@]}"
+            #--components="main contrib non-free"
+        )
+        #mirror=https://deb.debian.org/debian
+        ;;
 esac
 
 # useradd warning: systemd-network's uid 102 outside of the UID_MIN 1000 and UID_MAX 60000 range.
@@ -77,15 +77,18 @@ esac
 # adduser: `/usr/bin/chfn -f systemd Time Synchronization systemd-timesync' returned error code 1. Exiting.
 # になる環境で設定が一部不十分になるがエラーよりましなので対処する
 case "$arch:$suite" in
-    mips:buster | alpha:sid | hppa:sid )
-	args=(
-	    "${args[@]}"
-	    --essential-hook='chroot "$1" dpkg-divert --rename /usr/bin/chfn'
-	    --essential-hook='chroot "$1" ln -s /bin/true /usr/bin/chfn'
-	    --customize-hook='chroot "$1" rm /usr/bin/chfn'
-	    --customize-hook='chroot "$1" dpkg-divert --remove --rename /usr/bin/chfn'
-	)
-	;;
+    mips:buster \
+        | mipsel:bullseye \
+        | alpha:sid \
+        | hppa:sid )
+        args=(
+            "${args[@]}"
+            --essential-hook='chroot "$1" dpkg-divert --rename /usr/bin/chfn'
+            --essential-hook='chroot "$1" ln -s /bin/true /usr/bin/chfn'
+            --customize-hook='chroot "$1" rm /usr/bin/chfn'
+            --customize-hook='chroot "$1" dpkg-divert --remove --rename /usr/bin/chfn'
+        )
+        ;;
 esac
 
 mmdebstrap "${args[@]}" "$suite" "$tar" ${mirror:-}
@@ -105,8 +108,9 @@ done
 # ./create-debian.sh sid-arm64
 # ./create-debian.sh mips-buster mips buster
 ## 古さによる微妙さがある。 ca-certificates が古くて https が通らないことがあるなど。
-# ./create-debian.sh ppc64el-bullseye ppc64el bullseye
 # ./create-debian.sh s390x-bullseye s390x bullseye
+# ./create-debian.sh ppc64el-bullseye ppc64el bullseye
+# ./create-debian.sh mipsel-bullseye mipsel bullseye
 # debian-ports:
 # ./create-debian.sh alpha-sid alpha sid
 ## git-man が入らない, sudo が壊れている
@@ -123,7 +127,7 @@ done
 # ./create-debian.sh sh4-sid sh4 sid
 ## 結構安定している?
 # ./create-debian.sh sparc64-sid sparc64 sid
-# ./create-debian.sh x32-sid x32 sid
+## aarch64 上では「E: Method gave invalid 400 URI Failure message: Could not switch saved set-user-ID」で apt が失敗する
 #
 # ppc64el bullseye, s390x bullseye
 # systemd-networkd: Could not create manager: Protocol not supported
