@@ -32,3 +32,7 @@
 - <https://github.com/rurema/doctree/pull/2681>
 - <https://github.com/rurema/doctree/pull/2682>
 - <https://github.com/rurema/doctree/pull/2685>
+
+# 2022-03
+
+- <https://github.com/ruby/rdoc/pull/870>
