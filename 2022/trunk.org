@@ -5,3 +5,6 @@ https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20220104
 
 https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20220119
 [9033ac3e2c] EACCESS → EACCES ?
+
+https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20220203
+[7529c53891] Servver → Server ?
