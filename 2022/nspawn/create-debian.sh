@@ -37,6 +37,9 @@ args=(
 case "$arch" in
     arm64)
         # systemd-networkd で自動設定
+	#
+	# systemd-networkd[70]: Could not create manager: Protocol not supported
+	# になる環境ではあきらめる。
         args=(
             "${args[@]}"
             --customize-hook='chroot "$1" mv /etc/network/interfaces /etc/network/interfaces.save'
@@ -75,9 +78,14 @@ esac
 # useradd warning: systemd-network's uid 102 outside of the UID_MIN 1000 and UID_MAX 60000 range.
 # chfn: PAM: System error
 # adduser: `/usr/bin/chfn -f systemd Time Synchronization systemd-timesync' returned error code 1. Exiting.
+# や
+# Setting up systemd-timesyncd (247.3-6) ...
+# chfn: PAM: System error
+# adduser: `/usr/bin/chfn -f systemd Time Synchronization systemd-timesync' returned error code 1. Exiting.
 # になる環境で設定が一部不十分になるがエラーよりましなので対処する
 case "$arch:$suite" in
     mips:buster \
+        | mips64el:bullseye \
         | mipsel:bullseye \
         | alpha:sid \
         | hppa:sid )
@@ -111,6 +119,8 @@ done
 # ./create-debian.sh s390x-bullseye s390x bullseye
 # ./create-debian.sh ppc64el-bullseye ppc64el bullseye
 # ./create-debian.sh mipsel-bullseye mipsel bullseye
+# ./create-debian.sh mips64el-bullseye mips64el bullseye
+# ./create-debian.sh i386-bullseye i386 bullseye
 # debian-ports:
 # ./create-debian.sh alpha-sid alpha sid
 ## git-man が入らない, sudo が壊れている
