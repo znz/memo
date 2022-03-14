@@ -53,6 +53,6 @@ mkdir -p ~/ruby/build
 cd ~/ruby/build
 ../autogen.sh
 ../configure --prefix="$(rbenv root)"/versions/master --with-baseruby=/usr/bin/ruby --disable-install-doc
-make -j4
-make install-doc
-make check -j4
+make -j$(nproc)
+make install -j$(nproc)
+make check -j$(nproc)
