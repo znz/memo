@@ -1,8 +1,8 @@
 #!/bin/bash
-#!/bin/bash
 set -euxo pipefail
 guest_name=${1?usage: $0 machine_name [arch [suite]]}
-arch=${2:-$(dpkg-architecture -q DEB_HOST_ARCH)}
+hostarch=$(dpkg-architecture -q DEB_HOST_ARCH)
+arch=${2:-$hostarch}
 suite=${3:-sid}
 tar="${TMPDIR:-/tmp}/$guest_name.tar"
 
@@ -33,9 +33,16 @@ args=(
     --customize-hook='echo "127.0.1.1 '"$guest_name"'" >> "$1/etc/hosts"'
 )
 
+if systemctl is-active -q apt-cacher-ng.service; then
+    args=(
+        "${args[@]}"
+	--aptopt='Acquire::http { Proxy "http://'"$(hostname -I | cut -d' ' -f1)"':3142"; }'
+    )
+fi
+
 # network
 case "$arch" in
-    arm64)
+    $hostarch)
         # systemd-networkd で自動設定
 	#
 	# systemd-networkd[70]: Could not create manager: Protocol not supported
@@ -114,6 +121,7 @@ done
 # usage:
 # debian:
 # ./create-debian.sh sid-arm64
+# ./create-debian.sh arm64-bookworm arm64 bookworm
 # ./create-debian.sh mips-buster mips buster
 ## 古さによる微妙さがある。 ca-certificates が古くて https が通らないことがあるなど。
 # ./create-debian.sh s390x-bullseye s390x bullseye
