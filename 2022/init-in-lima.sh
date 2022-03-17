@@ -8,7 +8,7 @@ set -euxo pipefail
 #sudo apt-mark unhold linux-image-$(uname -r) linux-headers-generic linux-headers-virtual linux-image-virtual linux-virtual
 
 if [ -d /etc/needrestart/conf.d ]; then
-    echo "\$nrconf{restart} = 'a';" | sudo tee /etc/needrestart/conf.d/50local.conf
+    echo "\$nrconf{restart} = 'a';" | sudo tee /etc/needrestart/conf.d/local.conf
 fi
 
 sudo apt update
