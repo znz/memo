@@ -29,9 +29,9 @@ provision:
 
     # btrfs
     apt-get install -y btrfs-progs
-    fallocate -l 50G /50G.img
-    mkfs.btrfs /50G.img
-    echo /50G.img /var/lib/machines btrfs defaults,lazytime,compress=zstd:5 0 0 >> /etc/fstab
+    fallocate -l 50G /machines.img
+    mkfs.btrfs /machines.img
+    echo /machines.img /var/lib/machines btrfs defaults,lazytime,compress=zstd:5 0 0 >> /etc/fstab
     mount /var/lib/machines
 
     apt-get install -y debootstrap
