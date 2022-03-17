@@ -5,7 +5,7 @@ trap "sudo etckeeper vcs gc" EXIT
 # Japanese
 sudo apt install -y language-pack-ja
 sudo localectl set-locale LANG=ja_JP.utf8
-sudo apt install fonts-noto-cjk-extra
+sudo apt install -y fonts-noto-cjk-extra
 
 # snap
 sudo snap install chromium
