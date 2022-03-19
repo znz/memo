@@ -1,0 +1,50 @@
+arch: "aarch64"
+images:
+# Hint: run `limactl prune` to invalidate the "current" cache
+- location: "https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-amd64.img"
+  arch: "x86_64"
+- location: "https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-arm64.img"
+  arch: "aarch64"
+mounts:
+- location: "~"
+- location: "/tmp/lima"
+  writable: true
+containerd:
+  system: false
+  user: false
+provision:
+- mode: system
+  script: |
+    #!/bin/bash
+    set -eux -o pipefail
+    export DEBIAN_FRONTEND=noninteractive
+
+    if [ -f /etc/apt/apt.conf.d/50local ]; then
+      exit
+    fi
+    echo 'APT::Get::Purge 1;' > /etc/apt/apt.conf.d/50local
+
+    if [ -d /etc/needrestart/conf.d ]; then
+      echo "\$nrconf{restart} = 'a';" > /etc/needrestart/conf.d/local.conf
+    fi
+
+    apt-get update
+    apt-get install -y etckeeper
+
+    # Japanese
+    apt-get install -y language-pack-ja
+    localectl set-locale LANG=ja_JP.utf8
+    apt-get install -y fonts-noto-cjk-extra
+- mode: user
+  script: |
+    #!/bin/bash
+    set -eux -o pipefail
+    export DEBIAN_FRONTEND=noninteractive
+    curl -sSLo code.deb https://update.code.visualstudio.com/latest/linux-deb-arm64/stable
+    sudo dpkg -i code.deb || :
+    sudo apt-get install --fix-broken -y
+    ldd /usr/share/code/bin/../code | grep not | awk '{sub(/\.so\./, ""); print $1}' | xargs sudo apt-get install -y
+    sudo apt-get install -y libx11-xcb1
+message: |
+  After installing xquartz and reboot, use following command and run `code`:
+  $(limactl show-ssh {{.Name}}) -MS none -X
