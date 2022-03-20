@@ -39,3 +39,4 @@
 - <https://github.com/rurema/doctree/pull/2687>
 - <https://github.com/rails/rails/pull/44661>
 - <https://github.com/rubygems/rubygems/pull/5401>
+- <https://github.com/sorah/envchain/pull/31>
