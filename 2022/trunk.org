@@ -8,3 +8,7 @@ https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20220119
 
 https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20220203
 [7529c53891] Servver → Server ?
+
+https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20220223
+[3df16924b4] 環境変数 RUBY_ABI_CHECK が 0 (ではじまる文字列)や空文字列に設定された時以外で
+「val[1] == '\0'」もチェックしているので 0 の後ろに何か続いていると enable になりそう。
