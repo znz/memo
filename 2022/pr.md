@@ -41,3 +41,8 @@
 - <https://github.com/rubygems/rubygems/pull/5401>
 - <https://github.com/sorah/envchain/pull/31>
 - <https://github.com/rurema/doctree/pull/2691>
+- <https://github.com/ruby/chkbuild/pull/68>
+- <https://github.com/atig/atig/pull/73>
+- <https://github.com/atig/atig/pull/74>?
+- <https://github.com/atig/atig/pull/75>
+- <https://github.com/ongaeshi/rubyonbrowser/pull/4>
