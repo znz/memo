@@ -12,3 +12,12 @@ https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20220203
 https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20220223
 [3df16924b4] 環境変数 RUBY_ABI_CHECK が 0 (ではじまる文字列)や空文字列に設定された時以外で
 「val[1] == '\0'」もチェックしているので 0 の後ろに何か続いていると enable になりそう。
+
+https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20220308
+[17e09f033c] スキップる → スキップする ?
+
+https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20220322
+[034c09776d] rdoc のテトに → rdoc のテストに ?
+
+https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20220323
+[26aff37466] configre → configure ?

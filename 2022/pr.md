@@ -46,3 +46,9 @@
 - <https://github.com/atig/atig/pull/74>?
 - <https://github.com/atig/atig/pull/75>
 - <https://github.com/ongaeshi/rubyonbrowser/pull/4>
+
+# 2022-04
+
+- <https://github.com/rurema/doctree/pull/2694>
+- <https://github.com/rurema/doctree/pull/2695>
+- <https://github.com/rurema/doctree/pull/2696>
