@@ -52,3 +52,7 @@
 - <https://github.com/rurema/doctree/pull/2694>
 - <https://github.com/rurema/doctree/pull/2695>
 - <https://github.com/rurema/doctree/pull/2696>
+- <https://github.com/asdf-vm/asdf-ruby/pull/262>
+- <https://github.com/asdf-vm/asdf-ruby/pull/263>
+- <https://github.com/asdf-vm/asdf/pull/1202>
+- <https://github.com/ruby/net-smtp/pull/41>

@@ -21,3 +21,9 @@ https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20220322
 
 https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20220323
 [26aff37466] configre → configure ?
+
+https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20220405
+[42000664be] れに依存 → これに依存 ?
+
+https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20220408
+[697eed63e8] configu.guess → config.guess ?
