@@ -27,3 +27,6 @@ https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20220405
 
 https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20220408
 [697eed63e8] configu.guess → config.guess ?
+
+https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20220418
+[e5a852b912] 起きたい → 置きたい ?
