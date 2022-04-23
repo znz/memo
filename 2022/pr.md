@@ -56,3 +56,5 @@
 - <https://github.com/asdf-vm/asdf-ruby/pull/263>
 - <https://github.com/asdf-vm/asdf/pull/1202>
 - <https://github.com/ruby/net-smtp/pull/41>
+- <https://github.com/ruby/www.ruby-lang.org/pull/2838>
+- <https://github.com/ruby/ruby/pull/5832>
