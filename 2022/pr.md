@@ -59,3 +59,7 @@
 - <https://github.com/ruby/www.ruby-lang.org/pull/2838>
 - <https://github.com/ruby/ruby/pull/5832>
 - <https://github.com/ruby/rdoc/pull/883>
+
+# 2022-05
+
+- <https://github.com/rbenv/ruby-build/pull/1974>
