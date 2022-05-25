@@ -63,3 +63,7 @@
 # 2022-05
 
 - <https://github.com/rbenv/ruby-build/pull/1974>
+- <https://github.com/ruby/set/pull/25>
+- <https://github.com/rurema/doctree/pull/2703>
+- <https://github.com/ruby/rbs/pull/1005>
+- <https://github.com/rurema/doctree/pull/2706>
