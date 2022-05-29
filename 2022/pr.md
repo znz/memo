@@ -67,3 +67,4 @@
 - <https://github.com/rurema/doctree/pull/2703>
 - <https://github.com/ruby/rbs/pull/1005>
 - <https://github.com/rurema/doctree/pull/2706>
+- <https://github.com/rurema/doctree/pull/2707>
