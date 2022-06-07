@@ -30,3 +30,6 @@ https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20220408
 
 https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20220418
 [e5a852b912] 起きたい → 置きたい ?
+
+https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20220530
+[899c90cf8a] Rust 自走の → Rust 実装の ?
