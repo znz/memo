@@ -33,3 +33,6 @@ https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20220418
 
 https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20220530
 [899c90cf8a] Rust 自走の → Rust 実装の ?
+
+https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20220608
+`String#@+` → String#+@`
