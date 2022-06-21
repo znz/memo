@@ -40,3 +40,6 @@ https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20220608
 https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20220611
 [692fec4e72] メッーセージ → メッセージ ?
 [bf8dc36e40] エラーが発生しなはず → エラーが発生しないはず ?
+
+https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20220615
+[e09bdc11ec] asdf-ruby は asdf という rbenv のようなバージョンマネージャの ruby 対応部分のはず
