@@ -43,3 +43,7 @@ https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20220611
 
 https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20220615
 [e09bdc11ec] asdf-ruby は asdf という rbenv のようなバージョンマネージャの ruby 対応部分のはず
+
+https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20220618
+[c34a5469c8] 開放 → 解放 ?
+[566c5447ae] binwrite との組み合わせより Marshal.dump の第2引数に io を渡す方が良さそうな気がする。
