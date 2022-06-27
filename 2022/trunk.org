@@ -47,3 +47,9 @@ https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20220615
 https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20220618
 [c34a5469c8] 開放 → 解放 ?
 [566c5447ae] binwrite との組み合わせより Marshal.dump の第2引数に io を渡す方が良さそうな気がする。
+
+https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20220623
+[4f5eb48dea] budler → bundler ?
+
+https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20220624
+[962a3247b1] これは元が正しそうな気がする。
