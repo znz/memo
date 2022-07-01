@@ -53,3 +53,9 @@ https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20220623
 
 https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20220624
 [962a3247b1] これは元が正しそうな気がする。
+
+https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20220627
+[c3eb0437f2] cock_gettime → clock_gettime ?
+
+https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20220701
+[b6f6fc6e87] なさそうだかけど ?
