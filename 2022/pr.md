@@ -78,4 +78,7 @@
 
 # 2022-07
 
+## issues
+
 - <https://github.com/microsoft/vscode/issues/154047>
+- <https://bugs.ruby-lang.org/issues/18906>
