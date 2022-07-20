@@ -60,6 +60,10 @@
 - <https://github.com/ruby/ruby/pull/5832>
 - <https://github.com/ruby/rdoc/pull/883>
 
+## issues
+
+- <https://github.com/rurema/doctree/issues/2693>
+
 # 2022-05
 
 - <https://github.com/rbenv/ruby-build/pull/1974>
@@ -75,6 +79,10 @@
 - <https://github.com/rurema/doctree/pull/2711>
 - <https://github.com/ruby/rbs/pull/1029>
 - <https://github.com/rurema/doctree/pull/2713>
+
+## issues
+
+- <https://github.com/ko1/vscode-ruby-rstfilter/commit/955dcfeb7b5958ebcb5db9e26e6ea10762ebee9d>
 
 # 2022-07
 
