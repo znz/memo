@@ -94,3 +94,11 @@
 ## commits
 
 - <https://github.com/ruby/actions/commit/7e1821adbfe88d2ad51c558709e8d5f3e3dde786>
+
+# 2022-08
+
+## pr
+
+- <https://github.com/ruby/debug/pull/732>
+- <https://github.com/ruby-jp/ruby-jp.github.io/pull/30>
+- <https://github.com/reidmorrison/semantic_logger/pull/223>
