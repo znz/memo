@@ -102,3 +102,8 @@
 - <https://github.com/ruby/debug/pull/732>
 - <https://github.com/ruby-jp/ruby-jp.github.io/pull/30>
 - <https://github.com/reidmorrison/semantic_logger/pull/223>
+- <https://github.com/ruby/debug/pull/736>
+
+## issues
+
+- <https://github.com/rubocop/rubocop-jp/issues/65>
