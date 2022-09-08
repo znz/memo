@@ -13,7 +13,7 @@ date
 :   2022-09-10
 
 allotted-time
-:   30m
+:   25m
 
 theme
 :   lightning-simple
