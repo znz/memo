@@ -16,7 +16,7 @@ jobs:
       - run: |
           set -x
           echo "action_state=yellow" >> $GITHUB_ENV
-          echo "::set-output name=action_fruit::strawberry"
+          echo "action_fruit=strawberry" >> $GITHUB_OUTPUT
           echo "::debug file=app.js,line=1::Entered octocatAddition method"
           echo "::warning file=app.js,line=1,col=5::Missing semicolon"
           echo "::error file=app.js,line=10,col=15::Something went wrong"
