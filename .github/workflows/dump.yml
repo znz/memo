@@ -23,9 +23,10 @@ jobs:
           echo "::add-mask::Mona The Octocat"
           MY_NAME="Mona The Octocat"
           echo "::add-mask::$MY_NAME"
-          echo "::stop-commands::pause-logging"
+          stopMarker=$(uuidgen)
+          echo "::stop-commands::$stopMarker"
           echo dummy
-          echo "::pause-logging::"
+          echo "::$stopMarker::"
       - run: env | sort
       - run: |
           ulimit -a
