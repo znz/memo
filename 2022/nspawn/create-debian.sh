@@ -17,9 +17,6 @@ args=(
     # 起動時に自動でホスト側と同じ /etc/localtime に設定されるので dpkg-configure tzdata 直後しか影響がなくて無駄
     # --essential-hook='echo tzdata tzdata/Areas select Asia | chroot "$1" debconf-set-selections'
     # --essential-hook='echo tzdata tzdata/Zones/Asia select Tokyo | chroot "$1" debconf-set-selections'
-    --include locales # 日本語ロケールも入れてデフォルトは C.UTF-8 にしておく
-    --essential-hook='echo locales locales/locales_to_be_generated multiselect ja_JP.UTF-8 UTF-8 | chroot "$1" debconf-set-selections'
-    --essential-hook='echo locales locales/default_environment_locale select C.UTF-8 | chroot "$1" debconf-set-selections'
     # パスワードなしに
     --customize-hook='chroot "$1" passwd --delete root'
     # 一般ユーザー作成
@@ -36,7 +33,7 @@ args=(
 if systemctl is-active -q apt-cacher-ng.service; then
     args=(
         "${args[@]}"
-	--aptopt='Acquire::http { Proxy "http://'"$(hostname -I | cut -d' ' -f1)"':3142"; }'
+        --aptopt='Acquire::http { Proxy "http://'"$(hostname -I | cut -d' ' -f1)"':3142"; }'
     )
 fi
 
@@ -44,9 +41,9 @@ fi
 case "$arch" in
     $hostarch)
         # systemd-networkd で自動設定
-	#
-	# systemd-networkd[70]: Could not create manager: Protocol not supported
-	# になる環境ではあきらめる。
+        #
+        # systemd-networkd[70]: Could not create manager: Protocol not supported
+        # になる環境ではあきらめる。
         args=(
             "${args[@]}"
             --customize-hook='chroot "$1" mv /etc/network/interfaces /etc/network/interfaces.save'
@@ -81,6 +78,50 @@ case "$arch" in
         #mirror=https://deb.debian.org/debian
         ;;
 esac
+
+case "$arch" in
+    alpha)
+	# all のパッケージの locales と alpha の libc-bin などのバージョンのずれで locales はインストールできない
+	# vim-tiny と vim-common も同様に all のパッケージとのずれでインストールできない
+	# そんとあめ variant を minbase にしている
+        args=(
+            "${args[@]}"
+            # The following packages have unmet dependencies:
+            # vim-tiny : Depends: vim-common (= 2:9.0.0242-1) but 2:9.0.0626-1 is to be installed
+            # E: Unable to correct problems, you have held broken packages.
+            --variant=minbase
+            #
+            # /etc/network/interfaces.d/ のため
+            --include=ifupdown
+            # debconf: unable to initialize frontend: Dialog にならないようにするため
+            --include=whiptail
+            # システムコンテナの init の /lib/systemd/systemd のため
+            --include=systemd
+        )
+        ;;
+    powerpc)
+        # https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=927255 #927255 - powerpc-utils is uninstallable - Debian Bug report logs
+        args=(
+            "${args[@]}"
+            # --include=powerpc-ibm-utils-,powerpc-utils- での除外がうまくいかなかったので、Priority: important を含まない variants に変更
+            --variant=minbase
+            #
+            # /etc/network/interfaces.d/ のため
+            --include=ifupdown
+            # debconf: unable to initialize frontend: Dialog にならないようにするため
+            --include=whiptail
+        )
+        ;;
+    *)
+        args=(
+            "${args[@]}"
+            --include locales # 日本語ロケールも入れてデフォルトは C.UTF-8 にしておく
+            --essential-hook='echo locales locales/locales_to_be_generated multiselect ja_JP.UTF-8 UTF-8 | chroot "$1" debconf-set-selections'
+            --essential-hook='echo locales locales/default_environment_locale select C.UTF-8 | chroot "$1" debconf-set-selections'
+        )
+        ;;
+esac
+
 
 # useradd warning: systemd-network's uid 102 outside of the UID_MIN 1000 and UID_MAX 60000 range.
 # chfn: PAM: System error
