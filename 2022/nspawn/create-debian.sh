@@ -170,6 +170,7 @@ done
 # ./create-debian.sh mipsel-bullseye mipsel bullseye
 # ./create-debian.sh mips64el-bullseye mips64el bullseye
 # ./create-debian.sh i386-bullseye i386 bullseye
+# ./create-debian.sh amd64-bullseye amd64 bullseye
 # debian-ports:
 # ./create-debian.sh alpha-sid alpha sid
 ## git-man が入らない, sudo が壊れている
