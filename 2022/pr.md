@@ -125,4 +125,6 @@
 
 ## pr
 
+- <https://github.com/Homebrew/homebrew-core/pull/114076>
+
 ## issues
