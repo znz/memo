@@ -62,3 +62,5 @@ https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20220701
 
 https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20221125
 [bcdfe12919] html_escale → html_escape ?
+
+[67766cd55c] dubugger → debugger ?
