@@ -136,5 +136,6 @@
 ## pr
 
 - <https://github.com/rurema/doctree/pull/2751>
+- <https://github.com/yasslab/railsguides.jp/pull/1313>
 
 ## issues
