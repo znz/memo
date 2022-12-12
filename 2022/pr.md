@@ -139,3 +139,9 @@
 - <https://github.com/yasslab/railsguides.jp/pull/1313>
 
 ## issues
+
+# 2022-12
+
+## commit
+
+- <https://github.com/ruby/ruby/commit/d245c2ec481b133eb3334f7e18be22c14610994b>
