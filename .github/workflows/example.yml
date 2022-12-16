@@ -1,0 +1,19 @@
+name: example
+
+on:
+  push:
+    paths:
+      - '.github/workflows/example.yml'
+  workflow_dispatch:
+
+jobs:
+  example:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install libraries
+        run: |
+          set -x
+          sudo sed /etc/apt/sources.list -e "s/^# deb-src/deb-src/g" -i
+          sudo apt-get update -q || :
+          sudo apt-get install --no-install-recommends -q -y ruby lcov xz-utils libyaml-dev
+          sudo apt-get build-dep -q -y ruby$(ruby -e 'puts File.basename(RUBY_VERSION, ".*")')
