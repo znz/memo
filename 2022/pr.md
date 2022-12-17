@@ -145,3 +145,13 @@
 ## commit
 
 - <https://github.com/ruby/ruby/commit/d245c2ec481b133eb3334f7e18be22c14610994b>
+- <https://github.com/ruby/actions/commit/8a06451173db5305ddd171db4ca80533caa07a3c>
+- <https://github.com/ruby/actions/commit/15b62c8cb2ba1de601910ac4da31cc923f8ced69>
+
+## pr
+
+- fork せずに ruby/net-imap に push して PR 作成 <https://github.com/ruby/net-imap/pull/88>
+
+## issues
+
+- <https://github.com/codefirst/aquaskk/issues/117>
