@@ -60,7 +60,16 @@ https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20220627
 https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20220701
 [b6f6fc6e87] なさそうだかけど ?
 
+https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20221007
+[255e617bc3] 明示的に開放, 強制的に開放 の 開放 → 解放 ?
+
+https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20221008
+[83a9b91522] 補間処理 → 補完処理 ?
+
 https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20221125
 [bcdfe12919] html_escale → html_escape ?
 
 [67766cd55c] dubugger → debugger ?
+
+https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20221210
+getconstqant → getconstant ?
