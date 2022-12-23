@@ -13,6 +13,7 @@ end
 
 news.scan(/^(\[[^\[\]]+\]):/) do |link,|
   next if news.include?("[#{link}]")
+  next if news.match?(/\s#{Regexp.quote(link)}\s/)
   printf "\e[31mUnused footnote %s\e[0m\n", link
   status = false
 end
