@@ -73,3 +73,8 @@ https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20221125
 
 https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20221210
 getconstqant → getconstant ?
+
+https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20221214
+[95d7b5e2e9]
+resolve-replace → resolv-replace ?
+resolve.rb 版 → resolv.rb 版 ?

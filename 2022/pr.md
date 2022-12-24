@@ -147,6 +147,8 @@
 - <https://github.com/ruby/ruby/commit/d245c2ec481b133eb3334f7e18be22c14610994b>
 - <https://github.com/ruby/actions/commit/8a06451173db5305ddd171db4ca80533caa07a3c>
 - <https://github.com/ruby/actions/commit/15b62c8cb2ba1de601910ac4da31cc923f8ced69>
+- <https://github.com/ruby/docs.ruby-lang.org/commit/7e77ac93c95b41834e9cb85ea14cacb921ef4270>
+- <https://github.com/ruby/ruby/commit/af0ea88b30d8c844a251e344e0da85ea01b2e0aa>
 
 ## pr
 
