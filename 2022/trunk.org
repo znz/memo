@@ -66,6 +66,9 @@ https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20221007
 https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20221008
 [83a9b91522] 補間処理 → 補完処理 ?
 
+https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20221011
+無視するゆにする → 無視するようにする ?
+
 https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20221125
 [bcdfe12919] html_escale → html_escape ?
 

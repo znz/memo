@@ -149,10 +149,19 @@
 - <https://github.com/ruby/actions/commit/15b62c8cb2ba1de601910ac4da31cc923f8ced69>
 - <https://github.com/ruby/docs.ruby-lang.org/commit/7e77ac93c95b41834e9cb85ea14cacb921ef4270>
 - <https://github.com/ruby/ruby/commit/af0ea88b30d8c844a251e344e0da85ea01b2e0aa>
+- <https://github.com/ruby/ruby/commit/7d264e8e7bc21800c79b81e73a38082ff88c220b>
+- <https://github.com/ruby/ruby/commit/bb2c3601381d8ecb033e48825f3d0c2a387dddf2>
+- <https://github.com/ruby/actions/commit/da583e928050fe83d02465e7d10d3487150221a2>
+- <https://github.com/ruby/actions/commit/04b593beaf8a6ce0ef4be81dd1bc45a59bd94784>
+- <https://github.com/ruby/actions/commit/977478f6d3be981e80c190bf1e235b1e0c2a1f06>
 
 ## pr
 
 - fork せずに ruby/net-imap に push して PR 作成 <https://github.com/ruby/net-imap/pull/88>
+- <https://github.com/rurema/doctree/pull/2765>
+- <https://github.com/rurema/doctree/pull/2766>
+- <https://github.com/rurema/doctree/pull/2767>
+- <https://github.com/janlelis/stdgems/pull/18>
 
 ## issues
 
