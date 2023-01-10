@@ -72,6 +72,20 @@ https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20221011
 https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20221012
 [04d291a490] よっとした → ちょっとした ?
 
+https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20221013
+[504e388525] Module#remove_methd → Module#remove_method ?
+[166140aa28] Cirrus Ci → Cirrus CI ?
+[751ffb276f] フィル名 → ファイル名 ?
+[c50623f093] エラー置きた → エラー起きた ?
+
+https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20221015
+non -blocking → non-blocking ?
+[7b7e5153e8]
+「defined?(Data.define)」じゃダメなのかと思ったら、2.5から2.7.1ではデフォルトで「warning: constant ::Data is deprecated」が出るからダメそうだった。
+
+https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20221016
+[8d20632df8] 追加ています → 追加しています ?
+
 https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20221125
 [bcdfe12919] html_escale → html_escape ?
 
