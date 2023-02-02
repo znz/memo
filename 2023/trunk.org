@@ -1,0 +1,10 @@
+* ruby-trunk-changes
+
+https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20230106
+[f877805a0c] gemspe → gemspec ?
+
+https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20230110
+[3be2acfafd] 新の時だけ → 真の時だけ ?
+
+https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20230112
+[c7bb8d67b7] CSV → CVS ?

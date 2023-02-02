@@ -1,0 +1,18 @@
+# 2023-01
+
+## commits
+
+- <https://github.com/ruby/ruby/commit/2fa3fda0c4534c7ba3cf9ab9c1963afdeda45ac8>
+- <https://github.com/ruby/ruby/commit/8ae4e3ddc9de89821a04e09f19d3bb1aefc4617d>
+
+## issues
+
+- <https://github.com/ruby/setup-ruby/issues/447>
+- <https://github.com/ohler55/oj/issues/834>
+
+## pr
+
+- <https://github.com/ruby/benchmark/pull/17>
+- <https://github.com/ruby/ruby-builder/pull/13>
+- <https://github.com/ruby/jruby-dev-builder/pull/1>
+- <https://github.com/ruby/fileutils/pull/106>

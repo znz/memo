@@ -86,6 +86,22 @@ non -blocking → non-blocking ?
 https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20221016
 [8d20632df8] 追加ています → 追加しています ?
 
+https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20221017
+[7cf37a5722] 追加ています → 追加しています ?
+
+https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20221019
+[e7166c9bb7] Rus 実装 → Rust 実装 ?
+
+[567725ed30]
+> また configure で ppc-darwin プラットフォームの対応というのを地下しています。
+地下しています ??
+
+https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20221020
+[d9d9005a3a] 開放 → 解放 ?
+
+https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20221026
+開放 → 解放 ?
+
 https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20221125
 [bcdfe12919] html_escale → html_escape ?
 
