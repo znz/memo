@@ -8,3 +8,6 @@ https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20230110
 
 https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20230112
 [c7bb8d67b7] CSV → CVS ?
+
+https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20230208
+[df2e36aeeb] GC.comact → GC.compact ?
