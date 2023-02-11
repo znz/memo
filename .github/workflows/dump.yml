@@ -57,7 +57,7 @@ jobs:
         env:
           MATRIX_CONTEXT: ${{ toJson(matrix) }}
         run: echo "$MATRIX_CONTEXT"
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - run: ls -lR $GITHUB_WORKSPACE
         if: false
       - run: |
