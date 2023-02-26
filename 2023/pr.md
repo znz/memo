@@ -18,3 +18,7 @@
 - <https://github.com/ruby/fileutils/pull/106>
 
 # 2023-02
+
+## pr
+
+- <https://github.com/yasslab/railsguides.jp/pull/1412>
