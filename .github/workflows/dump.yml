@@ -8,6 +8,8 @@ on:
       - '*'
     tags:
       - '*'
+  repository_dispatch:
+  workflow_dispatch:
 
 jobs:
   build:
