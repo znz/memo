@@ -22,3 +22,13 @@
 ## pr
 
 - <https://github.com/yasslab/railsguides.jp/pull/1412>
+
+# 2023-03
+
+## commits
+
+- <https://github.com/ruby/ruby/commit/5cffa69c1babb80be17d2544a430dce0f2c22b4e>
+
+## issues
+
+- <https://github.com/stefankroes/ancestry/issues/636>
