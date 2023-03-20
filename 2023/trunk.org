@@ -11,3 +11,6 @@ https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20230112
 
 https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20230208
 [df2e36aeeb] GC.comact → GC.compact ?
+
+https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20230316
+[760b8b7d24] rubycop → rubocop ?
