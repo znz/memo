@@ -104,7 +104,7 @@ jobs:
       - name: make
         run: cd snapshot-*/ && make $JOBS
       - name: Setup tmate session
-        uses: mxschmitt/action-tmate@28f608baaa037465aa887c21a7924e9e6b66a9e0 # v3.13
+        uses: mxschmitt/action-tmate@1005f9c9db5f1b055a495e72c6e589764984baf6 # v3.14
       - name: Tests
         run: cd snapshot-*/ && make $JOBS -s ${{ matrix.test_task }}
         env:
