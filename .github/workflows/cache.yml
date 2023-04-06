@@ -13,7 +13,7 @@ jobs:
     steps:
     - name: Cache Test
       id: cache-tests
-      uses: actions/cache@v1
+      uses: actions/cache@69d9d449aced6a2ede0bc19182fadc3a0a42d2b0 # v3.2.6
       with:
         path: dummy
         key: ${{ runner.os }}-dummy
