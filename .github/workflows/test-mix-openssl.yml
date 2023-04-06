@@ -15,7 +15,7 @@ jobs:
         if [ -d /github/home -a ! -e /home/runner ]; then
           ln -s /github/home /home/runner
         fi
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@24cb9080177205b6e8c946b17badbe402adc938f # v3.4.0
     - uses: ruby/setup-ruby@master
       with:
         ruby-version: 2.3
