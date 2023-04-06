@@ -40,17 +40,17 @@ jobs:
       - run: echo bar > bar.txt
       - run: ls -lR .
 
-      - uses: actions/upload-artifact@master
+      - uses: actions/upload-artifact@0b7f8abb1508181956e8e162db84b466c27e18ce # v3.1.2
         with:
           name: foo
           path: foo.txt
 
-      - uses: actions/upload-artifact@master
+      - uses: actions/upload-artifact@0b7f8abb1508181956e8e162db84b466c27e18ce # v3.1.2
         with:
           name: bar
           path: bar.txt
 
-      - uses: actions/upload-artifact@master
+      - uses: actions/upload-artifact@0b7f8abb1508181956e8e162db84b466c27e18ce # v3.1.2
         with:
           name: my-artifact
           path: path/to/artifact
