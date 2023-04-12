@@ -1,6 +1,31 @@
 version: 2
 updates:
-  - package-ecosystem: 'github-actions'
-    directory: '/'
-    schedule:
-      interval: 'daily'
+- package-ecosystem: "docker"
+  directory: "/2023/docker-ruby/27"
+  schedule:
+    interval: "daily"
+    time: "00:00"
+  ignore:
+  - dependency-name: "ruby"
+    update-types: ["version-update:semver-major", version-update:semver-minor"]
+- package-ecosystem: "docker"
+  directory: "/2023/docker-ruby/30"
+  schedule:
+    interval: "daily"
+    time: "00:00"
+  ignore:
+  - dependency-name: "ruby"
+    update-types: ["version-update:semver-major", version-update:semver-minor"]
+- package-ecosystem: "docker"
+  directory: "/2023/docker-ruby/31"
+  schedule:
+    interval: "daily"
+    time: "00:00"
+  ignore:
+  - dependency-name: "ruby"
+    update-types: ["version-update:semver-major", version-update:semver-minor"]
+
+- package-ecosystem: 'github-actions'
+  directory: '/'
+  schedule:
+    interval: 'daily'
