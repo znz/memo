@@ -14,3 +14,6 @@ https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20230208
 
 https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20230316
 [760b8b7d24] rubycop → rubocop ?
+
+https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20230413
+[00bbd31edb] Assember → Assembler ?
