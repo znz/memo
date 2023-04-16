@@ -1,1 +1,1 @@
-FROM ruby:2.7.6-slim-buster
+FROM ruby:2.7.8-slim-buster
