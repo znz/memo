@@ -17,3 +17,6 @@ https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20230316
 
 https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20230413
 [00bbd31edb] Assember → Assembler ?
+
+https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20230426
+[e3d05001ed] rubyhspec → ruby/spec ?

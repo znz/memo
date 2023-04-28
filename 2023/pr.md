@@ -38,8 +38,11 @@
 ## commits
 
 - <https://github.com/ruby/actions/commit/b105aad95d851d30746dc3f31616d73c738ac91f>
+- <https://github.com/ruby/ruby/commit/2f6539fc9407e900d13416e20e521a413f900b15>
+- <https://github.com/ruby/ruby/commit/8519d94d3d8511080d3724fd328926d443cb95fa> <https://bugs.ruby-lang.org/issues/19605>
 
 ## pr
 
 - <https://github.com/ruby/www.ruby-lang.org/pull/3031>
 - <https://github.com/ruby/www.ruby-lang.org/pull/3032>
+- <https://github.com/yasslab/railsguides.jp/pull/1443>
