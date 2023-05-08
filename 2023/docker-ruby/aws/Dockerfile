@@ -1,1 +1,1 @@
-FROM public.ecr.aws/docker/library/ruby:3.0.0
+FROM public.ecr.aws/docker/library/ruby:3.2.2
