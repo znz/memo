@@ -26,7 +26,7 @@ updates:
   schedule:
     interval: "weekly"
     day: "tuesday"
-    time: "8:55"
+    time: "08:50"
     timezone: "Asia/Tokyo"
   ignore:
   - dependency-name: "ruby"
