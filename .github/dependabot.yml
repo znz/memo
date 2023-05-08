@@ -22,11 +22,11 @@ updates:
   - dependency-name: "ruby"
     update-types: ["version-update:semver-major", "version-update:semver-minor"]
 - package-ecosystem: "docker"
-  directory: "/2023/docker-ruby/31/local"
+  directory: "/2023/docker-ruby/aws"
   schedule:
     interval: "weekly"
-    day: "friday"
-    time: "14:55"
+    day: "tuesday"
+    time: "8:55"
     timezone: "Asia/Tokyo"
   ignore:
   - dependency-name: "ruby"
