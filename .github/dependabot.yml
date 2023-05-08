@@ -29,7 +29,7 @@ updates:
     time: "08:50"
     timezone: "Asia/Tokyo"
   ignore:
-  - dependency-name: "ruby"
+  - dependency-name: "docker/library/ruby"
     update-types: ["version-update:semver-major", "version-update:semver-minor"]
 
 - package-ecosystem: 'github-actions'
