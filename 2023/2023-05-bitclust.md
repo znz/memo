@@ -656,3 +656,22 @@ lib/bitclust/textutils.rb:21:23: [error] Type `(::MatchData | nil)` does not hav
 
 Detected 1 problem from 1 file
 ```
+
+## rbs 導入したい 3日目
+
+- vscode でみながら `sig/hand-written` にコピーして更新して以下のタスクで重複を消して調整していた。
+
+<https://github.com/znz/bitclust/blob/add-rbs/Rakefile#LL18C1-L26C1>
+
+```ruby
+desc "Re-generate sig/prototype"
+task :sig do
+  FileUtils.rm_rf 'sig/prototype'
+  sh 'rbs prototype rb --out-dir=sig/prototype lib'
+  FileUtils.rm 'sig/prototype/bitclust/compat.rbs'
+  sh 'rbs subtract --write sig/prototype sig/hand-written'
+  sh 'steep validate'
+end
+```
+
+- 現状は <https://github.com/znz/bitclust/tree/add-rbs> に push した。
