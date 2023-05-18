@@ -675,3 +675,5 @@ end
 ```
 
 - 現状は <https://github.com/znz/bitclust/tree/add-rbs> に push した。
+- `gsub` のブロックの中の `$~` などのように `nil` にならないとわかっている部分で `nil` の可能性の型エラーになるのをどうすればいいのかがまだわからない。
+- `@input.path if @input.respond_to?(:path)` のように `respond_to?` で分岐している部分で `path` メソッドのない型も通すのはどうすればいいのかがまだわからない。
