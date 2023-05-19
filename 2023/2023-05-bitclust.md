@@ -677,3 +677,15 @@ end
 - 現状は <https://github.com/znz/bitclust/tree/add-rbs> に push した。
 - `gsub` のブロックの中の `$~` などのように `nil` にならないとわかっている部分で `nil` の可能性の型エラーになるのをどうすればいいのかがまだわからない。
 - `@input.path if @input.respond_to?(:path)` のように `respond_to?` で分岐している部分で `path` メソッドのない型も通すのはどうすればいいのかがまだわからない。
+
+## rbs 導入したい 4日目
+
+- 他への依存が少なそうなものから再開。
+- `bitclust/subcommand.rbs` は `rbs_collection.yaml` に `optparse` と `pathname` の追加が必要だった。
+- `bitclust/syntax_highlighter.rbs` は `event_name = event.to_s.sub(/\Aon_/, "")   # :on_event --> "event"` というコメントが [型アサーション](https://github.com/soutaro/steep/blob/master/guides/src/nil-optional/nil-optional.md#type-assertions) に誤認識されていた。
+- `rb` ファイルは潜在バグ修正だけで、型のための修正は (まだ) しない方針なので、そのまま。
+- 昨日までの変更で、型のために `return foo, bar` のようなものを `[foo, bar]` のように書き換えてしまったところがあるので、あとで戻すかも。
+- `bitclust/rrdparser.rbs` は多かったので `Context` は後回しにして他をやっていた。
+- `bitclust/compat.rbs` は削除していたが、 `fopen` は使われているので、 `File.open` をホバーしたときに出てくる型をコピーして使った。
+- `NameUtils` の `typemark2name` に正常系でも `nil` を渡す可能性があったので、 `def self?.typemark2name: (String? mark) -> Symbol` に変更した。
+- `lib/bitclust/rrdparser.rb` の `nil` の可能性があるいくつかは潜在バグの可能性があるので、 `&.` にしたり `compact` をつけたりした。
