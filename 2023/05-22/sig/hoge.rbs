@@ -1,0 +1,8 @@
+interface _FromJson[T]
+  def from_json: (json: String) -> T
+end
+
+class Hoge
+  extend _FromJson[instance]
+  def hoge: () -> void
+end
