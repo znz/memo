@@ -689,3 +689,12 @@ end
 - `bitclust/compat.rbs` は削除していたが、 `fopen` は使われているので、 `File.open` をホバーしたときに出てくる型をコピーして使った。
 - `NameUtils` の `typemark2name` に正常系でも `nil` を渡す可能性があったので、 `def self?.typemark2name: (String? mark) -> Symbol` に変更した。
 - `lib/bitclust/rrdparser.rb` の `nil` の可能性があるいくつかは潜在バグの可能性があるので、 `&.` にしたり `compact` をつけたりした。
+
+## rbs 導入したい 5日目
+
+- `bitclust/preprocessor.rbs` の対応
+- `BitClust::LineFilter#next_line` はサブクラスで定義される想定で `# abstract next_line` というコメントがあって型ではどうすればいいのかわからず、とりあえず普通に `def next_line` を書いておいた。
+- `nil` の可能性対応をどうすればいいのか悩み中なので、 `lib/bitclust/preprocessor.rb` は変更せず。
+- `#@if` で使う条件を `eval_cond` しているところで、 database property から取り出しているらしい `@params[t]` の型がわからないので、とりあえず確実にわかる `String | Integer` と `nil` の可能性を `evaluated_result` という型にしておいた。
+- `State` も `@label` に入る `Symbol` は数種類しかなさそうだったので、 `type state_label = :toplevel | :samplecode | :condition` という型を用意してみた。
+- `fopen` 周りの型が決められなくて、 `process` や `wrap` などの引数は `untyped` のままにしている。
