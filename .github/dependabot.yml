@@ -1,34 +1,12 @@
 version: 2
 updates:
 - package-ecosystem: "docker"
-  directory: "/2023/docker-ruby/27"
+  directory: "/docker"
   schedule:
-    interval: "weekly"
+    interval: "daily"
   ignore:
   - dependency-name: "ruby"
     update-types: ["version-update:semver-major", "version-update:semver-minor"]
-- package-ecosystem: "docker"
-  directory: "/2023/docker-ruby/30"
-  schedule:
-    interval: "weekly"
-  ignore:
-  - dependency-name: "ruby"
-    update-types: ["version-update:semver-major", "version-update:semver-minor"]
-- package-ecosystem: "docker"
-  directory: "/2023/docker-ruby/31"
-  schedule:
-    interval: "weekly"
-  ignore:
-  - dependency-name: "ruby"
-    update-types: ["version-update:semver-major", "version-update:semver-minor"]
-- package-ecosystem: "docker"
-  directory: "/2023/docker-ruby/aws"
-  schedule:
-    interval: "weekly"
-    day: "tuesday"
-    time: "08:50"
-    timezone: "Asia/Tokyo"
-  ignore:
   - dependency-name: "docker/library/ruby"
     update-types: ["version-update:semver-major", "version-update:semver-minor"]
 
