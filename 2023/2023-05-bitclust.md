@@ -698,3 +698,18 @@ end
 - `#@if` で使う条件を `eval_cond` しているところで、 database property から取り出しているらしい `@params[t]` の型がわからないので、とりあえず確実にわかる `String | Integer` と `nil` の可能性を `evaluated_result` という型にしておいた。
 - `State` も `@label` に入る `Symbol` は数種類しかなさそうだったので、 `type state_label = :toplevel | :samplecode | :condition` という型を用意してみた。
 - `fopen` 周りの型が決められなくて、 `process` や `wrap` などの引数は `untyped` のままにしている。
+
+## rbs 導入したい 6日目
+
+- `bitclust/silent_progress_bar.rbs` は依存がないので特に問題なし。
+- `bitclust/messagecatalog.rbs` は 3 個指摘が残った。
+- `MessageCatalog.load_file` が `f.each` の中で `f.gets.chomp` していて `chomp` で `nil` の可能性があるという指摘。これは2行ごとのファイルという仮定があるので、指摘としては妥当。これは `|| raise` をつけても良いパターンかも。
+- `return path, locale` が `::Array[::String]` 扱いされて `[::String, ::String] | nil` にならないという指摘が残る。
+- `find_catalog` を `-> ([String, String] | nil)` にしてみたけど、 `load_file(path, loc)` の `loc` に赤波下線で `nil` の可能性を指摘されてしまう。
+
+https://github.com/znz/bitclust/blob/add-rbs/lib/bitclust/messagecatalog.rb#L55-L56
+
+```ruby
+      path, loc = find_catalog(prefix, locales)
+      path ? load_file(path, loc) : new({}, 'C')
+```
