@@ -15,10 +15,19 @@ jobs:
     steps:
     - name: Cache Test
       id: cache-tests
-      uses: actions/cache${{ contains(github.event.action, 'restore') && '/restore' }}@88522ab9f39a2ea568f7027eddc7d8d8bc9d59c8 # v3.3.1
+      uses: actions/cache/restore@88522ab9f39a2ea568f7027eddc7d8d8bc9d59c8 # v3.3.1
       with:
         path: dummy
         key: ${{ runner.os }}-dummy
+      if: "contains(github.event.action, 'restore')"
+
+    - name: Cache Test
+      id: cache-tests
+      uses: actions/cache@88522ab9f39a2ea568f7027eddc7d8d8bc9d59c8 # v3.3.1
+      with:
+        path: dummy
+        key: ${{ runner.os }}-dummy
+      if: "!contains(github.event.action, 'restore')"
 
     - name: Check dummy
       run: |
