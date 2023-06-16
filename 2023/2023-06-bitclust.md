@@ -7,3 +7,14 @@
 - `bitclust/database.rb` 対応
 - `DRbObject = DRb::DRbObject` のような定数の別名は `DRbObject: singleton(DRb::DRbObject)` のように書けばいいらしい。(`Mutex` を参考にした。)
 - `::String` のように `::` をつける書き方を使ってみたが、他のファイルと統一感がなくなっただけかもしれない。
+
+## rbs 導入したい 8日目
+
+- `lib/bitclust/methoddatabase.rb` 対応
+- `load_extent` で `def load_extent: (Class entry_class) -> Hash[String, entry_class]` という感じにしたかったけど、 `entry_class` という型はないのでダメだった。 `Class` のところもできれば `Entry` のサブクラスのみにしたい。
+- `def fetch_doc: (String name) -> (DocEntry | bot)` のように、バグじゃないときにも例外を投げる可能性のあるものは `| bot` をつけてみている。
+- `Location` の `file` に `Pathname` を渡しているところがあったので、受け付けるように緩めた。
+- `search_methods` の `result` は `Array[MethodEntry]` ではなく `SearchResult` っぽいが `first` メソッドが定義されてなさそうなので `search_method` で何が返ってきているのかが謎。
+- `bitclust/docentry.rbs` は property 関連だけ追加したので、後で他のメソッドの対応が必要。
+- `lib/bitclust/methodid.rb` 対応
+- `initialize` で受け取らずに直後に `attr_accessor` で設定していて、 `nil` の可能性があるという型エラーをどこかで無視する必要がある。オブジェクトを使う側にも初期化済みかどうかの状態管理の責任を押し付けているので、オブジェクト思考的には良くない設計になっている。ここではとりあえず `initialize` の代入のところでエラーのままにしてみた。
