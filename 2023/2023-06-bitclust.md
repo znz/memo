@@ -18,3 +18,10 @@
 - `bitclust/docentry.rbs` は property 関連だけ追加したので、後で他のメソッドの対応が必要。
 - `lib/bitclust/methodid.rb` 対応
 - `initialize` で受け取らずに直後に `attr_accessor` で設定していて、 `nil` の可能性があるという型エラーをどこかで無視する必要がある。オブジェクトを使う側にも初期化済みかどうかの状態管理の責任を押し付けているので、オブジェクト思考的には良くない設計になっている。ここではとりあえず `initialize` の代入のところでエラーのままにしてみた。
+
+## rbs 導入したい 9日目
+
+- <https://github.com/ruby/rbs/blob/cc6e829765883292f27d867af06340b0caeae4ac/docs/syntax.md#attribute-definition> で `attr_reader foo` などに `@foo` が含まれているので、 `attr_*` があれば `@foo` は不要とわかったので、新しいところからは消した。
+- [RBS helper](https://marketplace.visualstudio.com/items?itemName=tk0miya.rbs-helper) で `lib` の省略に対応してもらったので使えるようになった。
+- `MethodNamePattern` の `select_classes` から呼ばれている `expand_ic` は存在しなかった。(他のクラスに同名のメソッドはあるが継承関係などにはなっていない。)
+- `MethodNamePattern` の `@crecache` と `@mrecache` と `select_classes` は未使用っぽいとわかった。継承して使っているということもなかった。
