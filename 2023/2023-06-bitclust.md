@@ -25,3 +25,21 @@
 - [RBS helper](https://marketplace.visualstudio.com/items?itemName=tk0miya.rbs-helper) で `lib` の省略に対応してもらったので使えるようになった。
 - `MethodNamePattern` の `select_classes` から呼ばれている `expand_ic` は存在しなかった。(他のクラスに同名のメソッドはあるが継承関係などにはなっていない。)
 - `MethodNamePattern` の `@crecache` と `@mrecache` と `select_classes` は未使用っぽいとわかった。継承して使っているということもなかった。
+
+## rbs 導入したい 10日目
+
+- `methodentry.rbs` の対応途中
+- 以下のコメントがあったので、 `BitClust::NameUtils` の方に `type typename = (:singleton_method | :instance_method | :module_function | :constant | :special_variable)` を導入してみた。
+
+```ruby
+   # typename = :singleton_method
+    #          | :instance_method
+    #          | :module_function
+    #          | :constant
+    #          | :special_variable
+    def typename
+      methodid2typename(@id)
+    end
+```
+
+- `typemark` と `typechar` も正常系でとれる値は決まっているので専用の型を用意するのが良いのかもしれないと思って追加した。
