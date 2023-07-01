@@ -49,3 +49,10 @@
 - `methodentry.rbs` 続き
 - `typemark` は他のところにも波及していった
 - `typechar` や `typemark` のように値の範囲が固定で決まっている `String` 以外でも `split_method_id` の引数と返り値のように期待される形式が決まっている `String` は個別の型をつけてみるのが良いのかもしれない。
+
+## rbs 導入したい 12日目
+
+- `classentry.rbs` をやろうとしたが、親クラスの `entry.rbs` の改善をやっていた。
+- `attr_reader id: String` や `def source: () -> String` などは `Entry` にはないが、サブクラスでは定義されているはず、ということで呼び出しているところで型エラーになるので、結局 `entry.rbs` に追加することにした。
+- クラスのインスタンス変数は `self.@slots: Array[Property]` のように書けば認識された。
+- `def restore_entries: (String str, untyped klass) -> ::Array[untyped]` のように `klass` 引数で渡されたクラス (`Entry` クラスのサブクラス) のインスタンスの配列を返す、というのがどう書くのかわからなくて、 `untyped` にしてしまう。
