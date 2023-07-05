@@ -23,3 +23,6 @@ https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20230426
 
 https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20230629
 [a500eb9f8c] 開放時 → 解放時 ?
+
+https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20230702
+[765a19ab59] privagte → private ?

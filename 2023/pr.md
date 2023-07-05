@@ -73,3 +73,17 @@
 ## issues
 
 - <https://github.com/ruby/irb/issues/620>
+
+# 2023-07
+
+## pr
+
+- <https://github.com/sameersbn/docker-redmine/pull/518>
+
+## commits
+
+- <https://github.com/ruby/actions/commit/554cd6de9b19e431dfb02473e3e5f327bc588dcb>
+
+## issues
+
+- <https://github.com/rubocop/rubocop-factory_bot/issues/58>
