@@ -87,3 +87,4 @@
 ## issues
 
 - <https://github.com/rubocop/rubocop-factory_bot/issues/58>
+- <https://github.com/rails/spring/issues/697>
