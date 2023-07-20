@@ -83,6 +83,7 @@
 ## commits
 
 - <https://github.com/ruby/actions/commit/554cd6de9b19e431dfb02473e3e5f327bc588dcb>
+- <https://github.com/ruby/ruby/commit/ea2fc58d9ae4da9bf280ce2d4fd87896aa4b693d>
 
 ## issues
 
