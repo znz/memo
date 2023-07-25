@@ -107,4 +107,4 @@ systemctl enable grub-recheck.service
 # sudo btrfs subvolume delete /ext2_saved
 #
 # sudo apt install btrfsmaintenance
-# sudo systemctl enable --now btrfs-scrub.timer
+# sudo systemctl enable --now btrfs-balance.timer btrfs-defrag.timer btrfs-scrub.timer btrfs-trim.timer
