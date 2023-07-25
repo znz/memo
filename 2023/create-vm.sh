@@ -16,17 +16,17 @@ time limactl shell $name sudo btrfs scrub start /
 time limactl shell $name sudo btrfs subvolume delete /ext2_saved
 
 time limactl shell $name sudo apt update
-time limactl shell $name sudo apt install -y etckeeper
+time limactl shell $name sudo DEBIAN_FRONTEND=noninteractive apt install -y etckeeper
 
 time limactl shell $name bash -c 'sudo tee /etc/needrestart/conf.d/50-autorestart.conf <<<"\$nrconf{restart} = '"'a'"';"'
 time limactl shell $name sudo etckeeper commit 'Set needrestart auto'
 
-time limactl shell $name sudo apt install -y btrfsmaintenance
+time limactl shell $name sudo DEBIAN_FRONTEND=noninteractive apt install -y btrfsmaintenance
 time limactl shell $name sudo systemctl enable --now btrfs-balance.timer btrfs-defrag.timer btrfs-scrub.timer btrfs-trim.timer
 time limactl shell $name sudo etckeeper commit 'enable btrfsmaintenance timers'
 
-time limactl shell $name sudo apt full-upgrade -y
-time limactl shell $name sudo apt autoremove --purge -y
+time limactl shell $name sudo DEBIAN_FRONTEND=noninteractive apt full-upgrade -y
+time limactl shell $name sudo DEBIAN_FRONTEND=noninteractive apt autoremove --purge -y
 
 time limactl stop $name
 time limactl start $name
