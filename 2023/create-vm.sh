@@ -41,6 +41,6 @@ time limactl shell $name sudo btrfs subvolume set-default /@
 time limactl stop $name
 time limactl start $name
 
-time limactl shell $name sudo btrfs subvolume delete /ext2_saved
+time limactl shell $name sudo btrfs subvolume delete /mnt/btr_pool/ext2_saved
 time limactl shell $name sudo rm -rf /mnt/btr_pool/[A-Za-z]*
 time limactl shell $name sudo etckeeper vcs gc
