@@ -13,7 +13,7 @@ time limactl shell $name sudo btrfs filesystem defragment -r -v -czstd /
 time limactl shell $name sudo btrfs quota enable /
 time limactl shell $name sudo btrfs quota rescan / || :
 time limactl shell $name sudo btrfs scrub start /
-#time limactl shell $name sudo btrfs subvolume delete /ext2_saved
+time limactl shell $name sudo btrfs subvolume delete /ext2_saved
 
 time limactl shell $name sudo apt update
 time limactl shell $name sudo DEBIAN_FRONTEND=noninteractive apt install -y etckeeper
@@ -41,12 +41,11 @@ done
 time limactl shell $name sudo btrfs subvolume set-default /@
 
 if limactl shell $name test -d /@/var/lib/docker; then
-    time limactl shell $name sudo tee /@/etc/docker/daemon.json <<<"{\n  \"storage-driver\": \"btrfs\"\n}\n"
+    time limactl shell $name sudo tee /@/etc/docker/daemon.json <<<$'{\n  "storage-driver": "btrfs"\n}\n'
 fi
 
 time limactl stop $name
 time limactl start $name
 
-time limactl shell $name sudo btrfs subvolume delete /mnt/btr_pool/ext2_saved
 time limactl shell $name sudo rm -rf /mnt/btr_pool/[A-Za-z]*
 time limactl shell $name sudo etckeeper vcs gc
