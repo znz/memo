@@ -31,12 +31,18 @@ time limactl shell $name sudo DEBIAN_FRONTEND=noninteractive apt autoremove --pu
 time limactl shell $name sudo btrfs subvolume snapshot / /@
 time limactl shell $name sudo mkdir /@/mnt/btr_pool
 time limactl shell $name sudo tee -a /@/etc/fstab <<<"LABEL=cloudimg-rootfs /mnt/btr_pool btrfs subvolid=5 0 0"
-for d in home var/log tmp var/tmp var/cache var/lib/snapd var/snap snap; do
-    time limactl shell $name sudo btrfs subvolume create /@${d//\//_}
-    time limactl shell $name sudo find /@/$d -maxdepth 1 -mindepth 1 -exec mv -t /@${d//\//_} '{}' +
-    time limactl shell $name sudo tee -a /@/etc/fstab <<<"LABEL=cloudimg-rootfs /$d btrfs subvol=@${d//\//_} 0 0"
+for d in home var/log tmp var/tmp var/cache var/lib/snapd var/snap snap var/lib/docker; do
+    if limactl shell $name test -d /@/$d; then
+        time limactl shell $name sudo btrfs subvolume create /@${d//\//_}
+        time limactl shell $name sudo find /@/$d -maxdepth 1 -mindepth 1 -exec mv -t /@${d//\//_} '{}' +
+        time limactl shell $name sudo tee -a /@/etc/fstab <<<"LABEL=cloudimg-rootfs /$d btrfs subvol=@${d//\//_} 0 0"
+    fi
 done
 time limactl shell $name sudo btrfs subvolume set-default /@
+
+if limactl shell $name test -d /@/var/lib/docker; then
+    time limactl shell $name sudo tee /@/etc/docker/daemon.json <<<"{\n  \"storage-driver\": \"btrfs\"\n}\n"
+fi
 
 time limactl stop $name
 time limactl start $name
