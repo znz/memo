@@ -89,3 +89,9 @@
 
 - <https://github.com/rubocop/rubocop-factory_bot/issues/58>
 - <https://github.com/rails/spring/issues/697>
+
+# 2023-08
+
+## commits
+
+- <https://github.com/ruby/ruby/commit/3f010d48fc0be34799eeeb5661e7ffb3b5319d5c>
