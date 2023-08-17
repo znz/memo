@@ -95,3 +95,5 @@
 ## commits
 
 - <https://github.com/ruby/ruby/commit/3f010d48fc0be34799eeeb5661e7ffb3b5319d5c>
+- <https://github.com/ruby/actions/commit/a29e6dd466666a341e00561ad4efbd3e364b552a>
+- <https://github.com/ruby/actions/commit/ca19d5cd8115d0db6300be6d0f7b2e56332e0650>
