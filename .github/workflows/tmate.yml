@@ -11,18 +11,18 @@ jobs:
     if: contains(github.event.action, 'ubuntu')
     steps:
     - name: Setup tmate session
-      uses: mxschmitt/action-tmate@53a5c23a925969671a6bb98ea70a4f650928ef93 # v3.16
+      uses: mxschmitt/action-tmate@a283f9441d2d96eb62436dc46d7014f5d357ac22 # v3.17
 
   macos:
     runs-on: macos-latest
     if: contains(github.event.action, 'macos')
     steps:
     - name: Setup tmate session
-      uses: mxschmitt/action-tmate@53a5c23a925969671a6bb98ea70a4f650928ef93 # v3.16
+      uses: mxschmitt/action-tmate@a283f9441d2d96eb62436dc46d7014f5d357ac22 # v3.17
 
   windows:
     runs-on: windows-latest
     if: contains(github.event.action, 'windows')
     steps:
     - name: Setup tmate session
-      uses: mxschmitt/action-tmate@53a5c23a925969671a6bb98ea70a4f650928ef93 # v3.16
+      uses: mxschmitt/action-tmate@a283f9441d2d96eb62436dc46d7014f5d357ac22 # v3.17
