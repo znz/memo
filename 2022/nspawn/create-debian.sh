@@ -61,7 +61,7 @@ esac
 
 # apt-line
 case "$arch" in
-    alpha|hppa|ia64|m68k|powerpc|ppc64|riscv64|sh4|sparc64|x32)
+    alpha|hppa|ia64|m68k|powerpc|ppc64|sh4|sparc64|x32)
         # https://deb.debian.org/debian-ports/ にあるもの
         args=(
             "${args[@]}"
