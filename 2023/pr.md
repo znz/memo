@@ -103,3 +103,7 @@
 ## pr
 
 - <https://github.com/ruby/rubyci/pull/409>
+
+## issues
+
+- <https://bugs.ruby-lang.org/issues/19902>
