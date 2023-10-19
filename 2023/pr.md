@@ -107,3 +107,15 @@
 ## issues
 
 - <https://bugs.ruby-lang.org/issues/19902>
+
+# 2023-10
+
+## pr
+
+- <https://github.com/ruby/ruby/pull/8622>
+- <https://github.com/rurema/doctree/pull/2836>
+
+## commits
+
+- <https://github.com/ruby/ruby/commit/fe08839d8ac3b830c3b88626043da30f57de73c9>
+- <https://github.com/ruby/ruby/commit/c782c6fd4cedd63021afef03385da6ff15d27321>
