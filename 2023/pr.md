@@ -119,3 +119,5 @@
 
 - <https://github.com/ruby/ruby/commit/fe08839d8ac3b830c3b88626043da30f57de73c9>
 - <https://github.com/ruby/ruby/commit/c782c6fd4cedd63021afef03385da6ff15d27321>
+- <https://github.com/ruby/ruby/commit/77d7ac7c066e281b9c41d04b7fc3315e41aa6485>
+- <https://github.com/ruby/ruby/commit/8b3a2d56fd1041d0ec2dfdfb82f865592941fb05>
