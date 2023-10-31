@@ -121,3 +121,16 @@
 - <https://github.com/ruby/ruby/commit/c782c6fd4cedd63021afef03385da6ff15d27321>
 - <https://github.com/ruby/ruby/commit/77d7ac7c066e281b9c41d04b7fc3315e41aa6485>
 - <https://github.com/ruby/ruby/commit/8b3a2d56fd1041d0ec2dfdfb82f865592941fb05>
+- <https://github.com/ruby-jp/ruboty-ruby-jp/commit/54595c25cc8d482e55b21c6ad3eac4e7e6f57618>
+
+```console
+% ruby -e 'gem "activesupport", "~> 7.0.0"; require "active_support"; p 1.present?'
+true
+% ruby -e 'gem "activesupport", "~> 7.1.0"; require "active_support"; p 1.present?'
+-e:one:in `<main>': undefined method `present?' for 1:Integer (NoMethodError)
+
+gem "activesupport", "~> 7.1.0"; require "active_support"; p 1.present?
+                                                              ^^^^^^^^^
+% ruby -e 'gem "activesupport", "~> 7.1.0"; require "active_support"; require "active_support/core_ext"; p 1.present?'
+true
+```
