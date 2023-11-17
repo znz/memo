@@ -39,3 +39,9 @@ sig/prototype/bitclust/syntax_highlighter.rbs:13:4: [error] Declaration of `::Bi
 ```
 
 のようなのが大量に出ていたのは、結局勘で [`Steepfile` の `signature "sig"` をコメントアウト](https://github.com/rurema/bitclust/commit/15fc63e64642fba4aaa8313ea5a0928ed98c8684) したら解決した。
+
+## methodid.rb
+
+* `lib/bitclust/methodid.rb` の `(not @library or m.library.name?(@library))` などで `nil` の可能性が指摘されていたので、とりあえず `|| raise` を追加。
+* その変更を受けて `BitClust::MethodEntry#name?` の引数が `untyped` だったのを `String` に変更。この変更で他の場所で型エラーが増える可能性はありそう。
+* `BitClust::MethodNamePattern#expand_ic` は定義されていなくて、 `include` などもなかったので、コメントアウトして `raise "[MAYBE BUG] BitClust::MethodNamePattern#expand_ic is not defined"` に書き換え。

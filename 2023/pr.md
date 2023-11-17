@@ -134,3 +134,10 @@ gem "activesupport", "~> 7.1.0"; require "active_support"; p 1.present?
 % ruby -e 'gem "activesupport", "~> 7.1.0"; require "active_support"; require "active_support/core_ext"; p 1.present?'
 true
 ```
+
+# 2023-11
+
+## commits
+
+- <https://github.com/ruby/actions/commit/59ae9041f956a9349af8885d226c77230963b3f6>
+- <https://github.com/ruby/actions/commit/097bbfd7dcf46b950ee0c87193ac87c44f8d0472>
