@@ -147,3 +147,10 @@ true
 # pr
 
 - <https://github.com/elastic/elasticsearch-rails/pull/1065>
+
+# 2023-12
+
+## commits
+
+- <https://github.com/ruby/actions/commit/e4bce7bfccbe4323e93b7b577e94061cc1d26404>
+- <https://github.com/ruby/ruby/commit/eaead94d047a370cc80d9a88a7e80533a78ad8b7>
