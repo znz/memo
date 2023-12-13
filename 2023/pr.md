@@ -144,7 +144,7 @@ true
 - <https://github.com/ruby/ruby/commit/f7d268898e72aab6988b7e4694d920648a6de90e>
 - <https://github.com/ruby/ruby/commit/062b59ba9aa0f6d5057e0187a04d11b75d623952> <https://github.com/ruby/ruby/commit/60568e971e1e7061bfe365e1fbf8a70a598c241a>
 
-# pr
+## pr
 
 - <https://github.com/elastic/elasticsearch-rails/pull/1065>
 
@@ -154,3 +154,7 @@ true
 
 - <https://github.com/ruby/actions/commit/e4bce7bfccbe4323e93b7b577e94061cc1d26404>
 - <https://github.com/ruby/ruby/commit/eaead94d047a370cc80d9a88a7e80533a78ad8b7>
+
+## pr
+
+- <https://github.com/ruby/ruby/pull/9195>
