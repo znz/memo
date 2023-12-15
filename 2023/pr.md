@@ -154,6 +154,7 @@ true
 
 - <https://github.com/ruby/actions/commit/e4bce7bfccbe4323e93b7b577e94061cc1d26404>
 - <https://github.com/ruby/ruby/commit/eaead94d047a370cc80d9a88a7e80533a78ad8b7>
+- <https://github.com/ruby/ruby/commit/74b6e70ef4cf1e625ff968ebf3e62dc9a0760ac1>
 
 ## pr
 
