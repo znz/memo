@@ -7,3 +7,4 @@
 - <https://github.com/rubocop/rubocop/issues/12629>
 - <https://github.com/rubocop/rubocop/issues/12630>
 - <https://github.com/rubocop/rubocop/pull/12628#issuecomment-1897983405>
+- <https://github.com/rubocop/rubocop/issues/12632>
