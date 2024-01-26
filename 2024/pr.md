@@ -14,3 +14,8 @@
 ## pr
 
 - <https://github.com/bblimke/webmock/pull/1047>
+- <https://github.com/ruby/action-slack/pull/6>
+
+## commits
+
+- <https://github.com/ruby/actions/commit/e3c110710c9f993aab9b4a7655cf27989a603846>
