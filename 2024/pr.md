@@ -10,6 +10,7 @@
 - <https://github.com/rubocop/rubocop/issues/12632>
 - <https://github.com/reidmorrison/rails_semantic_logger/issues/206>
 - <https://github.com/bblimke/webmock/commit/d028c494026b441559f1805ecfdb0629559d51e5>
+- <https://github.com/milter-manager/milter-manager/issues/205>
 
 ## pr
 
