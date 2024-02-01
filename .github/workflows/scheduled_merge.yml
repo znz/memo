@@ -15,7 +15,9 @@ jobs:
     - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
     - name: Merge scheduled PRs
       run: |
-        pr_urls=($(gh pr list --label scheduled_merge --search 'status:success review:approved' --json url --jq 'map(.url)[]'))
+        # search_condition='status:success review:approved'
+        search_condition='review:approved'
+        pr_urls=($(gh pr list --label scheduled_merge --search "$search_condition" --json url --jq 'map(.url)[]'))
         for pr_url in "${pr_urls[@]}"; do
           echo "Merge $pr_url"
           gh pr merge --auto --merge "$pr_url"
