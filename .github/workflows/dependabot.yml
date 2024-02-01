@@ -4,6 +4,7 @@ on: pull_request_target
 permissions:
   pull-requests: write
   contents: write
+  repository-projects: write
 
 jobs:
   dependabot:
@@ -37,9 +38,9 @@ jobs:
         PR_URL: ${{github.event.pull_request.html_url}}
         GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
-    - name: Enable scheduled_merge for Dependabot PRs
-      if: ${{contains(steps.dependabot-metadata.outputs.dependency-names, 'aws-sdk')
-      run: gh pr edit --add-label scheduled_merge "$PR_URL"
+    - name: Add scheduled_merge label for aws-sdk
+      if: ${{contains(steps.dependabot-metadata.outputs.dependency-names, 'aws-sdk')}}
+      run: gh pr edit "$PR_URL" --add-label scheduled_merge
       env:
         PR_URL: ${{github.event.pull_request.html_url}}
         GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
