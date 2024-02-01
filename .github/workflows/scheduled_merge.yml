@@ -3,6 +3,7 @@ name: Scheduled merge
 on:
   schedule:
     - cron: '55 22 * * 4' # 7:55 Fri (Asia/Tokyo)
+    - cron: '10,20,30 0 * * 4' # 9:10 Fri (Asia/Tokyo)
 
 permissions:
   pull-requests: write
@@ -12,12 +13,11 @@ jobs:
   scheduled_merge:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
     - name: Merge scheduled PRs
       run: |
         # search_condition='status:success review:approved'
         search_condition='review:approved'
-        pr_urls=($(gh pr list --label scheduled_merge --search "$search_condition" --json url --jq 'map(.url)[]'))
+        pr_urls=($(gh pr list --repo "$REPOSITORY" --label scheduled_merge --search "$search_condition" --json url --jq 'map(.url)[]'))
         status=0
         for pr_url in "${pr_urls[@]}"; do
           echo "Merge $pr_url"
@@ -25,4 +25,5 @@ jobs:
         done
         exit $status
       env:
+        REPOSITORY: ${{github.repository}}
         GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
