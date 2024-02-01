@@ -2,7 +2,7 @@ name: Scheduled merge
 
 on:
   schedule:
-    - cron: '55 6 * * *'
+    - cron: '5 7 * * *'
 
 permissions:
   pull-requests: write
@@ -20,3 +20,5 @@ jobs:
           echo "Merge $pr_url"
           gh pr merge --auto --merge "$pr_url"
         done
+      env:
+        GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
