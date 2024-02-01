@@ -2,7 +2,7 @@ name: Scheduled merge
 
 on:
   schedule:
-    - cron: '45 6 * * *'
+    - cron: '55 6 * * *'
 
 permissions:
   pull-requests: write
