@@ -18,9 +18,11 @@ jobs:
         # search_condition='status:success review:approved'
         search_condition='review:approved'
         pr_urls=($(gh pr list --label scheduled_merge --search "$search_condition" --json url --jq 'map(.url)[]'))
+        status=0
         for pr_url in "${pr_urls[@]}"; do
           echo "Merge $pr_url"
-          gh pr merge --auto --merge "$pr_url"
+          gh pr merge --auto --merge "$pr_url" || status=1
         done
+        exit $status
       env:
         GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
