@@ -3,7 +3,7 @@ name: Scheduled merge
 on:
   schedule:
     - cron: '55 22 * * 4' # 7:55 Fri (Asia/Tokyo)
-    - cron: '0,10,20,30,40,50 0,1 * * 4' # 9:00-10:50 Fri (Asia/Tokyo)
+    - cron: '0,10,20,30,40,50 0,1 * * 5' # 9:00-10:50 Fri (Asia/Tokyo)
 
 permissions:
   pull-requests: write
