@@ -26,28 +26,34 @@ jobs:
         DEPENDABOT_METADATA: ${{ toJson(steps.dependabot-metadata.outputs) }}
       run: echo "$DEPENDABOT_METADATA"
 
-    - name: Add reviewers for Dependabot PRs
-      run: |
-        set -x
-        case "$DEPENDENCY_NAMES" in
-        *aws-sdk*) echo do nothing ;;
-        *) gh pr edit "$PR_URL" --add-reviewer znz ;;
-        esac
+    - name: Add reviewers for Dependabot PRs (capybara)
+      if: ${{contains(steps.dependabot-metadata.outputs.dependency-names, 'capybara')}}
+      run: gh pr edit "$PR_URL" --add-reviewer znz
       env:
-        DEPENDENCY_NAMES: ${{steps.dependabot-metadata.outputs.dependency-names}}
         PR_URL: ${{github.event.pull_request.html_url}}
         GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
-    - name: Add scheduled_merge label for aws-sdk
+    - name: Set scheduled_merge (aws-sdk)
       if: ${{contains(steps.dependabot-metadata.outputs.dependency-names, 'aws-sdk')}}
+      run: |
+        echo "MERGE=on_schedule" >> $GITHUB_ENV
+
+    - name: Set auto merge (rails patch)
+      if: ${{contains(steps.dependabot-metadata.outputs.dependency-names, 'rails') && steps.dependabot-metadata.outputs.update-type == 'version-update:semver-patch'}}
+      run: |
+        echo "MERGE=auto" >> $GITHUB_ENV
+
+    - name: Add scheduled_merge label
+      if: ${{ env.MERGE == 'on_schedule' }}
       run: gh pr edit "$PR_URL" --add-label scheduled_merge
       env:
         PR_URL: ${{github.event.pull_request.html_url}}
         GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
     - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+      if: ${{ env.MERGE == 'on_schedule' }}
     - name: Approve a PR if not already approved
-      if: ${{contains(steps.dependabot-metadata.outputs.dependency-names, 'aws-sdk')}}
+      if: ${{ env.MERGE == 'on_schedule' }}
       run: |
         gh pr checkout "$PR_URL" # sets the upstream metadata for `gh pr status`
         if [ "$(gh pr status --json reviewDecision -q .currentBranch.reviewDecision)" != "APPROVED" ];
@@ -58,9 +64,9 @@ jobs:
         PR_URL: ${{github.event.pull_request.html_url}}
         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
-    # - name: Enable auto-merge for Dependabot PRs
-    #   if: ${{contains(steps.dependabot-metadata.outputs.dependency-names, 'rails') && steps.dependabot-metadata.outputs.update-type == 'version-update:semver-patch'}}
-    #   run: gh pr merge --auto --merge "$PR_URL"
-    #   env:
-    #     PR_URL: ${{github.event.pull_request.html_url}}
-    #     GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+    - name: Enable auto-merge for Dependabot PRs
+      if: ${{ env.MERGE == 'auto' }}
+      run: gh pr merge --auto --merge "$PR_URL"
+      env:
+        PR_URL: ${{github.event.pull_request.html_url}}
+        GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
