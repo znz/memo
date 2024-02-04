@@ -51,9 +51,9 @@ jobs:
         GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
     - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
-      if: ${{ env.MERGE == 'on_schedule' }}
+      if: ${{ env.MERGE == 'on_schedule' || env.MERGE == 'auto' }}
     - name: Approve a PR if not already approved
-      if: ${{ env.MERGE == 'on_schedule' }}
+      if: ${{ env.MERGE == 'on_schedule' || env.MERGE == 'auto' }}
       run: |
         gh pr checkout "$PR_URL" # sets the upstream metadata for `gh pr status`
         if [ "$(gh pr status --json reviewDecision -q .currentBranch.reviewDecision)" != "APPROVED" ];
