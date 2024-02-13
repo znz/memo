@@ -2,7 +2,8 @@ name: Scheduled merge
 
 on:
   schedule:
-    - cron: '55 22 * * 4' # 7:55 Fri (Asia/Tokyo)
+    # - cron: '55 22 * * 4' # 7:55 Fri (Asia/Tokyo)
+    - cron: '55 22 * * *' # 7:55 (Asia/Tokyo)
 
 permissions:
   pull-requests: write
@@ -14,8 +15,7 @@ jobs:
     steps:
     - name: Merge scheduled PRs
       run: |
-        # search_condition='status:success review:approved'
-        search_condition='review:approved'
+        search_condition='status:success review:approved'
         pr_urls=($(gh pr list --repo "$REPOSITORY" --label scheduled_merge --search "$search_condition" --json url --jq 'map(.url)[]'))
         status=0
         for pr_url in "${pr_urls[@]}"; do
