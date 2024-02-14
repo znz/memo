@@ -31,3 +31,4 @@
 ## commits
 
 - <https://github.com/ruby/ruby/commit/8b897e6026981cb7195c4065d9a6647c56008808>
+- <https://github.com/ruby/ruby/commit/c54622c657cbdd8fd13790d5c339b8dbadff8b14>
