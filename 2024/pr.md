@@ -27,6 +27,7 @@
 ## pr
 
 - <https://github.com/ruby/ruby-docker-images/pull/62>
+- <https://github.com/ruby/actions/pull/64>
 
 ## commits
 
