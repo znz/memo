@@ -1,0 +1,46 @@
+name: Docs
+
+on:
+  schedule:
+    - cron: '15 0 * * *'
+  repository_dispatch:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  TARGET_REF: 'master' # ruby_x_y
+  TARGET_VERSION: 'master' # x.y
+
+jobs:
+  make:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@b32f140b0c872d58512e0a66172253c302617b90
+      with:
+        repository: 'ruby/ruby'
+        ref: '${{ env.TARGET_REF }}'
+        path: 'sources/${{ env.TARGET_VERSION }}'
+
+    - name: Make
+      run: |
+        set -euxo pipefail
+        cd sources/${{ env.TARGET_VERSION }}
+        ./autogen.sh || autoconf
+        ./configure --disable-install-doc
+        make -j2
+
+    - name: Make HTML
+      run: >-
+        make html
+        -C "sources/${{ env.TARGET_VERSION }}"
+        RDOCOPTS="--title=\"Documentation for Ruby ${{ env.TARGET_VERSION }}\" --main=README.md"
+        HTMLOUT="$(pwd)/${{ env.TARGET_VERSION }}"
+
+    - uses: actions/upload-artifact@ef09cdac3e2d3e60d8ccadda691f4f1cec5035cb
+      with:
+        name: "en-${{ env.TARGET_REF }}"
+        retention-days: 3
+        path: "${{ env.TARGET_VERSION }}"
