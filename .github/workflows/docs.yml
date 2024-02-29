@@ -9,38 +9,48 @@ on:
 permissions:
   contents: read
 
-env:
-  TARGET_REF: 'master' # ruby_x_y
-  TARGET_VERSION: 'master' # x.y
-
 jobs:
   make:
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        include:
+          - ref: "ruby_3_3"
+            version: "3.3"
+          - ref: "master"
+            version: "master"
+
     steps:
-    - uses: actions/checkout@b32f140b0c872d58512e0a66172253c302617b90
-      with:
-        repository: 'ruby/ruby'
-        ref: '${{ env.TARGET_REF }}'
-        path: 'sources/${{ env.TARGET_VERSION }}'
+      - uses: actions/checkout@b32f140b0c872d58512e0a66172253c302617b90
+        with:
+          repository: "ruby/ruby"
+          ref: "${{ matrix.ref }}"
+          path: "sources/${{ matrix.version }}"
 
-    - name: Make
-      run: |
-        set -euxo pipefail
-        cd sources/${{ env.TARGET_VERSION }}
-        ./autogen.sh || autoconf
-        ./configure --disable-install-doc
-        make -j2
+      - name: Make
+        run: |
+          set -euxo pipefail
+          cd sources/${{ matrix.version }}
+          ./autogen.sh || autoconf
+          ./configure --disable-install-doc
+          make -j2
 
-    - name: Make HTML
-      run: >-
-        make html
-        -C "sources/${{ env.TARGET_VERSION }}"
-        RDOCOPTS="--title=\"Documentation for Ruby ${{ env.TARGET_VERSION }}\" --main=README.md"
-        HTMLOUT="$(pwd)/${{ env.TARGET_VERSION }}"
+      - name: Make HTML
+        run: >-
+          make html
+          -C "sources/${{ matrix.version }}"
+          RDOCOPTS="--title=\"Documentation for Ruby ${{ matrix.version }}\" --main=README.md"
+          HTMLOUT="/tmp/html/en/${{ matrix.version }}"
 
-    - uses: actions/upload-artifact@ef09cdac3e2d3e60d8ccadda691f4f1cec5035cb
-      with:
-        name: "en-${{ env.TARGET_REF }}"
-        retention-days: 3
-        path: "${{ env.TARGET_VERSION }}"
+      - name: Make archive
+        run: >-
+          env XZ_OPT=-9e
+          tar -C /tmp/html/en --owner=root --group=root -acvf /tmp/ruby-docs-en-${{ matrix.version }}.tar.xz ${{ matrix.version }}
+          HTMLOUT="/tmp/html/en/${{ matrix.version }}"
+
+      - uses: actions/upload-artifact@ef09cdac3e2d3e60d8ccadda691f4f1cec5035cb
+        with:
+          name: "en-${{ matrix.ref }}"
+          retention-days: 3
+          path: "/tmp/ruby-docs-en-${{ matrix.version }}.tar.xz"
