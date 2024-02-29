@@ -28,8 +28,12 @@
 
 - <https://github.com/ruby/ruby-docker-images/pull/62>
 - <https://github.com/ruby/actions/pull/64>
+- <https://github.com/ruby/docs.ruby-lang.org/pull/144>
 
 ## commits
 
 - <https://github.com/ruby/ruby/commit/8b897e6026981cb7195c4065d9a6647c56008808>
 - <https://github.com/ruby/ruby/commit/c54622c657cbdd8fd13790d5c339b8dbadff8b14>
+- <https://github.com/ruby/actions/commit/d8f05dfe43e04aa24a2cdc85ea5093be54bcdfcf>
+- <https://github.com/ruby/docs.ruby-lang.org/commit/be6b66c3e40ea9e2f912403db7899dea342cbcba>
+- <https://github.com/ruby/docs.ruby-lang.org/commit/3aab1688dd96b9a2d3e27454a1ae4e596cfb0577>
