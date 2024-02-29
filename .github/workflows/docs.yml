@@ -20,6 +20,7 @@ jobs:
             version: "3.3"
           - ref: "master"
             version: "master"
+      fail-fast: false
 
     steps:
       - uses: actions/checkout@b32f140b0c872d58512e0a66172253c302617b90
@@ -46,8 +47,9 @@ jobs:
       - name: Make archive
         run: >-
           env XZ_OPT=-9e
-          tar -C /tmp/html/en --owner=root --group=root -acvf /tmp/ruby-docs-en-${{ matrix.version }}.tar.xz ${{ matrix.version }}
-          HTMLOUT="/tmp/html/en/${{ matrix.version }}"
+          tar -C /tmp/html/en
+          --owner=root --group=root
+          -acvf /tmp/ruby-docs-en-${{ matrix.version }}.tar.xz ${{ matrix.version }}
 
       - uses: actions/upload-artifact@ef09cdac3e2d3e60d8ccadda691f4f1cec5035cb
         with:
