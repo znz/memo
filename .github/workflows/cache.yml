@@ -14,14 +14,14 @@ jobs:
 
     steps:
     - name: Cache Restore-only Test
-      uses: actions/cache/restore@13aacd865c20de90d75de3b17ebe84f7a17d57d2 # v4.0.0
+      uses: actions/cache/restore@ab5e6d0c87105b4c9c2047343972218f562e4319 # v4.0.1
       with:
         path: dummy
         key: ${{ runner.os }}-dummy
       if: "contains(github.event.action, 'restore')"
 
     - name: Cache Test
-      uses: actions/cache@13aacd865c20de90d75de3b17ebe84f7a17d57d2 # v4.0.0
+      uses: actions/cache@ab5e6d0c87105b4c9c2047343972218f562e4319 # v4.0.1
       with:
         path: dummy
         key: ${{ runner.os }}-dummy
