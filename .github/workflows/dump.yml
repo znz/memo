@@ -93,7 +93,7 @@ jobs:
           author_name: "${{ github.workflow }}"
           status: ${{ job.status }}
           fields: repo,message,commit,author,action,job,took,eventName,ref,workflow,workflowRun,pullRequest
-          channel: "C2J8U9GHL"
+          channel: "#random"
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         if: always()
