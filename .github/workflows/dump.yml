@@ -11,6 +11,10 @@ on:
   repository_dispatch:
   workflow_dispatch:
 
+permissions:
+  contents: read
+  actions: read
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -84,3 +88,10 @@ jobs:
 #      - uses: ./.github/actions/notify-slack
 #        env:
 #          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      - uses: 8398a7/action-slack@21dc5d142b92115d9c154540e48df504ad4e9cf9
+        with:
+          status: ${{ job.status }}
+          fields: repo,message,commit,author,action,eventName,ref,workflow,job,took,pullRequest,workflowRun
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
+        if: always()
