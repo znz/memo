@@ -302,7 +302,7 @@ GEM
     rgeo-activerecord (7.0.1)
       activerecord (>= 5.0)
       rgeo (>= 1.0.0)
-    rollbar (3.5.1)
+    rollbar (3.5.2)
     rubocop (1.61.0)
       json (~> 2.3)
       language_server-protocol (>= 3.17.0)
