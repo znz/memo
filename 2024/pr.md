@@ -37,3 +37,9 @@
 - <https://github.com/ruby/actions/commit/d8f05dfe43e04aa24a2cdc85ea5093be54bcdfcf>
 - <https://github.com/ruby/docs.ruby-lang.org/commit/be6b66c3e40ea9e2f912403db7899dea342cbcba>
 - <https://github.com/ruby/docs.ruby-lang.org/commit/3aab1688dd96b9a2d3e27454a1ae4e596cfb0577>
+
+# 2024-03
+
+## pr
+
+- <https://github.com/devise-two-factor/devise-two-factor/pull/267>
