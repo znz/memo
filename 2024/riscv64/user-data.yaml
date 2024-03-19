@@ -13,7 +13,12 @@ locale: ja_JP.utf8
 package_update: true
 package_upgrade: true
 
+packages:
+  - etckeeper
+  # - build-essential
+
 runcmd:
+  - [ etckeeper, vcs, gc ]
   - [ ls, -l, / ]
   - [ sh, -xc, "echo $(date) ': hello world!'" ]
   - [ sh, -c, echo "=========hello world=========" ]
