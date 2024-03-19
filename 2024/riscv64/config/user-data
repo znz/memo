@@ -13,11 +13,11 @@ locale: ja_JP.utf8
 package_update: true
 # package_upgrade: true
 
-packages:
-  - etckeeper
-  # - build-essential
+mounts:
+  - [ test_mount, /mnt/shared, "9p", "trans=virtio,version=9p2000.L,posixacl,msize=104857600,nofail", "0", "0" ]
 
 runcmd:
+  - [ sh, -xc, "mkdir -p /mnt/shared" ]
   - |
     if ! grep -q rsz /home/ubuntu/.bashrc; then
       cat >> /home/ubuntu/.bashrc <<'EOF'
@@ -26,13 +26,6 @@ runcmd:
     rsz
     EOF
     fi
-  - [ ls, -l, / ]
-  - [ sh, -xc, "echo $(date) ': hello world!'" ]
-  - [ sh, -c, echo "=========hello world=========" ]
-  - ls -l /root
-  # Note: Don't write files to /tmp from cloud-init use /run/somedir instead.
-  # Early boot environments can race systemd-tmpfiles-clean LP: #1707222.
-  - mkdir /run/mydir
   - etckeeper vcs gc
 
 ssh_import_id:
