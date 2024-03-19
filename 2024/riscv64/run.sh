@@ -18,7 +18,8 @@ if [ -x /usr/bin/cloud-localds ]; then
     cloud-localds "$cidata" config/user-data config/meta-data
 else
     rm -f "$cidata"
-    hdiutil makehybrid -o "$cidata" -hfs -joliet -iso -default-volume-name cidata config/
+    # hblkid で TYPE="hfsplus" に見えていると認識されないので -hfs はつけない。
+    hdiutil makehybrid -o "$cidata" -joliet -iso -default-volume-name cidata config/
 fi
 
 fw=/usr/lib/riscv64-linux-gnu/opensbi/generic/fw_jump.bin
@@ -46,10 +47,10 @@ args=(
 
 if [ -d shared ]; then
     args=(
-	"${args[@]}"
-	# mount -t 9p -o trans=virtio test_mount /tmp/shared/ -oversion=9p2000.L,posixacl,msize=104857600
-	-virtfs "local,path=./shared,mount_tag=test_mount,security_model=mapped-xattr"
+        "${args[@]}"
+        # mount -t 9p -o trans=virtio test_mount /tmp/shared/ -oversion=9p2000.L,posixacl,msize=104857600
+        -virtfs "local,path=./shared,mount_tag=test_mount,security_model=mapped-xattr"
     )
 fi
 
-qemu-system-riscv64 "${args[@]}"
+exec qemu-system-riscv64 "${args[@]}"

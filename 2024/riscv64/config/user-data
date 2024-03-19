@@ -11,7 +11,7 @@ timezone: Asia/Tokyo
 locale: ja_JP.utf8
 
 package_update: true
-package_upgrade: true
+# package_upgrade: true
 
 packages:
   - etckeeper
