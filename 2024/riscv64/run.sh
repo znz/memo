@@ -10,26 +10,15 @@ if [ ! -f ubuntu-22.04.4-preinstalled-server-riscv64+unmatched.img ]; then
     qemu-img resize -f raw ubuntu-22.04.4-preinstalled-server-riscv64+unmatched.img +5G
 fi
 img=ubuntu-22.04.4-preinstalled-server-riscv64+unmatched.img
-if [ ! -f meta-data.yaml ]; then
-    echo "instance-id: $(uuidgen || echo i-abcdefg)" > meta-data.yaml
+if [ ! -f config/meta-data ]; then
+    echo "instance-id: $(uuidgen || echo i-abcdefg)" > config/meta-data
 fi
-cidata=my-seed.img
+cidata=seed.iso
 if [ -x /usr/bin/cloud-localds ]; then
-    cloud-localds "$cidata" user-data.yaml meta-data.yaml
-fi
-
-# うまくいかなかったので、Ubuntu で生成した my-seed.img を持ってきた。
-if false; then
-    mkdir -p config
-    cp metadata.yaml config/meta-data
-    cp user-data.yaml config/user-data
-    cidata=cidata.iso
-    rm "$cidata"
-    # -o my-seed.img だと勝手に .iso がついて my-seed.img.iso になる。
-    # config/ ディレクトリが ISO の中のルートになる。
-    # cidata が CIDATA になってしまった。
+    cloud-localds "$cidata" config/user-data config/meta-data
+else
+    rm -f "$cidata"
     hdiutil makehybrid -o "$cidata" -hfs -joliet -iso -default-volume-name cidata config/
-    rm -rf config
 fi
 
 fw=/usr/lib/riscv64-linux-gnu/opensbi/generic/fw_jump.bin
