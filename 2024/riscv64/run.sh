@@ -1,5 +1,7 @@
 #!/bin/bash
 set -euxo pipefail
+cd "$(dirname "$0")"
+
 if [ ! -f ubuntu-22.04.4-preinstalled-server-riscv64+unmatched.img.xz ]; then
     curl -LO https://cdimage.ubuntu.com/releases/22.04.4/release/ubuntu-22.04.4-preinstalled-server-riscv64+unmatched.img.xz
 fi
@@ -52,4 +54,13 @@ args=(
     -drive "if=virtio,format=raw,file=$img"
     -drive "if=virtio,format=raw,file=$cidata"
 )
+
+if [ -d shared ]; then
+    args=(
+	"${args[@]}"
+	# mount -t 9p -o trans=virtio test_mount /tmp/shared/ -oversion=9p2000.L,posixacl,msize=104857600
+	-virtfs "local,path=./shared,mount_tag=test_mount,security_model=mapped-xattr"
+    )
+fi
+
 qemu-system-riscv64 "${args[@]}"
