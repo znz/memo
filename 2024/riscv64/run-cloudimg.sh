@@ -9,6 +9,7 @@ fi
 img=diff.img
 if [ ! -f "$img" ]; then
     qemu-img create -f qcow2 -b "$base" -F qcow2 "$img"
+    qemu-img resize "$img" +5G
 fi
 if [ ! -f config/meta-data ]; then
     echo "instance-id: $(uuidgen || echo i-abcdefg)" > config/meta-data
