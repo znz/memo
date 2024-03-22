@@ -13,6 +13,9 @@ locale: ja_JP.utf8
 package_update: true
 # package_upgrade: true
 
+packages:
+  - etckeeper
+
 mounts:
   - [ test_mount, /mnt/shared, "9p", "trans=virtio,version=9p2000.L,posixacl,msize=104857600,nofail", "0", "0" ]
 
