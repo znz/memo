@@ -26,9 +26,7 @@ fi
 bios=$(echo /opt/homebrew/Cellar/qemu/*/share/qemu/edk2-aarch64-code.fd)
 
 args=(
-    -machine virt
-    # -enable-kvm -cpu host
-    -cpu cortex-a57
+    -cpu host -machine virt,accel=hvf
     -nographic
     -m 2048
     -smp 4
