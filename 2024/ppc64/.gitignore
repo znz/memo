@@ -2,4 +2,3 @@
 *.iso
 /config/meta-data
 /shared/
-uboot.elf
