@@ -40,6 +40,7 @@ args=(
     -smp 4
     -bios "$fw"
     -kernel "$uboot"
+    # ssh -o "StrictHostKeyChecking no" -p 2222 ubuntu@localhost
     -device "virtio-net-device,netdev=net0" -netdev "user,id=net0,hostfwd=tcp::2222-:22"
     -device virtio-rng-pci
     -drive "if=virtio,format=qcow2,file=$img"
