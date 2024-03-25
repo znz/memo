@@ -1,0 +1,4 @@
+*.img*
+*.iso
+/config/meta-data
+/shared/
