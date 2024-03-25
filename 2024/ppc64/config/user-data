@@ -1,6 +1,6 @@
 #cloud-config
 
-hostname: jammy-ppc64el
+hostname: mantic-ppc64el
 
 # user: ubuntu
 password: ubuntu
