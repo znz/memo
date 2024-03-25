@@ -35,6 +35,7 @@ args=(
     -device virtio-rng-pci
     -drive "if=virtio,format=qcow2,file=$img"
     -drive "if=virtio,format=raw,file=$cidata"
+    -device usb-ehci
 )
 
 if [ -d shared ]; then
