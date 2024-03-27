@@ -1,0 +1,35 @@
+#cloud-config
+
+hostname: jammy-amd64
+
+# user: ubuntu
+password: ubuntu
+chpasswd: { expire: False }
+ssh_pwauth: true
+
+timezone: Asia/Tokyo
+locale: ja_JP.utf8
+
+package_update: true
+# package_upgrade: true
+
+packages:
+  - etckeeper
+
+mounts:
+  - [ test_mount, /mnt/shared, "9p", "trans=virtio,version=9p2000.L,posixacl,msize=104857600,nofail", "0", "0" ]
+
+runcmd:
+  - [ sh, -xc, "mkdir -p /mnt/shared" ]
+  - |
+    if ! grep -q rsz /home/ubuntu/.bashrc; then
+      cat >> /home/ubuntu/.bashrc <<'EOF'
+
+    rsz () if [[ -t 0 ]]; then local escape r c prompt=$(printf '\e7\e[r\e[999;999H\e[6n\e8'); IFS='[;' read -sd R -p "$prompt" escape r c; stty cols $c rows $r; fi
+    rsz
+    EOF
+    fi
+  - [ sh, -xc, "etckeeper vcs gc" ]
+
+ssh_import_id:
+  - gh:znz
