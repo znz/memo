@@ -33,6 +33,8 @@ if [ -f uboot.elf ]; then
     uboot=uboot.elf
 fi
 
+mkdir -p tmp
+
 args=(
     -machine virt
     -nographic
@@ -45,6 +47,11 @@ args=(
     -device virtio-rng-pci
     -drive "if=virtio,format=qcow2,file=$img"
     -drive "if=virtio,format=raw,file=$cidata"
+
+    # apt install qemu-guest-agent
+    -chardev "socket,path=tmp/qga.sock,server=on,wait=off,id=qga0"
+    -device virtio-serial
+    -device "virtserialport,chardev=qga0,name=org.qemu.guest_agent.0"
 )
 
 if [ -d shared ]; then
