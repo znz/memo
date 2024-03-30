@@ -23,10 +23,6 @@ else
     hdiutil makehybrid -o "$cidata" -joliet -iso -default-volume-name cidata config/
 fi
 
-fw=/usr/lib/riscv64-linux-gnu/opensbi/generic/fw_jump.bin
-if [ ! -f "$fw" ]; then
-    fw=$(echo /opt/homebrew/Cellar/qemu/*/share/qemu/opensbi-riscv64-generic-fw_dynamic.bin)
-fi
 uboot=/usr/lib/u-boot/qemu-riscv64_smode/uboot.elf
 # riscv64 用の uboot は homebrew の qemu に入っていなかったのでコピーしてきた。
 if [ -f uboot.elf ]; then
@@ -40,7 +36,6 @@ args=(
     -nographic
     -m 2048
     -smp 4
-    -bios "$fw"
     -kernel "$uboot"
     # ssh -o "StrictHostKeyChecking no" -p 2222 ubuntu@localhost
     -device "virtio-net-device,netdev=net0" -netdev "user,id=net0,hostfwd=tcp::2222-:22"
