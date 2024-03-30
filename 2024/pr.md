@@ -43,3 +43,7 @@
 ## pr
 
 - <https://github.com/devise-two-factor/devise-two-factor/pull/267>
+
+## issue
+
+- <https://github.com/ruby-gnome/ruby-gnome/issues/1611>
