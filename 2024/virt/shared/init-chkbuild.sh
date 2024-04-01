@@ -7,3 +7,4 @@ fi
 install -o "$U" -g chkbuild -m 2755 -d /home/chkbuild
 install -o "$U" -g chkbuild -m 2755 -d /home/chkbuild/build
 install -o "$U" -g chkbuild -m 2755 -d /home/chkbuild/public_html
+ln -snf /home/chkbuild "/home/$U/chkbuild/tmp"

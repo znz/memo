@@ -1,7 +1,35 @@
 #!/bin/bash
 
-# ./inst.sh
-# env arch=riscv64 ./inst.sh
+# How to use:
+#
+#   env arch=riscv64 ./inst.sh
+#   virsh autostart jammy-riscv64
+#
+# How to prepare:
+#
+#   apt install qemu-system-misc qemu-utils u-boot-qemu
+#   apt install libvirt-daemon-system virtinst libvirt-clients uuid-runtime
+#
+#   virsh net-start default
+#   resolvectl mdns virbr0 yes
+#
+# How to revert changes:
+#
+#   virsh destroy jammy-riscv64
+#   virsh undefine jammy-riscv64
+#   virsh vol-delete --vol jammy-riscv64.img --pool libvirt-qemu-images
+#   virsh vol-delete --vol jammy-riscv64.iso --pool libvirt-qemu-images
+#   virsh pool-destroy --pool libvirt-qemu-images
+#   virsh pool-delete --pool libvirt-qemu-images
+#   virsh pool-undefine --pool libvirt-qemu-images
+#   virsh net-destroy default
+#   rm ubuntu-22.04-server-cloudimg-riscv64.img
+#
+# How to auto-start:
+#
+#   virsh net-autostart default
+#   virsh autostart jammy-riscv64
+
 
 set -euxo pipefail
 cd "$(dirname "$0")"
@@ -9,6 +37,10 @@ umask 027
 
 : ${osver=22.04}
 : ${arch=amd64}
+: ${ram=2048}
+: ${vcpu=4}
+: ${storage_dir=/srv/libvirt-qemu-images}
+
 
 case "$arch" in
     amd64)
@@ -41,9 +73,8 @@ if [ ! -f "$base" ]; then
     wget -N "https://cloud-images.ubuntu.com/releases/$osver/release/$base"
 fi
 
-imgdir=/srv/libvirt-qemu-images
-install -m 750 -o libvirt-qemu -g libvirt-qemu -d "$imgdir"
-img="$imgdir/$name.img"
+install -m 750 -o libvirt-qemu -g libvirt-qemu -d "$storage_dir"
+img="$storage_dir/$name.img"
 if [ ! -f "$img" ]; then
     qemu-img convert -f qcow2 -O raw "$base" "$img"
     qemu-img resize "$img" +5G
@@ -59,21 +90,16 @@ fi
 
 erb "arch=$arch" "osver=$osver" "codename=$codename" "name=$name" config/user-data > "$name/user-data"
 
-cidata="$name/cidata.iso"
+cidata="$storage_dir/$name.iso"
 cloud-localds "$cidata" "$name/user-data" "$name/meta-data"
 
-install -m 1777 -o root -g root -d "shared"
-install -m 775 -o libvirt-qemu -g libvirt-qemu -d "$name/home_chkbuild"
-# apt install attr
-# attr -q -g virtfs.uid jammy-amd64/home_chkbuild | hexdump -C
-printf '\xe9\x03\x00\x00' | attr -q -s virtfs.uid "$name/home_chkbuild"
-printf '\xe9\x03\x00\x00' | attr -q -s virtfs.gid "$name/home_chkbuild"
+install -m 1775 -o root -g libvirt-qemu -d "shared"
 
 args=(
     "${args[@]}"
     --name "$name"
-    --ram=2048
-    --vcpu=2
+    --ram "$ram"
+    --vcpu "$vcpu"
     --osinfo "$osinfo"
 
     --import
@@ -83,20 +109,7 @@ args=(
     --network "network=default"
     --graphics none
 
-    --filesystem "type=mount,accessmode=mapped,source=$PWD/$name/home_chkbuild,target=home_chkbuild"
     --filesystem "type=mount,accessmode=mapped,source=$PWD/shared,target=test_mount"
 )
 
 exec virt-install "${args[@]}"
-
-cat >/dev/null <<EOF
-+ exec virt-install --virt-type qemu --arch x86_64 --name jammy-amd64 --ram=2048 --vcpu=2 --osinfo ubuntu22.04 --import --disk path=/srv/libvirt-qemu-images/jammy-amd64.img,format=raw --disk path=jammy-amd64/cidata.iso,device=cdrom --network network=default --graphics none --filesystem type=mount,accessmode=mapped,source=/srv/jammy-amd64/home_chkbuild,target=home_chkbuild --filesystem type=mount,accessmode=mapped,source=/srv/shared,target=test_mount
-
-Starting install...
-Creating domain...                                                                                                                                                             |    0 B  00:00:00
-Running text console command: virsh --connect qemu:///system console jammy-amd64
-Connected to domain 'jammy-amd64'
-EOF
-
-# dd if=/dev/zero of=/tmp/write.tmp ibs=1M obs=1M count=1024
-# sudo dd if=/dev/zero of=/mnt/shared/write.tmp ibs=1M obs=1M count=1024
