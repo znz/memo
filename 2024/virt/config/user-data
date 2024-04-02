@@ -25,12 +25,15 @@ package_upgrade: true
 packages:
   - etckeeper
   - qemu-guest-agent
+
+  # for building mitamae
   - ruby
   - build-essential
   - autoconf
   - libtool
+
+  # editor
   - vim
-  - nano_ # purge
 
 mounts:
   - [ test_mount, /mnt/shared, "9p", "trans=virtio,version=9p2000.L,posixacl,msize=104857600,nofail", "0", "0" ]
@@ -46,5 +49,6 @@ runcmd:
     fi
   - [ sh, -xc, "etckeeper vcs gc" ]
   - [ "/mnt/shared/init-chkbuild.sh" ]
+  - [ "/mnt/shared/init-mdns.sh" ]
   - [ su, ubuntu, -c, "/mnt/shared/build-mitamae.sh" ]
   - [ su, ubuntu, -c, "/mnt/shared/ruby-infra-recipe.sh" ]
