@@ -2,33 +2,38 @@
 
 # How to use:
 #
-#   env arch=riscv64 ./inst.sh
-#   virsh autostart jammy-riscv64
+#   ./inst.sh
+#   sudo virsh autostart jammy-riscv64
 #
 # How to prepare:
 #
-#   apt install qemu-system-misc qemu-utils u-boot-qemu
-#   apt install libvirt-daemon-system virtinst libvirt-clients uuid-runtime
+#   sudo apt install qemu-system-misc qemu-utils u-boot-qemu
+#   sudo apt install libvirt-daemon-system virtinst libvirt-clients
 #
-#   virsh net-start default
-#   resolvectl mdns virbr0 yes
+#   (for uuidgen)
+#   sudo apt install uuid-runtime
+#   (for erb)
+#   sudo apt install ruby
+#
+#   sudo virsh net-start default
+#   sudo resolvectl mdns virbr0 yes
 #
 # How to revert changes:
 #
-#   virsh destroy jammy-riscv64
-#   virsh undefine jammy-riscv64
-#   virsh vol-delete --vol jammy-riscv64.img --pool libvirt-qemu-images
-#   virsh vol-delete --vol jammy-riscv64.iso --pool libvirt-qemu-images
-#   virsh pool-destroy --pool libvirt-qemu-images
-#   virsh pool-delete --pool libvirt-qemu-images
-#   virsh pool-undefine --pool libvirt-qemu-images
-#   virsh net-destroy default
+#   sudo virsh destroy jammy-riscv64
+#   sudo virsh undefine jammy-riscv64
+#   sudo virsh vol-delete --vol jammy-riscv64.img --pool libvirt-qemu-images
+#   sudo virsh vol-delete --vol jammy-riscv64.iso --pool libvirt-qemu-images
+#   sudo virsh pool-destroy --pool libvirt-qemu-images
+#   sudo virsh pool-delete --pool libvirt-qemu-images
+#   sudo virsh pool-undefine --pool libvirt-qemu-images
+#   sudo virsh net-destroy default
 #   rm ubuntu-22.04-server-cloudimg-riscv64.img
 #
 # How to auto-start:
 #
-#   virsh net-autostart default
-#   virsh autostart jammy-riscv64
+#   sudo virsh net-autostart default
+#   sudo virsh autostart jammy-riscv64
 
 
 set -euxo pipefail
@@ -36,9 +41,9 @@ cd "$(dirname "$0")"
 umask 027
 
 : ${osver=22.04}
-: ${arch=amd64}
+: ${arch=riscv64}
 : ${ram=2048}
-: ${vcpu=4}
+: ${vcpu=2}
 : ${storage_dir=/srv/libvirt-qemu-images}
 
 
@@ -73,15 +78,16 @@ if [ ! -f "$base" ]; then
     wget -N "https://cloud-images.ubuntu.com/releases/$osver/release/$base"
 fi
 
-install -m 750 -o libvirt-qemu -g libvirt-qemu -d "$storage_dir"
+sudo install -m 755 -o libvirt-qemu -g libvirt-qemu -d "$storage_dir"
 img="$storage_dir/$name.img"
 if [ ! -f "$img" ]; then
-    qemu-img convert -f qcow2 -O raw "$base" "$img"
-    qemu-img resize "$img" +5G
-    chown libvirt-qemu:libvirt-qemu "$img"
+    sudo qemu-img convert -f qcow2 -O raw "$base" "$img"
+    # sudo qemu-img resize "$img" +5G
+    sudo qemu-img resize "$img" 16G
+    sudo chown libvirt-qemu:libvirt-qemu "$img"
 fi
 
-install -m 2755 -o root -g libvirt-qemu -d "$name"
+mkdir -p "$name"
 
 if [ ! -f "$name/meta-data" ]; then
     # apt install uuid-runtime
@@ -91,9 +97,9 @@ fi
 erb "arch=$arch" "osver=$osver" "codename=$codename" "name=$name" config/user-data > "$name/user-data"
 
 cidata="$storage_dir/$name.iso"
-cloud-localds "$cidata" "$name/user-data" "$name/meta-data"
+sudo cloud-localds "$cidata" "$name/user-data" "$name/meta-data"
 
-install -m 1775 -o root -g libvirt-qemu -d "shared"
+sudo install -m 1775 -o root -g libvirt-qemu -d "shared"
 
 args=(
     "${args[@]}"
@@ -112,4 +118,4 @@ args=(
     --filesystem "type=mount,accessmode=mapped,source=$PWD/shared,target=test_mount"
 )
 
-exec virt-install "${args[@]}"
+exec sudo virt-install "${args[@]}"
