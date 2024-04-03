@@ -99,7 +99,7 @@ erb "arch=$arch" "osver=$osver" "codename=$codename" "name=$name" config/user-da
 cidata="$storage_dir/$name.iso"
 sudo cloud-localds "$cidata" "$name/user-data" "$name/meta-data"
 
-sudo install -m 1775 -o root -g libvirt-qemu -d "shared"
+sudo install -m 1775 -o 1000 -g libvirt-qemu -d "shared"
 
 args=(
     "${args[@]}"
