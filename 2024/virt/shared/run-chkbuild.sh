@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sudo sed -i -e 's/^ChkBuild.s3_upload_target/# ChkBuild.s3_upload_target/' /home/chkbuild/chkbuild/start-rubyci
+# sudo sed -i -e 's/^ChkBuild.s3_upload_target/# ChkBuild.s3_upload_target/' /home/chkbuild/chkbuild/start-rubyci
 
 exec sudo systemd-run \
      --uid=chkbuild --gid=chkbuild \
