@@ -74,9 +74,10 @@ jobs:
           '--enable-yjit=dev_nodebug'
           '--disable-install-doc'
       - name: make
-        run: >
-          cd ruby/ &&
-          script make-all.log make $JOBS all &&
-          script make-install.log make install &&
-          script make-install-doc.log make install-doc &&
-          script make-check.log make check TESTS=-v
+        run: cd ruby/ && make $JOBS all
+      - name: make install
+        run: cd ruby/ && make install
+      - name: make install-doc
+        run: cd ruby/ && make install-doc
+      - name: make check
+        run: cd ruby/ && make check TESTS=-v
