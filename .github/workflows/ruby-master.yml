@@ -41,7 +41,7 @@ jobs:
         run: echo "$MATRIX_CONTEXT"
 
       - name: Checkout ruby/ruby
-        run: git clone --single-branch --depth=1 https://github.com/ruby/ruby ruby
+        run: git clone -q --single-branch --depth=1 https://github.com/ruby/ruby ruby
         shell: bash
       - name: Apply patch
         run: |
@@ -54,15 +54,16 @@ jobs:
           RUBY_PATCH_URL: "${{ github.event.inputs.RUBY_PATCH_URL }}"
         if: "${{ github.event.inputs.RUBY_PATCH_URL != '' }}"
 
-      - name: Install libraries
-        run: |
-          brew install openssl@3 readline libyaml gmp rust
+      # - name: Install libraries
+      #   run: |
+      #     brew install openssl@3 readline libyaml gmp rust
       - name: Set ENV
         run: |
           echo "JOBS=-j$((1 + $(sysctl -n hw.activecpu)))" >> $GITHUB_ENV
       - name: configure
         run: >
           cd ruby/ &&
+          ./autogen.sh &&
           ./configure
           'cppflags=-DUSE_RVARGC -DRUBY_DEBUG -DVM_CHECK_MODE=1 -DTRANSIENT_HEAP_CHECK_MODE -DRGENGC_CHECK_MODE -DENC_DEBUG -DUSE_RUBY_DEBUG_LOG=1'
           "--with-baseruby=$(brew --prefix)/Library/Homebrew/vendor/portable-ruby/3.1.4/bin/ruby"
