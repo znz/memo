@@ -47,3 +47,10 @@
 ## issue
 
 - <https://github.com/ruby-gnome/ruby-gnome/issues/1611>
+
+# 2024-04
+
+## commits
+
+- <https://github.com/ruby/chkbuild/commit/d81c79aae82dfc96d1fcc4bea4cb75807980c415>
+- <https://github.com/ruby/chkbuild/commit/25504d810aba83a2eaa1643d5fc10958e4074a3e>
