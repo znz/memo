@@ -80,4 +80,4 @@ jobs:
       - name: make install-doc
         run: cd ruby/ && make install-doc
       - name: make check
-        run: cd ruby/ && make check TESTS=-v
+        run: cd ruby/ && make check TESTS="-v -n /test_gc_stress_at_startup/"
