@@ -1,0 +1,85 @@
+name: ruby-master
+
+on:
+  repository_dispatch:
+    types:
+      - "ruby-master"
+  workflow_dispatch:
+    inputs:
+      RUBY_PATCH_URL:
+        description: Patch URL
+        required: false
+
+jobs:
+  test:
+    runs-on: macos-latest
+    steps:
+      - run: env | sort
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+      - name: Dump job context
+        env:
+          JOB_CONTEXT: ${{ toJson(job) }}
+        run: echo "$JOB_CONTEXT"
+      - name: Dump steps context
+        env:
+          STEPS_CONTEXT: ${{ toJson(steps) }}
+        run: echo "$STEPS_CONTEXT"
+      - name: Dump runner context
+        env:
+          RUNNER_CONTEXT: ${{ toJson(runner) }}
+        run: echo "$RUNNER_CONTEXT"
+      - name: Dump strategy context
+        env:
+          STRATEGY_CONTEXT: ${{ toJson(strategy) }}
+        run: echo "$STRATEGY_CONTEXT"
+      - name: Dump matrix context
+        env:
+          MATRIX_CONTEXT: ${{ toJson(matrix) }}
+        run: echo "$MATRIX_CONTEXT"
+
+      - name: Checkout ruby/ruby
+        run: git clone --single-branch --depth=1 https://github.com/ruby/ruby ruby
+        shell: bash
+      - name: Apply patch
+        run: |
+          set -x
+          curl -sSL "${RUBY_PATCH_URL}" -o ruby.patch
+          cd ruby/
+          git apply ../ruby.patch
+        shell: bash
+        env:
+          RUBY_PATCH_URL: "${{ github.event.inputs.RUBY_PATCH_URL }}"
+        if: "${{ github.event.inputs.RUBY_PATCH_URL != '' }}"
+
+      - name: Install libraries
+        run: |
+          with_retry () {
+            "$@" || { sleep 5 && "$@"; } || { sleep 60 && "$@"; }
+          }
+          set -x
+          with_retry brew update
+          with_retry brew upgrade
+          with_retry brew install gdbm gmp libffi openssl@3 zlib autoconf automake libtool readline
+      - name: Set ENV
+        run: |
+          echo "JOBS=-j$((1 + $(sysctl -n hw.activecpu)))" >> $GITHUB_ENV
+      - name: configure
+        run: >
+          cd ruby/ &&
+          ./configure
+          'cppflags=-DUSE_RVARGC -DRUBY_DEBUG -DVM_CHECK_MODE=1 -DTRANSIENT_HEAP_CHECK_MODE -DRGENGC_CHECK_MODE -DENC_DEBUG -DUSE_RUBY_DEBUG_LOG=1'
+          "--with-baseruby=$(brew --prefix)/Library/Homebrew/vendor/portable-ruby/3.1.4/bin/ruby"
+          "--with-openssl-dir=$(brew --prefix openssl@3)"
+          "--with-readline-dir=$(brew --prefix readline)"
+          '--enable-yjit=dev_nodebug'
+          '--disable-install-doc'
+      - name: make
+        run: >
+          cd ruby/ &&
+          script make-all.log make $JOBS all &&
+          script make-install.log make install &&
+          script make-install-doc.log make install-doc &&
+          script make-check.log make check TESTS=-v
