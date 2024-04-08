@@ -5,6 +5,9 @@
 #   ./inst.sh
 #   sudo virsh autostart jammy-riscv64
 #
+# Other examples:
+#   env codename=noble arch=amd64 ./inst.sh
+#
 # How to prepare:
 #
 #   sudo apt install qemu-system-misc qemu-utils u-boot-qemu
@@ -40,7 +43,7 @@ set -euxo pipefail
 cd "$(dirname "$0")"
 umask 027
 
-: ${osver=22.04}
+: ${codename=jammy}
 : ${arch=riscv64}
 : ${ram=2048}
 : ${vcpu=2}
@@ -64,18 +67,20 @@ case "$arch" in
 	;;
 esac
 
-case "$osver" in
-    22.04)
-	codename=jammy
+case "$codename" in
+    jammy)
+	osinfo=ubuntu22.04
+	;;
+    noble)
 	osinfo=ubuntu22.04
 	;;
 esac
 
 : ${name="$codename-$arch"}
 
-base="ubuntu-${osver}-server-cloudimg-${arch}.img"
+base="${codename}-server-cloudimg-${arch}.img"
 if [ ! -f "$base" ]; then
-    wget -N "https://cloud-images.ubuntu.com/releases/$osver/release/$base"
+    wget -N "https://cloud-images.ubuntu.com/$codename/current/$base"
 fi
 
 sudo install -m 755 -o libvirt-qemu -g libvirt-qemu -d "$storage_dir"
@@ -94,7 +99,7 @@ if [ ! -f "$name/meta-data" ]; then
     echo "instance-id: $(uuidgen || echo i-abcdefg)" > "$name/meta-data"
 fi
 
-erb "arch=$arch" "osver=$osver" "codename=$codename" "name=$name" config/user-data > "$name/user-data"
+erb "arch=$arch" "codename=$codename" "name=$name" config/user-data > "$name/user-data"
 
 cidata="$storage_dir/$name.iso"
 sudo cloud-localds "$cidata" "$name/user-data" "$name/meta-data"
