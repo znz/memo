@@ -9,6 +9,10 @@ on:
       RUBY_PATCH_URL:
         description: Patch URL
         required: false
+      cppflags:
+        description: configure cppflags
+        required: false
+        default: "-DRUBY_DEBUG -DVM_CHECK_MODE=1 -DRGENGC_CHECK_MODE -DENC_DEBUG -DUSE_RUBY_DEBUG_LOG=1"
 
 permissions:
   contents: read
@@ -68,7 +72,7 @@ jobs:
           cd ruby/ &&
           ./autogen.sh &&
           ./configure
-          'cppflags=-DUSE_RVARGC -DRUBY_DEBUG -DVM_CHECK_MODE=1 -DTRANSIENT_HEAP_CHECK_MODE -DRGENGC_CHECK_MODE -DENC_DEBUG -DUSE_RUBY_DEBUG_LOG=1'
+          'cppflags=${{ github.event.inputs.cppflags }}'
           "--with-openssl-dir=$(brew --prefix openssl@3)"
           "--with-readline-dir=$(brew --prefix readline)"
           '--enable-yjit=dev_nodebug'
