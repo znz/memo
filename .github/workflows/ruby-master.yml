@@ -81,7 +81,7 @@ jobs:
         run: cd ruby/ && make $JOBS all
       - name: make install
         run: cd ruby/ && make install
-      - name: make install-doc
-        run: cd ruby/ && make install-doc
-      - name: make check
-        run: cd ruby/ && make check TESTS="-v -n /test_gc_stress_at_startup/"
+      # - name: make install-doc
+      #   run: cd ruby/ && make install-doc
+      - name: test
+        run: cd ruby/ && make test-all TESTS="-v -n /test_gc_stress_at_startup/"
