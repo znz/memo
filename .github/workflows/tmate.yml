@@ -4,8 +4,20 @@ on:
   repository_dispatch:
     types:
       - tmate-*
+  workflow_dispatch:
+    inputs:
+      os:
+        description: runs-on
+        required: true
 
 jobs:
+  workflow:
+    runs-on: "${{ github.event.inputs.os }}"
+    if: "${{ github.event.inputs.os != '' }}"
+    steps:
+    - name: Setup tmate session
+      uses: mxschmitt/action-tmate@a283f9441d2d96eb62436dc46d7014f5d357ac22 # v3.17
+
   ubuntu:
     runs-on: ubuntu-latest
     if: contains(github.event.action, 'ubuntu')
