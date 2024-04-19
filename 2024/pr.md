@@ -58,3 +58,4 @@
 ## issues
 
 - <https://bugs.ruby-lang.org/issues/20419>
+- <https://github.com/rubocop/rubocop/issues/12854>
