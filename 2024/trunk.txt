@@ -1,0 +1,10 @@
+https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20240122
+[67b00f721d]
+$LOADED_FEATURE → $LOADED_FEATURES ?
+[3b3f03666a]
+行末の " が余計?
+
+https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20240123
+[cffa54acad]
+> GitHub Actions の dependabot の設定で yjit/ 配下の Cargo.toml はチェックしないように除外する設定を追加しています。
+チェックするように追加では?
