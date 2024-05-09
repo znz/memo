@@ -2,9 +2,10 @@
 set -euxo pipefail
 name=${1?$0 name template}
 template=${2:-template://ubuntu-lts}
+shift 2
 dir=$(dirname "$0")
 
-time limactl start --name=$name $template
+time limactl start --name=$name $template "$@"
 
 time limactl shell $name sudo bash $dir/convert-root-to-btrfs.sh /dev/vda
 time limactl stop $name
