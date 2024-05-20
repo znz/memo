@@ -59,3 +59,12 @@
 
 - <https://bugs.ruby-lang.org/issues/20419>
 - <https://github.com/rubocop/rubocop/issues/12854>
+
+# 2024-05
+
+## pr
+
+- <https://github.com/ruby/ruby-infra-recipe/pull/38>
+- <https://github.com/rurema/bitclust/pull/181>
+- <https://github.com/rurema/doctree/pull/2882>
+- <https://github.com/ruby-gnome/ruby-gnome/pull/1615>
