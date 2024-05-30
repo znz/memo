@@ -68,3 +68,8 @@
 - <https://github.com/rurema/bitclust/pull/181>
 - <https://github.com/rurema/doctree/pull/2882>
 - <https://github.com/ruby-gnome/ruby-gnome/pull/1615>
+- <https://github.com/rails-on-services/apartment/pull/271>
+
+## issues
+
+- <https://github.com/rubocop/rubocop/issues/12924>
