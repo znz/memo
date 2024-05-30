@@ -75,7 +75,7 @@ jobs:
           ls -al "$HOME/.config"
           chmod -v a-w $HOME $HOME/.config
           ls -al "$HOME/.config"
-      - uses: ruby/action-slack@c278cfac2aa2a28dad4c7bbf83bd1b180c725eee # master
+      - uses: ruby/action-slack@54175162371f1f7c8eb94d7c8644ee2479fcd375 # v3.2.2
         with:
           payload: |
             {
