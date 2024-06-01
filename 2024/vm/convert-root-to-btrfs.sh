@@ -6,9 +6,19 @@ if ! test -b ${1:?$'\n'"Usage: $0 GRUB_INSTALL_DEVICE"$'\n'"Example: $0 /dev/sda
     exit 1
 fi
 
+if ! test -f /bin/gawk; then
+    apt-get update -qy
+    apt-get install -y gawk
+fi
+
 if ! gawk '$2=="/"&&$3=="ext4"{count+=1}END{if(count!=1){exit(1)}}' /etc/fstab; then
     echo This shell script supports root is ext4 only.
     exit 1
+fi
+
+if ! test -f /bin/btrfs-convert; then
+    apt-get update -qy
+    apt-get install -y btrfs-progs
 fi
 
 cat >/etc/initramfs-tools/hooks/0-convert-root-to-btrfs <<'EOF'
@@ -31,6 +41,12 @@ esac
 
 copy_exec /bin/btrfs-convert
 
+# Workaround for `libgcc_s.so.1 must be installed for pthread_cancel to work`
+# see /run/btrfs-convert.log
+if test -f /usr/lib/aarch64-linux-gnu/libgcc_s.so.1; then
+    copy_exec /usr/lib/aarch64-linux-gnu/libgcc_s.so.1
+fi
+
 exit 0
 EOF
 chmod +x /etc/initramfs-tools/hooks/0-convert-root-to-btrfs
@@ -43,31 +59,34 @@ PREREQ=""
 
 prereqs()
 {
-          echo "${PREREQ}"
+    echo "${PREREQ}"
 }
 
 case "${1}" in
-          prereqs)
-                  prereqs
-                  exit 0
-                  ;;
+    prereqs)
+        prereqs
+        exit 0
+        ;;
 esac
 
 case "${ROOT}" in
-UUID=*)
+    UUID=*)
         ROOTDEV=/dev/disk/by-uuid/${ROOT#UUID=}
         ;;
-LABEL=*)
+    LABEL=*)
         ROOTDEV=/dev/disk/by-label/${ROOT#LABEL=}
         ;;
-*)
+    PARTUUID=*)
+        ROOTDEV=/dev/disk/by-partuuid/${ROOT#PARTUUID=}
+        ;;
+    *)
         ROOTDEV=${ROOT}
         ;;
 esac
 
 exec >/run/btrfs-convert.log 2>&1
 if /bin/btrfs-convert "$ROOTDEV"; then
-        echo converted.
+    echo converted.
 fi
 
 exit 0
