@@ -55,7 +55,7 @@ jobs:
           name: my-artifact
           path: path/to/artifact
 
-      - uses: ruby/action-slack@0bd85c72233cdbb6a0fe01d37aaeff1d21b5fce1 # v3.2.1
+      - uses: ruby/action-slack@54175162371f1f7c8eb94d7c8644ee2479fcd375 # v3.2.2
         with:
           payload: |
             {
@@ -104,7 +104,7 @@ jobs:
       - run: cat path/to/artifact/world.txt
       - run: ls -lR .
 
-      - uses: ruby/action-slack@0bd85c72233cdbb6a0fe01d37aaeff1d21b5fce1 # v3.2.1
+      - uses: ruby/action-slack@54175162371f1f7c8eb94d7c8644ee2479fcd375 # v3.2.2
         with:
           payload: |
             {
