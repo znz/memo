@@ -73,3 +73,13 @@
 ## issues
 
 - <https://github.com/rubocop/rubocop/issues/12924>
+
+# 2024-06
+
+- <https://github.com/rurema/generated-documents>
+
+## pr
+
+- <https://github.com/StudistCorporation/scimaenaga/pull/52>
+
+## issues
