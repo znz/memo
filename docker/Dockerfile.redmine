@@ -1,1 +1,1 @@
-FROM sameersbn/redmine:5.1.2-1
+FROM sameersbn/redmine:5.1.3
