@@ -83,3 +83,7 @@
 - <https://github.com/StudistCorporation/scimaenaga/pull/52>
 
 ## issues
+
+## comments
+
+- <https://github.com/ruby/docs.ruby-lang.org/issues/80>
