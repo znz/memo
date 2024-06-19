@@ -81,6 +81,7 @@
 ## pr
 
 - <https://github.com/StudistCorporation/scimaenaga/pull/52>
+- <https://github.com/ooooooo-q/public_zenn_articles/pull/5>
 
 ## issues
 
