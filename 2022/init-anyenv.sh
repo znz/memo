@@ -65,12 +65,17 @@ sudo apt-get install -y ruby
 sudo apt-get install -y wget curl aria2
 
 # ruby master
+if [ ! -d "$HOME/ruby" ]; then
+    git clone https://github.com/ruby/ruby "$HOME/ruby"
+fi
 mkdir -p ~/ruby/build
 if [ ! -f "$(rbenv root)/versions/master/bin/ruby" ]; then
     (
 	cd ~/ruby/build
-	/Users/*/s/github.com/ruby/ruby/configure cppflags='-DUSE_RVARGC -DRUBY_DEBUG -DVM_CHECK_MODE=1 -DTRANSIENT_HEAP_CHECK_MODE -DRGENGC_CHECK_MODE -DENC_DEBUG -DUSE_RUBY_DEBUG_LOG=1' CC='ccache gcc' MJIT_CC=gcc CXX='ccache g++' --prefix=$(rbenv root)/versions/master --with-baseruby=/usr/bin/ruby --disable-install-doc
+	../autogen.sh
+	../configure cppflags='-DRGENGC_CHECK_MODE -DUSE_RUBY_DEBUG_LOG=1' optflags=-O0 CC='ccache gcc' CXX='ccache g++' --prefix=$(rbenv root)/versions/master --with-baseruby=/usr/bin/ruby --disable-install-doc
 	make all install -j$(nproc)
+	make -j$(nproc) install-doc
 	rbenv global master
     )
 fi
