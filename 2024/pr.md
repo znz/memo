@@ -88,3 +88,10 @@
 ## comments
 
 - <https://github.com/ruby/docs.ruby-lang.org/issues/80>
+
+# 2024-07
+
+## pr
+
+- <https://github.com/rurema/bitclust/pull/182>
+- <https://github.com/rurema/doctree/pull/2898>
