@@ -95,3 +95,7 @@
 
 - <https://github.com/rurema/bitclust/pull/182>
 - <https://github.com/rurema/doctree/pull/2898>
+
+## commits
+
+- <https://github.com/ruby/docs.ruby-lang.org/commit/31777714bcf544c9a735a8931dd52af1208fcc7f>
