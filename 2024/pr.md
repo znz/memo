@@ -95,7 +95,11 @@
 
 - <https://github.com/rurema/bitclust/pull/182>
 - <https://github.com/rurema/doctree/pull/2898>
+- <https://github.com/asa1984/nix-zenn-articles/pull/9>
+- <https://github.com/asa1984/nix-zenn-articles/pull/10>
+- <https://github.com/asa1984/nix-zenn-articles/pull/11>
 
 ## commits
 
 - <https://github.com/ruby/docs.ruby-lang.org/commit/31777714bcf544c9a735a8931dd52af1208fcc7f>
+- <https://github.com/ruby/ruby/commit/b01cf8ccdec705c09b90a6e6a9923c8bf87fca5a>
