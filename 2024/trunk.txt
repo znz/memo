@@ -8,3 +8,9 @@ https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20240123
 [cffa54acad]
 > GitHub Actions の dependabot の設定で yjit/ 配下の Cargo.toml はチェックしないように除外する設定を追加しています。
 チェックするように追加では?
+
+https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20240721
+Enumerator::Lazu#zip → Lazy ?
+
+https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20240722
+deined? → defined? ?

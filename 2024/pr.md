@@ -98,6 +98,7 @@
 - <https://github.com/asa1984/nix-zenn-articles/pull/9>
 - <https://github.com/asa1984/nix-zenn-articles/pull/10>
 - <https://github.com/asa1984/nix-zenn-articles/pull/11>
+- <https://github.com/rurema/generated-documents/pull/15>
 
 ## commits
 
