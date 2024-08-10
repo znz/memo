@@ -110,6 +110,7 @@
 ## pr
 
 - <https://github.com/dokku/blog/pull/195>
+- <https://github.com/rails/rails/pull/52542>
 
 ## commits
 
