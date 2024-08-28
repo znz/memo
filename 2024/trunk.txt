@@ -14,3 +14,7 @@ Enumerator::Lazu#zip → Lazy ?
 
 https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20240722
 deined? → defined? ?
+
+https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20240822
+[e7ce8ca166]
+action/upload-sari → action/upload-sarif ?

@@ -111,7 +111,9 @@
 
 - <https://github.com/dokku/blog/pull/195>
 - <https://github.com/rails/rails/pull/52542>
+- <https://github.com/ruby/ruby/pull/11441>
 
 ## commits
 
 - <https://github.com/ruby/actions/commit/fe77f83235bb3711f42d60547447e0a2b7ce3eac>
+- <https://github.com/ruby/ruby/commit/6dccb0131e109e480d6b86c98a14ce8e9f2cad4c>
