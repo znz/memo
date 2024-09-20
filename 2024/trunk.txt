@@ -18,3 +18,10 @@ deined? → defined? ?
 https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20240822
 [e7ce8ca166]
 action/upload-sari → action/upload-sarif ?
+
+https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20240901
+[afd12873e0] ruby/ratctor.h → ruby/ractor.h ?
+[185602e696] C89 だと変数定義がブロックの最初じゃないといけなかったから?
+
+https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20240904
+[a2243ee48b] NODE_ALIS → NODE_ALIAS ?

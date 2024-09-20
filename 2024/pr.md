@@ -123,3 +123,11 @@
 ## pr
 
 - <https://github.com/tric/trick2025/pull/1>
+- <https://github.com/rurema/doctree/pull/2909>
+- <https://github.com/rurema/doctree/pull/2910>
+- <https://github.com/rurema/doctree/pull/2911>
+
+## issues
+
+- <https://github.com/carrierwaveuploader/carrierwave/issues/2754>
+- <https://github.com/ruby-grape/grape-rabl/issues/53>
