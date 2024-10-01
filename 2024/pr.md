@@ -126,8 +126,15 @@
 - <https://github.com/rurema/doctree/pull/2909>
 - <https://github.com/rurema/doctree/pull/2910>
 - <https://github.com/rurema/doctree/pull/2911>
+- <https://github.com/Homebrew/homebrew-core/pull/191854>
 
 ## issues
 
 - <https://github.com/carrierwaveuploader/carrierwave/issues/2754>
 - <https://github.com/ruby-grape/grape-rabl/issues/53>
+
+# 2024-10
+
+## issues
+
+- <https://github.com/ruby/typeprof/issues/274>
