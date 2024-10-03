@@ -182,3 +182,33 @@ named capture でのローカル変数は `untyped` になっていたので `@t
          string ']</span>'
        end
 ```
+
+## statichtml_command.rb
+
+- `cname, tmark, mname = *split_method_spec(spec)` の `*` を削除。
+- `Dir.mktmpdir` を使っていたので、 `rbs_collection.yaml` に `tmpdir` を追加。
+
+以下の `ensure` の `verbose` がなぜか `untyped` になる。(代入の結果が `bool | nil` なので or `nil` の可能性が足されても `bool | nil` のままになるはず?
+
+```ruby
+          begin
+            verbose, $VERBOSE = $VERBOSE, false
+            Encoding.default_external = 'utf-8'
+          ensure
+            $VERBOSE = verbose
+          end
+```
+
+`screen.rbs` の `URLMapper` の型も書き換えつつ対応した。
+
+親クラスと同じ型でいいと思ってメソッドの型を消すと `bundle exec rake sig` の `rbs prototype rb` で `untyped` で生成されてしまうので、結局残しておくしかなかった。
+
+## screen.rbs
+
+```ruby
+    def new_screen(c, *args)
+      c.new(@conf, *args)
+    end
+```
+
+のようにクラスを受け取ってそのインスタンスを返すメソッドの型って untyped だらけにするしかない?
