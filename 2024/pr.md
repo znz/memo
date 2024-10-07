@@ -138,3 +138,4 @@
 ## issues
 
 - <https://github.com/ruby/typeprof/issues/274>
+- <https://github.com/rabbit-shocker/rabbit/issues/166>

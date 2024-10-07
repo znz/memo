@@ -25,3 +25,9 @@ https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20240901
 
 https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20240904
 [a2243ee48b] NODE_ALIS → NODE_ALIAS ?
+
+https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20241001
+[2f53c9fc62] magic commnet → magic comment ?
+
+https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20241003
+[e41e4bacb1] Array#inspec → Array#inspect ?
