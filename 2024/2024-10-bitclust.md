@@ -212,3 +212,33 @@ named capture でのローカル変数は `untyped` になっていたので `@t
 ```
 
 のようにクラスを受け取ってそのインスタンスを返すメソッドの型って untyped だらけにするしかない?
+
+```rbs
+    def new_screen: (c: singleton(Foo), *args) -> Foo
+                  | (c: singleton(Bar), *args) -> Bar
+```
+
+という方法を教えてもらって、クラスがわかっている範囲で書き換えた。
+
+
+```ruby
+    def edit_url(location)
+      @urlmapper.edit_url(location)
+    end
+```
+
+で `URLMapper#edit_url` がない (`URLMapperEx` にはある) という問題にまたひっかかったが、
+`URLMapperEx` が `statichtml_command.rb` だけではなく `chm_command.rb` にもあって、
+`edit_url` 自体を `URLMapper` にも定義した方がいいのでは、と思って、ここのエラーはいったん保留にした。
+
+https://github.com/rurema/bitclust/blob/2a2028ac761cee63a27eb24f7b6673da4b9fbd3e/lib/bitclust/screen.rb#L548
+の
+
+```ruby
+        roots.map!{|c| tree[c] }.flatten!
+```
+
+の部分が無理そうなので、 ruby-jp#types で相談。
+
+> `Array[T]` が `map!` で一瞬 `Array[Array[T]]` になって `flatten!` で `Array[T]` に戻る、っていい感じに型を付けるのは無理そうという認識であっているでしょうか?
+> 試しに `roots` を `Array[T | Array[T]}` にすると、 `tree` が `Hash[T, Array[T]]` なので、 `tree[c]` で赤色波線の `Ruby::ArgumentTypeMismatch` になって、現状の `{|c| tree[c] }` が黄色波線の `Ruby::BlockBodyTypeMismatch` より状況が悪化してしまう。
