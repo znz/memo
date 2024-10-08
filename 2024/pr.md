@@ -139,3 +139,7 @@
 
 - <https://github.com/ruby/typeprof/issues/274>
 - <https://github.com/rabbit-shocker/rabbit/issues/166>
+
+## pr
+
+- <https://github.com/ruby/www.ruby-lang.org/pull/3384>
