@@ -242,3 +242,73 @@ https://github.com/rurema/bitclust/blob/2a2028ac761cee63a27eb24f7b6673da4b9fbd3e
 
 > `Array[T]` が `map!` で一瞬 `Array[Array[T]]` になって `flatten!` で `Array[T]` に戻る、っていい感じに型を付けるのは無理そうという認識であっているでしょうか?
 > 試しに `roots` を `Array[T | Array[T]}` にすると、 `tree` が `Hash[T, Array[T]]` なので、 `tree[c]` で赤色波線の `Ruby::ArgumentTypeMismatch` になって、現状の `{|c| tree[c] }` が黄色波線の `Ruby::BlockBodyTypeMismatch` より状況が悪化してしまう。
+
+## list_command.rbs
+
+```ruby
+          @db.libraries.map {|lib| lib.name }.sort.each do |name|
+```
+
+の `@db` が `(::BitClust::FunctionDatabase | ::BitClust::MethodDatabase)` で
+
+```
+Type `(::BitClust::FunctionDatabase | ::BitClust::MethodDatabase)` does not have method `libraries`(Ruby::NoMethod)
+```
+
+になってしまうので、
+
+```ruby
+          db = @db
+          db.is_a?(MethodDatabase) or raise
+          db.libraries.map {|lib| lib.name }.sort.each do |name|
+```
+
+にしたが、 `--function` だけでは `FunctionDatabase` にならないとわかって、
+サブコマンドの前のグローバルオプションの方での `--capi` も必要だったので、
+
+```ruby
+        when :function
+          db = @db
+          db.is_a?(FunctionDatabase) or raise "invalid database given. Use with --capi option"
+          db.functions.sort_by {|f| f.name }.each do |f|
+```
+
+のように具体的にどうすればいいかを含むエラーメッセージをつけた。
+
+試したコマンド例:
+
+```shell
+bundle exec bitclust -d /tmp/db-3.4 list --library
+bundle exec bitclust -d /tmp/db-3.4 list --class
+bundle exec bitclust -d /tmp/db-3.4 list --method
+bundle exec bitclust -d /tmp/db-3.4 list --function
+bundle exec bitclust -d /tmp/db-3.4 --capi list --function
+bundle exec bitclust -d /tmp/db-3.4 --capi list --method
+```
+
+`parse` と `exec` はどのサブコマンドも同じ型にすれば良さそうだったので、
+`sd` コマンドで置き換えることにした。
+
+```shell
+sd -s 'def parse: (untyped argv) -> untyped' 'def parse: (Array[String] argv) -> void' sig/hand-written/bitclust/subcommands/*.rbs
+sd -s 'def exec: (untyped argv, untyped options) -> untyped' 'def exec: (Array[String] argv, Hash[Symbol, String?] options) -> void' sig/hand-written/bitclust/subcommands/*.rbs
+```
+
+## rrdparser.rbs
+
+`_ToIO | _ToStr s` にしてみたら ``Type `(::_ToIO | ::_ToStr)` does not have method `respond_to?`(Ruby::NoMethod)`` と言われてしまうので、どうすればいいのかわからなかった。
+
+```ruby
+      if s.respond_to?(:to_io)
+        io = s.to_io
+      elsif s.respond_to?(:to_str)
+        s1 = s.to_str
+```
+
+`methods_command.rb` のために `RRDParser.parse_stdlib_file` の返り値の型がほしかったので、そのあたりだけ型を追加した。
+
+## methoddatabase.rbs
+
+同様に関連する `self.dummy` や `attr_writer refs` にだけ型を追加した。
+
+## methods_command.rbs
