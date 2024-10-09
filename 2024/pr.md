@@ -143,3 +143,7 @@
 ## pr
 
 - <https://github.com/ruby/www.ruby-lang.org/pull/3384>
+
+## commits
+
+- <https://github.com/ruby/ruby/commit/bd85e88d3190556fc59ad9665b8e6f6715331696>

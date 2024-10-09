@@ -307,8 +307,107 @@ sd -s 'def exec: (untyped argv, untyped options) -> untyped' 'def exec: (Array[S
 
 `methods_command.rb` のために `RRDParser.parse_stdlib_file` の返り値の型がほしかったので、そのあたりだけ型を追加した。
 
+`Object &` をつけるという案を教えてもらって試した結果、以下のようにダメだった。
+
+```
+    def self.parse: (Object & (_ToIO | _ToStr) s, String lib, ?::Hash[String, String] params) -> [LibraryEntry, MethodDatabase]
+```
+にしてみましたが、
+```
+Type `(::Object & (::_ToIO | ::_ToStr))` does not have method `to_io`(Ruby::NoMethod)
+Type `(::Object & (::_ToIO | ::_ToStr))` does not have method `to_str`(Ruby::NoMethod)
+```
+になったので、 https://github.com/soutaro/steep/issues/560 の対応が入らないと `*.rb` 側の変更なしでは無理そうでした。
+
 ## methoddatabase.rbs
 
 同様に関連する `self.dummy` や `attr_writer refs` にだけ型を追加した。
 
+## crossrubyutils.rbs
+
+`methods_command` が依存していた `crossrubyutils` を先に型付け。
+
+`ENV['PATH']` を `ENV.fetch('PATH')` に変更。
+
+```ruby
+    def forall_ruby(path, &block)
+      rubys(path)\
+          .map {|ruby| [ruby, `#{ruby} --version`] }\
+          .reject {|ruby, verstr| `which #{ruby}`.include?('@') }\
+          .sort_by {|ruby, verstr| verstr }\
+          .each(&block)
+    end
+```
+
+の `sort_by` のブロックと `each(&block)` の `&block` が `Ruby::BlockBodyTypeMismatch` になる。
+
+steep が `*` に対応していないので、
+
+```ruby
+    def print_crossruby_table(&block)
+      print_table(*build_crossruby_table(&block))
+    end
+```
+
+を
+
+```ruby
+    def print_crossruby_table(&block)
+      vers, table = build_crossruby_table(&block)
+      print_table(vers, table)
+    end
+```
+
+に変更。
+
+他は推論された型を `rbs` ファイルに記入していくのがほとんどだった。
+
 ## methods_command.rbs
+
+```ruby
+          raise "must not happen: #{mode.inspect}"
+```
+
+の `mode` が
+
+```
+Type `::BitClust::Subcommands::MethodsCommand` does not have method `mode`(Ruby::NoMethod)
+```
+
+になっていて、 `@mode` の間違いというバグがみつかった。
+
+`m_order` は `*` がなくても `split` の返り値の型の問題があったので `or raise` の行を追加した。
+
+```ruby
+      def m_order(m)
+        m, t = *m.reverse.split(/(\#|\.|::)/, 2)
+        m or raise
+        t or raise
+        [ORDER[t] || 0, m.reverse]
+      end
+```
+
+## classes_command.rbs
+
+methods_command の一部と同じだった。
+
+## preprocessor.rbs
+
+方針変更前の `prototype` が残っていたのをマージした。
+
+`::BitClust::LineCollector` が間違えて `::BitClust::Preprocessor::LineCollector` になっていたのを修正した。
+
+```ruby
+    def LineCollector.process(path)
+      fopen(path) {|f|
+        return wrap(f).to_a
+      }
+    end
+```
+
+の `to_a` で型エラーになっていた。
+
+`each` の型が間違っているのかと思い、 `def each: () { (String) -> void } -> void` に修正したが `to_a` は直らず。
+
+`LineCollector.process` の返り値が `instance` ではなく `Array[String]` が正しかった。
+(`wrap` の返り値がそのまま返るのではないため)
