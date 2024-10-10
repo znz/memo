@@ -411,3 +411,17 @@ methods_command の一部と同じだった。
 
 `LineCollector.process` の返り値が `instance` ではなく `Array[String]` が正しかった。
 (`wrap` の返り値がそのまま返るのではないため)
+
+## 中断して webrick
+
+webrick を必要なところだけ型付けしていくのが不便に感じ始めたので、
+https://github.com/ruby/webrick/pull/115
+を参考にして `rbs prototype rb` をベースに型付けし始めているけど、
+typeprof で生成された https://github.com/ruby/webrick/blob/fb719152938719deadd21835153b9ed7bd1bb5dc/sig/webrick.rbs#L53-L56 の絞り込めていない感じが面白かった。
+https://github.com/ruby/webrick/blob/9350944141a3f15acda9c79edd5393289c098e04/lib/webrick/httputils.rb#L233-L249 なので、書きかけの型ファイルでは
+
+```rbs
+    def self?.parse_qvalues: (String? value) -> Array[String]
+```
+
+にしている。
