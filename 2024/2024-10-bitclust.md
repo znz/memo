@@ -425,3 +425,38 @@ https://github.com/ruby/webrick/blob/9350944141a3f15acda9c79edd5393289c098e04/li
 ```
 
 にしている。
+
+## webrick 続き
+
+`singleton` や `socket` への依存がある。
+`uri` も。
+
+timeout handler 周りは `timeout` ライブラリに合わせて、
+`Numeric` や `singleton(Exception)` にした。
+
+cancel 用の id は `object_id` だったので、
+`Integer` にした。
+
+`watch` は `while true` の無限ループで `return` するところもなさそうだったので `bot` になった。
+
+```rbs
+def self.register: (Numeric seconds, singleton(Exception) exception) -> Integer
+def self.cancel: (Integer id) -> boola
+def watch: () -> bot
+```
+
+`class GenericServer` が `webrick/ssl` でも上書きされていて、ちょっと難しい。
+
+`webrick/httpstatus` `const_set` されている定数は以下で補った。
+
+```ruby
+require 'webrick'
+
+puts WEBrick::HTTPStatus::constants.grep(/\ARC_/).map{"#{_1}: #{WEBrick::HTTPStatus.const_get(_1)}"}
+
+puts WEBrick::HTTPStatus::CodeToError.each_value.map{"class #{_1.name.split(/::/).last} < #{_1.superclass.name.split(/::/).last}\nend"}
+```
+
+`webrick/httprequest` の `@form_data` は `nil` で初期化されているだけで未使用だった。
+`@addr` と `@peeraddr` は `nil` ではなく `[]` で初期化の方が型が絞れそう。
+`@query` や `@header` も `nil` ではなく `{}` で初期化の方が型が絞れそう。
