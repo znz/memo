@@ -460,3 +460,34 @@ puts WEBrick::HTTPStatus::CodeToError.each_value.map{"class #{_1.name.split(/::/
 `webrick/httprequest` の `@form_data` は `nil` で初期化されているだけで未使用だった。
 `@addr` と `@peeraddr` は `nil` ではなく `[]` で初期化の方が型が絞れそう。
 `@query` や `@header` も `nil` ではなく `{}` で初期化の方が型が絞れそう。
+
+## webrick 続き
+
+```text
+Non-overloading method definition of `parse` in `::WEBrick::HTTPRequest` cannot be duplicated(RBS::DuplicatedMethodDefinition)
+```
+
+は `https.rbs` に重複定義があったので、 `| ...` を追加して、
+
+```rbs
+    alias orig_parse parse
+
+    def parse: (?(TCPSocket | OpenSSL::SSL::SSLSocket)? socket) -> void
+             | ...
+
+    alias orig_parse_uri parse_uri
+
+    private
+
+    def parse_uri: (String str, ?::String scheme) -> URI::Generic
+                 | ...
+
+    public
+
+    alias orig_meta_vars meta_vars
+
+    def meta_vars: () -> Hash[String, String]
+                 | ...
+```
+
+などとしていって解決した。
