@@ -491,3 +491,63 @@ Non-overloading method definition of `parse` in `::WEBrick::HTTPRequest` cannot 
 ```
 
 などとしていって解決した。
+
+## webrick 続き `webrick/httpresponse`
+
+`webrick/httpresponse` は `body` に悩んで、コメントの
+
+```ruby
+    # Body may be:
+    # * a String;
+    # * an IO-like object that responds to +#read+ and +#readpartial+;
+    # * a Proc-like object that responds to +#call+.
+```
+
+を参考にして、
+
+```rbs
+    interface _CallableBody
+      def call: (_Writer) -> void
+    end
+
+    attr_accessor body: String | _ReaderPartial | _CallableBody
+```
+
+にした。
+
+`#read` は呼ばれていなかったので、 `_Reader & _ReaderPartial` ではなく `_ReaderPartial` だけにした。
+
+書き込みは `write` のみだったので、 `socket` の型は `_Writer` にした。
+
+`=` つきのメソッドの返り値でちょっと悩んでしまったが、右辺の値の型をそのまま書くようだったので、そうしておいた。
+
+`set_redirect` は `singleton` を使って
+
+```rbs
+    def set_redirect: (singleton(WEBrick::HTTPStatus::Redirect) status, URI::Generic | String url) -> bot
+```
+
+にした。
+<https://github.com/ruby/webrick/blob/9350944141a3f15acda9c79edd5393289c098e04/lib/webrick/httpresponse.rb#L391-L393>
+の `Example` の `res.set_redirect WEBrick::HTTPStatus::TemporaryRedirect` は引数が足りてなさそう。
+
+<https://github.com/ruby/webrick/blob/fb719152938719deadd21835153b9ed7bd1bb5dc/sig/webrick.rbs#L518> で `nil ex` になっているのが気になったが、
+実際に使われているところでは `nil` は来なさそうだったので、
+
+```rbs
+    def set_error: (singleton(Exception) ex, ?bool backtrace) -> void
+```
+
+にした。
+
+`write` の引数になるものは `_Writer` での定義に合わせて `_ToS` を使った。
+
+## webrick/httprequest
+
+IO? 型が渡せなくなるらしいので、 `IO socket` を `IO? socket` に変更、
+`void` は返り値以外で書ける位置が制限されているらしいので `top` に変更。
+
+```rbs
+    def read_body: (IO? socket, body_chunk_block block) -> String
+                 | (nil socket, top block) -> nil
+```
