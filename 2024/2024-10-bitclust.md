@@ -544,10 +544,32 @@ Non-overloading method definition of `parse` in `::WEBrick::HTTPRequest` cannot 
 
 ## webrick/httprequest
 
-IO? 型が渡せなくなるらしいので、 `IO socket` を `IO? socket` に変更、
+`IO?` 型が渡せなくなるらしいので、 `IO socket` を `IO? socket` に変更した方がいいかもしれないが、返り値も `String?` になってしまうので、とりあえずそのままにした。
 `void` は返り値以外で書ける位置が制限されているらしいので `top` に変更。
 
 ```rbs
-    def read_body: (IO? socket, body_chunk_block block) -> String
+    def read_body: (IO socket, body_chunk_block block) -> String
                  | (nil socket, top block) -> nil
 ```
+
+### webrick 続き webrick/httpservlet/abstract.rbs と webrick/httpservlet/filehandler.rbs
+
+`AbstractServlet` は `@config` が `HTTPServer` で `FileHandler` は `Hash[Symbol, untyped]` で困ったので、
+
+```rbs
+    class AbstractServlet
+      @server: HTTPServer
+
+      interface _Config
+        def []: (Symbol) -> untyped
+      end
+
+      @config: _Config
+```
+
+にした。
+
+`@options` も `AbstractServlet` は `Array[untyped]` で `FileHandler` は `Hash[Symbol, untyped]` なので、
+`AbstractServlet` の方は `untyped` にした。
+
+`do_GET` などが `AbstractServlet` は `-> bot` で `FileHandler` で `-> void` にしたのは型エラーにはならなかった。
