@@ -573,3 +573,43 @@ Non-overloading method definition of `parse` in `::WEBrick::HTTPRequest` cannot 
 `AbstractServlet` の方は `untyped` にした。
 
 `do_GET` などが `AbstractServlet` は `-> bot` で `FileHandler` で `-> void` にしたのは型エラーにはならなかった。
+
+### webrick 続き
+
+まだ手をつけてなかった自動生成されただけの `cgi.rbs` に型エラーがあると思ったら、こんな感じで `include Enumerable[untyped]` になっていないからだった。
+
+```console
+% cat a.rb
+class C
+  include Enumerable
+
+  def each
+    yield nil
+  end
+end
+% rbs prototype rb a.rb
+class C
+  include Enumerable
+
+  def each: () { (untyped) -> untyped } -> untyped
+end
+```
+
+`webrick/httpserver.rbs` で
+
+```ruby
+    def mount_proc(dir, proc=nil, &block)
+      proc ||= block
+      raise HTTPServerError, "must pass a proc or block" unless proc
+      mount(dir, HTTPServlet::ProcHandler.new(proc))
+    end
+```
+
+に対応する型として、
+
+```rbs
+    def mount_proc: (String dir, ?HTTPServlet::ProcHandler::_Callable proc) -> void
+                  | (String dir, ?nil proc) { (HTTPRequest, HTTPResponse) -> void } -> void
+```
+
+としてみた。
