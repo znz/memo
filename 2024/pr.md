@@ -147,3 +147,5 @@
 ## commits
 
 - <https://github.com/ruby/ruby/commit/bd85e88d3190556fc59ad9665b8e6f6715331696>
+- <https://github.com/ruby-jp/ruboty-ruby-jp/commit/6ca3c809658815f2778ff5060559872a09fe174b>
+- <https://github.com/ruby-jp/ruboty-ruby-jp/commit/ea294b6fdbec1c09fe31d2c7b50152eb501c0891>

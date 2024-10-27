@@ -613,3 +613,7 @@ end
 ```
 
 としてみた。
+
+### webrick 続き
+
+`webrick/httpauth/authenticator.rb` の `ProxyAuthenticator` の `InfoField` は `ResponseInfoField` の typo っぽいというバグをみつけた。
