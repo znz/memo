@@ -617,3 +617,16 @@ end
 ### webrick 続き
 
 `webrick/httpauth/authenticator.rb` の `ProxyAuthenticator` の `InfoField` は `ResponseInfoField` の typo っぽいというバグをみつけた。
+
+`lib/webrick/httpauth/htgroup.rb` の `reload` の `group, members = line.split(/:\s*/)` は `split(re, 2)` にした方がいいかもしれない。
+`lib/webrick/httpauth/htpasswd.rb` の `reload` の `split` も 2 をつけた方がいいかもしれない。
+
+### webrick PR
+
+<https://github.com/ruby/webrick/pull/151> として出した。
+
+`manifest.yaml` は `gemspec` と同じトップではなく `sig/manifest.yaml` に置く必要があった。
+
+`stringio` を `manifest.yaml` に入れるとエラーになって困ったので調べてみると、
+<https://github.com/ruby/rbs/tree/master/core> にあったので、
+`core` のライブラリは不要なのかも、と思って書かなかったらエラーが消えた。
