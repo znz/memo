@@ -441,7 +441,7 @@ cancel 用の id は `object_id` だったので、
 
 ```rbs
 def self.register: (Numeric seconds, singleton(Exception) exception) -> Integer
-def self.cancel: (Integer id) -> boola
+def self.cancel: (Integer id) -> bool
 def watch: () -> bot
 ```
 

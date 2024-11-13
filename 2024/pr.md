@@ -143,9 +143,22 @@
 ## pr
 
 - <https://github.com/ruby/www.ruby-lang.org/pull/3384>
+- <https://github.com/ruby/webrick/pull/151>
 
 ## commits
 
 - <https://github.com/ruby/ruby/commit/bd85e88d3190556fc59ad9665b8e6f6715331696>
 - <https://github.com/ruby-jp/ruboty-ruby-jp/commit/6ca3c809658815f2778ff5060559872a09fe174b>
 - <https://github.com/ruby-jp/ruboty-ruby-jp/commit/ea294b6fdbec1c09fe31d2c7b50152eb501c0891>
+
+# 2024-11
+
+## pr
+
+- <https://github.com/ruby/webrick/pull/152>
+- <https://github.com/ruby/webrick/pull/154>
+- <https://github.com/ruby/webrick/pull/155>
+
+## commits
+
+- <https://github.com/ruby/actions/commit/62e26e94f79aa0ea2a54aa56761f8927cdb23b9b>
