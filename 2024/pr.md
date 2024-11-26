@@ -158,6 +158,7 @@
 - <https://github.com/ruby/webrick/pull/152>
 - <https://github.com/ruby/webrick/pull/154>
 - <https://github.com/ruby/webrick/pull/155>
+- <https://github.com/ruby/all-ruby/pull/22>
 
 ## commits
 
