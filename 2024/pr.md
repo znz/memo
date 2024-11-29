@@ -163,3 +163,7 @@
 ## commits
 
 - <https://github.com/ruby/actions/commit/62e26e94f79aa0ea2a54aa56761f8927cdb23b9b>
+
+## issues
+
+- <https://github.com/rubocop/rubocop-jp/issues/69>

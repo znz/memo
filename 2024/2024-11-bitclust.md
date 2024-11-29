@@ -53,3 +53,44 @@
 +    attr_accessor source: String
 +    attr_accessor source_location: Location
 ```
+
+## chm_command.rb の型エラー対策
+
+`encode('windows-31j', { :fallback => FIX_UNDEF } )` には `encode('windows-31j', **{ :fallback => FIX_UNDEF } )` のように `**` をつけた。
+
+以下の `entry_screen` で `Screen#body` がないというのは、結局 `Screen` に `def body: () -> String` を足して、 `TemplateScreen` に `undef body` を入れたかったが書き方がわからなかったので、 `def body: () -> bot` を入れておくことにして型エラーを消した。
+
+```ruby
+        html = manager.entry_screen(entry, {:database => db}).body
+        e = entry.is_a?(Array) ? entry.sort.first : entry
+```
+
+## server_command.rbs
+
+app.rbs も関連している。
+
+`BitClust::App` は `WEBrick::HTTPServer#mount` に渡しているが、 `WEBrick::HTTPServlet::AbstractServlet` を継承していないので、型エラーになってしまった。
+
+とりあえず以下のような interface を追加して回避することにした。
+`webrick` に入れるかどうかは検討中。
+
+`def get_instance(server)` だと `get_instance: (HTTPServer, *untyped options)` と合わないようなので、
+`def get_instance(_server, *_)` にしてみたが、後で戻すかも。
+
+```rbs
+module WEBrick
+  class HTTPServer < ::WEBrick::GenericServer
+    interface _Service
+      def service: (HTTPRequest req, HTTPResponse res) -> void
+    end
+
+    interface _GetInstance
+      def get_instance: (HTTPServer, *untyped options) -> _Service
+    end
+
+    def mount: (String dir, singleton(HTTPServlet::AbstractServlet) servlet, *untyped options) -> void
+             | (String dir, _GetInstance servlet, *untyped options) -> void
+             | ...
+  end
+end
+```
