@@ -167,3 +167,15 @@
 ## issues
 
 - <https://github.com/rubocop/rubocop-jp/issues/69>
+
+# 2024-12
+
+## commits
+
+- <https://github.com/ruby/webrick/commit/307f24c0e9624e56fdbe8ebbe6df03ee25e9e57b>
+- <https://github.com/ruby/ruby/commit/892c46283a5ea4179500d951c9d4866c0051f27b>
+
+## pr
+
+- <https://github.com/ruby/rbs/pull/2107>
+- <https://github.com/ruby/ruby/pull/12238>
