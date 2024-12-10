@@ -172,3 +172,15 @@ prototype に残っていた型を hand-written にマージした。
 ```ruby
           m.kind            = chunk.source.match?(/^@undef$/) ? :undefined : @kind
 ```
+
+## ancestors_command.rb
+
+`[]` を代入していて `Array[untyped]` になっていたところにコメントで型をつけた。
+
+## chm_command.rb
+
+`methods = {}` の型をちゃんとつけて、 `create_html_file` の型を仮のままにしていたのを修正した。
+
+## libraryentry.rb lineinput.rb messagecatalog.rb nameutils.rb rrdparser.rb
+
+型のコメントをつけた。
