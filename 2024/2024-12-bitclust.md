@@ -184,3 +184,32 @@ prototype に残っていた型を hand-written にマージした。
 ## libraryentry.rb lineinput.rb messagecatalog.rb nameutils.rb rrdparser.rb
 
 型のコメントをつけた。
+
+## rrdparser.rbs
+
+https://github.com/znz/bitclust/blob/7ca946fcc9a0768fa20050e270be642053486066/lib/bitclust/rrdparser.rb#L459
+の型エラーが直らないので、 ruby-jp#types で質問。
+
+````markdown
+https://github.com/znz/bitclust/blob/7ca946fcc9a0768fa20050e270be642053486066/lib/bitclust/rrdparser.rb#L459 の
+```
+          m.visibility      = @visibility || :public
+```
+という行で
+m.visibility は
+```
+attr_accessor visibility: (:public | :private | :protected)
+```
+で
+@visibility は (代入が正規表現から切り出して intern している関係で)
+```
+attr_reader visibility: (:public | :private | :protected)?
+attr_writer visibility: Symbol?
+```
+としてみているのですが、 `||` の右辺の `:public` の型が `:public` にならずに `::Symbol` になってしまうようで、以下の型エラーが出ているのですが、どうすればいいのでしょうか?
+```
+Cannot pass a value of type `::Symbol` as an argument of type `(:public | :private | :protected)`
+  ::Symbol <: (:public | :private | :protected)
+    ::Symbol <: :publicRuby::ArgumentTypeMismatch
+```
+````

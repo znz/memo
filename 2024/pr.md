@@ -179,3 +179,6 @@
 
 - <https://github.com/ruby/rbs/pull/2107>
 - <https://github.com/ruby/ruby/pull/12238>
+- <https://github.com/ruby/docker-images/pull/112>
+- <https://github.com/znz/magazine.rubyist.net-1/pull/1> (gh コマンドの操作ミス)
+- <https://github.com/rubima/magazine.rubyist.net/pull/549>
