@@ -213,3 +213,54 @@ Cannot pass a value of type `::Symbol` as an argument of type `(:public | :priva
     ::Symbol <: :publicRuby::ArgumentTypeMismatch
 ```
 ````
+
+## rrdparser.rb の ::BitClust::RRDParser::Context
+
+`singleton_object_class` が引数のところでは `::String?` で、 `if` のところで `::BitClust::ClassEntry?` に変わるというのを steep 1.9.1 が認識してくれなくて、以下のようにコメントを入れると `get_class` の引数も `::BitClust::ClassEntry?` に変わってしまってうまくいかなかった。
+
+```ruby
+      def define_object(name, singleton_object_class, location: nil)
+        singleton_object_class = @db.get_class(singleton_object_class) if singleton_object_class
+        # @type var singleton_object_class: ClassEntry?
+        register_class :object, name, singleton_object_class, location: location
+      end
+```
+
+`@klass` が `nil` の可能性に対応するために `&.` や `|| raise` が増えてしまった。
+
+## methodid.rbs
+
+初期の方針で prototype に残していた inspect などを hand-written にマージした。
+
+## simplesearcher.rbs
+
+破壊的変更は使わずに、配列にも `+=` で追加していて型はつけやすかった。
+
+`cs = ms = []` で初期化して別の型の要素を `+=` で追加していたところは、以下のように分離して型をつけた。
+
+```ruby
+      # @type var cs: Array[ClassEntry]
+      # @type var ms: Array[MethodEntry]
+      cs = []; ms = []
+```
+
+以下のようにローカル変数の型が途中で変わるのは難しかったので、変数名を変えた。
+
+```ruby
+    def parse_method_spec_pattern0(q)
+      q = q.scan(/\S+/)[0..1]
+      q = q.reverse unless /\A[A-Z]/ =~ q[0]
+      return q[0], nil, q[1]
+    end
+```
+
+`scan` も正規表現で capture を使っているかどうかで型が変わる (`Array` のネストが変わる) ので、コードの変更なしで決定できないので `_` を経由して回避した。
+
+```ruby
+    def parse_method_spec_pattern0(pat)
+      # @type var q: Array[String]
+      q = _ = pat.scan(/\S+/)[0..1]
+      q = q.reverse unless /\A[A-Z]/ =~ q[0]
+      return q[0], nil, q[1]
+    end
+```
