@@ -264,3 +264,60 @@ Cannot pass a value of type `::Symbol` as an argument of type `(:public | :priva
       return q[0], nil, q[1]
     end
 ```
+
+## searcher.rb
+
+`DRbObject` になるものインスタンス変数は `# @type var db: MethodDatabase` などで `DRbObject` の可能性を無視したり、
+`attr_writer` と `attr_reader` に分離して `attr_reader` では `DRbObject` ではないことにしたりしていた。
+
+`TerminalView` のエンコーディング周りは過去との互換性でごちゃごちゃしているが、
+とりあえず型だけ合わせて詳細は今のところ無視した。
+
+`nkf` は Ruby 3.4 で default gem から bundled gem になって、将来外される可能性が高そうということもあり、
+`Encoding` だけ対応にして `NKF` 対応のコードは削ってしまっても良さそうだった。
+
+`FunctionEntry` の `db` と `id` が `untyped` のままだったので、そこにも型をつけておいた。
+
+## epub.rbs
+
+`ERB.new` を古い形式で呼び出していて型エラーになっているところがあったので、今のままだと epub 生成は新しい Ruby では動かなそうということがわかった。
+とりあえず型優先なので、今は無視だけで新旧両対応は入れなかった。
+
+```ruby
+        # steep:ignore:start
+        # FIXME: ERB.new のキーワード引数化に対応が必要
+        contents = ERB.new(File.read(@templatedir + "contents"), nil, "-").result(binding)
+        # steep:ignore:end
+```
+
+`EPUBCommand` から渡される `catalog` は常に `nil` なので、
+`catalogdir` の typo によるバグっぽい。
+
+`fs_casesensitive` が `bool` ではなく `true?` なのも `false` での初期化忘れというだけかもしれない。
+
+## Dir.mktmpdir
+
+```console
+% ruby -r pathname -r tmpdir -e 'Dir.mktmpdir{|outer|n=Pathname(outer);(n+"foo").open("w");Dir.mktmpdir("prefix-", outer){}}'
+% ruby -r pathname -r tmpdir -e 'Dir.mktmpdir{outer=Pathname(_1);Dir.mktmpdir("prefix-", outer){}} rescue p $!'
+#<ArgumentError: empty parent path>
+```
+
+## completion.rb
+
+長くて非常にたいへん。
+
+```ruby
+  # Provides completion search methods like _search_classes, _search_methods.
+  # Included by MethodDatabase and FunctionDatabase.
+```
+
+と書いてあるので、それぞれのクラスからしか呼ばれていないメソッドには `# @type self: MethodDatabase` などで `self` のクラスを確定するようにした。
+
+デバッグ用っぽいインデントなしのコードやコメントがあるので、消していいのかどうか悩む。
+
+`SearchResult::Record.new` の引数はバグってるところがありそう。
+
+`SearchResult::Record` の `@idstring` が常に `nil` なので `idstring` ではなく `@idstring` を参照しているところはバグっぽい。
+
+`search_methods_from_cname_mname` の `SearchResult.new(self, pattern, recs.map {|rec| rec.class_name }, recs)` だけ第3引数が `Array[ClassEntry]` ではなく `Array[String]` になっているのでバグかもしれない。
