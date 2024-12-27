@@ -174,6 +174,11 @@
 
 - <https://github.com/ruby/webrick/commit/307f24c0e9624e56fdbe8ebbe6df03ee25e9e57b>
 - <https://github.com/ruby/ruby/commit/892c46283a5ea4179500d951c9d4866c0051f27b>
+- <https://github.com/ruby/ruby/commit/335bba0fde0c0407377b6e10050ab6c2ad0d3270>
+- <https://github.com/ruby/ruby/commit/c194357c082b6c48956df136b8f936a70db747a1>
+- <https://github.com/ruby/actions/commit/60b5eb8ee799824eba1b16a228af0cd5fd7f9c76>
+- <https://github.com/ruby/actions/commit/61579770d3921164576cf769919076225082fe27>
+- <https://github.com/ruby/actions/commit/afa38a1704946e3af82e2b48436461b926233a0c>
 
 ## pr
 
@@ -182,3 +187,11 @@
 - <https://github.com/ruby/docker-images/pull/112>
 - <https://github.com/znz/magazine.rubyist.net-1/pull/1> (gh コマンドの操作ミス)
 - <https://github.com/rubima/magazine.rubyist.net/pull/549>
+- <https://github.com/ruby/rbs/pull/2158>
+- <https://github.com/ruby/docs.ruby-lang.org/pull/159>
+- <https://github.com/rurema/generated-documents/pull/32>
+- <https://github.com/rurema/doctree/pull/2933>
+
+## issues
+
+- <https://github.com/ruby/tmpdir/issues/37>
