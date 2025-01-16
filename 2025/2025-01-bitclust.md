@@ -44,3 +44,77 @@ rbs の方では
     end
     private :id_extent
 ```
+
+### app.rbs
+
+`--auto` のときかどうかで `:dbpath` の型が変わっていたので、別 type にわけて `:viewpath` の有無も表現するようにした。
+
+```rbs
+    type options_auto = {
+      # auto
+      :dbpath => Array[String],
+      :baseurl => String?,
+      :datadir => String?,
+      :templatedir => String?,
+      :theme => String?,
+      :encoding => String,
+      :capi => bool,
+    }
+    type options_noauto = {
+      :viewpath => String,
+      :dbpath => String?,
+      :baseurl => String?,
+      :datadir => String?,
+      :templatedir => String?,
+      :theme => String?,
+      :encoding => String,
+      :capi => bool,
+    }
+    type options = options_auto | options_noauto
+
+    @options: options
+```
+
+### server_command.rb
+
+`server.mount viewpath, interface` で最低限だけ抜き出すと以下のようになっている `BitClust::Interface` が追加している `WEBrick::HTTPServer::_GetInstance` として受け付けられるのを期待したのに受け付けられなかったので、明示的に `BitClust::Interface` を受け付けるようにした。
+
+```rbs
+module BitClust
+  class Interface
+    def get_instance: (untyped server) -> WEBrickServlet
+  end
+
+  class WEBrickServlet < ::WEBrick::HTTPServlet::AbstractServlet
+  end
+end
+
+# webrick/sig/httpservlet/abstract.rbs
+module WEBrick
+  module HTTPServlet
+    class AbstractServlet
+      def service: (HTTPRequest req, HTTPResponse res) -> void
+	end
+  end
+end
+```
+
+```rbs
+# bitclust/sig/webrick.rbs
+module WEBrick
+  class HTTPServer < ::WEBrick::GenericServer
+    interface _Service
+      def service: (HTTPRequest req, HTTPResponse res) -> void
+    end
+
+    interface _GetInstance
+      def get_instance: (HTTPServer, *untyped options) -> _Service
+    end
+
+    def mount: (String dir, singleton(HTTPServlet::AbstractServlet) servlet, *untyped options) -> void
+             | (String dir, _GetInstance servlet, *untyped options) -> void
+             | (String dir, BitClust::Interface servlet, *untyped options) -> void # なぜか _GetInstance にならないようなので明示的に許可
+             | ...
+  end
+end
+```
