@@ -118,3 +118,46 @@ module WEBrick
   end
 end
 ```
+
+`_GetInstanceWithOptions` と `_GetInstanceWithoutOptions` に分離した。
+
+```rbs
+    interface _GetInstanceWithOptions
+      def get_instance: (HTTPServer, *untyped options) -> _Service
+    end
+
+    interface _GetInstanceWithoutOptions
+      def get_instance: (HTTPServer) -> _Service
+    end
+
+    def mount: (String dir, singleton(HTTPServlet::AbstractServlet) servlet, *untyped options) -> void
+             | (String dir, _GetInstanceWithOptions servlet, *untyped options) -> void
+             | (String dir, _GetInstanceWithoutOptions servlet) -> void
+             | ...
+```
+
+### entry.rbs
+
+```rbs
+    def restore_entries: (String str, singleton(LibraryEntry) klass) -> ::Array[LibraryEntry]
+                       | (String str, singleton(ClassEntry) klass) -> ::Array[ClassEntry]
+                       | (String str, singleton(MethodEntry) klass) -> ::Array[MethodEntry]
+```
+
+にしてしまうと
+
+```ruby
+    def restore_entries(str, klass)
+      return [] if str.nil?
+      str.split(',').map {|id| klass.load(@db, id) }
+    end
+```
+
+の返り値の型が `Array[LibraryEntry | ClassEntry | MethodEntry]` になってしまってうまくいかないので、
+
+```rbs
+    # klass < Entry, Array[klass]
+    def restore_entries: (String str, untyped klass) -> ::Array[untyped]
+```
+
+のように `untyped` のままにするしかなさそうだった。
