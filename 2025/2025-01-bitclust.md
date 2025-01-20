@@ -161,3 +161,90 @@ end
 ```
 
 のように `untyped` のままにするしかなさそうだった。
+
+### lib/bitclust/preprocessor.rb
+
+`key?` でチェックしてから参照するパターンに `# steep:ignore` を追加した。
+インスタンス変数だからダメというわけではなく、ローカル変数に代入するように書き換えてもダメそうだった。
+
+```ruby
+      if t = s.scan(/\w+/)
+        unless @params.key?(t) # steep:ignore
+          scan_error "database property `#{t}' not exist"
+        end
+        @params[t] # steep:ignore
+```
+
+### lib/bitclust/subcommands/htmlfile_command.rb
+
+<https://github.com/rurema/bitclust/blob/2a2028ac761cee63a27eb24f7b6673da4b9fbd3e/lib/bitclust/subcommands/htmlfile_command.rb#L48> のように途中で変数名を再利用してるときに `# @type var options: 以下の部分の型` と書くとコメント行より上の `options` にも影響してしまってダメだったけど、行末に `#:  新しい型` なら大丈夫そうだった。
+
+### lib/bitclust/database.rb
+
+`properties` まわりの型を厳密にしようとしたが、 `load_properties('properties')` で `db-x.y/properties` を読むときは厳密にできても、
+`entry.rb` で `@db.load_properties(objpath())` と呼ばれている方はここでは厳密にできなくて、
+`propget` や `propset` も `bitclust init` サブコマンド自体では制限していなくて `version` と `encoding` 以外も指定できてしまうため、
+緩くしていたらこういう状態になってしまった。
+
+`database.rb` の内部で `entry.rb` 用に `'source'` に値を設定して、
+`properties` では消しているのも `database_propkey` に足さないと型エラーになるところがあって困ってしまったので、
+足したままにしている。
+
+```rbs
+    type propkey_type = ::String
+    type properties_type = ::Hash[propkey_type, String]
+
+    # 'source' is internal use only
+    type database_propkey = 'version' | 'encoding' | 'source'
+    type database_properties = Hash[database_propkey, String]
+
+# ...
+
+    def properties: () -> database_properties
+
+    def propkeys: () -> ::Array[propkey_type]
+
+    # accept propkey_type, but should not happen
+    def propget: (database_propkey key) -> String
+               | (propkey_type key) -> String?
+
+    # accept propkey_type, but should not happen
+    def propset: (database_propkey key, String value) -> void
+               | (propkey_type key, String value) -> void
+
+# ...
+
+    def load_properties: ('properties' rel) -> database_properties
+                       | (::String rel) -> properties_type
+```
+
+### lib/bitclust/rdcompiler.rb
+
+これらが未使用だったので削除した。
+
+```ruby
+      @library = nil
+      @class = nil
+```
+
+### Hash[Symbol, untyped]
+
+できるだけ Record に変更して減らし中。
+
+### chm_command.rbs
+
+FIXME: `**` がないのは `chm_command.rb` に合わせているため。
+
+```diff
+-        def method_missing: (untyped name, *untyped args) { (?) -> untyped } -> untyped
++        def method_missing: (Symbol name, *untyped args) { (?) -> untyped } -> untyped
+```
+
+### searcher.rbs
+
+FIXME: 今だとキーワード引数にする方が良さそう。
+
+```diff
+-    def initialize: (Plain compiler, Hash[Symbol, untyped] opts) -> void
++    def initialize: (Plain compiler, { :describe_all => bool, :line => bool, :encoding => String? } opts) -> void
+```
