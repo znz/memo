@@ -7,6 +7,10 @@
 #
 # Other examples:
 #   env codename=noble arch=amd64 ./inst.sh
+#   sudo virsh autostart noble-amd64
+#
+#   env codename=noble arch=riscv64 ram=2048 vcpu=2 ./inst.sh
+#   sudo virsh autostart noble-riscv64
 #
 # How to prepare:
 #
