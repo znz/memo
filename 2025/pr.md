@@ -15,3 +15,7 @@
 ## pr
 
 - <https://github.com/sameersbn/docker-redmine/pull/575>
+
+## issues
+
+- <https://github.com/ruby/rbs/issues/2277>
