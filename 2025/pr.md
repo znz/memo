@@ -15,6 +15,7 @@
 ## pr
 
 - <https://github.com/sameersbn/docker-redmine/pull/575>
+- <https://github.com/dokku/blog/pull/244>
 
 ## issues
 
