@@ -145,8 +145,9 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
-    devise-i18n (1.12.1)
+    devise-i18n (1.13.0)
       devise (>= 4.9.0)
+      rails-i18n
     drb (2.2.1)
     erubi (1.13.1)
     execjs (2.9.1)
@@ -245,7 +246,7 @@ GEM
     pundit (2.5.0)
       activesupport (>= 3.0.0)
     racc (1.8.1)
-    rack (3.1.10)
+    rack (3.1.11)
     rack-attack (6.7.0)
       rack (>= 1.0, < 4)
     rack-mini-profiler (3.3.1)
