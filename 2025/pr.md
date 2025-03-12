@@ -20,3 +20,13 @@
 ## issues
 
 - <https://github.com/ruby/rbs/issues/2277>
+
+# 2025-03
+
+## commits
+
+- <https://github.com/ruby/chkbuild/commit/3d9f7046d7ef8440cfb2c62cb1d1c755b01da90c>
+- <https://github.com/ruby/chkbuild/commit/657ea34fe36e156c2cfd5def1c2961b5b49893a3>
+- <https://github.com/ruby/docs.ruby-lang.org/commit/2f82e0a2a045525ddbf2c468cb5a260bd37152ed>
+- <https://github.com/ruby/docs.ruby-lang.org/commit/2c5e5e87b6c294aa08461df9e5c96b1db4f3fd64>
+- <https://github.com/ruby/docs.ruby-lang.org/commit/39cca3231d0220629a2343e43b2fe77ffa2a4fe7>
