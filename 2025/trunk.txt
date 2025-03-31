@@ -1,0 +1,2 @@
+https://ruby-trunk-changes.hatenablog.com/entry/ruby_trunk_changes_20250314
+[3d4c7c3802] Enumerable#revert → Enumerable#reverse ?

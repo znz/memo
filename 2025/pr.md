@@ -34,3 +34,7 @@
 ## issues
 
 - <https://github.com/rgeo/activerecord-postgis-adapter/issues/426>
+
+## comments
+
+- <https://github.com/abiosoft/colima/issues/1000#issuecomment-2746682623>
