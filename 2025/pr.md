@@ -38,3 +38,18 @@
 ## comments
 
 - <https://github.com/abiosoft/colima/issues/1000#issuecomment-2746682623>
+
+# 2025-04
+
+## commits
+
+- <https://github.com/ruby/actions/commit/3ef1ffc5dab82345dbd83b897363e462b9b84d35>
+- <https://github.com/ruby/docs.ruby-lang.org/commit/d1aaca79949ca1030e0efe4de29c519787c63321>
+
+## pr
+
+- <https://github.com/ruby/www.ruby-lang.org/pull/3534>
+
+## issues
+
+- <https://github.com/ruby-jp/ruboty-ruby-jp/issues/170>
