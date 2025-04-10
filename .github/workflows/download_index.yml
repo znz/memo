@@ -1,0 +1,41 @@
+name: Download index.txt
+
+on:
+  repository_dispatch:
+    types: [download_index]
+  workflow_dispatch:
+
+permissions:
+  pull-requests: write
+  contents: write
+
+jobs:
+  download_index:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download index.txt
+        run: |
+          set -eux
+          cd ruby
+          curl -fsSLO https://cache.ruby-lang.org/pub/ruby/index.txt
+      - name: Create Pull Request
+        id: cpr
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: update-index.txt
+          delete-branch: true
+          add-paths: |
+            ruby/index.txt
+          title: 'Update index.txt'
+          body: >
+            This PR is auto-generated.
+      - name: Enable auto-merge
+        if: ${{ steps.cpr.outputs.pull-request-number }}
+        run: |
+          echo "Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}"
+          echo "Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"
+          gh pr merge --auto --delete-branch --merge "$PR_URL"
+        env:
+          PR_URL: "${{ steps.cpr.outputs.pull-request-url }}"
+          GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
