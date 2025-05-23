@@ -53,3 +53,9 @@
 ## issues
 
 - <https://github.com/ruby-jp/ruboty-ruby-jp/issues/170>
+
+# 2025-05
+
+## commits
+
+- <https://github.com/ruby/ruby/commit/fa2414f29a410b1d295f06470e9177638032105c>
