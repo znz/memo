@@ -59,3 +59,9 @@
 ## commits
 
 - <https://github.com/ruby/ruby/commit/fa2414f29a410b1d295f06470e9177638032105c>
+
+# 2025-06
+
+## issues
+
+- <https://github.com/rurema/doctree/issues/2965>
