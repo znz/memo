@@ -65,3 +65,12 @@
 ## issues
 
 - <https://github.com/rurema/doctree/issues/2965>
+
+# 2025-07
+
+## commits
+- <https://github.com/ruby/ruby/commit/7a3b6d30a8eb4e8a678d61d803d302218a19a014>
+
+## pr
+
+- <https://github.com/ruby/ruby/pull/13925>
