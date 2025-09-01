@@ -7,20 +7,27 @@ on:
       - '2025/postgres-containers/bake.hcl'
   workflow_dispatch:
 
+permissions:
+  contents: read
+  packages: write
+
 jobs:
-  example:
+  bake:
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v5
+      - name: Checkout bake.hcl
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
         with:
           path: memo
           sparse-checkout: 2025/postgres-containers
-      - uses: actions/checkout@v5
+      - name: Checkout cloudnative-pg/postgres-containers
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
         with:
           repository: cloudnative-pg/postgres-containers
           path: postgres-containers
-      - name: check files
+      - name: bake
         run: |
           set -x
-          pwd
-          ls -al
+          docker buildx create --name docker-container --driver docker-container --use --driver-opt network=host --bootstrap
+          docker run -d --rm -p 5000:5000 --name registry registry:2
+          docker buildx bake -f postgres-containers/docker-bake.hcl -f cwd://memo/2025/postgrescontainers/bake.hcl "https://github.com/cloudnative-pg/postgres-containers.git" myimage --push
