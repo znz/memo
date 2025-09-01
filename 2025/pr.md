@@ -74,3 +74,9 @@
 ## pr
 
 - <https://github.com/ruby/ruby/pull/13925>
+
+# 2025-08
+
+## pr
+
+- <https://github.com/rurema/doctree/pull/2984>
