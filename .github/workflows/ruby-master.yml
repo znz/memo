@@ -61,9 +61,9 @@ jobs:
           RUBY_PATCH_URL: "${{ github.event.inputs.RUBY_PATCH_URL }}"
         if: "${{ github.event.inputs.RUBY_PATCH_URL != '' }}"
 
-      # - name: Install libraries
-      #   run: |
-      #     brew install openssl@3 readline libyaml gmp rust
+      - name: Install libraries
+        run: |
+          brew install --quiet jemalloc gmp libffi openssl@3 zlib autoconf automake libtool
       - name: Set ENV
         run: |
           echo "JOBS=-j$((1 + $(sysctl -n hw.activecpu)))" >> $GITHUB_ENV
@@ -74,7 +74,6 @@ jobs:
           ./configure
           'cppflags=${{ github.event.inputs.cppflags }}'
           "--with-openssl-dir=$(brew --prefix openssl@3)"
-          "--with-readline-dir=$(brew --prefix readline)"
           '--disable-install-doc'
       - name: make
         run: cd ruby/ && make $JOBS all
