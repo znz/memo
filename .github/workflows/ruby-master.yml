@@ -78,7 +78,7 @@ jobs:
       - name: make
         run: cd ruby/ && make $JOBS all
       - name: make install
-        run: cd ruby/ && make install
+        run: cd ruby/ && sudo make install
       # - name: make install-doc
       #   run: cd ruby/ && make install-doc
       - name: test
