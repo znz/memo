@@ -75,10 +75,11 @@ jobs:
           'cppflags=${{ github.event.inputs.cppflags }}'
           "--with-openssl-dir=$(brew --prefix openssl@3)"
           '--disable-install-doc'
+          '--prefix=$HOME/local'
       - name: make
         run: cd ruby/ && make $JOBS all
       - name: make install
-        run: cd ruby/ && sudo make install
+        run: cd ruby/ && make install
       # - name: make install-doc
       #   run: cd ruby/ && make install-doc
       - name: test
