@@ -12,7 +12,7 @@ on:
       cppflags:
         description: configure cppflags
         required: false
-        default: "-DRUBY_DEBUG -DVM_CHECK_MODE=1 -DRGENGC_CHECK_MODE -DENC_DEBUG -DUSE_RUBY_DEBUG_LOG=1"
+        default: "-DRGENGC_CHECK_MODE=1"
 
 permissions:
   contents: read
@@ -75,7 +75,6 @@ jobs:
           'cppflags=${{ github.event.inputs.cppflags }}'
           "--with-openssl-dir=$(brew --prefix openssl@3)"
           "--with-readline-dir=$(brew --prefix readline)"
-          '--enable-yjit=dev_nodebug'
           '--disable-install-doc'
       - name: make
         run: cd ruby/ && make $JOBS all
@@ -84,4 +83,4 @@ jobs:
       # - name: make install-doc
       #   run: cd ruby/ && make install-doc
       - name: test
-        run: cd ruby/ && make test-all TESTS="-v -n /test_gc_stress_at_startup/"
+        run: cd ruby/ && make test-all TESTS='-v --gc-stress -n /test_broken_hash_value/'
