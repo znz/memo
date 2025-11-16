@@ -80,3 +80,9 @@
 ## pr
 
 - <https://github.com/rurema/doctree/pull/2984>
+
+# 2025-11
+
+## pr
+
+- <https://github.com/rurema/doctree/pull/2999>
