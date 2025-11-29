@@ -86,3 +86,9 @@
 ## pr
 
 - <https://github.com/rurema/doctree/pull/2999>
+
+## commits
+
+- <https://github.com/ruby/docs.ruby-lang.org/commit/dbc0dd77810b6a6e55acf84f541e1a1d7ce4b44b>
+- <https://github.com/ruby/docs.ruby-lang.org/commit/40144f9fdae6d0896354941ad95db7647c844c39>
+- <https://github.com/ruby/ruby/commit/68a7edaa81ccf09871227bf3e06e18cd19eb4a3e>
