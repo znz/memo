@@ -93,3 +93,14 @@
 - <https://github.com/ruby/docs.ruby-lang.org/commit/dbc0dd77810b6a6e55acf84f541e1a1d7ce4b44b>
 - <https://github.com/ruby/docs.ruby-lang.org/commit/40144f9fdae6d0896354941ad95db7647c844c39>
 - <https://github.com/ruby/ruby/commit/68a7edaa81ccf09871227bf3e06e18cd19eb4a3e>
+
+# 2025-12
+
+## commits
+
+- <https://github.com/rurema/generated-documents/commit/c6a6d67d8693ff272c25127e70e8a7a96e48ce48>
+
+## pr
+
+- <https://github.com/kubespray-offline/kubespray-offline/pull/67>
+- <https://github.com/kubespray-offline/kubespray-offline/pull/68>
