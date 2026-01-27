@@ -99,8 +99,20 @@
 ## commits
 
 - <https://github.com/rurema/generated-documents/commit/c6a6d67d8693ff272c25127e70e8a7a96e48ce48>
+- <https://github.com/ruby/docs.ruby-lang.org/commit/fa47daa9eb77099ee7d6cc7d4eddf7b52ccd71c3>
+- <https://github.com/ruby/docs.ruby-lang.org/commit/ca2f5ca5deec9f12bd60ac4e60afb812846b6c4c>
+- <https://github.com/ruby/docs.ruby-lang.org/commit/64f08baf7cc99d2b1306ce2505270e49943ccc8f>
+- <https://github.com/ruby/docs.ruby-lang.org/commit/16af071882ad5e4a4d23856cfa0cc2f75b055fa3>
+- <https://github.com/ruby/actions/commit/d2393ff22b69548428ab7eb01b4d2702f356e537>
+- <https://github.com/ruby/actions/commit/aa91072b8cc27dad98c9f4cd0a0aba5d9c2cb491>
+- <https://github.com/ruby/actions/commit/e066c7718ec9f45b713f856d68fba215f54eb871>
+- <https://github.com/ruby/actions/commit/23a3230f5ddaea8be93fe3fe98ad77771e91c8de>
 
 ## pr
 
 - <https://github.com/kubespray-offline/kubespray-offline/pull/67>
 - <https://github.com/kubespray-offline/kubespray-offline/pull/68>
+- <https://github.com/rurema/doctree/pull/3006>
+- <https://github.com/rurema/doctree/pull/3010>
+- <https://github.com/ruby/www.ruby-lang.org/pull/3758>
+- <https://github.com/rurema/doctree/pull/3011>
