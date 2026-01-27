@@ -1,0 +1,110 @@
+# https://github.com/kubernetes-sigs/kubespray/blob/5dce75d29b0d292080f9005e1d6e5c1f48cd1171/roles/kubernetes-apps/ansible/defaults/main.yml#L83-L88
+# etcd metrics
+etcd_metrics_service_labels:
+  k8s-app: etcd
+  app.kubernetes.io/managed-by: Kubespray
+  app: kube-prometheus-stack-kube-etcd
+  release: prometheus-stack
+
+# https://github.com/kubernetes-sigs/kubespray/blob/5dce75d29b0d292080f9005e1d6e5c1f48cd1171/roles/etcd_defaults/defaults/main.yml#L40-L41
+# Define in inventory to set a separate port for etcd to expose metrics on
+etcd_metrics_port: 2381
+
+### addons.yml
+metrics_server_enabled: true
+
+local_path_provisioner_enabled: true
+
+gateway_api_enabled: true
+cilium_gateway_api_enabled: true
+
+kube_vip_enabled: true
+kube_vip_arp_enabled: true
+kube_vip_controlplane_enabled: true
+kube_vip_address: 192.168.104.101
+loadbalancer_apiserver:
+  address: "{{ kube_vip_address }}"
+  port: 6443
+kube_vip_interface: eth0
+kube_vip_services_enabled: true
+
+### k8s-cluster.yml
+kube_network_plugin: cilium
+
+# https://kubespray.io/#/docs/CNI/cilium
+kube_owner: root
+# ipv6_stack: true
+
+kube_proxy_strict_arp: true
+
+### k8s-net-cilium.yml
+cilium_kube_proxy_replacement: true
+cilium_encryption_enabled: true
+cilium_encryption_type: "wireguard"
+cilium_enable_hubble: true
+cilium_enable_hubble_metrics: true
+cilium_hubble_metrics:
+  - dns:query;ignoreAAAA
+  - drop
+  - tcp
+  - flow
+  - icmp
+  - http
+cilium_hubble_install: true
+cilium_hubble_export_dynamic_enabled: true
+
+cilium_extra_values:
+  image:
+    digest: "sha256:"
+    useDigest: false
+
+  hubble:
+    relay:
+      image:
+        digest: "sha256:"
+        useDigest: false
+    ui:
+      backend:
+        image:
+          digest: "sha256:"
+          useDigest: false
+      frontend:
+        image:
+          digest: "sha256:"
+          useDigest: false
+
+  ingressController:
+      enabled: false
+
+  gatewayAPI:
+    hostNetwork:
+      enabled: true
+
+  operator:
+    image:
+      digest: "sha256:"
+      genericDigest: "sha256:"
+      useDigest: false
+
+  certgen:
+    image:
+      useDigest: false
+
+  envoy:
+    image:
+      digest: "sha256:"
+      useDigest: false
+    securityContext:
+      capabilities:
+        keepCapNetBindService: true
+        envoy:
+        - NET_ADMIN
+        - SYS_ADMIN
+        # Add NET_BIND_SERVICE to the list (keep the others!)
+        - NET_BIND_SERVICE
+
+# After `cilium upgrade`, some changes need to run:
+#   kubectl -n kube-system rollout restart ds/cilium
+#   kubectl -n kube-system rollout restart deployment/cilium-operator
+
+cilium_install_extra_flags: "--chart-directory /mnt/outputs/charts/cilium"

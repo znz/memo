@@ -1,0 +1,17 @@
+- hosts: all
+  become: yes
+  tasks:
+  - ansible.posix.sysctl:
+      name: fs.inotify.max_user_instances
+      value: '1280'
+      sysctl_file: /etc/sysctl.d/99-inotify.conf
+      sysctl_set: true
+      state: present
+      reload: true
+  - ansible.posix.sysctl:
+      name: fs.inotify.max_user_watches
+      value: '1048576'
+      sysctl_file: /etc/sysctl.d/99-inotify.conf
+      sysctl_set: true
+      state: present
+      reload: true

@@ -1,0 +1,28 @@
+- name: Install apt offline config
+  copy:
+    src: 99offline
+    dest: /etc/apt/apt.conf.d/
+
+- name: Backup sources.list
+  shell:
+    cmd: mv sources.list sources.list.orig
+    chdir: /etc/apt/
+    removes: sources.list
+
+- name: Backup sources.list.d/ubuntu.sources
+  shell:
+    cmd: mv sources.list.d/ubuntu.sources sources.list.d/ubuntu.sources.orig
+    chdir: /etc/apt/
+    removes: sources.list.d/ubuntu.sources
+
+- name: Delete sources.list.d/ubuntu.sources.original
+  file:
+    path: /etc/apt/sources.list.d/ubuntu.sources.original
+    state: absent
+
+- name: Install offline apt repo
+  apt_repository:
+    repo: deb [trusted=yes] {{ ubuntu_repo }}/local/ ./
+    filename: offline
+    state: present
+    update_cache: yes
