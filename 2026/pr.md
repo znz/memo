@@ -3,3 +3,9 @@
 ## pr
 
 - <https://github.com/ruby/www.ruby-lang.org/pull/3813>
+
+# 2026-02
+
+## issues
+
+- <https://github.com/kubernetes-sigs/kubespray/issues/13001>
