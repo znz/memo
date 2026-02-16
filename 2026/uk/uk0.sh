@@ -54,10 +54,12 @@ cd
 test -d kubespray-offline ||
 git clone https://github.com/kubespray-offline/kubespray-offline
 cd kubespray-offline
+git switch --detach v2.30.0-0
 cp -p '"$DIR"'/imagelists/*.txt imagelists/
 echo nfs-common > pkglist/ubuntu/nfs.txt
 test -d outputs ||
 time ./download-all.sh
+cp -p '"$DIR"'/patches/outputs/*.sh outputs/
 find outputs -type f | sort > outputs-$(date -I).list.txt
 tar acvf outputs-$(date -I).tar.gz outputs
 '
@@ -105,7 +107,11 @@ fi
 mkdir -p charts
 cd charts
 helm repo add cilium https://helm.cilium.io/
-helm pull cilium/cilium --untar --version 1.18.0
+helm repo update
+helm pull cilium/cilium --untar --version 1.18.4
+mv cilium cilium-1.18.4
+helm pull cilium/cilium --untar --version 1.18.6
+mv cilium cilium-1.18.6
 '
 
 run bash -euxc '

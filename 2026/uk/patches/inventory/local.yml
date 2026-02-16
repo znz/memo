@@ -107,4 +107,4 @@ cilium_extra_values:
 #   kubectl -n kube-system rollout restart ds/cilium
 #   kubectl -n kube-system rollout restart deployment/cilium-operator
 
-cilium_install_extra_flags: "--chart-directory /mnt/outputs/charts/cilium"
+cilium_install_extra_flags: "--chart-directory /mnt/outputs/charts/cilium-1.18.6"
