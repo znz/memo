@@ -1,1 +1,2 @@
 quay.io/cilium/operator-generic:v1.18.4
+quay.io/cilium/operator-generic:v1.18.6
