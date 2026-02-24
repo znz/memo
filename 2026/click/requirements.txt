@@ -1,0 +1,1 @@
+python-wayland==1.0.0
