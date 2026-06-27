@@ -55,6 +55,12 @@
 
 - <https://github.com/rurema/bitclust/pull/190>
 - <https://github.com/rurema/bitclust/pull/191>
+- <https://github.com/rurema/doctree/pull/3031>
+- <https://github.com/rurema/doctree/pull/3032>
+- <https://github.com/ruby/ruby/pull/17456>
+- znz/ruby の Agents で作業したら <https://github.com/znz/ruby/pull/1> に作成されてしまったので、
+  <https://github.com/ruby/ruby/pull/17491> を手動で作成した。
+  誘導されて <https://github.com/ruby/json/pull/1044> に作成しなおし。
 
 ## commits
 
