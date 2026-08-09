@@ -428,3 +428,51 @@
 
 - <https://github.com/rurema/doctree/pull/3393>
 - <https://github.com/rurema/bitclust/pull/310>
+- <https://github.com/rurema/doctree/pull/3405>
+- <https://github.com/rurema/doctree/pull/3407>
+- <https://github.com/rurema/doctree/pull/3409>
+- <https://github.com/rurema/doctree/pull/3411>
+- <https://github.com/rurema/doctree/pull/3412>
+- <https://github.com/rurema/doctree/pull/3413>
+- <https://github.com/rurema/doctree/pull/3414>
+- <https://github.com/rurema/doctree/pull/3419>
+- <https://github.com/ruby/ruby/pull/18188>
+- <https://github.com/rurema/doctree/pull/3422>
+- <https://github.com/rurema/doctree/pull/3424>
+- <https://github.com/rurema/doctree/pull/3425>
+- <https://github.com/rurema/doctree/pull/3426>
+- <https://github.com/rurema/doctree/pull/3427>
+- <https://github.com/rurema/doctree/pull/3428>
+- <https://github.com/rurema/doctree/pull/3429>
+- <https://github.com/rurema/doctree/pull/3430>
+- <https://github.com/rurema/doctree/pull/3431>
+- <https://github.com/rurema/bitclust/pull/312>
+- <https://github.com/rurema/bitclust/pull/313>
+- <https://github.com/rurema/doctree/pull/3432>
+- <https://github.com/rurema/doctree/pull/3434>
+- <https://github.com/ruby/docs.ruby-lang.org/pull/196>
+- <https://github.com/rurema/bitclust/pull/315>
+- <https://github.com/ruby/actions/pull/141>
+- <https://github.com/ruby/docs.ruby-lang.org/pull/197>
+- <https://github.com/ruby/docs.ruby-lang.org/pull/198>
+- <https://github.com/ruby/docs.ruby-lang.org/pull/199>
+- <https://github.com/rurema/bitclust/pull/317>
+- <https://github.com/rurema/generated-documents/pull/192>
+- <https://github.com/ruby/docs.ruby-lang.org/pull/200>
+- <https://github.com/rurema/doctree/pull/3440>
+- <https://github.com/ruby/ruby-infra-recipe/pull/72>
+- <https://github.com/ruby/ruby/pull/18237>
+- <https://github.com/ruby/ruby/pull/18263>
+- <https://github.com/rurema/bitclust/pull/318>
+
+## issues
+
+- <https://github.com/rurema/doctree/issues/3408>
+- <https://github.com/rurema/doctree/issues/3410>
+- <https://github.com/rurema/bitclust/issues/311>
+- <https://github.com/rurema/bitclust/issues/314>
+- <https://github.com/rurema/bitclust/issues/316>
+
+## commits
+
+- <https://github.com/ruby/actions/commit/6a72ec25ecebe7067b120199429207fe638462cf>
