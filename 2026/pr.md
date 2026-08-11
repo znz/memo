@@ -464,6 +464,7 @@
 - <https://github.com/ruby/ruby/pull/18237>
 - <https://github.com/ruby/ruby/pull/18263>
 - <https://github.com/rurema/bitclust/pull/318>
+- <https://github.com/rurema/bitclust/pull/320>
 
 ## issues
 
