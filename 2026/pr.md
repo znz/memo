@@ -465,6 +465,26 @@
 - <https://github.com/ruby/ruby/pull/18263>
 - <https://github.com/rurema/bitclust/pull/318>
 - <https://github.com/rurema/bitclust/pull/320>
+- <https://github.com/rurema/doctree/pull/3458>
+- <https://github.com/rurema/doctree/pull/3459>
+- <https://github.com/rurema/doctree/pull/3464>
+- <https://github.com/rurema/doctree/pull/3465>
+- <https://github.com/rurema/doctree/pull/3466>
+- <https://github.com/rurema/doctree/pull/3467>
+- <https://github.com/rurema/doctree/pull/3468>
+- <https://github.com/rurema/doctree/pull/3469>
+- <https://github.com/rurema/doctree/pull/3470>
+- <https://github.com/rurema/doctree/pull/3473>
+- <https://github.com/rurema/doctree/pull/3475>
+- <https://github.com/rurema/doctree/pull/3476>
+- <https://github.com/rurema/doctree/pull/3477>
+- <https://github.com/rurema/doctree/pull/3478>
+- <https://github.com/rurema/doctree/pull/3482>
+- <https://github.com/rurema/bitclust/pull/321>
+- <https://github.com/rurema/generated-documents/pull/202>
+- <https://github.com/ruby-jp/ruboty-ruby-jp/pull/171>
+- <https://github.com/ruby-jp/ruboty-ruby-jp/pull/174>
+- <https://github.com/ruby-jp/ruboty-ruby-jp/pull/175>
 
 ## issues
 
@@ -473,6 +493,7 @@
 - <https://github.com/rurema/bitclust/issues/311>
 - <https://github.com/rurema/bitclust/issues/314>
 - <https://github.com/rurema/bitclust/issues/316>
+- <https://github.com/tomoasleep/ruboty-slack_events/issues/8>
 
 ## commits
 
