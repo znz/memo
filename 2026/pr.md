@@ -485,6 +485,41 @@
 - <https://github.com/ruby-jp/ruboty-ruby-jp/pull/171>
 - <https://github.com/ruby-jp/ruboty-ruby-jp/pull/174>
 - <https://github.com/ruby-jp/ruboty-ruby-jp/pull/175>
+- <https://github.com/sameersbn/docker-redmine/pull/601>
+- <https://github.com/rurema/bitclust/pull/322>
+- <https://github.com/rurema/bitclust/pull/323>
+- <https://github.com/rurema/doctree/pull/3492>
+- <https://github.com/rurema/generated-documents/pull/204>
+- <https://github.com/rurema/bitclust/pull/324>
+- <https://github.com/rurema/doctree/pull/3496>
+- <https://github.com/rurema/generated-documents/pull/206>
+- <https://github.com/rurema/doctree/pull/3497>
+- <https://github.com/rurema/doctree/pull/3502>
+- <https://github.com/rurema/bitclust/pull/325>
+- <https://github.com/rurema/bitclust/pull/326>
+- <https://github.com/rurema/generated-documents/pull/209>
+- <https://github.com/rurema/doctree/pull/3503>
+- <https://github.com/rurema/doctree/pull/3504>
+- <https://github.com/rurema/doctree/pull/3506>
+- <https://github.com/rurema/bitclust/pull/327>
+- <https://github.com/ruby/www.ruby-lang.org/pull/3998>
+- <https://github.com/rurema/generated-documents/pull/210>
+- <https://github.com/rurema/bitclust/pull/328>
+- <https://github.com/rurema/generated-documents/pull/211>
+- <https://github.com/rurema/generated-documents/pull/212>
+- <https://github.com/rurema/doctree/pull/3508>
+- <https://github.com/rurema/generated-documents/pull/213>
+- <https://github.com/rurema/run-ruby-wasm/pull/4>
+- <https://github.com/ruby/docs.ruby-lang.org/pull/201>
+- <https://github.com/rurema/generated-documents/pull/214>
+- <https://github.com/ruby/actions/pull/143>
+- <https://github.com/ruby/ruby-infra-recipe/pull/74>
+- <https://github.com/ruby/ruby-infra-recipe/pull/75>
+- <https://github.com/ruby/docs.ruby-lang.org/pull/202>
+- <https://github.com/rurema/generated-documents/pull/216>
+- <https://github.com/rurema/generated-documents/pull/217>
+- <https://github.com/rurema/doctree/pull/3510>
+- <https://github.com/rurema/doctree/pull/3511>
 
 ## issues
 
@@ -498,3 +533,5 @@
 ## commits
 
 - <https://github.com/ruby/actions/commit/6a72ec25ecebe7067b120199429207fe638462cf>
+- <https://github.com/ruby/actions/commit/7429dac3072d1ffffb33a06aa927810bdfbf7ed6>
+- <https://github.com/ruby/actions/commit/b5bde6c7a0b283ceea37e041c11bff155343a0c6>
