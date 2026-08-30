@@ -520,6 +520,31 @@
 - <https://github.com/rurema/generated-documents/pull/217>
 - <https://github.com/rurema/doctree/pull/3510>
 - <https://github.com/rurema/doctree/pull/3511>
+- <https://github.com/ruby/ruby-infra-recipe/pull/77>
+- <https://github.com/ruby/ruby-infra-recipe/pull/78>
+- <https://github.com/rurema/doctree/pull/3514>
+- <https://github.com/rurema/doctree/pull/3515>
+- <https://github.com/rurema/doctree/pull/3516>
+- <https://github.com/rurema/doctree/pull/3517>
+- <https://github.com/rurema/doctree/pull/3518>
+- <https://github.com/rurema/doctree/pull/3519>
+- <https://github.com/rurema/doctree/pull/3520>
+- <https://github.com/rurema/doctree/pull/3521>
+- <https://github.com/rurema/doctree/pull/3522>
+- <https://github.com/rurema/doctree/pull/3523>
+- <https://github.com/rurema/doctree/pull/3524>
+- <https://github.com/rurema/doctree/pull/3525>
+- <https://github.com/rurema/doctree/pull/3526>
+- <https://github.com/rurema/doctree/pull/3527>
+- <https://github.com/rurema/doctree/pull/3528>
+- <https://github.com/rurema/doctree/pull/3529>
+- <https://github.com/rurema/doctree/pull/3530>
+- <https://github.com/rurema/doctree/pull/3531>
+- <https://github.com/rurema/doctree/pull/3532>
+- <https://github.com/rurema/bitclust/pull/329>
+- <https://github.com/rurema/bitclust/pull/330>
+- <https://github.com/rurema/doctree/pull/3533>
+- <https://github.com/rurema/doctree/pull/3534>
 
 ## issues
 
@@ -529,6 +554,7 @@
 - <https://github.com/rurema/bitclust/issues/314>
 - <https://github.com/rurema/bitclust/issues/316>
 - <https://github.com/tomoasleep/ruboty-slack_events/issues/8>
+- <https://github.com/rurema/bitclust/issues/331>
 
 ## commits
 
