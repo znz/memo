@@ -2,6 +2,8 @@ version: 2
 updates:
 - package-ecosystem: "docker"
   directory: "/docker"
+  commit-message:
+    include: "scope"
   schedule:
     interval: "daily"
   ignore:
@@ -14,6 +16,8 @@ updates:
 
 - package-ecosystem: 'github-actions'
   directory: '/'
+  commit-message:
+    include: "scope"
   schedule:
     interval: 'daily'
   groups:
@@ -25,6 +29,8 @@ updates:
 
 - package-ecosystem: "bundler"
   directory: "/ruby"
+  commit-message:
+    include: "scope"
   schedule:
     interval: "daily"
     time: "08:00"
