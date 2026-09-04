@@ -3,6 +3,7 @@ updates:
 - package-ecosystem: "docker"
   directory: "/docker"
   commit-message:
+    prefix: "build"
     include: "scope"
   schedule:
     interval: "daily"
@@ -17,6 +18,7 @@ updates:
 - package-ecosystem: 'github-actions'
   directory: '/'
   commit-message:
+    prefix: "ci"
     include: "scope"
   schedule:
     interval: 'daily'
@@ -30,6 +32,7 @@ updates:
 - package-ecosystem: "bundler"
   directory: "/ruby"
   commit-message:
+    prefix: "build"
     include: "scope"
   schedule:
     interval: "daily"
