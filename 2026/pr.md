@@ -545,6 +545,7 @@
 - <https://github.com/rurema/bitclust/pull/330>
 - <https://github.com/rurema/doctree/pull/3533>
 - <https://github.com/rurema/doctree/pull/3534>
+- <https://github.com/rurema/doctree/pull/3538>
 
 ## issues
 
@@ -561,3 +562,19 @@
 - <https://github.com/ruby/actions/commit/6a72ec25ecebe7067b120199429207fe638462cf>
 - <https://github.com/ruby/actions/commit/7429dac3072d1ffffb33a06aa927810bdfbf7ed6>
 - <https://github.com/ruby/actions/commit/b5bde6c7a0b283ceea37e041c11bff155343a0c6>
+
+# 2026-09
+
+## pr
+
+- <https://github.com/ruby/ruby/pull/18596>
+- <https://github.com/rurema/doctree/pull/3540>
+- <https://github.com/rurema/doctree/pull/3541>
+- <https://github.com/rurema/doctree/pull/3542>
+- <https://github.com/rurema/doctree/pull/3543>
+- <https://github.com/rurema/doctree/pull/3544>
+- <https://github.com/rurema/bitclust/pull/332>
+- <https://github.com/ruby/www.ruby-lang.org/pull/4001>
+- <https://github.com/rurema/doctree/pull/3545>
+- <https://github.com/rurema/doctree/pull/3546>
+- <https://github.com/rurema/doctree/pull/3547>
