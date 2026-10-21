@@ -4,13 +4,13 @@ source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "~> 8.1.4"
+gem "rails", "~> 8.1.0"
 
 # The modern asset pipeline for Rails [https://github.com/rails/propshaft]
 gem "propshaft"
 
 # Use postgresql as the database for Active Record
-gem "pg", "~> 1.6"
+gem "pg", "~> 1.7"
 gem "activerecord-postgis-adapter", group: :postgresql
 
 # Use the Puma web server [https://github.com/puma/puma]
@@ -101,11 +101,5 @@ gem "ransack"
 gem "simple_form"
 gem "slim-rails"
 
-gem "acts-as-taggable-array-on"
-
 gem "rollbar"
 gem "rack-attack"
-
-# AWS SDK
-gem 'aws-sdk-s3', '~> 1'
-gem 'aws-sdk-ec2', '~> 1'
