@@ -92,6 +92,9 @@ GEM
       jmespath (~> 1, >= 1.6.1)
       logger
       rexml (~> 3.4, >= 3.4.2)
+    aws-sdk-ec2 (1.658.0)
+      aws-sdk-core (~> 3, >= 3.258.0)
+      aws-sigv4 (~> 1.5)
     aws-sdk-kms (1.134.0)
       aws-sdk-core (~> 3, >= 3.258.0)
       aws-sigv4 (~> 1.5)
@@ -434,6 +437,7 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord-postgis-adapter
+  aws-sdk-ec2 (~> 1)
   aws-sdk-s3 (~> 1)
   bootsnap
   brakeman
@@ -486,6 +490,7 @@ CHECKSUMS
   aws-eventstream (1.4.0) sha256=116bf85c436200d1060811e6f5d2d40c88f65448f2125bc77ffce5121e6e183b
   aws-partitions (1.1296.0) sha256=70cc7a44fa4824a9df5652b853dc96aaaf09ec20642cd9d42ed7335a36cc3567
   aws-sdk-core (3.259.0) sha256=1c2bcb73d4c1146a2f52a2a05258ae11e349fb8ea6e42159c699d6dae9fb9441
+  aws-sdk-ec2 (1.658.0) sha256=311d56fc18d9ccfbf8452d5a052865e53afb0c6170be6b2411446f4da41e46ef
   aws-sdk-kms (1.134.0) sha256=85dde5d616160a0bfa7aed143f0e6f54dd440b81d1cdfc7008d49ee8e0c49a28
   aws-sdk-s3 (1.235.0) sha256=e42c1d4ee18014fe0b7d92267e97f20bb02634e35aa604443f76869255be5660
   aws-sigv4 (1.12.1) sha256=6973ff95cb0fd0dc58ba26e90e9510a2219525d07620c8babeb70ef831826c00
