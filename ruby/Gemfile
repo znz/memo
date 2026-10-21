@@ -103,3 +103,5 @@ gem "slim-rails"
 
 gem "rollbar"
 gem "rack-attack"
+
+gem "aws-sdk-s3", "~> 1"
