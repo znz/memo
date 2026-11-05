@@ -731,6 +731,34 @@
 - <https://github.com/rurema/doctree/pull/3680>
 - <https://github.com/rurema/doctree/pull/3681>
 - <https://github.com/rurema/doctree/pull/3682>
+- <https://github.com/rurema/doctree/pull/3683>
+- <https://github.com/rurema/bitclust/pull/347>
+- <https://github.com/rurema/doctree/pull/3684>
+- <https://github.com/rurema/doctree/pull/3685>
+- <https://github.com/rurema/doctree/pull/3686>
+- <https://github.com/rurema/doctree/pull/3688>
+- <https://github.com/rurema/doctree/pull/3689>
+- <https://github.com/rurema/doctree/pull/3690>
+- <https://github.com/rurema/doctree/pull/3691>
+- <https://github.com/rurema/doctree/pull/3692>
+- <https://github.com/rurema/doctree/pull/3693>
+- <https://github.com/rurema/doctree/pull/3694>
+- <https://github.com/rurema/doctree/pull/3695>
+- <https://github.com/rurema/doctree/pull/3696>
+- <https://github.com/rurema/doctree/pull/3697>
+- <https://github.com/rurema/doctree/pull/3698>
+- <https://github.com/rurema/doctree/pull/3699>
+- <https://github.com/rurema/doctree/pull/3700>
+- <https://github.com/rurema/doctree/pull/3701>
+- <https://github.com/rurema/doctree/pull/3702>
+- <https://github.com/rurema/doctree/pull/3703>
+- <https://github.com/rurema/doctree/pull/3704>
+- <https://github.com/rurema/doctree/pull/3705>
+- <https://github.com/rurema/doctree/pull/3706>
+- <https://github.com/rurema/doctree/pull/3707>
+- <https://github.com/rurema/bitclust/pull/348>
+- <https://github.com/rurema/bitclust/pull/349>
+- <https://github.com/rurema/doctree/pull/3708>
 
 ## issues
 
@@ -739,3 +767,22 @@
 - <https://github.com/rurema/doctree/issues/3662>
 - <https://github.com/rurema/doctree/issues/3663>
 - <https://github.com/rurema/doctree/issues/3664>
+
+# 2026-11
+
+## PR
+
+- <https://github.com/ruby/docs.ruby-lang.org/pull/203>
+- <https://github.com/ruby/ruby-infra-recipe/pull/92>
+- <https://github.com/rurema/doctree/pull/3710>
+- <https://github.com/rurema/doctree/pull/3711>
+- <https://github.com/rurema/doctree/pull/3712>
+- <https://github.com/rurema/doctree/pull/3713>
+- <https://github.com/rurema/doctree/pull/3714>
+- <https://github.com/rurema/doctree/pull/3715>
+- <https://github.com/rurema/doctree/pull/3716>
+
+## issues
+
+- <https://bugs.ruby-lang.org/issues/22508>
+- <https://bugs.ruby-lang.org/issues/22507>
