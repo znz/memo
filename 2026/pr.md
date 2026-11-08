@@ -781,6 +781,14 @@
 - <https://github.com/rurema/doctree/pull/3714>
 - <https://github.com/rurema/doctree/pull/3715>
 - <https://github.com/rurema/doctree/pull/3716>
+- <https://github.com/rurema/doctree/pull/3717>
+- <https://github.com/rurema/doctree/pull/3718>
+- <https://github.com/rurema/doctree/pull/3719>
+- <https://github.com/rurema/doctree/pull/3720>
+- <https://github.com/rurema/doctree/pull/3721>
+- <https://github.com/rurema/doctree/pull/3722>
+- <https://github.com/rurema/doctree/pull/3723>
+- <https://github.com/rurema/doctree/pull/3724>
 
 ## issues
 
