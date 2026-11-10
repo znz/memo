@@ -48,3 +48,21 @@ updates:
     aws-sdk:
       patterns:
       - "aws-*"
+    rails:
+      patterns:
+      - "rails"
+      - "railties"
+      - "actioncable"
+      - "actionmailbox"
+      - "actionmailer"
+      - "actionpack"
+      - "actiontext"
+      - "actionview"
+      - "activejob"
+      - "activemodel"
+      - "activerecord"
+      - "activestorage"
+      - "activesupport"
+    kaminari:
+      patterns:
+      - "kaminari*"
