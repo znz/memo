@@ -789,8 +789,18 @@
 - <https://github.com/rurema/doctree/pull/3722>
 - <https://github.com/rurema/doctree/pull/3723>
 - <https://github.com/rurema/doctree/pull/3724>
+- <https://github.com/rurema/doctree/pull/3726>
+- <https://github.com/rurema/doctree/pull/3727>
+- <https://github.com/rurema/doctree/pull/3728>
+- <https://github.com/rurema/bitclust/pull/352>
+- <https://github.com/rurema/doctree/pull/3729>
+- <https://github.com/rurema/doctree/pull/3730>
+- <https://github.com/rurema/doctree-measurements/pull/1>
+- <https://github.com/rurema/doctree/pull/3731>
 
 ## issues
 
 - <https://bugs.ruby-lang.org/issues/22508>
 - <https://bugs.ruby-lang.org/issues/22507>
+- <https://github.com/ruby/net-imap/issues/789>
+- <https://github.com/ruby/csv/issues/385>
