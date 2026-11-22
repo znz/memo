@@ -797,6 +797,7 @@
 - <https://github.com/rurema/doctree/pull/3730>
 - <https://github.com/rurema/doctree-measurements/pull/1>
 - <https://github.com/rurema/doctree/pull/3731>
+- <https://github.com/ruby/ruby/pull/19973>
 
 ## issues
 
